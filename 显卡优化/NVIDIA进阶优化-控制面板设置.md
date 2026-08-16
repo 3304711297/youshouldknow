@@ -26,7 +26,7 @@
 | 6 | OpenGL 渲染 GPU | **本机最强 GPU**（笔记本选独显） | 混合显卡平台上「自动选择」可能把 OpenGL 任务路由到核显，显式指定独显更稳妥 |
 | 7 | Vulkan / OpenGL 现行方法 | 优先本机（按需，见下注） | 「优先在 DXGI 交换链上分层」会把 Vulkan/OpenGL 程序当作 DX11/12 运行，走 Windows 全屏优化路径——好处是切回桌面不黑屏，坏处是失去真正的全屏独占；「优先本机」则是真全屏独占。按「独占性能」还是「切换体验」自行取舍 |
 | 8 | 三重缓冲 | 关闭 | — |
-| 9 | 低延时模式 | **开** | 更激进的「高 / 超高」会进一步压缩渲染队列，部分游戏可能出现帧数不稳；支持 Reflex 的游戏在游戏内开 Reflex 即可，无需依赖此项 |
+| 9 | 低延时模式 | **开** | 选项实际只有**关 / 开 / 超高**三档。全局选「开」（渲染队列压至 1 帧，无副作用）；「超高」逐帧即时提交、延迟最低但可能损失少量帧数，且 GPU 未跑满时收益甚微甚至略增延迟——仅 GPU 满载的竞技场景值得开。支持 Reflex 的游戏以游戏内 Reflex 开关为准，此项对其不起作用 |
 | 10 | 各向异性过滤 | 应用程序控制 | 在游戏内调，建议不低于 8x |
 | 11 | 后台应用程序最大帧速率 | 关 | — |
 | 12 | 垂直同步 | 使用 3D 应用程序设置 | — |
@@ -123,11 +123,17 @@
 | 动态范围「完全」= 0-255 全范围输出，「有限」= 16-235 | ✅ 属实：NVIDIA 输出范围标准定义；笔记本屏为全范围设备，选完全避免发灰 |
 | 更改分辨率页：输出颜色格式 RGB、颜色深度最高有效值、动态范围完全 | ✅ 设置项真实存在；RGB + 全范围为 PC 显示器标准输出组合，10bpc 按屏 / 线材支持取舍 |
 | G-SYNC 设置页：启用 G-SYNC，可选全屏模式或窗口和全屏模式 | ✅ 属实：控制面板「设置 G-SYNC」页的真实选项 |
+| 低延时模式档位为关 / 开 / 超高（无「高」档） | ✅ 属实：现行驱动控制面板选项；「高」为早期资料误记 |
+| 「开」= 队列压至 1 帧；「超高」= 即时提交、延迟最低但可能损失帧数，GPU 未满载时收益甚微甚至略增延迟 | ✅ 属实：Guru3D 与 Blur Busters 实测结论一致 |
+| 支持 Reflex 的游戏以游戏内 Reflex 为准，控制面板此项冗余 | ✅ 属实：NVIDIA 官方系统延迟优化指南明确 Reflex 更有效 |
 | 笔记本全局「最高性能优先」影响空闲功耗 | ✅ 属实：最高性能模式抑制降频，待机功耗与发热上升，建议按游戏单独设置 |
 | 外接显示器时视频颜色交给播放器 + 显示器 OSD | 💡 作者经验建议：外接显示设备（尤其电视）色彩链路以 OSD 校准为准 |
 
 **参考来源：**
 
 - [NVIDIA Control Panel 官方帮助文档](https://www.nvidia.com/content/Control-Panel-Help/v0/en-UK/index.html)
+- [NVIDIA 官方 — 系统延迟优化指南（Reflex 与低延时模式）](https://www.nvidia.com/en-us/geforce/guides/gfecnt/202010/system-latency-optimization-guide/)
+- [Blur Busters — Low Latency Mode 实测讨论](https://forums.blurbusters.com/viewtopic.php?t=7317)
+- [Guru3D — Ultra Low Latency Mode 各档位原理与利弊](https://forums.guru3d.com/threads/new-ultra-low-latency-mode-from-nvidia-in-new-drivers-pros-and-cons.428179/)
 - [NVIDIA 官方 — G-SYNC 技术页](https://www.nvidia.com/en-us/geforce/products/g-sync-monitors/)
 - 本系列第（一）篇：ReBAR 强制开启 · 第（二）篇：App 设置与超频（见本目录）
