@@ -18,7 +18,20 @@
 | **Smooth Motion** | 开（如果支持） | 驱动级 AI 帧生成，可让几乎任何游戏「一键翻倍」感知帧数 |
 | **Whisper Mode** | 关（如果有的话） | 笔记本专属安静模式：限制帧率 + 调整风扇策略降噪，与性能取向冲突 |
 
-**关于 Smooth Motion 的支持范围**：原生支持 RTX 50 系；自 **GeForce 590.26 驱动（2025 年 7 月）**起扩展支持**全部 RTX 40 系（含笔记本显卡）**，RTX 30 及更早不支持。在 App 中可全局或逐游戏开启。注意：游戏本身支持 DLSS 帧生成（Frame Generation）时，优先使用游戏原生帧生成。
+**关于 Smooth Motion 的支持范围与开启方法**：原生支持 RTX 50 系；自 **GeForce 590.26 驱动（2025 年 7 月）**起扩展支持**全部 RTX 40 系（含笔记本显卡）**，RTX 30 及更早不支持。开启路径（官方）：英伟达 App → **图形 → 程序设置** → 选中游戏 → **驱动程序设置（Driver Settings）** → Smooth Motion 开（较新版本 App 另提供全局开关）。
+
+**Smooth Motion 与 DLSS 的关系（重点）**：
+
+| 组合 | 能否同开 | 说明 |
+| --- | --- | --- |
+| Smooth Motion + DLSS **帧生成**（Frame Generation） | ❌ **不可叠加** | 两者是竞争技术：官方将 Smooth Motion 定位为「**面向不支持 DLSS 帧生成的游戏**」的方案；同时开启会导致性能下降与画面异常 |
+| Smooth Motion + DLSS **超分**（Super Resolution） | ✅ 可以同开 | 官方原文：Smooth Motion 可用于原生分辨率、DLSS 超分或其他缩放技术生效的游戏 |
+
+**怎么选**：
+
+- **游戏支持 DLSS 帧生成** → 在游戏内开帧生成，**不要**再开 Smooth Motion。原生 FG 走引擎级运动矢量，画质与流畅度显著优于驱动级插帧；
+- **游戏不支持帧生成** → 用 Smooth Motion 兜底（驱动侧 AI 推测插帧，快速运动画面可能略糊 / 出现伪影，属预期）；
+- 想叠加收益：DLSS 超分 + Smooth Motion 同开（缩放 + 插帧互不冲突）。
 
 ## 二、特别提醒：不要开「自动调优」
 
@@ -62,6 +75,9 @@ App 的 **系统 → 性能 → 自动调优** 会自动扫描并小幅超频显
 | 声明 | 核查结果 |
 | --- | --- |
 | Smooth Motion：驱动级 AI 帧生成，RTX 40 系自 590.26 驱动起支持（含笔记本），RTX 30 及更早不支持 | ✅ 属实：NVIDIA 官方公告（2025-07）原文，Tom's Hardware 报道一致 |
+| Smooth Motion 定位为「面向不支持 DLSS 帧生成的游戏」；与 FG 不可叠加 | ✅ 属实：官方公告原文 "for titles without DLSS Frame Generation support"；NVIDIA 驱动文档将两者列为竞争技术，同开致性能下降与画面异常 |
+| Smooth Motion 可与 DLSS 超分（Super Resolution）同开 | ✅ 属实：官方公告原文（原生分辨率 / DLSS 超分 / 其他缩放技术下均可生效） |
+| 逐游戏开启路径：App → 图形 → 程序设置 → 驱动程序设置 → Smooth Motion | ✅ 属实：官方公告给出的操作路径 |
 | Battery Boost：电池模式限制帧率省电；Whisper Mode：笔记本降噪模式 | ✅ 属实：均为 NVIDIA 官方笔记本特性，App 中可开关 |
 | 自动调优：小幅超频、耗时很久 | ✅ 属实：官方说明需 10~20 分钟扫描；社区普遍反馈幅度保守、显存给值过低，收益有限 |
 | 自动调优扫描中黑屏重启案例 | ✅ 有社区反馈（NGA），个案性质 |
@@ -72,6 +88,7 @@ App 的 **系统 → 性能 → 自动调优** 会自动扫描并小幅超频显
 **参考来源：**
 
 - [NVIDIA 官方 — App 更新：RTX 40 系 Smooth Motion 与全局 DLSS 覆盖](https://www.nvidia.com/en-us/geforce/news/nvidia-app-global-dlss-overrides-rtx-40-series-smooth-motion/)
+- [Reddit r/nvidia — DLSS 帧生成与 Smooth Motion 同开的讨论](https://www.reddit.com/r/nvidia/comments/1krikzm/do_dlss_3_frame_generation_and_smooth_motion_work/)
 - [Tom's Hardware — Smooth Motion 登陆 RTX 40 系](https://www.tomshardware.com/pc-components/gpu-drivers/nvidias-new-driver-update-finally-brings-smooth-motion-to-rtx-40-series-gpus-works-like-amds-fluid-motion-frames-and-claims-to-double-your-fps-with-a-single-click-in-any-game)
 - [NVIDIA 官方 — App 自动调优说明（10~20 分钟扫描）](https://www.nvidia.cn/geforce/news/nvidia-app-beta-update-av1-performance-tuning/)
 - [Reddit r/nvidia — 自动调优实测讨论（幅度保守）](https://www.reddit.com/r/nvidia/comments/1d7x1vo/has_anyone_tried_the_automatic_tuning_in_nvidia/?tl=zh-hans)
