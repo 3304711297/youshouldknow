@@ -86,12 +86,23 @@
 1. 勾选 **「启用 G-SYNC」**；
 2. 「G-SYNC 能够且将会启用的方式」按需选择：
    - **全屏模式**——仅全屏独占游戏生效（推荐，窗口化程序交给系统）；
-   - **窗口和全屏模式**——无边界窗口 / 窗口化游戏也生效；
+   - **窗口和全屏模式**——无边界窗口 / 窗口化游戏也生效；**玩窗口化 / 无边框游戏必须勾此项，否则 G-SYNC 对它们完全不生效**；
 3. 点击「应用」。
 
 > 屏不支持 G-SYNC / G-SYNC 兼容模式则跳过此页；对延迟有极致要求的也可不开 G-SYNC 用固定刷新——G-SYNC 会略增延迟，但显著减少画面撕裂。
 >
 > 📌 **FreeSync / Adaptive-Sync 显示器同样适用**：NVIDIA 卡驱动 FreeSync 屏的机制就是「G-SYNC Compatible」（兼容 VESA Adaptive-Sync 标准）。使用流程：显示器 OSD 内先开启 FreeSync → 本页勾选启用（非 NVIDIA 验证名单机型需勾选「为所选显示器型号启用设置」，偶发闪屏属正常）→ 游戏内 `Ctrl+Alt+R` 呼出指示器验证。建议使用 DisplayPort 连接。
+
+#### 防撕裂什么情况下不生效（重点）
+
+G-SYNC 消除画面撕裂的前提是**帧数始终处于 G-SYNC 范围内（低于显示器最大刷新率）**。一旦帧数超过最大刷新率，G-SYNC 即失效——画面重新撕裂（垂直同步关时），或退回普通垂直同步引入缓冲延迟（垂直同步开时）。
+
+**对策：把帧数上限设在略低于最大刷新率的位置**——建议低于刷新率 2～3 帧：144Hz 显示器设 **141～142**、165Hz 设 **162～163**，以此类推。上限设置位置任选其一：游戏内帧数上限 / NVIDIA 控制面板「最大帧速率」（RTSS 亦可）。这是 Blur Busters（G-SYNC 101 系列）给出的标准做法，确保帧数永远不会冲出 G-SYNC 范围。
+
+#### 刷新率设置方法
+
+1. **Windows 设置** → 系统 → 屏幕 → **高级显示设置** → 「选择刷新率」，把刷新率设为显示器支持的**最大值**（如 144Hz）；
+2. 若列表中没有目标刷新率：NVIDIA 控制面板 → **更改分辨率** → 自定义分辨率，手动创建对应刷新率的模式。
 
 ## 三、视频：调整视频颜色设置
 
@@ -129,7 +140,11 @@
 | 「开」= 队列压至 1 帧；「超高」= 即时提交、延迟最低但可能损失帧数，GPU 未满载时收益甚微甚至略增延迟 | ✅ 属实：Guru3D 与 Blur Busters 实测结论一致 |
 | 支持 Reflex 的游戏以游戏内 Reflex 为准，控制面板此项冗余 | ✅ 属实：NVIDIA 官方系统延迟优化指南明确 Reflex 更有效 |
 | 垂直同步全局设「关/开」会覆盖游戏内开关；新装系统此项可能为空白，需手动设置 | ✅ 属实：控制面板全局垂直同步会强制覆盖游戏请求 |
-| G-SYNC 开启前提下垂直同步设「关」：防撕裂由 G-SYNC 负责，避免帧数顶到刷新率时的垂直同步延迟 | ✅ 属实：G-SYNC + V-Sync 关（帧数不超刷新率区间）= 无撕裂低延迟，为电竞社区主流方案；不超刷新率可用帧数上限兜底 |
+| G-SYNC 开启前提下垂直同步设「关」：防撕裂由 G-SYNC 负责，避免帧数顶到刷新率时的垂直同步延迟 | ✅ 属实：G-SYNC + V-Sync 关（帧数不超刷新率区间）= 无撕裂低延迟，为电竞社区主流方案 |
+| G-SYNC 仅在帧数低于最大刷新率时有效；帧数超出范围即失效（重新撕裂或退回垂直同步延迟） | ✅ 属实：G-SYNC/VRR 工作范围机制，Blur Busters G-SYNC 101 系列与 Guru3D 均有明确记载 |
+| 帧数上限设低于刷新率 2～3 帧（144Hz → 141/142） | ✅ 属实：Blur Busters 标准建议（至少 -2 帧，推荐 -3 帧），确保帧数不冲出 VRR 范围 |
+| 刷新率设置：Windows 设置 → 系统 → 屏幕 → 高级显示设置 → 选择刷新率；无目标值时用 NVIDIA 控制面板自定义分辨率创建 | ✅ 属实：均为标准功能路径 |
+| 窗口化 / 无边框游戏需在 G-SYNC 页勾选「窗口和全屏模式」，否则不启用 G-SYNC | ✅ 属实：控制面板该选项的既定行为 |
 | 笔记本全局「最高性能优先」影响空闲功耗 | ✅ 属实：最高性能模式抑制降频，待机功耗与发热上升，建议按游戏单独设置 |
 | 外接显示器时视频颜色交给播放器 + 显示器 OSD | 💡 作者经验建议：外接显示设备（尤其电视）色彩链路以 OSD 校准为准 |
 
@@ -137,7 +152,10 @@
 
 - [NVIDIA Control Panel 官方帮助文档](https://www.nvidia.com/content/Control-Panel-Help/v0/en-UK/index.html)
 - [NVIDIA 官方 — 系统延迟优化指南（Reflex 与低延时模式）](https://www.nvidia.com/en-us/geforce/guides/gfecnt/202010/system-latency-optimization-guide/)
-- [Blur Busters — Low Latency Mode 实测讨论](https://forums.blurbusters.com/viewtopic.php?t=7317)
+- [Blur Busters — G-SYNC 101：输入延迟测试与推荐设置](https://blurbusters.com/gsync/gsync101-input-lag-tests-and-settings/)
+- [Blur Busters 论坛 — 帧数上限设低于刷新率 3 帧的原因](https://forums.blurbusters.com/viewtopic.php?t=7288)
+- [Blur Busters 论坛 — Low Latency Mode 实测讨论](https://forums.blurbusters.com/viewtopic.php?t=7317)
+- [NVIDIA 官方 — G-SYNC Compatible 与 VESA VRR 设置说明](https://www.nvidia.com/content/Control-Panel-Help/vLatest/en-us/mergedProjects/nvdsp/To_use_variable_refresh_rates.htm)
 - [Guru3D — Ultra Low Latency Mode 各档位原理与利弊](https://forums.guru3d.com/threads/new-ultra-low-latency-mode-from-nvidia-in-new-drivers-pros-and-cons.428179/)
 - [NVIDIA 官方 — G-SYNC 技术页](https://www.nvidia.com/en-us/geforce/products/g-sync-monitors/)
 - 本系列第（一）篇：ReBAR 强制开启 · 第（二）篇：App 设置与超频（见本目录）
