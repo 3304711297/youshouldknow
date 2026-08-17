@@ -182,7 +182,31 @@ Windows 电脑只是热点的客户端，并不承担路由器职责，那么通
 
 如果 Windows 还需要作为网络共享设备、软路由或网关，让其他设备通过这台电脑访问网络，则不能简单认为 Forwarding 可以关闭，应根据实际网络拓扑重新配置。
 
-## 十、推荐的 Karing Windows 配置
+## 十、关闭 Forwarding 后手机热点暂时断网的处理
+
+在部分 Windows + 手机热点环境中，修改网卡 Forwarding 后，网络接口或热点连接可能不会立即重新初始化。此时可能出现：
+
+- Forwarding 已经关闭；
+- 手机热点仍显示连接；
+- 但普通网页暂时无法打开；
+- Karing 也可能暂时无法正常建立网络连接。
+
+如果确认只是刚刚修改了 Forwarding 后出现这种情况，可以先**断开手机热点，再重新连接手机热点**。
+
+重新连接会让 Windows 重新初始化当前 Wi-Fi 网络接口、IP 配置和路由状态。实际排查时，如果重新连接热点后网页恢复正常，通常无需因为这一次短暂断网而重新开启 Forwarding。
+
+推荐排查顺序：
+
+1. 先确认手机热点本身仍然正常；
+2. 断开 Windows 与手机热点的连接；
+3. 重新连接手机热点；
+4. 测试普通网页是否恢复；
+5. 再测试 Karing；
+6. 如果仍然无法联网，再检查 IP、默认网关、DNS、Karing TUN 和 Forwarding 状态。
+
+> **经验提示：** 修改 Forwarding 后出现的短暂断网，不一定意味着 Forwarding 必须保持 Enabled。先重新连接热点是成本最低、最值得尝试的恢复方法。
+
+## 十一、推荐的 Karing Windows 配置
 
 对于普通 Windows 终端，并且电脑通过手机热点上网，可以优先考虑：
 
@@ -205,18 +229,19 @@ Windows 电脑只是热点的客户端，并不承担路由器职责，那么通
                     └─ TUN 接管的其他程序 ──┘
 ```
 
-## 十一、遇到 Karing TUN 异常时的排查顺序
+## 十二、遇到 Karing TUN 异常时的排查顺序
 
 如果开启 TUN 后出现 `karingservice.exe` CPU/内存异常、网络异常或疑似回环，可以按下面顺序检查：
 
 1. 确认没有同时运行其他 Clash、sing-box、v2rayN 等 TUN/VPN 软件；
 2. 检查 Windows 是否启用了网卡 Forwarding；
 3. 如果不需要路由转发，关闭 Forwarding；
-4. 检查 Karing TUN 的自动路由设置；
-5. 如果 Windows 自己开启了移动热点并进行网络共享，检查是否因此产生额外的路由关系；
-6. 重新启动 Karing，再观察 `karingservice.exe` 的 CPU 和内存占用。
+4. 如果刚修改 Forwarding 后手机热点暂时断网，先断开并重新连接热点；
+5. 检查 Karing TUN 的自动路由设置；
+6. 如果 Windows 自己开启了移动热点并进行网络共享，检查是否因此产生额外的路由关系；
+7. 重新启动 Karing，再观察 `karingservice.exe` 的 CPU 和内存占用。
 
-## 十二、什么时候不要关闭 Forwarding
+## 十三、什么时候不要关闭 Forwarding
 
 以下情况不要在不了解网络拓扑的情况下直接关闭：
 
@@ -226,11 +251,11 @@ Windows 电脑只是热点的客户端，并不承担路由器职责，那么通
 - 某些虚拟化、容器或网络实验环境依赖 IP 转发；
 - 使用特殊 VPN、桥接或路由方案。
 
-## 十三、官方资料
+## 十四、官方资料
 
 - [Karing 官方 FAQ](https://karing.app/faq)
 - [Karing 官方设置说明](https://karing.app/app-manual/settings)
 - [Karing 官方快速使用教程](https://karing.app/quickstart)
 - [Karing 官方 GitHub FAQ 文档](https://github.com/KaringX/karing-docu/blob/main/docs/faq.md)
 
-> 核心结论：**Karing TUN 和 Windows Forwarding 是两个不同的功能。普通 Windows 电脑通过手机热点上网、使用 Karing TUN 时，如果不需要让 Windows 承担路由器/网关职责，可以关闭不必要的网卡 Forwarding；系统代理和 TUN 则可以同时开启。**
+> 核心结论：**Karing TUN 和 Windows Forwarding 是两个不同的功能。普通 Windows 电脑通过手机热点上网、使用 Karing TUN 时，如果不需要让 Windows 承担路由器/网关职责，可以关闭不必要的网卡 Forwarding；系统代理和 TUN 则可以同时开启。如果修改 Forwarding 后手机热点暂时断网，可以先重新连接热点，让网络接口重新初始化。**
