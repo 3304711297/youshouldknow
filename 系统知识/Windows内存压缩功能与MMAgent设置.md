@@ -48,6 +48,12 @@
 
 恢复开启：`Enable-MMAgent -mc` 后重启。
 
+### 与 tweakbyjie 的实际对应关系
+
+`tweakbyjie.ps1` 在主菜单 `1` → 系统行为优化 `2` 中执行 `Disable-MMAgent -mc`，并在执行后用 `Get-MMAgent` 检查 `MemoryCompression=False`。该路径会提示需要重启，但当前脚本没有保存执行前的 Memory Compression 状态，也没有自动恢复入口；需要恢复时应手动执行上面的 `Enable-MMAgent -mc` 并重启。
+
+脚本同时把传统注册表 `EnablePrefetcher` 写为 `0`，但没有同步修改 MMAgent 的 `ApplicationLaunchPrefetching`。两者是两套机制，不能把其中一个的验证结果当作另一个已经关闭。
+
 ## 四、MMAgent 其他设置详解
 
 `Get-MMAgent` 输出中的每一项都可以单独开关（`Enable-MMAgent` / `Disable-MMAgent` 加对应参数）：
