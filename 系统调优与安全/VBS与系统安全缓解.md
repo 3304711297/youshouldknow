@@ -58,6 +58,43 @@ VBS 是否影响性能取决于：
 
 关闭或覆盖这些安全功能可能影响 Memory Integrity、Credential Guard、BitLocker、WSL2、Docker、虚拟机和企业安全策略。执行前应确认确实不需要 Hyper-V/VBS，并保留 BitLocker 恢复密钥；Device Guard EFI 操作必须确认 BitLocker 保护状态并理解一次性引导流程。
 
+## InSpectre：Spectre/Meltdown 缓解的图形化管理工具
+
+[InSpectre](https://www.grc.com/inspectre.htm) 是 GRC（Gibson Research Corporation）发布的免费工具，可以查看和修改 Windows 的 Spectre/Meltdown CPU 安全缓解状态。
+
+### 作用
+
+- 显示当前系统 Spectre 和 Meltdown 缓解是否启用；
+- 显示 CPU 和 Windows 对这些缓解的支持情况；
+- 提供图形化开关，比手动修改注册表更直观。
+
+### 与 `tweakbyjie` 选项 1→3 的关系
+
+`tweakbyjie` 的 CPU 安全缓解子项通过写入 `FeatureSettingsOverride=3` 和 `FeatureSettingsOverrideMask=3` 调整缓解状态。InSpectre 修改的是同类底层配置，但两者不应同时使用：
+
+- 同时修改可能产生冲突或覆盖；
+- 先用一个工具修改并重启，再检查另一个工具的显示；
+- 不要假设两者报告的值始终一致。
+
+### 风险
+
+- 关闭 Spectre/Meltdown 缓解会降低系统安全性，增加侧信道攻击风险；
+- 个人游戏设备可能接受此取舍，但不应在公司、生产或高安全需求设备上关闭；
+- 某些 Windows 更新可能自动恢复缓解或产生兼容问题；
+- 部分杀毒软件将 InSpectre 识别为 PUAT（潜在有害应用），因为它能修改安全设置；
+- 修改后必须重启才生效。
+
+### 恢复
+
+- 使用 InSpectre 界面重新打开缓解并重启；
+- 或使用 `tweakbyjie` 选项 1→3 子项 3 按快照恢复原始值；
+- 也可以通过 Windows 更新或系统还原恢复默认缓解状态。
+
+### 参考
+
+- [GRC InSpectre 官方页面](https://www.grc.com/inspectre.htm)
+- [Microsoft Spectre/Meltdown FAQ](https://support.microsoft.com/en-us/windows/protect-windows-devices-from-spectre-meltdown-35f20c88-a028-3bd9-29bf-3723e872a5e8)
+
 ## 与 tweakbyjie 的关系
 
 `tweakbyjie` 中涉及 VBS、Hyper-V、Device Guard 的功能属于高级配置，应独立测试。这类修改影响系统安全模型，不应与普通游戏优化混合执行。项目编号、源码行号、验证和恢复状态见 `youshouldknow/项目导航/tweakbyjie-optimization-mapping.md`。
