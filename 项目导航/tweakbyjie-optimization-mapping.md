@@ -2,7 +2,7 @@
 
 ## 目的
 
-建立知识说明与实际优化之间的对应关系。逐项映射必须以 `tweakbyjie/tweakbyjie.ps1` 当前源码为准，不能只根据概念标题判断已经覆盖。
+建立知识说明与实际优化之间的对应关系。逐项映射必须以 `tweakbyjie/tweakbyjie.ps1`（脚本位于 tweakbyjie 仓库根目录） 当前源码为准，不能只根据概念标题判断已经覆盖。
 
 结构：
 
@@ -52,7 +52,7 @@
 | MEMORY-002 | Memory Compression | 主菜单 `1` → 系统行为优化 `2`；执行 `Disable-MMAgent -mc`；源码 `tweakbyjie.ps1:825-828` | 源码 `:859` 使用 `Verify-MemoryCompressionDisabled` / `Get-MMAgent` 检查关闭状态；需重启 | 当前脚本未保存原状态；手动恢复使用 `Enable-MMAgent -mc` 后重启 |
 | MEMORY-003 | 虚拟内存 / 页面文件 | 当前 `tweakbyjie.ps1` 未发现 pagefile、分页文件或 `AutomaticManagedPagefile` 的执行项 | 知识文档提供 GUI 和系统托管原则，不属于脚本运行时验证 | 不存在脚本修改或脚本恢复项；不要把知识教程误记为自动化覆盖 |
 
-对应知识文档：[`Windows内存压缩功能与MMAgent设置`](./系统知识/Windows内存压缩功能与MMAgent设置.md)、[`Windows虚拟内存设置指南`](./系统知识/Windows虚拟内存设置指南.md)。
+对应知识文档：[`Windows内存压缩功能与MMAgent设置`](../系统知识/Windows内存压缩功能与MMAgent设置.md)、[`Windows虚拟内存设置指南`](../系统知识/Windows虚拟内存设置指南.md)。
 
 ### Memory 映射说明
 
@@ -70,7 +70,7 @@
 | STORAGE-004 | Native NVMe Driver | 主菜单 `8`；按系统版本、NVMe 和 ViVeTool 条件管理 Feature/SafeBoot/驱动状态；源码 `tweakbyjie.ps1:1534-1687` | 重启后检查 `nvmedisk` 驱动状态；模块有失败回滚和状态检查 | 使用 NVMe 专用快照恢复 Feature、SafeBoot 和旧 Override；该模块不是写入缓存设置 |
 | STORAGE-005 | 写入缓存策略 | 当前 `tweakbyjie.ps1` 未发现实际写入项 | 无脚本验证 | 仅有知识/检查文档提及，不计作脚本执行覆盖 |
 
-对应知识文档：[`存储与NVMe原理`](./存储与NVMe原理.md)。该文档现已补充脚本入口、实际行为、验证和恢复边界；其中写入缓存仍明确标记为当前脚本未执行的知识/检查项。
+对应知识文档：[`存储与NVMe原理`](../内存与存储/存储与NVMe原理.md)。该文档现已补充脚本入口、实际行为、验证和恢复边界；其中写入缓存仍明确标记为当前脚本未执行的知识/检查项。
 
 ## Security 逐项映射
 
@@ -80,7 +80,7 @@
 | SECURITY-002 | VBS/HVCI/Credential Guard/Hyper-V 关闭 | 主菜单 `10` 子项 `1`；写入 5 个 Device Guard 相关注册表值为 `0`，设置 BCD `hypervisorlaunchtype off`、`isolatedcontext no`、`vsmlaunchtype off`，禁用 Hyper-V；源码 `tweakbyjie.ps1:1915-1931` | BCD 有 `Verify-BcdValue`；注册表没有专门回读；运行状态需重启后检查 | 子项 `2` 删除脚本覆盖并尝试启用 Hyper-V，但脚本明确不是原始状态精确回滚，未保存原始注册表/功能状态 |
 | SECURITY-003 | Device Guard EFI 锁定清除 | 主菜单 `9`；检查 BitLocker，复制/调用 `SecConfig.efi`，创建一次性 BCD 引导项清除 EFI 变量；源码 `tweakbyjie.ps1:1700-1913` | 重启后用 `msinfo32` 等检查；有临时 BCD 清理 | 没有 EFI 变量原始快照或精确恢复；清理子项只能删除临时引导项，EFI 状态重新启用需系统安全设置手工处理 |
 
-对应知识文档：[`VBS 与系统安全缓解`](./VBS与系统安全缓解.md)。该文档需要补充实际路径、选项入口、BitLocker 前置检查、重启后验证和“非精确回滚”边界。
+对应知识文档：[`VBS 与系统安全缓解`](../系统调优与安全/VBS与系统安全缓解.md)。该文档已补充实际路径、选项入口、BitLocker 前置检查、重启后验证和“非精确回滚”边界。
 
 ## Service 逐项映射
 
@@ -89,7 +89,7 @@
 | SERVICE-001 | Part 6 服务启动类型 | 主菜单 `6 → 1`；Group A 21 个 + Group B 9 个设为 `Disabled`，Xbox/Bluetooth/Embedded/BITS 7 个设为 `Manual`；源码 `tweakbyjie.ps1:1302-1420` | `Verify-ServiceStartupType` 使用 `Win32_Service.StartMode` 逐项验证；不验证运行状态和依赖功能 | 修改前创建/校验 `service-backup.json`；`6 → 2` 恢复原启动类型，不强制恢复运行状态 |
 | SERVICE-002 | Part 5 Defender/Security Center 服务与策略 | 主菜单 `5`；`WinDefend` 及额外 Defender 服务停止并禁用，同时写入 Defender/SmartScreen/Security Center 策略，额外分支还删除任务、启动项和 `SecHealthUI`；源码 `tweakbyjie.ps1:977-1300` | 该入口没有统一启动类型回读；策略和删除操作没有完整配置层验证 | 不使用 `service-backup.json`，没有统一自动恢复；属于高风险、可能不可逆的安全组件停用 |
 
-对应知识文档：[`Windows服务优化原则`](./Windows服务优化原则.md)、[`Windows系统服务对应注册表路径`](./系统知识/Windows系统服务对应注册表路径.md)。
+对应知识文档：[`Windows服务优化原则`](../系统调优与安全/Windows服务优化原则.md)、[`Windows系统服务对应注册表路径`](../系统知识/Windows系统服务对应注册表路径.md)。
 
 ## Boot 逐项映射
 
@@ -102,7 +102,7 @@
 | BOOT-005 | Device Guard EFI 锁定清除 | 主菜单 `9`；BitLocker 检查、SecConfig.efi、一次性 BCD 引导项；源码 `tweakbyjie.ps1:1700-1913` | 重启后 `msinfo32` 等人工检查；清理临时 BCD | 无 EFI/bootsequence 原始快照；只能清理临时项，不是精确回滚 |
 | BOOT-006 | VBS/Hyper-V 启动项 | 主菜单 `10`；`hypervisorlaunchtype`、`vsmlaunchtype`、`isolatedcontext`；源码 `tweakbyjie.ps1:1915-1931` | BCD 值有回读，运行状态需重启 | 删除覆盖并尝试启用 Hyper-V，不恢复原 BCD/功能状态 |
 
-对应知识文档：[`Windows启动配置与 tweakbyjie 对应说明`](./系统知识/Windows启动配置与tweakbyjie对应说明.md)。
+对应知识文档：[`Windows启动配置与 tweakbyjie 对应说明`](../系统知识/Windows启动配置与tweakbyjie对应说明.md)。
 
 ## Registry 逐项边界
 
@@ -112,7 +112,7 @@
 - Part 5：Defender、SmartScreen、Security Center、CI/Smart App Control 等策略注册表值；没有统一原值备份、完整回读或自动恢复，且与服务/任务/Appx 删除操作相互影响。
 - `defender-removal.ps1`：独立的高风险删除脚本，会删除 Defender 服务注册、WinRT/Svchost、CLSID/App/Shell/Autologger 等键和值及实体文件；只有前置查询和有限验证，没有备份，脚本本身明确不可逆。
 
-对应原则文档：[`注册表优化原则`](./注册表优化原则.md)。这些项目后续应继续按稳定编号拆分；本阶段不把概念性注册表文章当作已完成的逐项执行覆盖。
+对应原则文档：[`注册表优化原则`](../系统调优与安全/注册表优化原则.md)。这些项目后续应继续按稳定编号拆分；本阶段不把概念性注册表文章当作已完成的逐项执行覆盖。
 
 ## 原则
 

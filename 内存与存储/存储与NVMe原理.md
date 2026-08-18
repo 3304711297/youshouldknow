@@ -38,4 +38,4 @@ NVMe 是针对 PCIe 固态硬盘设计的协议，相比传统 SATA AHCI，具�
 | Native NVMe Driver | 主菜单 `8`，按版本和硬件条件管理 NVMe Feature/SafeBoot/驱动配置 | 有 NVMe 专用快照、失败回滚和重启后驱动状态检查；这不是写入缓存设置 |
 | 写入缓存 | 当前脚本未发现实际写入、验证或恢复命令 | 仅属于知识/检查范围，不计为脚本执行项 |
 
-脚本没有直接修改 SSD/NVMe 写入缓存策略，也没有对虚拟内存或页面文件执行设置。具体源码行号和项目编号见 `youshouldknow/tweakbyjie-optimization-mapping.md`。
+脚本没有直接修改 SSD/NVMe 写入缓存策略，也没有对虚拟内存或页面文件执行设置。具体源码行号和项目编号见 `youshouldknow/项目导航/tweakbyjie-optimization-mapping.md`。

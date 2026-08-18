@@ -60,4 +60,4 @@ VBS 是否影响性能取决于：
 
 ## 与 tweakbyjie 的关系
 
-`tweakbyjie` 中涉及 VBS、Hyper-V、Device Guard 的功能属于高级配置，应独立测试。这类修改影响系统安全模型，不应与普通游戏优化混合执行。项目编号、源码行号、验证和恢复状态见 `youshouldknow/tweakbyjie-optimization-mapping.md`。
+`tweakbyjie` 中涉及 VBS、Hyper-V、Device Guard 的功能属于高级配置，应独立测试。这类修改影响系统安全模型，不应与普通游戏优化混合执行。项目编号、源码行号、验证和恢复状态见 `youshouldknow/项目导航/tweakbyjie-optimization-mapping.md`。

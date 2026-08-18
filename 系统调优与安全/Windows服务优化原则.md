@@ -103,4 +103,4 @@ Group B 和 Manual 组尤其需要按场景评估：`Spooler` 影响打印，`WS
 - 不追求无服务状态
 - 区分 Part 6 的可回滚启动类型调整与 Part 5 的高风险安全组件停用
 
-具体服务集合、源码入口、验证和恢复限制见 `youshouldknow/tweakbyjie-optimization-mapping.md`。
+具体服务集合、源码入口、验证和恢复限制见 `youshouldknow/项目导航/tweakbyjie-optimization-mapping.md`。
