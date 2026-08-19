@@ -64,11 +64,15 @@ NVCleanstall 是 **TechPowerUp 开发**的免费绿色工具，用于在安装 N
 | Enable Message Signaled Interrupts | ✅ | 启用 MSI 消息信号中断，可降低中断开销（对延迟敏感场景有帮助） |
 | Disable HDCP | ✅→⚠️ 按需 | 禁用 HDCP 输出加密。**副作用：Netflix 等 DRM 受保护内容将无法播放**；需要采集卡录制、或纯本地内容用户才建议勾 |
 | Apply NVENC Video Encoding Session Limit Patch | ✅ | 解除消费级显卡 NVENC 并发编码会话数限制（官方限制：2019 年 3 路 → 2023 年 5 路 → 2024 年起 8 路，专业卡无限制）。挂 Plex/Jellyfin 转码、多路推流用户收益明显 |
-| Start external application | ❌ | 安装完成后运行外部程序 |
+| Start external application | ❌ | 安装完成后运行外部程序；**只有勾选此项后，页面底部的外部程序相关设置才会显示** |
 
-### 3. 数字签名与反作弊（页面底部）
+### 3. 数字签名与反作弊（条件显示）
 
-由于勾选了上述修改类补丁，需要处理驱动签名：
+只有在 `Start external application` 被勾选后，NVCleanstall 页面底部才会显示下面这组与外部程序、数字签名和反作弊兼容性有关的选项。未勾选时看不到这些选项是正常的，不代表软件缺少功能。
+
+如果当前只是进行普通驱动精简安装，且没有启动外部程序或应用修改后驱动的需求，不应因为教程截图而强行寻找或开启这些选项。
+
+当页面显示并且你确实使用了修改类补丁时，才需要进一步查看驱动签名设置：
 
 | 选项 | 参考勾选 | 说明 |
 | --- | --- | --- |
@@ -109,7 +113,8 @@ NVCleanstall 是 **TechPowerUp 开发**的免费绿色工具，用于在安装 N
 | 禁用 MPO 的合理性 | ✅ 属实 | NVIDIA 官方知识库提供 mpo_disable.reg（注册表 OverlayTestMode=5）作为闪烁/卡顿问题的官方修复；NVCleanstall 该选项等效（NVIDIA 官方支持页） |
 | Disable NVIDIA Container 的风险 | ✅ 属实（界面已标注） | 软件界面原文注明 "(Experimental, breaks NVIDIA Control Panel)"，会导致 NVIDIA 控制面板/App 部分功能不可用 |
 | Disable HDCP 的副作用 | ⚠️ 已知代价 | 禁用后输出不再经 HDCP 加密，受 DRM 保护内容（Netflix 4K 等）将拒绝播放；采集/本地用途才建议启用 |
-| 重签驱动 + EAC 兼容方式 + 自动接受未签名警告 | ✅ 与界面一致 | 勾选修改类补丁后需重建签名；EAC 兼容方式避免反作弊误判；未签名警告为正常现象 |
+| `Start external application` 控制底部选项显示 | ✅ 按界面行为修正 | 只有勾选该项后，数字签名、EAC 兼容方式和未签名警告相关选项才会显示；未勾选时不应寻找这些选项 |
+| 重签驱动 + EAC 兼容方式 + 自动接受未签名警告 | ⚠️ 条件成立时适用 | 这些选项在底部条件显示；勾选修改类补丁且确实需要外部程序时才按界面和具体反作弊环境决定，未签名/重签驱动可能导致游戏或安全软件拒绝加载 |
 
 ## 参考来源
 
