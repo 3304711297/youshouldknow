@@ -42,6 +42,7 @@ Windows 系统、硬件、游戏性能与日常使用知识库。
 
 - [项目关联说明](./项目导航/tweakbyjie关联说明.md)
 - [逐项优化映射](./项目导航/tweakbyjie-optimization-mapping.md)
+- [全量逐项执行参考](./项目导航/tweakbyjie全量执行参考.md)
 - [CPU 优化对应说明](./项目导航/CPU优化与tweakbyjie对应说明.md)
 - [GPU 调度与显示管线](./项目导航/GPU调度与显示管线.md)
 - [游戏性能验证流程](./项目导航/游戏性能验证流程.md)

@@ -17,11 +17,25 @@
 ### 注册表位置与目标值
 
 ```text
-路径：HKLM\SYSTEM\CurrentControlSet\Control\PriorityControl
+注册表 Hive：HKEY_LOCAL_MACHINE（HKLM）
+子键：SYSTEM\CurrentControlSet\Control\PriorityControl
 值名：Win32PrioritySeparation
-类型：REG_DWORD
-脚本目标值：38（十进制）= 0x26
+类型：REG_DWORD（32 位无符号整数）
+脚本目标值：38（十进制）= 0x26（十六进制）
 ```
+
+### 字段卡
+
+| 字段 | 当前事实 |
+|---|---|
+| 稳定编号 | `CPU-001` |
+| 分类 | CPU 调度 / 前台与后台线程资源分配 |
+| 脚本入口 | 主菜单 `1` → 核心游戏优化 `1` |
+| 执行源码 | `tweakbyjie.ps1:796`，调用 `Set-RegDword` |
+| 验证源码 | `tweakbyjie.ps1:813`，调用 `Verify-RegDword` |
+| 配置对象 | `HKLM\SYSTEM\CurrentControlSet\Control\PriorityControl` 下的单个 DWORD |
+| 脚本行为 | 写入 `38`，成功后标记需要重启；不提供 CPU-001 专用快照 |
+| 文档状态 | 已绑定当前源码；其他编码仅为参考，不属于脚本菜单 |
 
 ### Windows 原理
 
@@ -31,9 +45,23 @@ Windows 调度器根据线程优先级、前台/后台状态和量子时间等�
 
 脚本将该值设为十进制 `38`（十六进制 `0x26`），目标是调整前台交互应用和游戏线程的调度策略，优先关注响应性。这里必须区分十进制和十六进制表示，不能把 `38` 误读成十六进制 `0x38`。
 
-### 默认行为与适用环境
+### 默认值与目标值对照
 
-Windows 默认值由系统版本、安装方式和现有策略决定，不能只根据一台电脑推断所有系统的默认值。适合在有明确测试基线、重视前台响应或游戏帧时间的环境中评估；不应默认适用于所有办公、服务器或后台任务场景。
+`Win32PrioritySeparation` 的默认值不能从图片、旧教程或另一台电脑直接推断。必须在目标机修改前读取，并记录：
+
+```powershell
+$path = 'HKLM:\SYSTEM\CurrentControlSet\Control\PriorityControl'
+Get-ItemProperty -Path $path -Name Win32PrioritySeparation |
+  Select-Object Win32PrioritySeparation
+```
+
+| 状态 | 十进制 | 十六进制 | 含义 |
+|---|---:|---:|---|
+| 目标机修改前 | 以实际读取为准 | 以实际读取为准 | Windows 版本、策略和历史工具可能不同 |
+| 当前脚本目标 | `38` | `0x26` | Short + Variable + High foreground boost（传统位字段解释） |
+| 图片中的后台参考值 | `24` | `0x18` | Long + Fixed + No foreground boost（传统位字段解释） |
+
+`24/0x18` 只是参考对照，不是当前脚本的后台服务模式，也不应因为名称“后台优化”就直接写入服务器、办公机或目标用户设备。
 
 ## Win32PrioritySeparation 位字段参考表
 
@@ -97,9 +125,11 @@ Windows 默认值由系统版本、安装方式和现有策略决定，不能只
 
 ### 潜在影响
 
-前台响应可能改善，也可能没有可测收益。后台编译、压缩、同步、渲染或长时间计算任务的调度份额可能变化；不同系统版本和硬件的结果可能不同。应使用平均 FPS、1% Low、帧时间、输入延迟和后台任务完成时间进行前后对比，而不是只看主观感受。
+前台响应可能改善，也可能没有可测收益。后台编译、压缩、同步、渲染或长时间计算任务的调度份额可能变化；不同系统版本和硬件的结果可能不同。该值不会锁定某个进程的 CPU，也不会绕过电源、温度、线程优先级或应用自身调度。
 
 ### 验证方法
+
+#### 配置层验证
 
 脚本在 `tweakbyjie.ps1:813` 使用 `Verify-RegDword` 回读并验证目标值 `38`。也可以只读检查：
 
@@ -109,9 +139,50 @@ Get-ItemPropertyValue `
   'Win32PrioritySeparation'
 ```
 
+这只能验证注册表配置层的目标值，不代表调度器在所有应用中产生了预期效果，也不代表性能一定提升。
+
+#### 运行时 A/B 验证
+
+在相同硬件、驱动、游戏版本、分辨率和电源模式下，对比修改前后：
+
+- 平均 FPS 和 1% Low；
+- 帧时间波动；
+- 输入延迟；
+- 后台编译、压缩或同步任务完成时间；
+- 游戏切换、录制、睡眠/唤醒和长时间稳定性。
+
+如果只观察一个游戏的一次平均 FPS，不能判断该值是否有效。建议先保留默认值作为基线，再测试目标值；不要同时修改 HAGS、MMCSS、Games 任务或电源计划，否则无法归因。
+
+### 备份与恢复
+
+当前脚本没有为 CPU-001 建立独立备份文件，也没有提供自动恢复入口。执行前应手工保存原始存在状态、注册表类型和值：
+
+```powershell
+$path = 'HKLM:\SYSTEM\CurrentControlSet\Control\PriorityControl'
+$key = Get-Item $path
+$exists = $key.GetValueNames() -contains 'Win32PrioritySeparation'
+if ($exists) {
+  [pscustomobject]@{
+    Exists = $true
+    Kind = $key.GetValueKind('Win32PrioritySeparation').ToString()
+    Value = $key.GetValue('Win32PrioritySeparation')
+  }
+} else {
+  [pscustomobject]@{ Exists = $false; Kind = $null; Value = $null }
+}
+```
+
+恢复时：
+
+- 原值存在：按原类型和值写回；
+- 原值不存在：删除实验新增的 `Win32PrioritySeparation`；
+- 恢复后重新读取并重启，再进行同一组 A/B 测试。
+
+不要把 `0x26`、`0x18` 或另一台电脑的值当作通用恢复值。
+
 ### 恢复方式
 
-执行前应先读取并记录原值；恢复时将该值写回原来的 `REG_DWORD`。当前脚本没有为 CPU-001 建立独立备份文件，也没有提供自动恢复入口，因此不要在未保存原值的情况下直接执行。
+上面的手工快照和恢复规则是本条目的恢复前提。`tweakbyjie` 当前只负责写入/验证 `38`，不负责保存或恢复 CPU-001 的原始值。
 
 ## CPU-002 Multimedia SystemProfile
 
