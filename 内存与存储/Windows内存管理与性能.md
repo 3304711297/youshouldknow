@@ -1,39 +1,16 @@
 # Windows 内存管理与性能
 
-## Memory Compression
+> **定位**：Windows 内存管理主题主入口。
+>
+> 详细的 Memory Compression、MMAgent、Prefetch 和页面文件说明见：
+>
+> - [Windows 内存压缩功能与 MMAgent 设置](../系统知识/Windows内存压缩功能与MMAgent设置.md)
+> - [Windows 虚拟内存设置指南](../系统知识/Windows虚拟内存设置指南.md)
+>
+> 本文保留主入口路径，用于说明主题边界：Windows 内存压缩用 CPU 压缩数据减少磁盘分页，Prefetch 通过历史加载行为改善程序启动；是否关闭这些功能取决于内存容量、CPU、存储设备和多任务场景，不能把关闭功能当作通用优化。
 
-Windows 内存压缩用于降低分页压力，通过 CPU 压缩数据来减少磁盘交换需求。
+## 主题分层
 
-## 是否关闭
-
-没有统一答案。
-
-适合测试关闭的情况：
-
-- CPU 性能较弱
-- 内存容量充足
-- 追求低延迟场景
-
-保持开启的情况：
-
-- 内存容量较小
-- 多任务使用
-- 笔记本移动场景
-
-## Prefetch / Superfetch
-
-Prefetch 主要用于改善程序启动速度，通过记录加载行为提前准备数据。
-
-关闭后可能减少后台活动，但不一定提升所有设备性能。
-
-SSD/NVMe 环境下需要结合实际测试判断。
-
-## 与 tweakbyjie 关系
-
-相关项目：
-
-- Memory Compression 管理
-- EnablePrefetcher 配置
-- 存储优化模块
-
-优化目标不是关闭所有功能，而是根据硬件和使用场景调整。
+- **机制专题**：内存压缩、MMAgent、Prefetch 和页面文件；
+- **执行参考**：`tweakbyjie` 的实际目标、验证和恢复限制见[全量逐项执行参考](../项目导航/tweakbyjie全量执行参考.md)；
+- **独立硬件专题**：DDR5/AM5 内存超频不属于本文范围。
