@@ -7,6 +7,9 @@ on:
     branches: [main]
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -38,3 +41,29 @@ jobs:
         with:
           args: --no-progress --verbose "./**/*.md"
           fail: false
+
+  deploy:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install MkDocs
+        run: pip install -r requirements-docs.txt
+      - name: Build and deploy to gh-pages
+        run: |
+          mkdir -p docs
+          cp README.md docs/index.md
+          for dir in "BIOS与固件" "CPU与延迟" "GPU与显示" "内存与存储" "内存超频" "显卡优化" "笔电相关" "系统知识" "系统调优与安全" "网络通信" "软件技巧" "项目导航" "验机相关"; do
+            if [ -d "$dir" ]; then
+              cp -r "$dir" "docs/$dir"
+            fi
+          done
+          mkdocs gh-deploy --force
