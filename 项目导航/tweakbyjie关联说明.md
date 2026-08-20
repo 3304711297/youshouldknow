@@ -27,6 +27,18 @@
 - 游戏相关优化
 - 电源管理
 
+## 与 tweakbyjie 模块化结构的对应
+
+`tweakbyjie` 已完成第一阶段模块化（`tweakbyjie.ps1` 为 Loader，功能拆至 `Modules/`）：
+
+| 模块 | 职责 | 说明 |
+|---|---|---|
+| `Common.ps1` | 通用注册表/BCD/验证/重启 | `Set-Reg*`/`Invoke-BcdEdit`/`Verify-*` |
+| `Backup.Mpo/Bcd/Service/SecurityMitigation/Nvme` | 备份闭环 | 各自的 `Test/Ensure/Restore` 三元组 |
+| `Menu.ps1` | 菜单调度 | `Show-TweakMenu`（11 个 Part） |
+
+本文档在描述执行位置时，已从“`tweakbyjie.ps1:行号`”改为“`Modules/函数名`”定位，避免行号漂移。建议按 `tweakbyjie/docs/design/CODE-REFACTOR-STATUS.md` 查看最新模块清单，再对应到下方映射表与全量参考。
+
 ## 原则
 
 优化不是简单地关闭越多功能越好，而是在性能、延迟、稳定性之间寻找适合当前设备的配置。
