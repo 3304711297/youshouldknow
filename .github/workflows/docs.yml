@@ -18,7 +18,16 @@ jobs:
       - name: Install MkDocs
         run: pip install mkdocs mkdocs-material
       - name: Build site
-        run: mkdocs build --strict
+        run: |
+          mkdir -p docs
+          # 将根目录的 Markdown 与各分类复制到 docs/，满足 mkdocs 默认 docs_dir
+          cp README.md docs/index.md
+          for dir in "BIOS与固件" "CPU与延迟" "GPU与显示" "内存与存储" "内存超频" "显卡优化" "笔电相关" "系统知识" "系统调优与安全" "网络通信" "软件技巧" "项目导航" "验机相关"; do
+            if [ -d "$dir" ]; then
+              cp -r "$dir" "docs/$dir"
+            fi
+          done
+          mkdocs build --strict
 
   link-check:
     runs-on: ubuntu-latest

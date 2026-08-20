@@ -33,18 +33,3 @@ markdown_extensions:
   - pymdownx.superfences
   - pymdownx.tabbed:
       alternate_style: true
-nav:
-  - 首页: README.md
-  - 验机相关: 验机相关/
-  - BIOS与固件: BIOS与固件/
-  - 系统知识: 系统知识/
-  - CPU与延迟: CPU与延迟/
-  - GPU与显示: GPU与显示/
-  - 内存与存储: 内存与存储/
-  - 内存超频: 内存超频/
-  - 系统调优与安全: 系统调优与安全/
-  - 显卡优化: 显卡优化/
-  - 笔电相关: 笔电相关/
-  - 网络通信: 网络通信/
-  - 软件技巧: 软件技巧/
-  - 项目导航: 项目导航/
