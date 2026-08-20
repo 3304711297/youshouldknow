@@ -1,5 +1,8 @@
 # tweakbyjie 全量逐项执行参考
 
+
+> 已与 `tweakbyjie` 模块化结构同步：执行逻辑现位于 `Modules/Menu.ps1` 与 `Modules/Common.ps1`（通用写入/验证）、`Modules/Backup.*.ps1`（备份闭环）；此处不再使用 `tweakbyjie.ps1:行号` 定位，以 `Modules/函数名` 为准。详见 `tweakbyjie/docs/design/CODE-REFACTOR-STATUS.md`。
+
 > **用途**：把 `tweakbyjie/tweakbyjie.ps1` 当前实际执行项转换为可核对的参考手册。
 >
 > **源码基线**：`tweakbyjie.ps1` 当前 `main` 分支源码；行号随源码变化，更新脚本后必须重新核对。
@@ -36,7 +39,7 @@
 ## 一、CPU-001：Win32PrioritySeparation
 
 - **入口**：主菜单 `1` → 核心游戏优化 `1`。
-- **源码**：写入 `tweakbyjie.ps1:796`；验证 `:813`；写入函数 `Set-RegDword:40-60`；无专用备份/恢复函数。
+- **源码**：写入 `Modules/Menu.ps1`（Part 1）+ `Modules/Common.ps1/Set-RegDword`；验证 `:813`；写入函数 `Set-RegDword`（`Modules/Common.ps1`）；无专用备份/恢复函数。
 - **目标对象**：`HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\PriorityControl`。
 - **值**：`Win32PrioritySeparation`，`REG_DWORD`，目标 `38 Dec = 0x26`。
 - **传统位解释**：`32/16` 表示短/长量子，`8/4` 表示固定/可变量子，`2/1/0` 表示高/中/无前台提升。`38=32+4+2`；`24=16+8+0` 仅是后台参考值，不是脚本模式。
@@ -49,7 +52,7 @@
 
 ### CPU-002 `Multimedia\SystemProfile`
 
-- **入口/源码**：主菜单 `1→1`；`tweakbyjie.ps1:793-807`。
+- **入口/源码**：主菜单 `1→1`；`Modules/Menu.ps1`。
 - **目标对象**：`HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile`。
 - **实际子项**：`SystemResponsiveness=10`、`NetworkThrottlingIndex=0xFFFFFFFF`，以及 `Tasks\Games` 七项；它们应分别核对，不应把路径当成单一值。
 - **验证/恢复**：除 CPU-001/HAGS 外没有统一回读；无统一原值备份；必须人工记录每个值的存在性、类型和值。
@@ -163,7 +166,7 @@
 - **入口**：主菜单 `2`。
 - **计时器目标**：`useplatformclock=no`、`useplatformtick=no`、`disabledynamictick=yes`、`tscsyncpolicy=Enhanced`。
 - **安全目标**：`nx=AlwaysOff`、`tpmbootentropy=ForceDisable`、`nointegritychecks=Yes`。
-- **源码**：应用 `:902-918`，验证 `Verify-BcdValue:279-303`。
+- **源码**：应用 `:902-918`，验证 `Verify-BcdValue（Modules/Common.ps1）`。
 - **备份/恢复**：`bcd-backup.json` 保存 `{current}` 下七项存在性和值；子项 `2/4` 按快照写回或删除。
 - **风险**：高级计时和安全项可能影响启动、安全和兼容性，不是普通性能开关。
 

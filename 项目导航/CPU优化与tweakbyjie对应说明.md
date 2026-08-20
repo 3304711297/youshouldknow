@@ -2,6 +2,9 @@
 
 ## 对应范围
 
+> 已与 `tweakbyjie` 模块化结构同步：执行逻辑现位于 `Modules/Menu.ps1` 与 `Modules/Common.ps1`（通用写入/验证）、`Modules/Backup.*.ps1`（备份闭环）；此处不再使用 `tweakbyjie.ps1:行号` 定位，以 `Modules/函数名` 为准。详见 `tweakbyjie/docs/design/CODE-REFACTOR-STATUS.md`。
+
+
 本章节逐项对应 `tweakbyjie/tweakbyjie.ps1` 当前“Part 1 → 核心游戏优化 → 子项 1”中的 CPU、MMCSS 多媒体调度和 Games 任务配置。脚本实际写入的路径、值名和目标值以当前源码为准。
 
 > 重要边界：当前脚本对这些项目没有统一的修改前备份/恢复流程；除 CPU-001 外，当前执行路径也没有为这些项目提供完整的回读验证。因此，下面的“恢复方式”是人工恢复前提，不代表脚本已经自动提供恢复功能。
@@ -10,7 +13,7 @@
 
 ### 执行位置
 
-- 源码：`tweakbyjie.ps1:796`
+- 源码：`Modules/Menu.ps1`（Part 1）+ `Modules/Common.ps1/Set-RegDword`
 - 入口：主菜单 `1` → 核心游戏优化 `1`
 - 写入函数：`Set-RegDword`
 
@@ -31,8 +34,8 @@
 | 稳定编号 | `CPU-001` |
 | 分类 | CPU 调度 / 前台与后台线程资源分配 |
 | 脚本入口 | 主菜单 `1` → 核心游戏优化 `1` |
-| 执行源码 | `tweakbyjie.ps1:796`，调用 `Set-RegDword` |
-| 验证源码 | `tweakbyjie.ps1:813`，调用 `Verify-RegDword` |
+| 执行源码 | `Modules/Menu.ps1`（Part 1）+ `Modules/Common.ps1/Set-RegDword`，调用 `Set-RegDword` |
+| 验证源码 | `Modules/Common.ps1/Verify-RegDword`，调用 `Verify-RegDword` |
 | 配置对象 | `HKLM\SYSTEM\CurrentControlSet\Control\PriorityControl` 下的单个 DWORD |
 | 脚本行为 | 写入 `38`，成功后标记需要重启；不提供 CPU-001 专用快照 |
 | 文档状态 | 已绑定当前源码；其他编码仅为参考，不属于脚本菜单 |
@@ -119,7 +122,7 @@ Get-ItemProperty -Path $path -Name Win32PrioritySeparation |
 
 传统资料常把 `38 Dec / 0x26` 描述为前台应用优化，把 `24 Dec / 0x18` 描述为后台服务优化。它们可以帮助理解位字段，但不能直接证明在当前 Windows 版本、硬件或游戏中一定更快。
 
-`tweakbyjie` 当前只在 `tweakbyjie.ps1:796` 写入 `38 Dec / 0x26`，并在 `:813` 回读验证；脚本没有实现 `24/0x18` 或其他组合的切换，也没有新增“前台/后台模式”菜单。
+`tweakbyjie` 当前只在 `Modules/Menu.ps1`（Part 1）+ `Modules/Common.ps1/Set-RegDword` 写入 `38 Dec / 0x26`，并在 `:813` 回读验证；脚本没有实现 `24/0x18` 或其他组合的切换，也没有新增“前台/后台模式”菜单。
 
 > ⚠️ **可靠性边界**：量子长度、量子类型和 foreground boost 的传统位解释在资料中广泛流传，但实际调度效果会受到 Windows 版本、策略、处理器、线程优先级和应用行为影响。修改前请读取目标机原值、保存恢复信息，并用帧时间、输入延迟和后台任务完成时间进行 A/B 测试。不要仅凭表格或注册表目标值宣称性能提升。
 
@@ -131,7 +134,7 @@ Get-ItemProperty -Path $path -Name Win32PrioritySeparation |
 
 #### 配置层验证
 
-脚本在 `tweakbyjie.ps1:813` 使用 `Verify-RegDword` 回读并验证目标值 `38`。也可以只读检查：
+脚本在 `Modules/Common.ps1/Verify-RegDword` 使用 `Verify-RegDword` 回读并验证目标值 `38`。也可以只读检查：
 
 ```powershell
 Get-ItemPropertyValue `
@@ -188,7 +191,7 @@ if ($exists) {
 
 ### 执行位置
 
-- 源码：`tweakbyjie.ps1:793-794`
+- 源码：`Modules/Menu.ps1`（Part 1）+ `Modules/Common.ps1/Set-RegDword`
 - 入口：主菜单 `1` → 核心游戏优化 `1`
 - 写入函数：`Set-RegDword`
 
@@ -227,7 +230,7 @@ Windows 会使用系统默认的 MMCSS 策略；默认值应在目标机器上�
 
 ### 执行位置
 
-- 源码：`tweakbyjie.ps1:794`
+- 源码：`Modules/Menu.ps1`（Part 1）+ `Modules/Common.ps1/Set-RegDword`
 - 入口：主菜单 `1` → 核心游戏优化 `1`
 - 写入函数：`Set-RegDword`
 
@@ -274,7 +277,7 @@ Get-ItemPropertyValue `
 
 ### 执行位置
 
-- 源码：`tweakbyjie.ps1:793`
+- 源码：`Modules/Menu.ps1`（Part 1）+ `Modules/Common.ps1/Set-RegDword`
 - 入口：主菜单 `1` → 核心游戏优化 `1`
 - 写入函数：`Set-RegDword`
 
@@ -322,8 +325,8 @@ Get-ItemProperty `
 
 ### 执行位置
 
-- 路径定义：`tweakbyjie.ps1:800`
-- 写入位置：`tweakbyjie.ps1:801-807`
+- 路径定义：`Modules/Menu.ps1`（Part 1）
+- 写入位置：`Modules/Menu.ps1`（Part 1，Games 任务七项）
 - 入口：主菜单 `1` → 核心游戏优化 `1`
 
 ### 注册表位置与目标值

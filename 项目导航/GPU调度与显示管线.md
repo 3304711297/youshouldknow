@@ -2,6 +2,9 @@
 
 ## 对应范围
 
+> 已与 `tweakbyjie` 模块化结构同步：执行逻辑现位于 `Modules/Menu.ps1` 与 `Modules/Common.ps1`（通用写入/验证）、`Modules/Backup.*.ps1`（备份闭环）；此处不再使用 `tweakbyjie.ps1:行号` 定位，以 `Modules/函数名` 为准。详见 `tweakbyjie/docs/design/CODE-REFACTOR-STATUS.md`。
+
+
 本章节对应 `tweakbyjie/tweakbyjie.ps1` 当前源码中的两个 GPU/显示相关执行项目：
 
 - GPU-001：核心游戏优化中的 HAGS
@@ -17,7 +20,7 @@ HAGS 是 Windows 提供的硬件加速 GPU 调度模式。启用后，部分 GPU
 
 ### tweakbyjie 执行位置
 
-- 源码：`tweakbyjie.ps1:797-798`
+- 源码：`Modules/Menu.ps1`（Part 1）+ `Modules/Common.ps1/Set-RegDword`
 - 入口：主菜单 `1` → 核心游戏优化 `1`
 - 写入函数：`Set-RegDword`
 
@@ -44,7 +47,7 @@ HAGS 是 Windows 提供的硬件加速 GPU 调度模式。启用后，部分 GPU
 
 ### 验证方法
 
-脚本在 `tweakbyjie.ps1:814` 使用 `Verify-RegDword` 回读 `HwSchMode=2`。这只证明注册表配置层写入成功，不等于驱动已经采用 HAGS 运行时路径。可进一步检查 Windows 图形设置、`dxdiag` 和实际游戏测试结果：
+脚本在 `Modules/Common.ps1/Verify-RegDword` 使用 `Verify-RegDword` 回读 `HwSchMode=2`。这只证明注册表配置层写入成功，不等于驱动已经采用 HAGS 运行时路径。可进一步检查 Windows 图形设置、`dxdiag` 和实际游戏测试结果：
 
 ```powershell
 Get-ItemPropertyValue `
@@ -68,7 +71,7 @@ MPO 相关异常可能表现为闪屏、切屏黑屏、副屏冻结、Chromium �
 
 ### tweakbyjie 执行位置
 
-- 源码：`tweakbyjie.ps1:1933-2059`
+- 源码：`Modules/Menu.ps1`（Part 11）+ `Modules/Backup.Mpo.ps1`
 - 入口：主菜单 `11. MPO 设置管理`
 - 修改前调用 `Ensure-MpoBackup`，首次保存脚本目录下的 `mpo-backup.json`
 - 修改后需重启；`11 → 4` 用于恢复

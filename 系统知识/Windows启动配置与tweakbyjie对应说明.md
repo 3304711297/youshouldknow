@@ -2,13 +2,16 @@
 
 ## 对应范围
 
+> 已与 `tweakbyjie` 模块化结构同步：执行逻辑现位于 `Modules/Menu.ps1` 与 `Modules/Common.ps1`（通用写入/验证）、`Modules/Backup.*.ps1`（备份闭环）；此处不再使用 `tweakbyjie.ps1:行号` 定位，以 `Modules/函数名` 为准。详见 `tweakbyjie/docs/design/CODE-REFACTOR-STATUS.md`。
+
+
 本页对应 `tweakbyjie/tweakbyjie.ps1` 的 BCD、测试模式和 Device Guard 启动项操作。启动配置会影响系统能否正常启动、驱动完整性和安全边界，不能与普通游戏优化混合执行。
 
 ## BOOT-001 高级 BCD 计时器配置
 
 ### 执行入口与目标
 
-主菜单 `2. 高级 BCD / 计时器与启动安全`，源码 `tweakbyjie.ps1:902-918`：
+主菜单 `2. 高级 BCD / 计时器与启动安全`，源码 `Modules/Menu.ps1`（Part 2）+ `Modules/Backup.Bcd.ps1`/`Modules/Common.ps1`：
 
 ```text
 useplatformclock    = No
@@ -31,7 +34,7 @@ tscsyncpolicy       = Enhanced
 
 ### 执行入口与目标
 
-同为主菜单 `2`，源码 `tweakbyjie.ps1:902-918`：
+同为主菜单 `2`，源码 `Modules/Menu.ps1`（Part 2）+ `Modules/Backup.Bcd.ps1`/`Modules/Common.ps1`：
 
 ```text
 nx               = AlwaysOff
@@ -49,7 +52,7 @@ nointegritychecks = Yes
 
 ### 执行入口与目标
 
-主菜单 `3. 开启测试模式`，源码 `tweakbyjie.ps1:923-948`：
+主菜单 `3. 开启测试模式`，源码 `Modules/Menu.ps1`（Part 3）：
 
 ```text
 bcdedit /set testsigning on
@@ -68,7 +71,7 @@ bcdedit /set nointegritychecks on
 
 ### 执行入口与目标
 
-主菜单 `4. 关闭测试模式`，源码 `tweakbyjie.ps1:950-972`。当前脚本删除：
+主菜单 `4. 关闭测试模式`，源码 `Modules/Menu.ps1`（Part 4）。当前脚本删除：
 
 ```text
 bcdedit /deletevalue testsigning
@@ -81,7 +84,7 @@ bcdedit /deletevalue debug
 
 ### 执行入口与目标
 
-主菜单 `9. 清除 Device Guard EFI 锁定`，源码 `tweakbyjie.ps1:1700-1913`。流程包括：
+主菜单 `9. 清除 Device Guard EFI 锁定`，源码 `Modules/Menu.ps1`（Part 9）。流程包括：
 
 1. 检查 BitLocker 保护状态和管理员权限；
 2. 查找并挂载 EFI 分区，复制 `SecConfig.efi`；
