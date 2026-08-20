@@ -16,7 +16,7 @@ jobs:
         with:
           python-version: "3.11"
       - name: Install MkDocs
-        run: pip install mkdocs mkdocs-material
+        run: pip install mkdocs mkdocs-material mkdocs-redirects
       - name: Build site
         run: |
           mkdir -p docs
