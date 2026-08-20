@@ -33,3 +33,19 @@ markdown_extensions:
   - pymdownx.superfences
   - pymdownx.tabbed:
       alternate_style: true
+plugins:
+  - search:
+      lang: zh
+  - redirects:
+      redirect_maps:
+        'CPU与延迟/DPC与ISR延迟机制.md': 'CPU与延迟/CPU调度与游戏线程.md'
+        'CPU与延迟/Windows延迟来源与性能测试方法.md': 'CPU与延迟/CPU调度与游戏线程.md'
+        'CPU与延迟/Windows计时器机制与输入延迟.md': 'CPU与延迟/CPU调度与游戏线程.md'
+        'CPU与延迟/Windows调度与游戏性能.md': 'CPU与延迟/CPU调度与游戏线程.md'
+        'GPU与显示/Windows驱动模型与性能影响.md': 'GPU与显示/Windows图形管线与帧时间.md'
+        '系统知识/Windows优化前准备与风险等级.md': '系统调优与安全/Windows优化原则与风险.md'
+        '系统知识/Windows优化误区.md': '系统调优与安全/Windows优化原则与风险.md'
+        '系统知识/排查阻止Windows自动睡眠的程序.md': '系统知识/电源计划创建与优化指南.md'
+        '系统调优与安全/优化等级说明.md': '系统调优与安全/Windows优化原则与风险.md'
+        '系统调优与安全/注册表优化原则.md': '系统调优与安全/Windows优化原则与风险.md'
+        '系统调优与安全/Windows电源计划与性能调度.md': '系统知识/电源计划创建与优化指南.md'
