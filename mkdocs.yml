@@ -49,3 +49,96 @@ plugins:
         '系统调优与安全/优化等级说明.md': '系统调优与安全/Windows优化原则与风险.md'
         '系统调优与安全/注册表优化原则.md': '系统调优与安全/Windows优化原则与风险.md'
         '系统调优与安全/Windows电源计划与性能调度.md': '系统知识/电源计划创建与优化指南.md'
+nav:
+  - 首页: index.md
+  - 验机相关:
+    - 验机相关/index.md: 验机相关/README.md
+    - Windows 审核模式 AuditMode 与 OOBE: 验机相关/Windows审核模式_AuditMode与OOBE.md
+    - Windows 11 跳过联网激活并创建本地账户: 验机相关/Windows-11-跳过联网激活并创建本地账户.md
+    - Windows 激活与数字许可证验机指南: 验机相关/Windows激活与数字许可证验机指南.md
+    - 装机法: 验机相关/装机法.md
+  - BIOS与固件:
+    - BIOS与固件/index.md: BIOS与固件/README.md
+    - BIOS 与 UEFI 固件刷写及开机 Logo 修改指南: BIOS与固件/BIOS与UEFI固件刷写及开机Logo修改指南.md
+    - UEFI Editor 项目说明: BIOS与固件/UEFI-Editor项目说明.md
+    - 机械革命笔记本 BIOS 选项与超频降压风险说明: BIOS与固件/机械革命笔记本BIOS选项与超频降压风险说明.md
+  - 系统知识:
+    - 系统知识/index.md: 系统知识/README.md
+    - 电源计划创建与优化指南: 系统知识/电源计划创建与优化指南.md
+    - Windows 睡眠、休眠与混合睡眠详解: 系统知识/Windows-睡眠-休眠与混合睡眠详解.md
+    - Windows 启动配置与 tweakbyjie 对应说明: 系统知识/Windows启动配置与tweakbyjie对应说明.md
+    - Windows 内存压缩功能与 MMAgent 设置: 系统知识/Windows内存压缩功能与MMAgent设置.md
+    - Windows 虚拟内存设置指南: 系统知识/Windows虚拟内存设置指南.md
+    - Windows 新驱动程序策略与关闭方法: 系统知识/Windows新驱动程序策略与关闭方法.md
+    - Windows 系统服务对应注册表路径: 系统知识/Windows系统服务对应注册表路径.md
+    - Windows 常用命令列表: 系统知识/Windows常用命令列表.md
+    - Windows 常用环境变量列表: 系统知识/Windows常用环境变量列表.md
+    - 安装系统时跳过硬件和 TPM 检测: 系统知识/安装系统时跳过硬件和TPM检测.md
+    - 用事件查看器排查黑屏蓝屏绿屏崩溃: 系统知识/用事件查看器排查黑屏蓝屏绿屏崩溃.md
+    - Defender 删除脚本风险与恢复边界: 系统知识/Defender删除脚本风险与恢复边界.md
+    - 删除此电脑中多余软件快捷方式图标: 系统知识/删除此电脑中多余软件快捷方式图标.md
+    - 禁用 Windows 通知中心与操作中心: 系统知识/禁用Windows通知中心与操作中心.md
+    - 调整 Windows 滚动条宽度与高度: 系统知识/调整Windows滚动条宽度与高度.md
+    - 历史兼容（旧路径重定向）:
+      - Windows 优化前准备与风险等级: 系统知识/Windows优化前准备与风险等级.md
+      - Windows 优化误区: 系统知识/Windows优化误区.md
+      - 排查阻止 Windows 自动睡眠的程序: 系统知识/排查阻止Windows自动睡眠的程序.md
+  - CPU与延迟:
+    - CPU与延迟/index.md: CPU与延迟/README.md
+    - CPU 调度与游戏线程: CPU与延迟/CPU调度与游戏线程.md
+    - Windows 键鼠与 TCP 低延迟可选实验设置: CPU与延迟/Windows键鼠与TCP低延迟可选实验设置.md
+    - 历史兼容（旧路径重定向）:
+      - DPC 与 ISR 延迟机制: CPU与延迟/DPC与ISR延迟机制.md
+      - Windows 调度与游戏性能: CPU与延迟/Windows调度与游戏性能.md
+      - Windows 计时器机制与输入延迟: CPU与延迟/Windows计时器机制与输入延迟.md
+      - Windows 延迟来源与性能测试方法: CPU与延迟/Windows延迟来源与性能测试方法.md
+  - GPU与显示:
+    - GPU与显示/index.md: GPU与显示/README.md
+    - Windows 图形管线、驱动与帧时间: GPU与显示/Windows图形管线与帧时间.md
+    - 历史兼容:
+      - Windows 驱动模型与性能影响: GPU与显示/Windows驱动模型与性能影响.md
+  - 内存与存储:
+    - 内存与存储/index.md: 内存与存储/README.md
+    - Windows 内存管理与性能: 内存与存储/Windows内存管理与性能.md
+    - 存储与 NVMe 原理: 内存与存储/存储与NVMe原理.md
+  - 内存超频:
+    - 内存超频/index.md: 内存超频/README.md
+    - DDR5 内存超频时序参数公式速查: 内存超频/DDR5-内存超频时序参数公式速查.md
+  - 显卡优化:
+    - 显卡优化/index.md: 显卡优化/README.md
+    - NVCleanstall 精简安装 NVIDIA 显卡驱动: 显卡优化/NVCleanstall精简安装NVIDIA显卡驱动.md
+    - NVIDIA 进阶优化 - 控制面板设置: 显卡优化/NVIDIA进阶优化-控制面板设置.md
+    - NVIDIA 进阶优化 - App 设置与超频: 显卡优化/NVIDIA进阶优化-App设置与超频.md
+    - DLSS 帧生成、低延时模式与延迟的关系: 显卡优化/DLSS帧生成低延时模式与延迟的关系.md
+    - NVIDIA 进阶优化 - DLSS 超分预设模型: 显卡优化/NVIDIA进阶优化-DLSS超分预设模型.md
+    - NVIDIA 进阶优化 - ReBAR 强制开启: 显卡优化/NVIDIA进阶优化-ReBAR强制开启.md
+    - DP / HDMI 协议与速率关系表: 显卡优化/DP-HDMI协议与速率关系表.md
+  - 笔电相关:
+    - 笔电相关/index.md: 笔电相关/README.md
+    - 控制中心与 Uniwill 驱动冲突排查: 笔电相关/控制中心与Uniwill驱动冲突排查.md
+    - 同方模具电池充电模式与跳升至满电现象解析: 笔电相关/同方模具电池充电模式与跳升至满电现象解析.md
+  - 系统调优与安全:
+    - 系统调优与安全/index.md: 系统调优与安全/README.md
+    - Windows 优化原则与风险: 系统调优与安全/Windows优化原则与风险.md
+    - Windows 服务优化原则: 系统调优与安全/Windows服务优化原则.md
+    - VBS 与系统安全缓解: 系统调优与安全/VBS与系统安全缓解.md
+    - 历史兼容（旧路径重定向）:
+      - 优化等级说明: 系统调优与安全/优化等级说明.md
+      - 注册表优化原则: 系统调优与安全/注册表优化原则.md
+      - Windows 电源计划与性能调度: 系统调优与安全/Windows电源计划与性能调度.md
+  - 网络通信:
+    - 网络通信/index.md: 网络通信/README.md
+    - Windows 网络栈优化原则: 网络通信/Windows网络栈优化原则.md
+    - Karing Windows TUN 与 Windows 网络转发设置: 网络通信/Karing-Windows-TUN与Windows网络转发设置.md
+    - 四大运营商频段速率与 APN 设置速查: 网络通信/四大运营商频段速率与APN设置速查.md
+  - 软件技巧:
+    - 软件技巧/index.md: 软件技巧/README.md
+    - Steam 设置优化指南: 软件技巧/Steam设置优化指南.md
+  - 项目导航:
+    - 项目导航/index.md: 项目导航/README.md
+    - tweakbyjie 关联说明: 项目导航/tweakbyjie关联说明.md
+    - tweakbyjie 优化项目映射: 项目导航/tweakbyjie-optimization-mapping.md
+    - tweakbyjie 全量执行参考: 项目导航/tweakbyjie全量执行参考.md
+    - CPU 优化与 tweakbyjie 对应说明: 项目导航/CPU优化与tweakbyjie对应说明.md
+    - GPU 调度与显示管线: 项目导航/GPU调度与显示管线.md
+    - 游戏性能验证流程: 项目导航/游戏性能验证流程.md
