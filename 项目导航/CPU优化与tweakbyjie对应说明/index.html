@@ -1,0 +1,5601 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Windows 系统、硬件、游戏性能与日常使用知识库">
+      
+      
+      
+        <link rel="canonical" href="https://3304711297.github.io/youshouldknow/%E9%A1%B9%E7%9B%AE%E5%AF%BC%E8%88%AA/CPU%E4%BC%98%E5%8C%96%E4%B8%8Etweakbyjie%E5%AF%B9%E5%BA%94%E8%AF%B4%E6%98%8E/">
+      
+      
+        <link rel="prev" href="../tweakbyjie%E5%85%A8%E9%87%8F%E6%89%A7%E8%A1%8C%E5%8F%82%E8%80%83/">
+      
+      
+        <link rel="next" href="../GPU%E8%B0%83%E5%BA%A6%E4%B8%8E%E6%98%BE%E7%A4%BA%E7%AE%A1%E7%BA%BF/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>CPU 优化与 tweakbyjie 对应说明 - YouShouldKnow</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#cpu-tweakbyjie" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="YouShouldKnow" class="md-header__button md-logo" aria-label="YouShouldKnow" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            YouShouldKnow
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              CPU 优化与 tweakbyjie 对应说明
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/3304711297/youshouldknow" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../%E9%AA%8C%E6%9C%BA%E7%9B%B8%E5%85%B3/" class="md-tabs__link">
+          
+  
+  
+  验机相关
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../BIOS%E4%B8%8E%E5%9B%BA%E4%BB%B6/" class="md-tabs__link">
+          
+  
+  
+  BIOS与固件
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86/" class="md-tabs__link">
+          
+  
+  
+  系统知识
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../CPU%E4%B8%8E%E5%BB%B6%E8%BF%9F/" class="md-tabs__link">
+          
+  
+  
+  CPU与延迟
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../GPU%E4%B8%8E%E6%98%BE%E7%A4%BA/" class="md-tabs__link">
+          
+  
+  
+  GPU与显示
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../%E5%86%85%E5%AD%98%E4%B8%8E%E5%AD%98%E5%82%A8/" class="md-tabs__link">
+          
+  
+  
+  内存与存储
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../%E5%86%85%E5%AD%98%E8%B6%85%E9%A2%91/" class="md-tabs__link">
+          
+  
+  
+  内存超频
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../%E6%98%BE%E5%8D%A1%E4%BC%98%E5%8C%96/" class="md-tabs__link">
+          
+  
+  
+  显卡优化
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../%E7%AC%94%E7%94%B5%E7%9B%B8%E5%85%B3/" class="md-tabs__link">
+          
+  
+  
+  笔电相关
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../%E7%B3%BB%E7%BB%9F%E8%B0%83%E4%BC%98%E4%B8%8E%E5%AE%89%E5%85%A8/" class="md-tabs__link">
+          
+  
+  
+  系统调优与安全
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/" class="md-tabs__link">
+          
+  
+  
+  网络通信
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../%E8%BD%AF%E4%BB%B6%E6%8A%80%E5%B7%A7/" class="md-tabs__link">
+          
+  
+  
+  软件技巧
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  项目导航
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="YouShouldKnow" class="md-nav__button md-logo" aria-label="YouShouldKnow" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    YouShouldKnow
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/3304711297/youshouldknow" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    验机相关
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    验机相关
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E9%AA%8C%E6%9C%BA%E7%9B%B8%E5%85%B3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    验机相关/index.md
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E9%AA%8C%E6%9C%BA%E7%9B%B8%E5%85%B3/Windows%E5%AE%A1%E6%A0%B8%E6%A8%A1%E5%BC%8F_AuditMode%E4%B8%8EOOBE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Windows 审核模式 AuditMode 与 OOBE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E9%AA%8C%E6%9C%BA%E7%9B%B8%E5%85%B3/Windows-11-%E8%B7%B3%E8%BF%87%E8%81%94%E7%BD%91%E6%BF%80%E6%B4%BB%E5%B9%B6%E5%88%9B%E5%BB%BA%E6%9C%AC%E5%9C%B0%E8%B4%A6%E6%88%B7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Windows 11 跳过联网激活并创建本地账户
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E9%AA%8C%E6%9C%BA%E7%9B%B8%E5%85%B3/Windows%E6%BF%80%E6%B4%BB%E4%B8%8E%E6%95%B0%E5%AD%97%E8%AE%B8%E5%8F%AF%E8%AF%81%E9%AA%8C%E6%9C%BA%E6%8C%87%E5%8D%97/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Windows 激活与数字许可证验机指南
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E9%AA%8C%E6%9C%BA%E7%9B%B8%E5%85%B3/%E8%A3%85%E6%9C%BA%E6%B3%95/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    装机法
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BIOS与固件
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    BIOS与固件
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BIOS%E4%B8%8E%E5%9B%BA%E4%BB%B6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BIOS与固件/index.md
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BIOS%E4%B8%8E%E5%9B%BA%E4%BB%B6/BIOS%E4%B8%8EUEFI%E5%9B%BA%E4%BB%B6%E5%88%B7%E5%86%99%E5%8F%8A%E5%BC%80%E6%9C%BALogo%E4%BF%AE%E6%94%B9%E6%8C%87%E5%8D%97/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BIOS 与 UEFI 固件刷写及开机 Logo 修改指南
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BIOS%E4%B8%8E%E5%9B%BA%E4%BB%B6/UEFI-Editor%E9%A1%B9%E7%9B%AE%E8%AF%B4%E6%98%8E/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UEFI Editor 项目说明
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BIOS%E4%B8%8E%E5%9B%BA%E4%BB%B6/%E6%9C%BA%E6%A2%B0%E9%9D%A9%E5%91%BD%E7%AC%94%E8%AE%B0%E6%9C%ACBIOS%E9%80%89%E9%A1%B9%E4%B8%8E%E8%B6%85%E9%A2%91%E9%99%8D%E5%8E%8B%E9%A3%8E%E9%99%A9%E8%AF%B4%E6%98%8E/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    机械革命笔记本 BIOS 选项与超频降压风险说明
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    系统知识
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    系统知识
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    系统知识/index.md
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86/%E7%94%B5%E6%BA%90%E8%AE%A1%E5%88%92%E5%88%9B%E5%BB%BA%E4%B8%8E%E4%BC%98%E5%8C%96%E6%8C%87%E5%8D%97/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    电源计划创建与优化指南
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86/Windows-%E7%9D%A1%E7%9C%A0-%E4%BC%91%E7%9C%A0%E4%B8%8E%E6%B7%B7%E5%90%88%E7%9D%A1%E7%9C%A0%E8%AF%A6%E8%A7%A3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Windows 睡眠、休眠与混合睡眠详解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86/Windows%E5%90%AF%E5%8A%A8%E9%85%8D%E7%BD%AE%E4%B8%8Etweakbyjie%E5%AF%B9%E5%BA%94%E8%AF%B4%E6%98%8E/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Windows 启动配置与 tweakbyjie 对应说明
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86/Windows%E5%86%85%E5%AD%98%E5%8E%8B%E7%BC%A9%E5%8A%9F%E8%83%BD%E4%B8%8EMMAgent%E8%AE%BE%E7%BD%AE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Windows 内存压缩功能与 MMAgent 设置
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86/Windows%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E8%AE%BE%E7%BD%AE%E6%8C%87%E5%8D%97/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Windows 虚拟内存设置指南
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86/Windows%E6%96%B0%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F%E7%AD%96%E7%95%A5%E4%B8%8E%E5%85%B3%E9%97%AD%E6%96%B9%E6%B3%95/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Windows 新驱动程序策略与关闭方法
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86/Windows%E7%B3%BB%E7%BB%9F%E6%9C%8D%E5%8A%A1%E5%AF%B9%E5%BA%94%E6%B3%A8%E5%86%8C%E8%A1%A8%E8%B7%AF%E5%BE%84/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Windows 系统服务对应注册表路径
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86/Windows%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%88%97%E8%A1%A8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Windows 常用命令列表
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86/Windows%E5%B8%B8%E7%94%A8%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%88%97%E8%A1%A8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Windows 常用环境变量列表
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86/%E5%AE%89%E8%A3%85%E7%B3%BB%E7%BB%9F%E6%97%B6%E8%B7%B3%E8%BF%87%E7%A1%AC%E4%BB%B6%E5%92%8CTPM%E6%A3%80%E6%B5%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    安装系统时跳过硬件和 TPM 检测
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86/%E7%94%A8%E4%BA%8B%E4%BB%B6%E6%9F%A5%E7%9C%8B%E5%99%A8%E6%8E%92%E6%9F%A5%E9%BB%91%E5%B1%8F%E8%93%9D%E5%B1%8F%E7%BB%BF%E5%B1%8F%E5%B4%A9%E6%BA%83/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    用事件查看器排查黑屏蓝屏绿屏崩溃
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86/Defender%E5%88%A0%E9%99%A4%E8%84%9A%E6%9C%AC%E9%A3%8E%E9%99%A9%E4%B8%8E%E6%81%A2%E5%A4%8D%E8%BE%B9%E7%95%8C/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Defender 删除脚本风险与恢复边界
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86/%E5%88%A0%E9%99%A4%E6%AD%A4%E7%94%B5%E8%84%91%E4%B8%AD%E5%A4%9A%E4%BD%99%E8%BD%AF%E4%BB%B6%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F%E5%9B%BE%E6%A0%87/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    删除此电脑中多余软件快捷方式图标
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86/%E7%A6%81%E7%94%A8Windows%E9%80%9A%E7%9F%A5%E4%B8%AD%E5%BF%83%E4%B8%8E%E6%93%8D%E4%BD%9C%E4%B8%AD%E5%BF%83/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    禁用 Windows 通知中心与操作中心
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86/%E8%B0%83%E6%95%B4Windows%E6%BB%9A%E5%8A%A8%E6%9D%A1%E5%AE%BD%E5%BA%A6%E4%B8%8E%E9%AB%98%E5%BA%A6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    调整 Windows 滚动条宽度与高度
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_17" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_17" id="__nav_4_17_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    历史兼容（旧路径重定向）
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_17_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_17">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    历史兼容（旧路径重定向）
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86/Windows%E4%BC%98%E5%8C%96%E5%89%8D%E5%87%86%E5%A4%87%E4%B8%8E%E9%A3%8E%E9%99%A9%E7%AD%89%E7%BA%A7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Windows 优化前准备与风险等级
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86/Windows%E4%BC%98%E5%8C%96%E8%AF%AF%E5%8C%BA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Windows 优化误区
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86/%E6%8E%92%E6%9F%A5%E9%98%BB%E6%AD%A2Windows%E8%87%AA%E5%8A%A8%E7%9D%A1%E7%9C%A0%E7%9A%84%E7%A8%8B%E5%BA%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    排查阻止 Windows 自动睡眠的程序
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CPU与延迟
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    CPU与延迟
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CPU%E4%B8%8E%E5%BB%B6%E8%BF%9F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CPU与延迟/index.md
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CPU%E4%B8%8E%E5%BB%B6%E8%BF%9F/CPU%E8%B0%83%E5%BA%A6%E4%B8%8E%E6%B8%B8%E6%88%8F%E7%BA%BF%E7%A8%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CPU 调度与游戏线程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CPU%E4%B8%8E%E5%BB%B6%E8%BF%9F/Windows%E9%94%AE%E9%BC%A0%E4%B8%8ETCP%E4%BD%8E%E5%BB%B6%E8%BF%9F%E5%8F%AF%E9%80%89%E5%AE%9E%E9%AA%8C%E8%AE%BE%E7%BD%AE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Windows 键鼠与 TCP 低延迟可选实验设置
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_4" id="__nav_5_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    历史兼容（旧路径重定向）
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    历史兼容（旧路径重定向）
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CPU%E4%B8%8E%E5%BB%B6%E8%BF%9F/DPC%E4%B8%8EISR%E5%BB%B6%E8%BF%9F%E6%9C%BA%E5%88%B6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DPC 与 ISR 延迟机制
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CPU%E4%B8%8E%E5%BB%B6%E8%BF%9F/Windows%E8%B0%83%E5%BA%A6%E4%B8%8E%E6%B8%B8%E6%88%8F%E6%80%A7%E8%83%BD/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Windows 调度与游戏性能
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CPU%E4%B8%8E%E5%BB%B6%E8%BF%9F/Windows%E8%AE%A1%E6%97%B6%E5%99%A8%E6%9C%BA%E5%88%B6%E4%B8%8E%E8%BE%93%E5%85%A5%E5%BB%B6%E8%BF%9F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Windows 计时器机制与输入延迟
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CPU%E4%B8%8E%E5%BB%B6%E8%BF%9F/Windows%E5%BB%B6%E8%BF%9F%E6%9D%A5%E6%BA%90%E4%B8%8E%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E6%96%B9%E6%B3%95/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Windows 延迟来源与性能测试方法
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GPU与显示
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    GPU与显示
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GPU%E4%B8%8E%E6%98%BE%E7%A4%BA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GPU与显示/index.md
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GPU%E4%B8%8E%E6%98%BE%E7%A4%BA/Windows%E5%9B%BE%E5%BD%A2%E7%AE%A1%E7%BA%BF%E4%B8%8E%E5%B8%A7%E6%97%B6%E9%97%B4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Windows 图形管线、驱动与帧时间
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_3" id="__nav_6_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    历史兼容
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    历史兼容
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GPU%E4%B8%8E%E6%98%BE%E7%A4%BA/Windows%E9%A9%B1%E5%8A%A8%E6%A8%A1%E5%9E%8B%E4%B8%8E%E6%80%A7%E8%83%BD%E5%BD%B1%E5%93%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Windows 驱动模型与性能影响
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    内存与存储
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    内存与存储
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%86%85%E5%AD%98%E4%B8%8E%E5%AD%98%E5%82%A8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    内存与存储/index.md
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%86%85%E5%AD%98%E4%B8%8E%E5%AD%98%E5%82%A8/Windows%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E4%B8%8E%E6%80%A7%E8%83%BD/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Windows 内存管理与性能
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%86%85%E5%AD%98%E4%B8%8E%E5%AD%98%E5%82%A8/%E5%AD%98%E5%82%A8%E4%B8%8ENVMe%E5%8E%9F%E7%90%86/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    存储与 NVMe 原理
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    内存超频
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    内存超频
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%86%85%E5%AD%98%E8%B6%85%E9%A2%91/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    内存超频/index.md
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%86%85%E5%AD%98%E8%B6%85%E9%A2%91/DDR5-%E5%86%85%E5%AD%98%E8%B6%85%E9%A2%91%E6%97%B6%E5%BA%8F%E5%8F%82%E6%95%B0%E5%85%AC%E5%BC%8F%E9%80%9F%E6%9F%A5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DDR5 内存超频时序参数公式速查
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    显卡优化
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    显卡优化
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%98%BE%E5%8D%A1%E4%BC%98%E5%8C%96/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    显卡优化/index.md
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%98%BE%E5%8D%A1%E4%BC%98%E5%8C%96/NVCleanstall%E7%B2%BE%E7%AE%80%E5%AE%89%E8%A3%85NVIDIA%E6%98%BE%E5%8D%A1%E9%A9%B1%E5%8A%A8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NVCleanstall 精简安装 NVIDIA 显卡驱动
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%98%BE%E5%8D%A1%E4%BC%98%E5%8C%96/NVIDIA%E8%BF%9B%E9%98%B6%E4%BC%98%E5%8C%96-%E6%8E%A7%E5%88%B6%E9%9D%A2%E6%9D%BF%E8%AE%BE%E7%BD%AE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NVIDIA 进阶优化 - 控制面板设置
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%98%BE%E5%8D%A1%E4%BC%98%E5%8C%96/NVIDIA%E8%BF%9B%E9%98%B6%E4%BC%98%E5%8C%96-App%E8%AE%BE%E7%BD%AE%E4%B8%8E%E8%B6%85%E9%A2%91/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NVIDIA 进阶优化 - App 设置与超频
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%98%BE%E5%8D%A1%E4%BC%98%E5%8C%96/DLSS%E5%B8%A7%E7%94%9F%E6%88%90%E4%BD%8E%E5%BB%B6%E6%97%B6%E6%A8%A1%E5%BC%8F%E4%B8%8E%E5%BB%B6%E8%BF%9F%E7%9A%84%E5%85%B3%E7%B3%BB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DLSS 帧生成、低延时模式与延迟的关系
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%98%BE%E5%8D%A1%E4%BC%98%E5%8C%96/NVIDIA%E8%BF%9B%E9%98%B6%E4%BC%98%E5%8C%96-DLSS%E8%B6%85%E5%88%86%E9%A2%84%E8%AE%BE%E6%A8%A1%E5%9E%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NVIDIA 进阶优化 - DLSS 超分预设模型
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%98%BE%E5%8D%A1%E4%BC%98%E5%8C%96/NVIDIA%E8%BF%9B%E9%98%B6%E4%BC%98%E5%8C%96-ReBAR%E5%BC%BA%E5%88%B6%E5%BC%80%E5%90%AF/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NVIDIA 进阶优化 - ReBAR 强制开启
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%98%BE%E5%8D%A1%E4%BC%98%E5%8C%96/DP-HDMI%E5%8D%8F%E8%AE%AE%E4%B8%8E%E9%80%9F%E7%8E%87%E5%85%B3%E7%B3%BB%E8%A1%A8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DP / HDMI 协议与速率关系表
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    笔电相关
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    笔电相关
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%AC%94%E7%94%B5%E7%9B%B8%E5%85%B3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    笔电相关/index.md
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%AC%94%E7%94%B5%E7%9B%B8%E5%85%B3/%E6%8E%A7%E5%88%B6%E4%B8%AD%E5%BF%83%E4%B8%8EUniwill%E9%A9%B1%E5%8A%A8%E5%86%B2%E7%AA%81%E6%8E%92%E6%9F%A5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    控制中心与 Uniwill 驱动冲突排查
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%AC%94%E7%94%B5%E7%9B%B8%E5%85%B3/%E5%90%8C%E6%96%B9%E6%A8%A1%E5%85%B7%E7%94%B5%E6%B1%A0%E5%85%85%E7%94%B5%E6%A8%A1%E5%BC%8F%E4%B8%8E%E8%B7%B3%E5%8D%87%E8%87%B3%E6%BB%A1%E7%94%B5%E7%8E%B0%E8%B1%A1%E8%A7%A3%E6%9E%90/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    同方模具电池充电模式与跳升至满电现象解析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    系统调优与安全
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    系统调优与安全
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%B3%BB%E7%BB%9F%E8%B0%83%E4%BC%98%E4%B8%8E%E5%AE%89%E5%85%A8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    系统调优与安全/index.md
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%B3%BB%E7%BB%9F%E8%B0%83%E4%BC%98%E4%B8%8E%E5%AE%89%E5%85%A8/Windows%E4%BC%98%E5%8C%96%E5%8E%9F%E5%88%99%E4%B8%8E%E9%A3%8E%E9%99%A9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Windows 优化原则与风险
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%B3%BB%E7%BB%9F%E8%B0%83%E4%BC%98%E4%B8%8E%E5%AE%89%E5%85%A8/Windows%E6%9C%8D%E5%8A%A1%E4%BC%98%E5%8C%96%E5%8E%9F%E5%88%99/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Windows 服务优化原则
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%B3%BB%E7%BB%9F%E8%B0%83%E4%BC%98%E4%B8%8E%E5%AE%89%E5%85%A8/VBS%E4%B8%8E%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E7%BC%93%E8%A7%A3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VBS 与系统安全缓解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_11_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_11_5" id="__nav_11_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    历史兼容（旧路径重定向）
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_11_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    历史兼容（旧路径重定向）
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%B3%BB%E7%BB%9F%E8%B0%83%E4%BC%98%E4%B8%8E%E5%AE%89%E5%85%A8/%E4%BC%98%E5%8C%96%E7%AD%89%E7%BA%A7%E8%AF%B4%E6%98%8E/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    优化等级说明
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%B3%BB%E7%BB%9F%E8%B0%83%E4%BC%98%E4%B8%8E%E5%AE%89%E5%85%A8/%E6%B3%A8%E5%86%8C%E8%A1%A8%E4%BC%98%E5%8C%96%E5%8E%9F%E5%88%99/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    注册表优化原则
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%B3%BB%E7%BB%9F%E8%B0%83%E4%BC%98%E4%B8%8E%E5%AE%89%E5%85%A8/Windows%E7%94%B5%E6%BA%90%E8%AE%A1%E5%88%92%E4%B8%8E%E6%80%A7%E8%83%BD%E8%B0%83%E5%BA%A6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Windows 电源计划与性能调度
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_12" >
+        
+          
+          <label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    网络通信
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    网络通信
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    网络通信/index.md
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/Windows%E7%BD%91%E7%BB%9C%E6%A0%88%E4%BC%98%E5%8C%96%E5%8E%9F%E5%88%99/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Windows 网络栈优化原则
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/Karing-Windows-TUN%E4%B8%8EWindows%E7%BD%91%E7%BB%9C%E8%BD%AC%E5%8F%91%E8%AE%BE%E7%BD%AE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Karing Windows TUN 与 Windows 网络转发设置
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/%E5%9B%9B%E5%A4%A7%E8%BF%90%E8%90%A5%E5%95%86%E9%A2%91%E6%AE%B5%E9%80%9F%E7%8E%87%E4%B8%8EAPN%E8%AE%BE%E7%BD%AE%E9%80%9F%E6%9F%A5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    四大运营商频段速率与 APN 设置速查
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_13" >
+        
+          
+          <label class="md-nav__link" for="__nav_13" id="__nav_13_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    软件技巧
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_13_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_13">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    软件技巧
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%BD%AF%E4%BB%B6%E6%8A%80%E5%B7%A7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    软件技巧/index.md
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%BD%AF%E4%BB%B6%E6%8A%80%E5%B7%A7/Steam%E8%AE%BE%E7%BD%AE%E4%BC%98%E5%8C%96%E6%8C%87%E5%8D%97/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Steam 设置优化指南
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_14" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_14" id="__nav_14_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    项目导航
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_14_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_14">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    项目导航
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    项目导航/index.md
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tweakbyjie%E5%85%B3%E8%81%94%E8%AF%B4%E6%98%8E/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    tweakbyjie 关联说明
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tweakbyjie-optimization-mapping/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    tweakbyjie 优化项目映射
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tweakbyjie%E5%85%A8%E9%87%8F%E6%89%A7%E8%A1%8C%E5%8F%82%E8%80%83/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    tweakbyjie 全量执行参考
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CPU 优化与 tweakbyjie 对应说明
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CPU 优化与 tweakbyjie 对应说明
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        对应范围
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cpu-001-win32priorityseparation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CPU-001 Win32PrioritySeparation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CPU-001 Win32PrioritySeparation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        执行位置
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        注册表位置与目标值
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        字段卡
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Windows 原理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        修改目的
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        默认值与目标值对照
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#win32priorityseparation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Win32PrioritySeparation 位字段参考表
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Win32PrioritySeparation 位字段参考表">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        常见组合
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        如何读取目标值
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        参考值与脚本实际范围
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        潜在影响
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        验证方法
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="验证方法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        配置层验证
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ab" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        运行时 A/B 验证
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        备份与恢复
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        恢复方式
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cpu-002-multimedia-systemprofile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CPU-002 Multimedia SystemProfile
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CPU-002 Multimedia SystemProfile">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        执行位置
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        注册表位置与包含项目
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#windows_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Windows 原理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        修改目的
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        默认行为与适用环境
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        潜在影响
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        验证与恢复
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cpu-003-systemresponsiveness" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CPU-003 SystemResponsiveness
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CPU-003 SystemResponsiveness">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        执行位置
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        注册表位置与目标值
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#windows_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Windows 原理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        修改目的
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        默认行为与适用环境
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        潜在影响
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_26" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        验证方法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_27" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        恢复方式
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cpu-004-networkthrottlingindex" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CPU-004 NetworkThrottlingIndex
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CPU-004 NetworkThrottlingIndex">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_28" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        执行位置
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_29" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        注册表位置与目标值
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#windows_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Windows 原理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_30" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        修改目的
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        默认行为与适用环境
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        潜在影响
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        验证方法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_34" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        恢复方式
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cpu-005-tasksgames" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CPU-005 Tasks\Games
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CPU-005 Tasks\Games">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_35" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        执行位置
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_36" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        注册表位置与目标值
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#windows_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Windows 原理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_37" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        修改目的
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_38" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        默认行为与适用环境
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_39" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        潜在影响
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_40" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        验证方法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_41" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        恢复方式
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cpu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CPU 类核对结论
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../GPU%E8%B0%83%E5%BA%A6%E4%B8%8E%E6%98%BE%E7%A4%BA%E7%AE%A1%E7%BA%BF/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GPU 调度与显示管线
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%B8%B8%E6%88%8F%E6%80%A7%E8%83%BD%E9%AA%8C%E8%AF%81%E6%B5%81%E7%A8%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    游戏性能验证流程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        对应范围
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cpu-001-win32priorityseparation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CPU-001 Win32PrioritySeparation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CPU-001 Win32PrioritySeparation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        执行位置
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        注册表位置与目标值
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        字段卡
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Windows 原理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        修改目的
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        默认值与目标值对照
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#win32priorityseparation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Win32PrioritySeparation 位字段参考表
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Win32PrioritySeparation 位字段参考表">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        常见组合
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        如何读取目标值
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        参考值与脚本实际范围
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        潜在影响
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        验证方法
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="验证方法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        配置层验证
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ab" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        运行时 A/B 验证
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        备份与恢复
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        恢复方式
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cpu-002-multimedia-systemprofile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CPU-002 Multimedia SystemProfile
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CPU-002 Multimedia SystemProfile">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        执行位置
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        注册表位置与包含项目
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#windows_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Windows 原理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        修改目的
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        默认行为与适用环境
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        潜在影响
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        验证与恢复
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cpu-003-systemresponsiveness" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CPU-003 SystemResponsiveness
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CPU-003 SystemResponsiveness">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        执行位置
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        注册表位置与目标值
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#windows_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Windows 原理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        修改目的
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        默认行为与适用环境
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        潜在影响
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_26" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        验证方法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_27" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        恢复方式
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cpu-004-networkthrottlingindex" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CPU-004 NetworkThrottlingIndex
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CPU-004 NetworkThrottlingIndex">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_28" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        执行位置
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_29" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        注册表位置与目标值
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#windows_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Windows 原理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_30" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        修改目的
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        默认行为与适用环境
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        潜在影响
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        验证方法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_34" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        恢复方式
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cpu-005-tasksgames" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CPU-005 Tasks\Games
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CPU-005 Tasks\Games">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_35" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        执行位置
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_36" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        注册表位置与目标值
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#windows_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Windows 原理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_37" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        修改目的
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_38" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        默认行为与适用环境
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_39" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        潜在影响
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_40" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        验证方法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_41" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        恢复方式
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cpu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CPU 类核对结论
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="cpu-tweakbyjie">CPU 优化与 tweakbyjie 对应说明<a class="headerlink" href="#cpu-tweakbyjie" title="Permanent link">&para;</a></h1>
+<h2 id="_1">对应范围<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>已与 <code>tweakbyjie</code> 模块化结构同步：执行逻辑现位于 <code>Modules/Menu.ps1</code> 与 <code>Modules/Common.ps1</code>（通用写入/验证）、<code>Modules/Backup.*.ps1</code>（备份闭环）；此处不再使用 <code>tweakbyjie.ps1:行号</code> 定位，以 <code>Modules/函数名</code> 为准。详见 <code>tweakbyjie/docs/design/CODE-REFACTOR-STATUS.md</code>。</p>
+</blockquote>
+<p>本章节逐项对应 <code>tweakbyjie/tweakbyjie.ps1</code> 当前“Part 1 → 核心游戏优化 → 子项 1”中的 CPU、MMCSS 多媒体调度和 Games 任务配置。脚本实际写入的路径、值名和目标值以当前源码为准。</p>
+<blockquote>
+<p>重要边界：当前脚本对这些项目没有统一的修改前备份/恢复流程；除 CPU-001 外，当前执行路径也没有为这些项目提供完整的回读验证。因此，下面的“恢复方式”是人工恢复前提，不代表脚本已经自动提供恢复功能。</p>
+</blockquote>
+<h2 id="cpu-001-win32priorityseparation">CPU-001 Win32PrioritySeparation<a class="headerlink" href="#cpu-001-win32priorityseparation" title="Permanent link">&para;</a></h2>
+<h3 id="_2">执行位置<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>源码：<code>Modules/Menu.ps1</code>（Part 1）+ <code>Modules/Common.ps1/Set-RegDword</code></li>
+<li>入口：主菜单 <code>1</code> → 核心游戏优化 <code>1</code></li>
+<li>写入函数：<code>Set-RegDword</code></li>
+</ul>
+<h3 id="_3">注册表位置与目标值<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>注册表 Hive：HKEY_LOCAL_MACHINE（HKLM）
+子键：SYSTEM\CurrentControlSet\Control\PriorityControl
+值名：Win32PrioritySeparation
+类型：REG_DWORD（32 位无符号整数）
+脚本目标值：38（十进制）= 0x26（十六进制）
+</code></pre></div>
+<h3 id="_4">字段卡<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>当前事实</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>稳定编号</td>
+<td><code>CPU-001</code></td>
+</tr>
+<tr>
+<td>分类</td>
+<td>CPU 调度 / 前台与后台线程资源分配</td>
+</tr>
+<tr>
+<td>脚本入口</td>
+<td>主菜单 <code>1</code> → 核心游戏优化 <code>1</code></td>
+</tr>
+<tr>
+<td>执行源码</td>
+<td><code>Modules/Menu.ps1</code>（Part 1）+ <code>Modules/Common.ps1/Set-RegDword</code>，调用 <code>Set-RegDword</code></td>
+</tr>
+<tr>
+<td>验证源码</td>
+<td><code>Modules/Common.ps1/Verify-RegDword</code>，调用 <code>Verify-RegDword</code></td>
+</tr>
+<tr>
+<td>配置对象</td>
+<td><code>HKLM\SYSTEM\CurrentControlSet\Control\PriorityControl</code> 下的单个 DWORD</td>
+</tr>
+<tr>
+<td>脚本行为</td>
+<td>写入 <code>38</code>，成功后标记需要重启；不提供 CPU-001 专用快照</td>
+</tr>
+<tr>
+<td>文档状态</td>
+<td>已绑定当前源码；其他编码仅为参考，不属于脚本菜单</td>
+</tr>
+</tbody>
+</table>
+<h3 id="windows">Windows 原理<a class="headerlink" href="#windows" title="Permanent link">&para;</a></h3>
+<p>Windows 调度器根据线程优先级、前台/后台状态和量子时间等因素分配处理器时间。<code>Win32PrioritySeparation</code> 是系统级调度策略参数，会影响前台程序与后台程序的相对调度行为。它不是简单的“锁定某个程序使用 CPU”，实际效果还会受 Windows 版本、处理器、线程优先级和应用自身行为影响。</p>
+<h3 id="_5">修改目的<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p>脚本将该值设为十进制 <code>38</code>（十六进制 <code>0x26</code>），目标是调整前台交互应用和游戏线程的调度策略，优先关注响应性。这里必须区分十进制和十六进制表示，不能把 <code>38</code> 误读成十六进制 <code>0x38</code>。</p>
+<h3 id="_6">默认值与目标值对照<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<p><code>Win32PrioritySeparation</code> 的默认值不能从图片、旧教程或另一台电脑直接推断。必须在目标机修改前读取，并记录：</p>
+<div class="highlight"><pre><span></span><code><span class="nv">$path</span> <span class="p">=</span> <span class="s1">'HKLM:\SYSTEM\CurrentControlSet\Control\PriorityControl'</span>
+<span class="nb">Get-ItemProperty</span> <span class="n">-Path</span> <span class="nv">$path</span> <span class="n">-Name</span> <span class="n">Win32PrioritySeparation</span> <span class="p">|</span>
+  <span class="nb">Select-Object</span> <span class="n">Win32PrioritySeparation</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>状态</th>
+<th style="text-align: right;">十进制</th>
+<th style="text-align: right;">十六进制</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>目标机修改前</td>
+<td style="text-align: right;">以实际读取为准</td>
+<td style="text-align: right;">以实际读取为准</td>
+<td>Windows 版本、策略和历史工具可能不同</td>
+</tr>
+<tr>
+<td>当前脚本目标</td>
+<td style="text-align: right;"><code>38</code></td>
+<td style="text-align: right;"><code>0x26</code></td>
+<td>Short + Variable + High foreground boost（传统位字段解释）</td>
+</tr>
+<tr>
+<td>图片中的后台参考值</td>
+<td style="text-align: right;"><code>24</code></td>
+<td style="text-align: right;"><code>0x18</code></td>
+<td>Long + Fixed + No foreground boost（传统位字段解释）</td>
+</tr>
+</tbody>
+</table>
+<p><code>24/0x18</code> 只是参考对照，不是当前脚本的后台服务模式，也不应因为名称“后台优化”就直接写入服务器、办公机或目标用户设备。</p>
+<h2 id="win32priorityseparation">Win32PrioritySeparation 位字段参考表<a class="headerlink" href="#win32priorityseparation" title="Permanent link">&para;</a></h2>
+<p>下面的表用于解释传统资料中常见的 <code>Win32PrioritySeparation</code> 编码。它是<strong>参考解码表</strong>，不是 Windows 所有版本的官方性能保证，也不是 <code>tweakbyjie</code> 的菜单选项。</p>
+<p>常见的位组合可以按以下方式理解：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">位值</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;"><code>32</code>（<code>0x20</code>）</td>
+<td>Short Quantum；短量子</td>
+</tr>
+<tr>
+<td style="text-align: right;"><code>16</code>（<code>0x10</code>）</td>
+<td>Long Quantum；长量子</td>
+</tr>
+<tr>
+<td style="text-align: right;"><code>8</code>（<code>0x08</code>）</td>
+<td>Fixed Quantum；固定量子</td>
+</tr>
+<tr>
+<td style="text-align: right;"><code>4</code>（<code>0x04</code>）</td>
+<td>Variable Quantum；可变量子</td>
+</tr>
+<tr>
+<td style="text-align: right;"><code>2</code>（<code>0x02</code>）</td>
+<td>High foreground boost；前台高提升</td>
+</tr>
+<tr>
+<td style="text-align: right;"><code>1</code>（<code>0x01</code>）</td>
+<td>Medium foreground boost；前台中等提升</td>
+</tr>
+<tr>
+<td style="text-align: right;"><code>0</code></td>
+<td>No foreground boost；无前台提升</td>
+</tr>
+</tbody>
+</table>
+<p>每一项的基础值只取相应互斥组中的一个值：量子长度取 <code>32</code> 或 <code>16</code>，量子类型取 <code>8</code> 或 <code>4</code>，前台提升取 <code>2</code>、<code>1</code> 或 <code>0</code>。例如：</p>
+<div class="highlight"><pre><span></span><code>32 + 4 + 2 = 38 Dec = 0x26
+16 + 8 + 0 = 24 Dec = 0x18
+</code></pre></div>
+<h3 id="_7">常见组合<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">十进制</th>
+<th style="text-align: right;">十六进制</th>
+<th>量子长度</th>
+<th>量子类型</th>
+<th>前台提升</th>
+<th>传统资料中的描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;"><code>42</code></td>
+<td style="text-align: right;"><code>0x2A</code></td>
+<td>Short</td>
+<td>Fixed</td>
+<td>High</td>
+<td>短、固定、前台高提升</td>
+</tr>
+<tr>
+<td style="text-align: right;"><code>41</code></td>
+<td style="text-align: right;"><code>0x29</code></td>
+<td>Short</td>
+<td>Fixed</td>
+<td>Medium</td>
+<td>短、固定、前台中等提升</td>
+</tr>
+<tr>
+<td style="text-align: right;"><code>40</code></td>
+<td style="text-align: right;"><code>0x28</code></td>
+<td>Short</td>
+<td>Fixed</td>
+<td>None</td>
+<td>短、固定、无前台提升</td>
+</tr>
+<tr>
+<td style="text-align: right;"><code>38</code></td>
+<td style="text-align: right;"><code>0x26</code></td>
+<td>Short</td>
+<td>Variable</td>
+<td>High</td>
+<td>短、可变、前台高提升</td>
+</tr>
+<tr>
+<td style="text-align: right;"><code>37</code></td>
+<td style="text-align: right;"><code>0x25</code></td>
+<td>Short</td>
+<td>Variable</td>
+<td>Medium</td>
+<td>短、可变、前台中等提升</td>
+</tr>
+<tr>
+<td style="text-align: right;"><code>36</code></td>
+<td style="text-align: right;"><code>0x24</code></td>
+<td>Short</td>
+<td>Variable</td>
+<td>None</td>
+<td>短、可变、无前台提升</td>
+</tr>
+<tr>
+<td style="text-align: right;"><code>26</code></td>
+<td style="text-align: right;"><code>0x1A</code></td>
+<td>Long</td>
+<td>Fixed</td>
+<td>High</td>
+<td>长、固定、前台高提升</td>
+</tr>
+<tr>
+<td style="text-align: right;"><code>25</code></td>
+<td style="text-align: right;"><code>0x19</code></td>
+<td>Long</td>
+<td>Fixed</td>
+<td>Medium</td>
+<td>长、固定、前台中等提升</td>
+</tr>
+<tr>
+<td style="text-align: right;"><code>24</code></td>
+<td style="text-align: right;"><code>0x18</code></td>
+<td>Long</td>
+<td>Fixed</td>
+<td>None</td>
+<td>长、固定、无前台提升</td>
+</tr>
+<tr>
+<td style="text-align: right;"><code>22</code></td>
+<td style="text-align: right;"><code>0x16</code></td>
+<td>Long</td>
+<td>Variable</td>
+<td>High</td>
+<td>长、可变、前台高提升</td>
+</tr>
+<tr>
+<td style="text-align: right;"><code>21</code></td>
+<td style="text-align: right;"><code>0x15</code></td>
+<td>Long</td>
+<td>Variable</td>
+<td>Medium</td>
+<td>长、可变、前台中等提升</td>
+</tr>
+<tr>
+<td style="text-align: right;"><code>20</code></td>
+<td style="text-align: right;"><code>0x14</code></td>
+<td>Long</td>
+<td>Variable</td>
+<td>None</td>
+<td>长、可变、无前台提升</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_8">如何读取目标值<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<p>只读读取注册表得到的是一个 DWORD。先确认输出是十进制还是十六进制，再按表格解码。以脚本当前值为例：</p>
+<div class="highlight"><pre><span></span><code>38 Dec = 0x26
+0x26 = 32 + 4 + 2
+= Short Quantum + Variable Quantum + High foreground boost
+</code></pre></div>
+<p>这里的 <code>26</code> 是十六进制数字，不能把脚本的十进制 <code>38</code> 误写成十六进制 <code>0x38</code>。同理，图片中的 <code>24 Dec / 18 Hex</code> 是十进制 <code>24</code>、十六进制 <code>0x18</code> 的同一个值，不是两个不同配置。</p>
+<h3 id="_9">参考值与脚本实际范围<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<p>传统资料常把 <code>38 Dec / 0x26</code> 描述为前台应用优化，把 <code>24 Dec / 0x18</code> 描述为后台服务优化。它们可以帮助理解位字段，但不能直接证明在当前 Windows 版本、硬件或游戏中一定更快。</p>
+<p><code>tweakbyjie</code> 当前只在 <code>Modules/Menu.ps1</code>（Part 1）+ <code>Modules/Common.ps1/Set-RegDword</code> 写入 <code>38 Dec / 0x26</code>，并在 <code>:813</code> 回读验证；脚本没有实现 <code>24/0x18</code> 或其他组合的切换，也没有新增“前台/后台模式”菜单。</p>
+<blockquote>
+<p>⚠️ <strong>可靠性边界</strong>：量子长度、量子类型和 foreground boost 的传统位解释在资料中广泛流传，但实际调度效果会受到 Windows 版本、策略、处理器、线程优先级和应用行为影响。修改前请读取目标机原值、保存恢复信息，并用帧时间、输入延迟和后台任务完成时间进行 A/B 测试。不要仅凭表格或注册表目标值宣称性能提升。</p>
+</blockquote>
+<h3 id="_10">潜在影响<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<p>前台响应可能改善，也可能没有可测收益。后台编译、压缩、同步、渲染或长时间计算任务的调度份额可能变化；不同系统版本和硬件的结果可能不同。该值不会锁定某个进程的 CPU，也不会绕过电源、温度、线程优先级或应用自身调度。</p>
+<h3 id="_11">验证方法<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<h4 id="_12">配置层验证<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h4>
+<p>脚本在 <code>Modules/Common.ps1/Verify-RegDword</code> 使用 <code>Verify-RegDword</code> 回读并验证目标值 <code>38</code>。也可以只读检查：</p>
+<div class="highlight"><pre><span></span><code><span class="nb">Get-ItemPropertyValue</span> <span class="p">`</span>
+  <span class="s1">'HKLM:\SYSTEM\CurrentControlSet\Control\PriorityControl'</span> <span class="p">`</span>
+  <span class="s1">'Win32PrioritySeparation'</span>
+</code></pre></div>
+<p>这只能验证注册表配置层的目标值，不代表调度器在所有应用中产生了预期效果，也不代表性能一定提升。</p>
+<h4 id="ab">运行时 A/B 验证<a class="headerlink" href="#ab" title="Permanent link">&para;</a></h4>
+<p>在相同硬件、驱动、游戏版本、分辨率和电源模式下，对比修改前后：</p>
+<ul>
+<li>平均 FPS 和 1% Low；</li>
+<li>帧时间波动；</li>
+<li>输入延迟；</li>
+<li>后台编译、压缩或同步任务完成时间；</li>
+<li>游戏切换、录制、睡眠/唤醒和长时间稳定性。</li>
+</ul>
+<p>如果只观察一个游戏的一次平均 FPS，不能判断该值是否有效。建议先保留默认值作为基线，再测试目标值；不要同时修改 HAGS、MMCSS、Games 任务或电源计划，否则无法归因。</p>
+<h3 id="_13">备份与恢复<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<p>当前脚本没有为 CPU-001 建立独立备份文件，也没有提供自动恢复入口。执行前应手工保存原始存在状态、注册表类型和值：</p>
+<div class="highlight"><pre><span></span><code><span class="nv">$path</span> <span class="p">=</span> <span class="s1">'HKLM:\SYSTEM\CurrentControlSet\Control\PriorityControl'</span>
+<span class="nv">$key</span> <span class="p">=</span> <span class="nb">Get-Item</span> <span class="nv">$path</span>
+<span class="nv">$exists</span> <span class="p">=</span> <span class="nv">$key</span><span class="p">.</span><span class="n">GetValueNames</span><span class="p">()</span> <span class="o">-contains</span> <span class="s1">'Win32PrioritySeparation'</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$exists</span><span class="p">)</span> <span class="p">{</span>
+  <span class="no">[pscustomobject]</span><span class="p">@{</span>
+    <span class="n">Exists</span> <span class="p">=</span> <span class="nv">$true</span>
+    <span class="n">Kind</span> <span class="p">=</span> <span class="nv">$key</span><span class="p">.</span><span class="n">GetValueKind</span><span class="p">(</span><span class="s1">'Win32PrioritySeparation'</span><span class="p">).</span><span class="n">ToString</span><span class="p">()</span>
+    <span class="n">Value</span> <span class="p">=</span> <span class="nv">$key</span><span class="p">.</span><span class="n">GetValue</span><span class="p">(</span><span class="s1">'Win32PrioritySeparation'</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+  <span class="no">[pscustomobject]</span><span class="p">@{</span> <span class="n">Exists</span> <span class="p">=</span> <span class="nv">$false</span><span class="p">;</span> <span class="n">Kind</span> <span class="p">=</span> <span class="nv">$null</span><span class="p">;</span> <span class="n">Value</span> <span class="p">=</span> <span class="nv">$null</span> <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>恢复时：</p>
+<ul>
+<li>原值存在：按原类型和值写回；</li>
+<li>原值不存在：删除实验新增的 <code>Win32PrioritySeparation</code>；</li>
+<li>恢复后重新读取并重启，再进行同一组 A/B 测试。</li>
+</ul>
+<p>不要把 <code>0x26</code>、<code>0x18</code> 或另一台电脑的值当作通用恢复值。</p>
+<h3 id="_14">恢复方式<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
+<p>上面的手工快照和恢复规则是本条目的恢复前提。<code>tweakbyjie</code> 当前只负责写入/验证 <code>38</code>，不负责保存或恢复 CPU-001 的原始值。</p>
+<h2 id="cpu-002-multimedia-systemprofile">CPU-002 Multimedia SystemProfile<a class="headerlink" href="#cpu-002-multimedia-systemprofile" title="Permanent link">&para;</a></h2>
+<h3 id="_15">执行位置<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
+<ul>
+<li>源码：<code>Modules/Menu.ps1</code>（Part 1）+ <code>Modules/Common.ps1/Set-RegDword</code></li>
+<li>入口：主菜单 <code>1</code> → 核心游戏优化 <code>1</code></li>
+<li>写入函数：<code>Set-RegDword</code></li>
+</ul>
+<h3 id="_16">注册表位置与包含项目<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>路径：HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile
+</code></pre></div>
+<p>CPU-002 表示 <code>SystemProfile</code> 这一组多媒体调度配置；其中的两个独立值另列为 CPU-003 和 CPU-004：</p>
+<ul>
+<li><code>SystemResponsiveness</code>：目标 <code>10</code>，见 CPU-003</li>
+<li><code>NetworkThrottlingIndex</code>：目标 <code>0xFFFFFFFF</code>，见 CPU-004</li>
+</ul>
+<h3 id="windows_1">Windows 原理<a class="headerlink" href="#windows_1" title="Permanent link">&para;</a></h3>
+<p><code>Multimedia\SystemProfile</code> 是 Windows Multimedia Class Scheduler Service（MMCSS）使用的系统级配置区域之一。它参与多媒体任务与普通后台任务之间的资源调度，不能理解为单独的 CPU 超频或显卡驱动开关。</p>
+<h3 id="_17">修改目的<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
+<p>脚本通过调整该路径下的具体 DWORD，尝试改变游戏、音频和其他实时交互任务的调度环境。真正的效果取决于具体值、任务类别、Windows 版本和应用是否使用相应的调度机制。</p>
+<h3 id="_18">默认行为与适用环境<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h3>
+<p>Windows 会使用系统默认的 MMCSS 策略；默认值应在目标机器上实际读取确认。适合在游戏、音频、视频或实时交互场景中进行有基线的测试，不适合把整组参数无差别地视为所有用户的通用优化。</p>
+<h3 id="_19">潜在影响<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h3>
+<p>可能改变后台任务获得的处理器时间、网络线程调度或多媒体任务的稳定性。错误或不适配的值可能导致后台任务延迟、应用兼容性问题，且不一定带来帧率收益。</p>
+<h3 id="_20">验证与恢复<a class="headerlink" href="#_20" title="Permanent link">&para;</a></h3>
+<p>当前脚本没有对 <code>SystemProfile</code> 下所有写入值进行统一回读，也没有自动备份这组配置。验证时应分别读取 CPU-003、CPU-004 和 CPU-005 中列出的具体值；恢复时必须将执行前记录的每个原值逐项写回。</p>
+<h2 id="cpu-003-systemresponsiveness">CPU-003 SystemResponsiveness<a class="headerlink" href="#cpu-003-systemresponsiveness" title="Permanent link">&para;</a></h2>
+<h3 id="_21">执行位置<a class="headerlink" href="#_21" title="Permanent link">&para;</a></h3>
+<ul>
+<li>源码：<code>Modules/Menu.ps1</code>（Part 1）+ <code>Modules/Common.ps1/Set-RegDword</code></li>
+<li>入口：主菜单 <code>1</code> → 核心游戏优化 <code>1</code></li>
+<li>写入函数：<code>Set-RegDword</code></li>
+</ul>
+<h3 id="_22">注册表位置与目标值<a class="headerlink" href="#_22" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>路径：HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile
+值名：SystemResponsiveness
+类型：REG_DWORD
+脚本目标值：10（十进制）
+</code></pre></div>
+<h3 id="windows_2">Windows 原理<a class="headerlink" href="#windows_2" title="Permanent link">&para;</a></h3>
+<p>该值参与 MMCSS 对系统响应性和后台任务资源分配的策略判断。它影响的是调度策略的一部分，不是对所有进程设置固定 CPU 占用比例，也不是直接保证游戏获得某个百分比的处理器时间。</p>
+<h3 id="_23">修改目的<a class="headerlink" href="#_23" title="Permanent link">&para;</a></h3>
+<p>脚本将目标值设为 <code>10</code>，意图在多媒体或游戏前台运行时调整后台任务资源分配，使交互任务保持更高的响应性。</p>
+<h3 id="_24">默认行为与适用环境<a class="headerlink" href="#_24" title="Permanent link">&para;</a></h3>
+<p>默认值由 Windows 版本和系统策略决定，应在修改前读取。只有在游戏、音视频或实时交互场景中完成前后测试后，才适合评估该调整；办公、多任务、编译和后台服务负载较重的用户需要谨慎。</p>
+<h3 id="_25">潜在影响<a class="headerlink" href="#_25" title="Permanent link">&para;</a></h3>
+<p>后台任务可能获得不同的调度份额，表现为同步、下载、编译、压缩或后台渲染速度变化。对游戏帧率和延迟的收益并不保证，必须结合实际帧时间、1% Low、输入延迟和后台任务影响判断。</p>
+<h3 id="_26">验证方法<a class="headerlink" href="#_26" title="Permanent link">&para;</a></h3>
+<p>当前脚本写入后没有调用专门的 <code>Verify-RegDword</code> 验证该值。可只读检查：</p>
+<div class="highlight"><pre><span></span><code><span class="nb">Get-ItemPropertyValue</span> <span class="p">`</span>
+  <span class="s1">'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile'</span> <span class="p">`</span>
+  <span class="s1">'SystemResponsiveness'</span>
+</code></pre></div>
+<h3 id="_27">恢复方式<a class="headerlink" href="#_27" title="Permanent link">&para;</a></h3>
+<p>修改前读取并保存原始 <code>REG_DWORD</code>；恢复时写回原值。当前脚本没有自动备份或恢复 CPU-003。</p>
+<h2 id="cpu-004-networkthrottlingindex">CPU-004 NetworkThrottlingIndex<a class="headerlink" href="#cpu-004-networkthrottlingindex" title="Permanent link">&para;</a></h2>
+<h3 id="_28">执行位置<a class="headerlink" href="#_28" title="Permanent link">&para;</a></h3>
+<ul>
+<li>源码：<code>Modules/Menu.ps1</code>（Part 1）+ <code>Modules/Common.ps1/Set-RegDword</code></li>
+<li>入口：主菜单 <code>1</code> → 核心游戏优化 <code>1</code></li>
+<li>写入函数：<code>Set-RegDword</code></li>
+</ul>
+<h3 id="_29">注册表位置与目标值<a class="headerlink" href="#_29" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>路径：HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile
+值名：NetworkThrottlingIndex
+类型：REG_DWORD
+脚本目标值：0xFFFFFFFF
+</code></pre></div>
+<h3 id="windows_3">Windows 原理<a class="headerlink" href="#windows_3" title="Permanent link">&para;</a></h3>
+<p>该值位于 MMCSS 的网络节流相关配置中。脚本使用 <code>0xFFFFFFFF</code> 作为目标值，意图关闭或绕过 Windows 的网络节流限制。它不等同于提升带宽，也不能替代网卡驱动、路由器、运营商或应用协议层面的调优。</p>
+<h3 id="_30">修改目的<a class="headerlink" href="#_30" title="Permanent link">&para;</a></h3>
+<p>在对网络延迟敏感的游戏或实时通信场景中，尝试减少系统网络节流对多媒体任务的影响。</p>
+<h3 id="_31">默认行为与适用环境<a class="headerlink" href="#_31" title="Permanent link">&para;</a></h3>
+<p>Windows 默认行为应以目标系统当前值和版本实现为准。适用性需要通过稳定的网络延迟、抖动、丢包和 CPU 占用测试评估；普通办公、下载或带宽受限环境不应仅凭“关闭节流”就预期收益。</p>
+<h3 id="_32">潜在影响<a class="headerlink" href="#_32" title="Permanent link">&para;</a></h3>
+<p>可能改变网络线程与多媒体任务的调度方式，增加高负载下的 CPU 调度压力；也可能没有可测的网络延迟改善。网络稳定性、吞吐量和游戏服务器路径仍是主要因素。</p>
+<h3 id="_33">验证方法<a class="headerlink" href="#_33" title="Permanent link">&para;</a></h3>
+<p>当前脚本没有对该值进行回读验证。可只读检查并确认类型和值：</p>
+<div class="highlight"><pre><span></span><code><span class="nb">Get-ItemProperty</span> <span class="p">`</span>
+  <span class="s1">'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile'</span> <span class="p">`</span>
+  <span class="n">-Name</span> <span class="s1">'NetworkThrottlingIndex'</span> <span class="p">|</span>
+  <span class="nb">Select-Object</span> <span class="n">NetworkThrottlingIndex</span>
+</code></pre></div>
+<h3 id="_34">恢复方式<a class="headerlink" href="#_34" title="Permanent link">&para;</a></h3>
+<p>修改前记录原始 <code>REG_DWORD</code>，恢复时写回原值。当前脚本没有自动备份或恢复 CPU-004；不要把 <code>0xFFFFFFFF</code> 当作所有系统的默认值。</p>
+<h2 id="cpu-005-tasksgames">CPU-005 Tasks\Games<a class="headerlink" href="#cpu-005-tasksgames" title="Permanent link">&para;</a></h2>
+<h3 id="_35">执行位置<a class="headerlink" href="#_35" title="Permanent link">&para;</a></h3>
+<ul>
+<li>路径定义：<code>Modules/Menu.ps1</code>（Part 1）</li>
+<li>写入位置：<code>Modules/Menu.ps1</code>（Part 1，Games 任务七项）</li>
+<li>入口：主菜单 <code>1</code> → 核心游戏优化 <code>1</code></li>
+</ul>
+<h3 id="_36">注册表位置与目标值<a class="headerlink" href="#_36" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>路径：HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>值名</th>
+<th>类型</th>
+<th>脚本目标值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Affinity</code></td>
+<td><code>REG_DWORD</code></td>
+<td><code>0</code></td>
+</tr>
+<tr>
+<td><code>Background Only</code></td>
+<td><code>REG_SZ</code></td>
+<td><code>False</code></td>
+</tr>
+<tr>
+<td><code>Clock Rate</code></td>
+<td><code>REG_DWORD</code></td>
+<td><code>10000</code></td>
+</tr>
+<tr>
+<td><code>GPU Priority</code></td>
+<td><code>REG_DWORD</code></td>
+<td><code>8</code></td>
+</tr>
+<tr>
+<td><code>Priority</code></td>
+<td><code>REG_DWORD</code></td>
+<td><code>6</code></td>
+</tr>
+<tr>
+<td><code>Scheduling Category</code></td>
+<td><code>REG_SZ</code></td>
+<td><code>High</code></td>
+</tr>
+<tr>
+<td><code>SFIO Priority</code></td>
+<td><code>REG_SZ</code></td>
+<td><code>High</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="windows_4">Windows 原理<a class="headerlink" href="#windows_4" title="Permanent link">&para;</a></h3>
+<p><code>Tasks\Games</code> 是 MMCSS 的游戏任务类别配置。相关值用于描述该类别任务的调度、优先级、I/O 和后台属性。它不是显卡硬件时钟控制项；特别是 <code>Clock Rate=10000</code> 不能解释成“把 GPU 时钟设置为最高”。</p>
+<h3 id="_37">修改目的<a class="headerlink" href="#_37" title="Permanent link">&para;</a></h3>
+<p>脚本为游戏任务类别设置一组偏向前台和高优先级处理的目标属性，意图改善游戏线程、I/O 和多媒体任务的调度环境。</p>
+<h3 id="_38">默认行为与适用环境<a class="headerlink" href="#_38" title="Permanent link">&para;</a></h3>
+<p>默认配置由 Windows 和系统版本提供，目标系统可能已经被 OEM、驱动或其他工具调整。适合在明确以游戏为主、并能进行重复测试的系统上评估；不应假定所有使用 MMCSS 的音视频或后台任务都适合使用同一组值。</p>
+<h3 id="_39">潜在影响<a class="headerlink" href="#_39" title="Permanent link">&para;</a></h3>
+<p>高优先级任务可能挤占后台任务的处理器或 I/O 资源，导致同步、更新、录制、编译或其他多任务行为改变。对平均 FPS、1% Low 和输入延迟的影响必须实测；兼容性也可能因 Windows 版本和应用实现不同而变化。</p>
+<h3 id="_40">验证方法<a class="headerlink" href="#_40" title="Permanent link">&para;</a></h3>
+<p>当前脚本没有对 <code>Tasks\Games</code> 下的七个值进行回读验证。可通过只读命令查看实际值：</p>
+<div class="highlight"><pre><span></span><code><span class="nb">Get-ItemProperty</span> <span class="p">`</span>
+  <span class="s1">'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games'</span>
+</code></pre></div>
+<p>应逐项核对值名、类型和目标值，而不是只确认注册表路径存在。</p>
+<h3 id="_41">恢复方式<a class="headerlink" href="#_41" title="Permanent link">&para;</a></h3>
+<p>修改前必须记录该路径下七个值的原始存在状态、类型和值；恢复时按记录逐项写回，原本不存在的值应删除。当前脚本没有为 CPU-005 提供自动备份、删除缺失值或恢复入口。</p>
+<h2 id="cpu">CPU 类核对结论<a class="headerlink" href="#cpu" title="Permanent link">&para;</a></h2>
+<ul>
+<li>CPU-001 至 CPU-005 均已与 <code>tweakbyjie.ps1</code> 当前源码逐项对应。</li>
+<li><code>Multimedia SystemProfile</code> 是配置路径/类别；<code>SystemResponsiveness</code>、<code>NetworkThrottlingIndex</code> 和 <code>Tasks\Games</code> 是其中的独立执行项目，不能合并后遗漏。</li>
+<li>当前脚本的写入成功提示不等于所有值都已回读验证；CPU-001 之外的这些项目仍存在验证和备份恢复缺口。</li>
+<li>实际是否改善性能，应使用可重复的游戏和系统负载测试验证，不能仅凭注册表目标值判断。</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>
