@@ -138,3 +138,13 @@ UEFI Editor 主要位于第二阶段。即使编辑器成功导出文件，也�
 ## 与 tweakbyjie 的边界
 
 UEFI Editor 和 BIOS 固件修改不属于 `tweakbyjie` 的 Windows 优化执行范围。不要把固件镜像编辑、UEFI 变量写入或刷 BIOS 功能加入 PowerShell 优化菜单。
+
+## 事实核查记录
+
+核验基准：UEFI-Editor 上游项目资料与 UEFI Setup 规范概念（2026-08-21）。
+
+| 声明 | 核查结果 |
+| --- | --- |
+| Setup/Form/Suppress If/Access Level/VarStore/VarOffset 为 UEFI Setup 的真实概念 | ✅ 属实：与 EDK2/UEFI 规范术语一致 |
+| 项目功能与配套工具描述 | ⚠️ 以上游 README 为准，随项目版本演进可能变化 |
+| 不刷修改版 BIOS 也可用 VarStore/Shell 变量方式调整部分选项 | ⚠️ 社区路线，可行性依机型固件而异 |

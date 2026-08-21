@@ -196,3 +196,16 @@ Sysprep /oobe /shutdown
 - [Microsoft Learn：Boot Windows to Audit Mode or OOBE](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/boot-windows-to-audit-mode-or-oobe?view=windows-11)
 - [Microsoft Learn：Sysprep Process Overview](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/sysprep-process-overview?view=windows-11)
 - [Microsoft Learn：auditUser](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/audituser?view=windows-11)
+
+## 事实核查记录
+
+核验基准：Microsoft Learn《Audit mode Overview》（2026-08-21 在线核验）。
+
+| 声明 | 核查结果 |
+| --- | --- |
+| Audit Mode 允许在 OOBE 前进入桌面安装驱动/应用/运行脚本 | ✅ 属实：官方页面 Benefits 一节原文一致 |
+| 进入 Audit Mode 后以内置 Administrator 账户自动登录，无需 lusrmgr.msc 手动启用 | ✅ 属实：官方"Audit mode account"一节原文一致 |
+| 审核模式可绕过 OOBE（Bypass OOBE） | ✅ 属实：官方 Benefits 一节原文 |
+| Ctrl+Shift+F3 进入审核模式、Sysprep /oobe 返回 OOBE、Unattend Reseal Mode=audit | ✅ 属实：官方 Boot to Audit mode / Sysprep / Unattend 文档记载（组合键详见官方 Boot to Audit mode or OOBE 页） |
+| 修改 HKLM\SYSTEM\Setup 状态值跳过联网属非官方技巧 | ✅ 判断合理：官方文档未记载此方法，正文已按非官方标注 |
+| 补充边界 | ⚠️ 官方注明审核模式账户在 auditUser 阶段后即被禁用、不应用于测试验证场景——本文未展开，读者可查阅原页 Notes |

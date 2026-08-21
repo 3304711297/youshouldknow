@@ -259,3 +259,13 @@ Windows 电脑只是热点的客户端，并不承担路由器职责，那么通
 - [Karing 官方 GitHub FAQ 文档](https://github.com/KaringX/karing-docu/blob/main/docs/faq.md)
 
 > 核心结论：**Karing TUN 和 Windows Forwarding 是两个不同的功能。普通 Windows 电脑通过手机热点上网、使用 Karing TUN 时，如果不需要让 Windows 承担路由器/网关职责，可以关闭不必要的网卡 Forwarding；系统代理和 TUN 则可以同时开启。如果修改 Forwarding 后手机热点暂时断网，可以先重新连接热点，让网络接口重新初始化。**
+
+## 事实核查记录
+
+核验基准：Windows 网络机制（2026-08-21）。
+
+| 声明 | 核查结果 |
+| --- | --- |
+| 系统代理与 TUN 是两种不同入站方式 | ✅ 属实：代理为应用层设置，TUN 为虚拟网卡层接管 |
+| Windows Forwarding（IP 路由转发）影响热点共享与 TUN 场景 | ✅ 属实：IPEnableRouter/接口转发为系统机制，检查命令可复现 |
+| Karing 客户端的具体行为与规则模式说明 | ⚠️ 依赖该开源项目当前版本实现，随上游更新可能变化 |
