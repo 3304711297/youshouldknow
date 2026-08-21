@@ -4,7 +4,9 @@
   "sourceBranch": "main",
   "mappingDocument": "项目导航/tweakbyjie-optimization-mapping.md",
   "executionReference": "项目导航/tweakbyjie全量执行参考.md",
-  "coverageCheck": "../tweakbyjie/docs/coverage/YOUSEHOULDKNOW-COVERAGE-CHECK.md",
+  "coverageRepository": "3304711297/tweakbyjie",
+  "coverageBranch": "main",
+  "coverageCheck": "docs/coverage/YOUSEHOULDKNOW-COVERAGE-CHECK.md",
   "items": [
     {"id":"CORE-001","category":"Core","name":"GameDVR AppCaptureEnabled"},
     {"id":"CORE-002","category":"Core","name":"GameDVR_Enabled"},
