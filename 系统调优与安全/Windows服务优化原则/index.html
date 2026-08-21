@@ -3704,7 +3704,7 @@
 <p>这些用途是功能边界提示，不代表在每台 Windows 版本上都完全相同；执行前应查看服务依赖和当前 <code>StartMode</code>，尤其不要仅凭“性能优化”字样禁用打印、搜索、诊断、更新、蓝牙或 Xbox 相关服务。</p>
 <p>Group B 和 Manual 组尤其需要按场景评估：<code>Spooler</code> 影响打印，<code>WSearch</code> 影响索引搜索，<code>SysMain</code> 影响预读取，BITS 影响 Windows 更新和后台下载，蓝牙/Xbox 服务影响对应硬件和账户功能。A/B 分组不是自动安全保证，选择 <code>6 → 1</code> 时两组都会执行。</p>
 <h3 id="service-002part-5-defender">SERVICE-002：Part 5 安全中心/Defender 停用<a class="headerlink" href="#service-002part-5-defender" title="Permanent link">&para;</a></h3>
-<p>主菜单 <code>5</code> 会停止并禁用 <code>WinDefend</code>；选择额外分支时还会处理一组 Defender/Security Center 相关服务，并可能删除 Defender 计划任务、启动项和 <code>SecHealthUI</code>。该入口没有使用 <code>service-backup.json</code>，也没有统一的启动类型回读或自动原始状态恢复；相关策略注册表写入同样没有统一备份闭环。</p>
+<p>主菜单 <code>5 → 1</code> 会停止并禁用 <code>WinDefend</code>；选择额外分支时还会处理一组 Defender/Security Center 相关服务，并可能删除 Defender 计划任务、启动项和 <code>SecHealthUI</code>。该入口不使用 <code>service-backup.json</code>，也没有统一的启动类型回读；约 95 个策略注册表值在首次应用前会自动快照到 <code>defender-policy-backup.json</code>，可经 <code>5 → 2</code> 按快照恢复，但服务停用、任务删除与 SecHealthUI 移除仍无精确回滚。</p>
 <p>这不是普通服务优化。它可能降低实时防护、篡改防护、SmartScreen、安全中心提示、更新和企业安全策略的有效性。除非明确理解安全影响并准备手工恢复/系统修复方案，否则不应执行。</p>
 <h2 id="tweakbyjie_1">与 tweakbyjie 的关系<a class="headerlink" href="#tweakbyjie_1" title="Permanent link">&para;</a></h2>
 <p>服务优化模块应遵循：</p>

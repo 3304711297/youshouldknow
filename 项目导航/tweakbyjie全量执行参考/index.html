@@ -4010,7 +4010,7 @@
 <tr>
 <td>Service</td>
 <td>SERVICE-001/002</td>
-<td>Part 6 有 37 项快照；Part 5 无统一回滚</td>
+<td>Part 6 有 37 项快照；Part 5 策略值有快照（<code>5→2</code> 恢复），服务/任务/Appx 无精确回滚</td>
 </tr>
 <tr>
 <td>Boot</td>
@@ -4375,13 +4375,17 @@
 <li><code>Verify-ServiceStartupType</code> 回读 StartMode；<code>6→2</code> 恢复启动类型，不强制恢复运行状态。</li>
 </ul>
 <h3 id="service-002-part-5">SERVICE-002 Part 5<a class="headerlink" href="#service-002-part-5" title="Permanent link">&para;</a></h3>
-<p>WinDefend/Defender 服务停止禁用、约 95 个策略值、任务/启动项/SecHealthUI 操作位于 <code>:977-1300</code>；没有统一备份、完整回读或自动恢复，属于高风险安全组件操作。</p>
+<ul>
+<li>实现位于 <code>Modules/Defender.ps1</code>（Invoke-DefenderModule）；约 95 个策略值统一定义在 <code>Modules/Backup.Defender.ps1</code> 的 <code>$script:defenderPolicyValues</code>。</li>
+<li>首次应用前自动快照全部策略值与 4 个自启动项的原始状态到 <code>defender-policy-backup.json</code>（Version 1，含结构校验，已有快照不覆盖）；备份失败会阻止修改。</li>
+<li>子选项 <code>5 → 2</code> 按快照恢复注册表值（按快照记录的原始类型写回）；服务停用、计划任务删除与 SecHealthUI 移除不在快照范围内，仍属高风险、部分不可逆操作。</li>
+</ul>
 <h2 id="power-001">九、POWER-001<a class="headerlink" href="#power-001" title="Permanent link">&para;</a></h2>
 <p>主菜单 <code>7</code> 使用 <code>ultimate-performance.pow</code>：<code>powercfg /export</code> 保存当前计划到 <code>power-backup.pow</code>，再 <code>/import</code> 和 <code>/setactive</code> 应用；子项 2 导入备份恢复。文件内置设置不是注册表逐项值；备份只保留最初快照，需手动用 <code>powercfg /getactivescheme</code> 验证当前计划。</p>
 <h2 id="registry">十、REGISTRY 高风险边界<a class="headerlink" href="#registry" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Part 1 的普通注册表项大多由 <code>Set-RegDword/Set-RegString/Set-RegBinary</code> 写入，没有原值快照；只有 ActivationType、Win32Priority、HAGS 等有限回读。</li>
-<li>Part 5 的 Defender/SmartScreen/Security Center 约 95 个策略值没有统一备份/回读/恢复，并与服务、任务和 Appx 删除相互影响。</li>
+<li>Part 5 的 Defender/SmartScreen/Security Center 约 95 个策略值已有快照与恢复入口（<code>5 → 2</code>）但无逐项回读，并与服务、任务和 Appx 删除相互影响。</li>
 <li><code>defender-removal.ps1</code> 删除大量 Defender 注册、组件和文件，没有完整备份，脚本本身不可逆；不应归类为普通优化。</li>
 </ul>
 <h2 id="_3">文档状态<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>

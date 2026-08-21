@@ -3929,9 +3929,9 @@
 <tr>
 <td>SERVICE-002</td>
 <td>Part 5 Defender/Security Center 服务与策略</td>
-<td>主菜单 <code>5</code>；<code>WinDefend</code> 及额外 Defender 服务停止并禁用，同时写入 Defender/SmartScreen/Security Center 策略，额外分支还删除任务、启动项和 <code>SecHealthUI</code>；源码 <code>Modules/Menu.ps1</code>（Part 5）</td>
-<td>该入口没有统一启动类型回读；策略和删除操作没有完整配置层验证</td>
-<td>不使用 <code>service-backup.json</code>，没有统一自动恢复；属于高风险、可能不可逆的安全组件停用</td>
+<td>主菜单 <code>5 → 1</code>；<code>WinDefend</code> 及额外 Defender 服务停止并禁用，同时写入约 95 个 Defender/SmartScreen/Security Center 策略值（定义见 <code>Modules/Backup.Defender.ps1</code>），可选分支删除任务、启动项和 <code>SecHealthUI</code>；源码 <code>Modules/Defender.ps1</code>（Invoke-DefenderModule）</td>
+<td>策略写入无逐项回读；首次应用前自动快照到 <code>defender-policy-backup.json</code></td>
+<td>注册表策略值经主菜单 <code>5 → 2</code> 按快照恢复；服务停用、任务删除与 SecHealthUI 移除无精确回滚</td>
 </tr>
 </tbody>
 </table>
@@ -4029,7 +4029,7 @@
 <tr>
 <td>REGISTRY-001</td>
 <td>Defender / 安全注册表删除</td>
-<td>Part 5 约 95 个策略值无统一备份/回读/恢复；<code>defender-removal.ps1</code> 高风险且不可逆</td>
+<td>Part 5 约 95 个策略值已有快照与恢复入口（<code>5 → 2</code>）但无逐项回读；<code>defender-removal.ps1</code> 高风险且不可逆</td>
 </tr>
 </tbody>
 </table>
