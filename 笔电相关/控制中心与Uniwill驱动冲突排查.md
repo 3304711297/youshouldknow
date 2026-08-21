@@ -176,4 +176,4 @@ pnputil /delete-driver oemXX.inf /uninstall
 
 - [Driver Store Explorer（GitHub）](https://github.com/lostindark/DriverStoreExplorer)
 - [Microsoft pnputil 文档](https://learn.microsoft.com/windows-hardware/drivers/devtest/pnputil)
-- [Microsoft DISM 驱动管理文档](https://learn.microsoft.com/windows-hardware/manufacture/desktop/driver-servicing)
+- [Microsoft DISM 驱动管理文档](https://learn.microsoft.com/windows-hardware/manufacture/desktop/dism-driver-servicing-command-line-options-s14)

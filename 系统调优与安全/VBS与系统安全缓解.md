@@ -93,7 +93,7 @@ VBS 是否影响性能取决于：
 ### 参考
 
 - [GRC InSpectre 官方页面](https://www.grc.com/inspectre.htm)
-- [Microsoft Spectre/Meltdown FAQ](https://support.microsoft.com/en-us/windows/protect-windows-devices-from-spectre-meltdown-35f20c88-a028-3bd9-29bf-3723e872a5e8)
+- Microsoft 官方 Spectre/Meltdown FAQ（support.microsoft.com 35f20c88）已被微软下架，可经 Internet Archive 检索原文；缓解状态查询以 `Get-SpeculationControlSettings` 为准。
 
 ## 与 tweakbyjie 的关系
 
