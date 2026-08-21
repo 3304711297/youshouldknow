@@ -1412,6 +1412,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        事实核查记录
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3618,6 +3629,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        事实核查记录
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3687,7 +3709,7 @@
 <p>并明确保留 <code>nointegritychecks</code>。该模块没有独立备份，也没有完整回读；删除不存在的值可能产生失败提示。源码中的用户提示已修正为：重新开启测试模式应使用主菜单选项 <code>3</code>。</p>
 <h2 id="boot-005-device-guard-efi">BOOT-005 Device Guard EFI 锁定清除<a class="headerlink" href="#boot-005-device-guard-efi" title="Permanent link">&para;</a></h2>
 <h3 id="_10">执行入口与目标<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
-<p>主菜单 <code>9. 清除 Device Guard EFI 锁定</code>，源码 <code>Modules/Menu.ps1</code>（Part 9）。流程包括：</p>
+<p>主菜单 <code>9. 清除 Device Guard EFI 锁定</code>，源码 <code>Modules/Virtualization.ps1</code>。流程包括：</p>
 <ol>
 <li>检查 BitLocker 保护状态和管理员权限；</li>
 <li>查找并挂载 EFI 分区，复制 <code>SecConfig.efi</code>；</li>
@@ -3710,6 +3732,34 @@
 <li>BCD 回读只证明当前配置层值，不证明系统启动后所有安全或计时行为符合预期。</li>
 <li>任何测试模式、<code>nointegritychecks</code>、VBS/HVCI 或 EFI 操作都应独立测试并保留恢复介质。</li>
 </ul>
+<h2 id="_13">事实核查记录<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h2>
+<p>核验基准：tweakbyjie 仓库 main 分支源码（2026-08-21）。</p>
+<table>
+<thead>
+<tr>
+<th>声明</th>
+<th>核查结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>高级 BCD 管理 7 个值（useplatformclock/useplatformtick/disabledynamictick/tscsyncpolicy/nx/tpmbootentropy/nointegritychecks）</td>
+<td>✅ 属实：bcdManagedValues 定义一致</td>
+</tr>
+<tr>
+<td>BCD 修改前备份 bcd-backup.json，恢复按快照写回或删除，无备份时拒绝声称恢复</td>
+<td>✅ 属实：Backup.Bcd.ps1（含写后回读校验）</td>
+</tr>
+<tr>
+<td>测试模式开启写入 testsigning/debug/dbgsettings/nointegritychecks；关闭仅删除 testsigning/debug、保留 nointegritychecks</td>
+<td>✅ 属实：Part 3/4 行为一致</td>
+</tr>
+<tr>
+<td>测试模式与 EFI/VBS 操作无精确原始状态回滚</td>
+<td>✅ 属实：文档边界与源码行为一致</td>
+</tr>
+</tbody>
+</table>
 
 
 
@@ -3732,7 +3782,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月21日 08:15:18 UTC">2026年8月21日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月21日 09:42:57 UTC">2026年8月21日</span>
   </span>
 
     

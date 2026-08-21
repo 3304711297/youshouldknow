@@ -3700,6 +3700,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#_42" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        事实核查记录
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -4434,6 +4445,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#_42" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        事实核查记录
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -4466,7 +4488,7 @@
 <h2 id="cpu-001-win32priorityseparation">CPU-001 Win32PrioritySeparation<a class="headerlink" href="#cpu-001-win32priorityseparation" title="Permanent link">&para;</a></h2>
 <h3 id="_2">执行位置<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <ul>
-<li>源码：<code>Modules/Menu.ps1</code>（Part 1）+ <code>Modules/Common.ps1/Set-RegDword</code></li>
+<li>源码：<code>Modules/Registry.ps1</code>+ <code>Modules/Common.ps1/Set-RegDword</code></li>
 <li>入口：主菜单 <code>1</code> → 核心游戏优化 <code>1</code></li>
 <li>写入函数：<code>Set-RegDword</code></li>
 </ul>
@@ -4500,7 +4522,7 @@
 </tr>
 <tr>
 <td>执行源码</td>
-<td><code>Modules/Menu.ps1</code>（Part 1）+ <code>Modules/Common.ps1/Set-RegDword</code>，调用 <code>Set-RegDword</code></td>
+<td><code>Modules/Registry.ps1</code>+ <code>Modules/Common.ps1/Set-RegDword</code>，调用 <code>Set-RegDword</code></td>
 </tr>
 <tr>
 <td>验证源码</td>
@@ -4726,7 +4748,7 @@
 <p>这里的 <code>26</code> 是十六进制数字，不能把脚本的十进制 <code>38</code> 误写成十六进制 <code>0x38</code>。同理，图片中的 <code>24 Dec / 18 Hex</code> 是十进制 <code>24</code>、十六进制 <code>0x18</code> 的同一个值，不是两个不同配置。</p>
 <h3 id="_9">参考值与脚本实际范围<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
 <p>传统资料常把 <code>38 Dec / 0x26</code> 描述为前台应用优化，把 <code>24 Dec / 0x18</code> 描述为后台服务优化。它们可以帮助理解位字段，但不能直接证明在当前 Windows 版本、硬件或游戏中一定更快。</p>
-<p><code>tweakbyjie</code> 当前只在 <code>Modules/Menu.ps1</code>（Part 1）+ <code>Modules/Common.ps1/Set-RegDword</code> 写入 <code>38 Dec / 0x26</code>，并在 <code>:813</code> 回读验证；脚本没有实现 <code>24/0x18</code> 或其他组合的切换，也没有新增“前台/后台模式”菜单。</p>
+<p><code>tweakbyjie</code> 当前只在 <code>Modules/Registry.ps1</code>+ <code>Modules/Common.ps1/Set-RegDword</code> 写入 <code>38 Dec / 0x26</code>，并经 <code>Verify-RegDword</code> 回读验证；脚本没有实现 <code>24/0x18</code> 或其他组合的切换，也没有新增“前台/后台模式”菜单。</p>
 <blockquote>
 <p>⚠️ <strong>可靠性边界</strong>：量子长度、量子类型和 foreground boost 的传统位解释在资料中广泛流传，但实际调度效果会受到 Windows 版本、策略、处理器、线程优先级和应用行为影响。修改前请读取目标机原值、保存恢复信息，并用帧时间、输入延迟和后台任务完成时间进行 A/B 测试。不要仅凭表格或注册表目标值宣称性能提升。</p>
 </blockquote>
@@ -4777,7 +4799,7 @@
 <h2 id="cpu-002-multimedia-systemprofile">CPU-002 Multimedia SystemProfile<a class="headerlink" href="#cpu-002-multimedia-systemprofile" title="Permanent link">&para;</a></h2>
 <h3 id="_15">执行位置<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
 <ul>
-<li>源码：<code>Modules/Menu.ps1</code>（Part 1）+ <code>Modules/Common.ps1/Set-RegDword</code></li>
+<li>源码：<code>Modules/Registry.ps1</code>+ <code>Modules/Common.ps1/Set-RegDword</code></li>
 <li>入口：主菜单 <code>1</code> → 核心游戏优化 <code>1</code></li>
 <li>写入函数：<code>Set-RegDword</code></li>
 </ul>
@@ -4802,7 +4824,7 @@
 <h2 id="cpu-003-systemresponsiveness">CPU-003 SystemResponsiveness<a class="headerlink" href="#cpu-003-systemresponsiveness" title="Permanent link">&para;</a></h2>
 <h3 id="_21">执行位置<a class="headerlink" href="#_21" title="Permanent link">&para;</a></h3>
 <ul>
-<li>源码：<code>Modules/Menu.ps1</code>（Part 1）+ <code>Modules/Common.ps1/Set-RegDword</code></li>
+<li>源码：<code>Modules/Registry.ps1</code>+ <code>Modules/Common.ps1/Set-RegDword</code></li>
 <li>入口：主菜单 <code>1</code> → 核心游戏优化 <code>1</code></li>
 <li>写入函数：<code>Set-RegDword</code></li>
 </ul>
@@ -4831,7 +4853,7 @@
 <h2 id="cpu-004-networkthrottlingindex">CPU-004 NetworkThrottlingIndex<a class="headerlink" href="#cpu-004-networkthrottlingindex" title="Permanent link">&para;</a></h2>
 <h3 id="_28">执行位置<a class="headerlink" href="#_28" title="Permanent link">&para;</a></h3>
 <ul>
-<li>源码：<code>Modules/Menu.ps1</code>（Part 1）+ <code>Modules/Common.ps1/Set-RegDword</code></li>
+<li>源码：<code>Modules/Registry.ps1</code>+ <code>Modules/Common.ps1/Set-RegDword</code></li>
 <li>入口：主菜单 <code>1</code> → 核心游戏优化 <code>1</code></li>
 <li>写入函数：<code>Set-RegDword</code></li>
 </ul>
@@ -4861,7 +4883,7 @@
 <h2 id="cpu-005-tasksgames">CPU-005 Tasks\Games<a class="headerlink" href="#cpu-005-tasksgames" title="Permanent link">&para;</a></h2>
 <h3 id="_35">执行位置<a class="headerlink" href="#_35" title="Permanent link">&para;</a></h3>
 <ul>
-<li>路径定义：<code>Modules/Menu.ps1</code>（Part 1）</li>
+<li>路径定义：<code>Modules/Registry.ps1</code></li>
 <li>写入位置：<code>Modules/Menu.ps1</code>（Part 1，Games 任务七项）</li>
 <li>入口：主菜单 <code>1</code> → 核心游戏优化 <code>1</code></li>
 </ul>
@@ -4937,6 +4959,42 @@
 <li>当前脚本的写入成功提示不等于所有值都已回读验证；CPU-001 之外的这些项目仍存在验证和备份恢复缺口。</li>
 <li>实际是否改善性能，应使用可重复的游戏和系统负载测试验证，不能仅凭注册表目标值判断。</li>
 </ul>
+<h2 id="_42">事实核查记录<a class="headerlink" href="#_42" title="Permanent link">&para;</a></h2>
+<p>核验基准：tweakbyjie 仓库 main 分支源码（2026-08-21，模块化收尾后）。</p>
+<table>
+<thead>
+<tr>
+<th>声明</th>
+<th>核查结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CPU-001 写入 Win32PrioritySeparation=38（0x26），经 Verify-RegDword 回读</td>
+<td>✅ 属实：Modules/Registry.ps1 调用 Set-RegDword 写入、Verify-RegDword 回读</td>
+</tr>
+<tr>
+<td>CPU-003/004/005 写入后无专门回读验证</td>
+<td>✅ 属实：源码仅写入，无对应 Verify 调用</td>
+</tr>
+<tr>
+<td>Tasks\Games 七项目标值（Affinity=0、Clock Rate=10000、Scheduling Category=High 等）</td>
+<td>✅ 属实：与 Registry.ps1 源码逐项一致</td>
+</tr>
+<tr>
+<td>脚本未提供 CPU-001~005 的自动备份/恢复</td>
+<td>✅ 属实：无专用快照文件与恢复入口</td>
+</tr>
+<tr>
+<td>执行位置标注为 Modules/Menu.ps1（Part 1）</td>
+<td>❌ 勘误并已更新：Part 1 已迁至 Modules/Registry.ps1</td>
+</tr>
+<tr>
+<td>正文 <code>:813</code> 行号引用</td>
+<td>❌ 勘误并已移除：模块化后行号失效，改为函数定位</td>
+</tr>
+</tbody>
+</table>
 
 
 
@@ -4959,7 +5017,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月21日 08:15:18 UTC">2026年8月21日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月21日 09:42:57 UTC">2026年8月21日</span>
   </span>
 
     

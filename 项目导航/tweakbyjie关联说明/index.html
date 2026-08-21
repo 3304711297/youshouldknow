@@ -3035,6 +3035,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        事实核查记录
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3272,6 +3283,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        事实核查记录
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3331,7 +3353,7 @@
 <li>电源管理</li>
 </ul>
 <h2 id="tweakbyjie_1">与 tweakbyjie 模块化结构的对应<a class="headerlink" href="#tweakbyjie_1" title="Permanent link">&para;</a></h2>
-<p><code>tweakbyjie</code> 已完成第一阶段模块化（<code>tweakbyjie.ps1</code> 为 Loader，功能拆至 <code>Modules/</code>）：</p>
+<p><code>tweakbyjie</code> 模块化已完成：<code>tweakbyjie.ps1</code> 为 Loader（含 <code>-RunModule</code> 非交互入口），全部功能拆至 <code>Modules/</code>：</p>
 <table>
 <thead>
 <tr>
@@ -3343,24 +3365,72 @@
 <tbody>
 <tr>
 <td><code>Common.ps1</code></td>
-<td>通用注册表/BCD/验证/重启</td>
-<td><code>Set-Reg*</code>/<code>Invoke-BcdEdit</code>/<code>Verify-*</code></td>
+<td>通用注册表/BCD/验证/重启/电源计划去重</td>
+<td><code>Set-Reg*</code>/<code>Invoke-BcdEdit</code>/<code>Verify-*</code>/<code>Invoke-PowerPlanDedupe</code></td>
 </tr>
 <tr>
-<td><code>Backup.Mpo/Bcd/Service/SecurityMitigation/Nvme</code></td>
+<td><code>Backup.Mpo/Bcd/Service/SecurityMitigation/Nvme/Defender</code></td>
 <td>备份闭环</td>
-<td>各自的 <code>Test/Ensure/Restore</code> 三元组</td>
+<td>各自的 <code>Test/Ensure/Restore</code> 三元组与写后回读校验</td>
+</tr>
+<tr>
+<td><code>Registry.ps1</code></td>
+<td>Part 1 编排</td>
+<td><code>Invoke-RegistryModule</code>（核心游戏/系统行为/CPU 缓解）</td>
+</tr>
+<tr>
+<td><code>Nvme.ps1</code></td>
+<td>Part 8 编排</td>
+<td><code>Invoke-NvmeModule</code>（备份逻辑在 <code>Backup.Nvme.ps1</code>）</td>
+</tr>
+<tr>
+<td><code>Virtualization.ps1</code></td>
+<td>Part 9/10 编排</td>
+<td><code>Invoke-DeviceGuardModule</code>/<code>Invoke-VbsModule</code></td>
+</tr>
+<tr>
+<td><code>Defender.ps1</code></td>
+<td>Part 5 编排</td>
+<td><code>Invoke-DefenderModule</code>（策略快照见 <code>Backup.Defender.ps1</code>）</td>
 </tr>
 <tr>
 <td><code>Menu.ps1</code></td>
-<td>菜单调度</td>
-<td><code>Show-TweakMenu</code>（11 个 Part）</td>
+<td>菜单调度与分发</td>
+<td><code>Show-TweakMenu</code>（11 个 Part，支持 <code>-RunModules</code> 队列）</td>
 </tr>
 </tbody>
 </table>
 <p>本文档在描述执行位置时，已从“<code>tweakbyjie.ps1:行号</code>”改为“<code>Modules/函数名</code>”定位，避免行号漂移。建议按 <code>tweakbyjie/docs/design/CODE-REFACTOR-STATUS.md</code> 查看最新模块清单，再对应到下方映射表与全量参考。</p>
 <h2 id="_4">原则<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <p>优化不是简单地关闭越多功能越好，而是在性能、延迟、稳定性之间寻找适合当前设备的配置。</p>
+<h2 id="_5">事实核查记录<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<p>核验基准：tweakbyjie 仓库 <code>main</code> 分支源码（2026-08-21，模块化收尾提交后）。</p>
+<table>
+<thead>
+<tr>
+<th>声明</th>
+<th>核查结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>tweakbyjie 采用 Loader + <code>Modules/</code> 模块化结构</td>
+<td>✅ 属实：Loader 约 100 行，点源 12 个模块文件</td>
+</tr>
+<tr>
+<td>模块清单为 Common + 5 个 Backup.* + Menu</td>
+<td>❌ 勘误并已更新：现为 Common + 6 个 <code>Backup.*</code>（含 Defender）+ Registry/Nvme/Virtualization/Defender 四个编排模块 + Menu</td>
+</tr>
+<tr>
+<td>执行位置采用 <code>Modules/函数名</code> 定位而非行号</td>
+<td>✅ 属实：映射表与执行参考均已迁移</td>
+</tr>
+<tr>
+<td><code>Menu.ps1</code> 含 11 个 Part</td>
+<td>✅ 属实：菜单选项 1–11 对应 11 个功能模块函数</td>
+</tr>
+</tbody>
+</table>
 
 
 
@@ -3383,7 +3453,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月21日 08:15:18 UTC">2026年8月21日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月21日 09:42:57 UTC">2026年8月21日</span>
   </span>
 
     

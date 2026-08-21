@@ -3313,6 +3313,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        事实核查记录
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3604,6 +3615,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        事实核查记录
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3640,7 +3662,7 @@
 <p>HAGS 是 Windows 提供的硬件加速 GPU 调度模式。启用后，部分 GPU 调度工作由更接近硬件的调度路径处理，实际收益和行为取决于 Windows 版本、WDDM、显卡架构、驱动版本、游戏引擎以及显示链路。它不是显卡超频，也不会保证所有应用降低延迟。</p>
 <h3 id="tweakbyjie">tweakbyjie 执行位置<a class="headerlink" href="#tweakbyjie" title="Permanent link">&para;</a></h3>
 <ul>
-<li>源码：<code>Modules/Menu.ps1</code>（Part 1）+ <code>Modules/Common.ps1/Set-RegDword</code></li>
+<li>源码：<code>Modules/Registry.ps1</code>+ <code>Modules/Common.ps1/Set-RegDword</code></li>
 <li>入口：主菜单 <code>1</code> → 核心游戏优化 <code>1</code></li>
 <li>写入函数：<code>Set-RegDword</code></li>
 </ul>
@@ -3742,6 +3764,38 @@
 <li>MPO 是独立排障模块，包含四个受管理值、互斥方案、备份、恢复和辅助验证；它不应与核心优化中的 HAGS 混为一项。</li>
 <li>当前脚本没有直接执行 DirectX 优化项，因此 DirectX 相关内容属于知识背景，不计作遗漏的脚本执行项。</li>
 </ul>
+<h2 id="_12">事实核查记录<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
+<p>核验基准：tweakbyjie 仓库 main 分支源码（2026-08-21）。</p>
+<table>
+<thead>
+<tr>
+<th>声明</th>
+<th>核查结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GPU-001 写入 HwSchMode=2，经 Verify-RegDword 回读，需重启</td>
+<td>✅ 属实：Modules/Registry.ps1 + Common.ps1</td>
+</tr>
+<tr>
+<td>GPU-002 管理四个 MPO 值（DisableMPO/OverlayTestMode/DisableOverlays/OverlayMinFPS），方案 A/B/C 互斥</td>
+<td>✅ 属实：与 Menu.ps1（Part 11）及 mpoManagedValues 定义一致</td>
+</tr>
+<tr>
+<td>MPO 首次修改前快照 mpo-backup.json，已有备份不覆盖，11→4 恢复，备份损坏时阻止修改</td>
+<td>✅ 属实：Backup.Mpo.ps1 的 Ensure/Restore 逻辑一致（含写后回读校验）</td>
+</tr>
+<tr>
+<td>HAGS 无独立自动备份/恢复</td>
+<td>✅ 属实：核心路径仅写入+回读</td>
+</tr>
+<tr>
+<td>HAGS 执行位置标注为 Modules/Menu.ps1（Part 1）</td>
+<td>❌ 勘误并已更新：已随 Part 1 迁至 Modules/Registry.ps1</td>
+</tr>
+</tbody>
+</table>
 
 
 
@@ -3764,7 +3818,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月21日 08:15:18 UTC">2026年8月21日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月21日 09:42:57 UTC">2026年8月21日</span>
   </span>
 
     
