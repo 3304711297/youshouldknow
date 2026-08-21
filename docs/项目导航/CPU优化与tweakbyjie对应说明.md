@@ -13,7 +13,7 @@
 
 ### 执行位置
 
-- 源码：`Modules/Menu.ps1`（Part 1）+ `Modules/Common.ps1/Set-RegDword`
+- 源码：`Modules/Registry.ps1`+ `Modules/Common.ps1/Set-RegDword`
 - 入口：主菜单 `1` → 核心游戏优化 `1`
 - 写入函数：`Set-RegDword`
 
@@ -34,7 +34,7 @@
 | 稳定编号 | `CPU-001` |
 | 分类 | CPU 调度 / 前台与后台线程资源分配 |
 | 脚本入口 | 主菜单 `1` → 核心游戏优化 `1` |
-| 执行源码 | `Modules/Menu.ps1`（Part 1）+ `Modules/Common.ps1/Set-RegDword`，调用 `Set-RegDword` |
+| 执行源码 | `Modules/Registry.ps1`+ `Modules/Common.ps1/Set-RegDword`，调用 `Set-RegDword` |
 | 验证源码 | `Modules/Common.ps1/Verify-RegDword`，调用 `Verify-RegDword` |
 | 配置对象 | `HKLM\SYSTEM\CurrentControlSet\Control\PriorityControl` 下的单个 DWORD |
 | 脚本行为 | 写入 `38`，成功后标记需要重启；不提供 CPU-001 专用快照 |
@@ -122,7 +122,7 @@ Get-ItemProperty -Path $path -Name Win32PrioritySeparation |
 
 传统资料常把 `38 Dec / 0x26` 描述为前台应用优化，把 `24 Dec / 0x18` 描述为后台服务优化。它们可以帮助理解位字段，但不能直接证明在当前 Windows 版本、硬件或游戏中一定更快。
 
-`tweakbyjie` 当前只在 `Modules/Menu.ps1`（Part 1）+ `Modules/Common.ps1/Set-RegDword` 写入 `38 Dec / 0x26`，并在 `:813` 回读验证；脚本没有实现 `24/0x18` 或其他组合的切换，也没有新增“前台/后台模式”菜单。
+`tweakbyjie` 当前只在 `Modules/Registry.ps1`+ `Modules/Common.ps1/Set-RegDword` 写入 `38 Dec / 0x26`，并经 `Verify-RegDword` 回读验证；脚本没有实现 `24/0x18` 或其他组合的切换，也没有新增“前台/后台模式”菜单。
 
 > ⚠️ **可靠性边界**：量子长度、量子类型和 foreground boost 的传统位解释在资料中广泛流传，但实际调度效果会受到 Windows 版本、策略、处理器、线程优先级和应用行为影响。修改前请读取目标机原值、保存恢复信息，并用帧时间、输入延迟和后台任务完成时间进行 A/B 测试。不要仅凭表格或注册表目标值宣称性能提升。
 
@@ -191,7 +191,7 @@ if ($exists) {
 
 ### 执行位置
 
-- 源码：`Modules/Menu.ps1`（Part 1）+ `Modules/Common.ps1/Set-RegDword`
+- 源码：`Modules/Registry.ps1`+ `Modules/Common.ps1/Set-RegDword`
 - 入口：主菜单 `1` → 核心游戏优化 `1`
 - 写入函数：`Set-RegDword`
 
@@ -230,7 +230,7 @@ Windows 会使用系统默认的 MMCSS 策略；默认值应在目标机器上�
 
 ### 执行位置
 
-- 源码：`Modules/Menu.ps1`（Part 1）+ `Modules/Common.ps1/Set-RegDword`
+- 源码：`Modules/Registry.ps1`+ `Modules/Common.ps1/Set-RegDword`
 - 入口：主菜单 `1` → 核心游戏优化 `1`
 - 写入函数：`Set-RegDword`
 
@@ -277,7 +277,7 @@ Get-ItemPropertyValue `
 
 ### 执行位置
 
-- 源码：`Modules/Menu.ps1`（Part 1）+ `Modules/Common.ps1/Set-RegDword`
+- 源码：`Modules/Registry.ps1`+ `Modules/Common.ps1/Set-RegDword`
 - 入口：主菜单 `1` → 核心游戏优化 `1`
 - 写入函数：`Set-RegDword`
 
@@ -325,7 +325,7 @@ Get-ItemProperty `
 
 ### 执行位置
 
-- 路径定义：`Modules/Menu.ps1`（Part 1）
+- 路径定义：`Modules/Registry.ps1`
 - 写入位置：`Modules/Menu.ps1`（Part 1，Games 任务七项）
 - 入口：主菜单 `1` → 核心游戏优化 `1`
 
@@ -382,3 +382,15 @@ Get-ItemProperty `
 - `Multimedia SystemProfile` 是配置路径/类别；`SystemResponsiveness`、`NetworkThrottlingIndex` 和 `Tasks\Games` 是其中的独立执行项目，不能合并后遗漏。
 - 当前脚本的写入成功提示不等于所有值都已回读验证；CPU-001 之外的这些项目仍存在验证和备份恢复缺口。
 - 实际是否改善性能，应使用可重复的游戏和系统负载测试验证，不能仅凭注册表目标值判断。
+## 事实核查记录
+
+核验基准：tweakbyjie 仓库 main 分支源码（2026-08-21，模块化收尾后）。
+
+| 声明 | 核查结果 |
+| --- | --- |
+| CPU-001 写入 Win32PrioritySeparation=38（0x26），经 Verify-RegDword 回读 | ✅ 属实：Modules/Registry.ps1 调用 Set-RegDword 写入、Verify-RegDword 回读 |
+| CPU-003/004/005 写入后无专门回读验证 | ✅ 属实：源码仅写入，无对应 Verify 调用 |
+| Tasks\Games 七项目标值（Affinity=0、Clock Rate=10000、Scheduling Category=High 等） | ✅ 属实：与 Registry.ps1 源码逐项一致 |
+| 脚本未提供 CPU-001~005 的自动备份/恢复 | ✅ 属实：无专用快照文件与恢复入口 |
+| 执行位置标注为 Modules/Menu.ps1（Part 1） | ❌ 勘误并已更新：Part 1 已迁至 Modules/Registry.ps1 |
+| 正文 `:813` 行号引用 | ❌ 勘误并已移除：模块化后行号失效，改为函数定位 |

@@ -84,7 +84,7 @@ bcdedit /deletevalue debug
 
 ### 执行入口与目标
 
-主菜单 `9. 清除 Device Guard EFI 锁定`，源码 `Modules/Menu.ps1`（Part 9）。流程包括：
+主菜单 `9. 清除 Device Guard EFI 锁定`，源码 `Modules/Virtualization.ps1`。流程包括：
 
 1. 检查 BitLocker 保护状态和管理员权限；
 2. 查找并挂载 EFI 分区，复制 `SecConfig.efi`；
@@ -113,3 +113,13 @@ isolatedcontext      = No
 - `bcd-backup.json`、`service-backup.json` 等备份文件只有在实际运行模块后才会生成；仓库中存在脚本定义不等于本地已有用户备份。
 - BCD 回读只证明当前配置层值，不证明系统启动后所有安全或计时行为符合预期。
 - 任何测试模式、`nointegritychecks`、VBS/HVCI 或 EFI 操作都应独立测试并保留恢复介质。
+## 事实核查记录
+
+核验基准：tweakbyjie 仓库 main 分支源码（2026-08-21）。
+
+| 声明 | 核查结果 |
+| --- | --- |
+| 高级 BCD 管理 7 个值（useplatformclock/useplatformtick/disabledynamictick/tscsyncpolicy/nx/tpmbootentropy/nointegritychecks） | ✅ 属实：bcdManagedValues 定义一致 |
+| BCD 修改前备份 bcd-backup.json，恢复按快照写回或删除，无备份时拒绝声称恢复 | ✅ 属实：Backup.Bcd.ps1（含写后回读校验） |
+| 测试模式开启写入 testsigning/debug/dbgsettings/nointegritychecks；关闭仅删除 testsigning/debug、保留 nointegritychecks | ✅ 属实：Part 3/4 行为一致 |
+| 测试模式与 EFI/VBS 操作无精确原始状态回滚 | ✅ 属实：文档边界与源码行为一致 |

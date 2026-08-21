@@ -20,7 +20,7 @@ HAGS 是 Windows 提供的硬件加速 GPU 调度模式。启用后，部分 GPU
 
 ### tweakbyjie 执行位置
 
-- 源码：`Modules/Menu.ps1`（Part 1）+ `Modules/Common.ps1/Set-RegDword`
+- 源码：`Modules/Registry.ps1`+ `Modules/Common.ps1/Set-RegDword`
 - 入口：主菜单 `1` → 核心游戏优化 `1`
 - 写入函数：`Set-RegDword`
 
@@ -127,3 +127,14 @@ DirectX、GPU 队列和 MPO/HAGS 之间存在运行时关系，但当前 `tweakb
 - HAGS 是核心优化中的单个 `HwSchMode` 写入，当前有配置层回读，但没有独立自动备份/恢复。
 - MPO 是独立排障模块，包含四个受管理值、互斥方案、备份、恢复和辅助验证；它不应与核心优化中的 HAGS 混为一项。
 - 当前脚本没有直接执行 DirectX 优化项，因此 DirectX 相关内容属于知识背景，不计作遗漏的脚本执行项。
+## 事实核查记录
+
+核验基准：tweakbyjie 仓库 main 分支源码（2026-08-21）。
+
+| 声明 | 核查结果 |
+| --- | --- |
+| GPU-001 写入 HwSchMode=2，经 Verify-RegDword 回读，需重启 | ✅ 属实：Modules/Registry.ps1 + Common.ps1 |
+| GPU-002 管理四个 MPO 值（DisableMPO/OverlayTestMode/DisableOverlays/OverlayMinFPS），方案 A/B/C 互斥 | ✅ 属实：与 Menu.ps1（Part 11）及 mpoManagedValues 定义一致 |
+| MPO 首次修改前快照 mpo-backup.json，已有备份不覆盖，11→4 恢复，备份损坏时阻止修改 | ✅ 属实：Backup.Mpo.ps1 的 Ensure/Restore 逻辑一致（含写后回读校验） |
+| HAGS 无独立自动备份/恢复 | ✅ 属实：核心路径仅写入+回读 |
+| HAGS 执行位置标注为 Modules/Menu.ps1（Part 1） | ❌ 勘误并已更新：已随 Part 1 迁至 Modules/Registry.ps1 |

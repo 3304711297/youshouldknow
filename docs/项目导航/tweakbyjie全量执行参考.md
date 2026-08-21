@@ -39,7 +39,7 @@
 ## 一、CPU-001：Win32PrioritySeparation
 
 - **入口**：主菜单 `1` → 核心游戏优化 `1`。
-- **源码**：写入 `Modules/Menu.ps1`（Part 1）+ `Modules/Common.ps1/Set-RegDword`；验证 `:813`；写入函数 `Set-RegDword`（`Modules/Common.ps1`）；无专用备份/恢复函数。
+- **源码**：写入 `Modules/Registry.ps1` + `Modules/Common.ps1/Set-RegDword`；验证 `Verify-RegDword`（Modules/Common.ps1）；写入函数 `Set-RegDword`（`Modules/Common.ps1`）；无专用备份/恢复函数。
 - **目标对象**：`HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\PriorityControl`。
 - **值**：`Win32PrioritySeparation`，`REG_DWORD`，目标 `38 Dec = 0x26`。
 - **传统位解释**：`32/16` 表示短/长量子，`8/4` 表示固定/可变量子，`2/1/0` 表示高/中/无前台提升。`38=32+4+2`；`24=16+8+0` 仅是后台参考值，不是脚本模式。
@@ -226,3 +226,6 @@
 
 - 本参考按当前 `tweakbyjie.ps1` 源码核对；源码行号变化后必须重新校对。
 - “脚本执行”不等于“可恢复”；“配置层回读”不等于“运行时有效”；“知识说明”不等于“脚本支持”。
+## 事实核查记录
+
+核验机制：由 tweakbyjie 仓库 Coverage 自动审计持续校验 ID 并集覆盖（manifest 44 项）；2026-08-21 对照 main 源码逐项校准一次（CORE 总览范围、NVMe 验证函数结论、SECURITY-002/003 与 MEMORY-003/STORAGE-005 编号补齐）。⚠️ 已知边界：正文表格中的 `:NNN` 为模块化前单文件源码的基线行号快照，仅作历史对照，不对应现行 Modules/ 结构；现行定位以 `Modules/函数名` 为准。
