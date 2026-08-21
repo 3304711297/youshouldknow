@@ -1491,6 +1491,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        事实核查记录
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3272,6 +3283,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        事实核查记录
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3352,6 +3374,34 @@
 <li>本项目当前只记录其行为和风险，不建议为了补齐优化数量而修改或扩展该脚本。</li>
 <li>在 <code>tweakbyjie → youshouldknow</code> 映射中，它属于 Registry/Security 高风险独立项目，状态应保持“有执行项但不可逆、说明需谨慎”，不能标记为具备完整恢复闭环。</li>
 </ul>
+<h2 id="_5">事实核查记录<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<p>核验基准：tweakbyjie 仓库 main 分支源码（2026-08-21）。</p>
+<table>
+<thead>
+<tr>
+<th>声明</th>
+<th>核查结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>defender-removal.ps1 删除 Defender 服务注册、WinRT/Svchost、CLSID/App/Shell/Autologger 键值与实体文件</td>
+<td>✅ 属实：357 行源码含上述对象的大量删除项</td>
+</tr>
+<tr>
+<td>受保护对象以管理员尝试后按 SYSTEM 批量重试</td>
+<td>✅ 属实：源码注释与实现一致（TrustedInstaller 保护键）</td>
+</tr>
+<tr>
+<td>无原始状态备份、无撤销命令、脚本不可逆</td>
+<td>✅ 属实：全文无 backup/restore 路径</td>
+</tr>
+<tr>
+<td>与 Part 5 是不同入口，Part 5 的 Defender 策略值有快照而删除脚本没有</td>
+<td>✅ 属实：defender-policy-backup.json 仅覆盖 Part 5</td>
+</tr>
+</tbody>
+</table>
 
 
 
@@ -3374,7 +3424,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月21日 08:15:18 UTC">2026年8月21日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月21日 10:28:35 UTC">2026年8月21日</span>
   </span>
 
     
