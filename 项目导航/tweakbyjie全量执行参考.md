@@ -26,14 +26,14 @@
 
 | 分类 | 编号范围 | 当前执行闭环 |
 |---|---|---|
-| CPU/核心系统 | CPU-001 至 CPU-005、CORE-001 至 CORE-013 | 多数写入；仅少数回读；普通项通常无原值快照 |
+| CPU/核心系统 | CPU-001 至 CPU-005、CORE-001 至 CORE-016 | 多数写入；仅少数回读；普通项通常无原值快照 |
 | GPU/显示 | GPU-001 至 GPU-002 | HAGS 有回读无快照；MPO 有四值快照和恢复 |
 | Memory/Storage | MEMORY-001/002、STORAGE-001 至 004 | Prefetch/压缩/TRIM 回读但无完整原值恢复；NVMe 有专用快照 |
 | Security | SECURITY-001 至 003 | CPU 缓解有快照；VBS/EFI 非精确回滚 |
 | Service | SERVICE-001/002 | Part 6 有 37 项快照；Part 5 无统一回滚 |
 | Boot | BOOT-001 至 006 | BCD-001/002 有快照；测试模式/EFI/VBS 部分不可精确恢复 |
 | Power | POWER-001 | `power-backup.pow` 恢复最初电源计划 |
-| NVMe | STORAGE-004 | `nvme-backup.json`，失败可回滚；运行时验证函数需修复 |
+| NVMe | STORAGE-004 | `nvme-backup.json`，失败可回滚；运行时验证由 `Modules/Backup.Nvme.ps1` 的 `Test-NativeNvme*` 提供 |
 | Registry deletion | REGISTRY-001 | Part 5/独立 Defender 删除高风险、部分不可逆 |
 
 ## 一、CPU-001：Win32PrioritySeparation
@@ -129,18 +129,36 @@
 - **恢复**：子项 `3` 按快照写回或删除原本不存在的值。
 - **风险**：降低 Meltdown/Spectre 侧信道缓解，不应作为普通游戏优化默认执行。
 
+### SECURITY-002 VBS/HVCI/Credential Guard/Hyper-V
+
+- **入口**：主菜单 `10` 子项 `1`。
+- **对象**：写入 5 个 Device Guard 相关注册表值为 `0`，BCD 设置 `hypervisorlaunchtype off`、`isolatedcontext no`、`vsmlaunchtype off`，并禁用 Hyper-V。
+- **验证**：BCD 值有 `Verify-BcdValue` 回读；注册表无专门回读；运行状态需重启后用 `msinfo32` 等检查。
+- **恢复**：子项 `2` 删除脚本覆盖并尝试启用 Hyper-V，明确不是原始状态精确回滚，未保存原始注册表/功能状态。详见 BOOT-006。
+
+### SECURITY-003 Device Guard EFI 锁定清除
+
+- **入口**：主菜单 `9`。
+- **对象**：检查 BitLocker，复制/调用 `SecConfig.efi`，创建一次性 BCD 引导项清除 EFI 变量。
+- **验证**：重启后用 `msinfo32` 等人工检查；有临时 BCD 清理。
+- **恢复**：无 EFI 变量原始快照或精确恢复；清理子项只能删除临时引导项，EFI 状态重新启用需系统安全设置手工处理。详见 BOOT-005。
+
 ## 五、MEMORY/STORAGE
 
 ### MEMORY-001/002
 
 - `EnablePrefetcher=0`：`HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters`，源码 `:822`，回读 `:858`，无原值快照。
 - `Disable-MMAgent -mc`：源码 `:827`，回读 `:859`，手动 `Enable-MMAgent -mc` 恢复，无原状态快照。
-- 页面文件：当前脚本没有自动修改、验证、备份或恢复，不计为执行项。
+- **MEMORY-003** 页面文件：当前脚本没有自动修改、验证、备份或恢复，不计为执行项。
 
 ### STORAGE-001/002
 
 - NTFS 8.3：`HKLM\SYSTEM\CurrentControlSet\Control\FileSystem\NtfsDisable8dot3NameCreation=1`，源码 `:824`；无专门回读/恢复。
 - TRIM：`fsutil behavior set DisableDeleteNotify 0`，源码 `:832`；全局查询验证 `:704-706`，不代表每卷结果；无原策略快照。
+
+### STORAGE-005
+
+写入缓存策略：当前脚本没有实际写入项，不计为执行覆盖；仅知识文档提及检查方法。
 
 ### STORAGE-003 BITS
 
@@ -152,7 +170,7 @@
 - 实际启用：ViVeTool Feature `60786016`、`48433719`（`:1627-1639`）；SafeBoot 两项默认值 `Storage Disks`（`:1643-1656`）。
 - 旧 Override：只读查看和备份，不再自动写入/删除；不要按旧文档声称写入三个 Override。
 - 备份：`nvme-backup.json` Version 3，含 Feature、SafeBoot 和旧 Override 原始状态；支持失败回滚。
-- 已知源码缺陷：调用 `Test-NativeNvmeConfigured`/`Test-NativeNvmeEffective`，当前源码未发现定义，状态查看和启用后验证可能运行时失败；这不是已完成验证。
+- 运行时验证：`Test-NativeNvmeConfigured`/`Test-NativeNvmeEffective` 由 `Modules/Backup.Nvme.ps1` 提供，CI 在 Pester 下覆盖定义与返回结构；仍不等价于重启后的硬件行为验证。
 
 ## 六、GPU-001/002
 

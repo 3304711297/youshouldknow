@@ -1,0 +1,18 @@
+# lychee 死链检查配置
+# 知识库引用大量带反爬墙的站点（Reddit/知乎/intel/NGA/各类论坛），
+# 它们对 CI 网络环境返回 403/429 或直接重置连接，属于误报而非断链。
+
+max_retries = 2
+timeout = 20
+
+# 反爬墙的 403/429 视为可达；429 同时覆盖 GitHub 等站点的限流误报
+accept = ["200..=299", "403", "429"]
+
+# 连接层直接失败（重置/拒连）的站点无法用状态码放行，只能整域排除
+exclude = [
+  'https://www\.grc\.com/',
+  'https://profileinspector\.io/',
+  'https://blog\.csdn\.net/',
+  'https://bbs\.nga\.cn/',
+  'https://ngabbs\.com/',
+]
