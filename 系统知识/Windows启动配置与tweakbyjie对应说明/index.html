@@ -1240,6 +1240,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#hpet-hpet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HPET 辨析：不建议直接禁用 HPET 设备
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1395,6 +1406,17 @@
     <span class="md-ellipsis">
       
         BOOT-006 VBS/HVCI/Hyper-V 的启动部分
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bcd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        已知但脚本未采纳的 BCD 项（仅知识记录）
       
     </span>
   </a>
@@ -3457,6 +3479,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#hpet-hpet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HPET 辨析：不建议直接禁用 HPET 设备
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -3619,6 +3652,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#bcd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        已知但脚本未采纳的 BCD 项（仅知识记录）
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#_12" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3679,6 +3723,16 @@
 <p>只适合有明确计时、帧时间或音频同步问题并能准备恢复介质的测试环境。错误的 BCD 计时器设置可能导致计时异常、功耗变化、兼容性问题或没有任何收益。</p>
 <h3 id="_4">验证与恢复<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <p>应用后脚本使用 <code>Verify-BcdValue</code> 回读目标值。修改前会在 <code>bcd-backup.json</code> 中保存 <code>Present/Value</code> 快照；恢复依赖有效的完整备份，按原值写回或删除原本不存在的项。该备份还被安全 BCD 项共用，文件损坏或缺失时脚本拒绝声称已恢复。</p>
+<h3 id="hpet-hpet">HPET 辨析：不建议直接禁用 HPET 设备<a class="headerlink" href="#hpet-hpet" title="Permanent link">&para;</a></h3>
+<p>HPET（High Precision Event Timer，高精度事件定时器）是主板上的硬件计时器。社区常见的"禁用 HPET"做法（BIOS 里关闭或设备管理器停用设备）并不适合作为通用优化：部分系统组件与传统应用仍依赖它做时间基准，直接禁用设备可能造成计时漂移、音频爆音或兼容性问题。</p>
+<p>更稳妥的思路不是动设备，而是通过 BCD 调整操作系统对计时器的<strong>调用策略</strong>——这正是 BOOT-001 四个值的作用：</p>
+<ul>
+<li><code>useplatformclock no</code>：禁止操作系统强制优先调用 HPET；</li>
+<li><code>useplatformtick no</code>：禁止强制使用主板计时器（相对 TSC 的纳秒级精度慢得多）;</li>
+<li><code>disabledynamictick yes</code>：关闭动态 tick 频率调节，使计时稳定平滑（该机制原本是节能特性）；</li>
+<li><code>tscsyncpolicy Enhanced</code>：增强 TSC 同步策略。</li>
+</ul>
+<p>恢复时把 <code>/set xxx yes|no</code> 写法换成 <code>bcdedit /deletevalue &lt;值名&gt;</code> 后重启即可。延伸参考：B站文章<a href="https://b23.tv/cOH0RxB">《【Win优化】Bcdedit 参数与高精度计时器 HPET》</a>。注意：以上均为调用策略层面的调整，HPET 设备本身不在 tweakbyjie 的执行范围内。</p>
 <h2 id="boot-002-bcd">BOOT-002 高级启动安全 BCD 配置<a class="headerlink" href="#boot-002-bcd" title="Permanent link">&para;</a></h2>
 <h3 id="_5">执行入口与目标<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <p>同为主菜单 <code>2</code>，源码 <code>Modules/Menu.ps1</code>（Part 2）+ <code>Modules/Backup.Bcd.ps1</code>/<code>Modules/Common.ps1</code>：</p>
@@ -3700,6 +3754,9 @@
 <p>该入口用于测试驱动或调试环境，不是性能优化。它没有独立的原始 BCD 快照，也没有完整的自动回读闭环。</p>
 <h3 id="_8">影响与恢复<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
 <p>测试签名、内核调试和完整性检查改变系统安全模型，可能显示桌面水印并允许不适合日常使用的驱动环境。主菜单 <code>4</code> 可以删除 <code>testsigning</code> 和 <code>debug</code>，但脚本明确保留 <code>nointegritychecks</code>；它不是原状态精确恢复。若需关闭保留项，应按当前系统需求手动检查 BCD。</p>
+<blockquote>
+<p>⚠️ <strong>反作弊风险</strong>：<code>/debug on</code> 开启的内核调试模式会被主流反作弊系统（EAC、BattlEye 等）识别为调试环境，可能导致游戏拒绝运行甚至账号封禁；⚠️ 该结论来自社区共识而非反作弊厂商官方声明。调试用途结束后应及时用主菜单 <code>4</code> 或 <code>bcdedit /deletevalue debug</code> 关闭。</p>
+</blockquote>
 <h2 id="boot-004">BOOT-004 关闭测试模式<a class="headerlink" href="#boot-004" title="Permanent link">&para;</a></h2>
 <h3 id="_9">执行入口与目标<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
 <p>主菜单 <code>4. 关闭测试模式</code>，源码 <code>Modules/Menu.ps1</code>（Part 4）。当前脚本删除：</p>
@@ -3726,6 +3783,35 @@
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>isolatedcontext      = No
 </code></pre></div>
 <p>关闭子项对这些 BCD 值有回读验证；恢复子项删除脚本覆盖并尝试启用 Hyper-V，但没有保存原始 BCD、可选功能或策略状态，因此不是精确回滚。运行时是否仍有 Hypervisor 必须重启后检查。</p>
+<h2 id="bcd">已知但脚本未采纳的 BCD 项（仅知识记录）<a class="headerlink" href="#bcd" title="Permanent link">&para;</a></h2>
+<p>以下 BCD 用法在社区资料中流传，<code>tweakbyjie</code> 当前<strong>明确不采纳</strong>（无对应菜单项、无编号、无备份闭环），此处仅作知识记录；使用需自行承担验证与恢复责任。</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用与边界</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>bcdedit /set loadoptions DISABLE_INTEGRITY_CHECKS</code></td>
+<td>经加载选项关闭驱动签名强制（内核加载未签名驱动的常见手法之一）。脚本不采纳：与测试模式/完整性检查项职责重叠且风险更高</td>
+</tr>
+<tr>
+<td><code>bcdedit /set loadoptions DISABLE_INTEGRITY_CHECKS,DISABLE-LSA-ISO,DISABLE-VBS</code></td>
+<td>三合一组合：在关闭签名强制之外同时关闭 LSA 隔离与 VBS 加载。脚本仅在 BOOT-005 的 EFI 清除流程中设置过 <code>DISABLE-LSA-ISO</code> 单值，组合形式不采纳</td>
+</tr>
+<tr>
+<td><code>bcdedit /set nx OptIn</code></td>
+<td>DEP 的 OptIn 档位（仅为 Windows 组件和服务启用 DEP，兼容性更好）。脚本只用 <code>nx AlwaysOff</code>（BOOT-002），恢复走快照删除还原系统默认，不写 OptIn</td>
+</tr>
+<tr>
+<td><code>bcdedit /set bootux disabled</code></td>
+<td>禁用 Windows 启动动画（转圈界面），缩短开机画面时间。恢复：<code>bcdedit /deletevalue bootux</code></td>
+</tr>
+</tbody>
+</table>
+<p>以上均不计入 tweakbyjie 执行覆盖（无 BOOT 编号、无快照），效果与副作用随 Windows 版本差异较大。</p>
 <h2 id="_12">重要边界<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
 <ul>
 <li><code>bcd-backup.json</code>、<code>service-backup.json</code> 等备份文件只有在实际运行模块后才会生成；仓库中存在脚本定义不等于本地已有用户备份。</li>
@@ -3758,6 +3844,18 @@
 <td>测试模式与 EFI/VBS 操作无精确原始状态回滚</td>
 <td>✅ 属实：文档边界与源码行为一致</td>
 </tr>
+<tr>
+<td><code>bootux disabled</code> 可禁用启动动画；<code>loadoptions</code> 三合一组合可关闭签名强制/LSA 隔离/VBS 加载；<code>nx OptIn</code> 为仅 Windows 组件档位</td>
+<td>⚠️ 社区资料记载，按知识记录收录；除 <code>DISABLE-LSA-ISO</code> 单值（BOOT-005）外脚本均不采纳</td>
+</tr>
+<tr>
+<td><code>/debug on</code> 会被主流反作弊识别，可能导致游戏拒跑或封号</td>
+<td>⚠️ 社区共识（EAC/BattlEye 用户报告），无反作弊厂商官方声明</td>
+</tr>
+<tr>
+<td>直接禁用 HPET 设备不适合，应改用 BCD 计时器调用策略调整</td>
+<td>✅ 判断合理：BOOT-001 即为此类调整；设备禁用的副作用已有社区案例</td>
+</tr>
 </tbody>
 </table>
 
@@ -3782,7 +3880,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月21日 09:42:57 UTC">2026年8月21日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月21日 12:28:38 UTC">2026年8月21日</span>
   </span>
 
     
@@ -3822,6 +3920,46 @@
       
         <footer class="md-footer">
   
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="页脚" >
+        
+          
+          <a href="../Windows-%E7%9D%A1%E7%9C%A0-%E4%BC%91%E7%9C%A0%E4%B8%8E%E6%B7%B7%E5%90%88%E7%9D%A1%E7%9C%A0%E8%AF%A6%E8%A7%A3/" class="md-footer__link md-footer__link--prev" aria-label="上一页: Windows 睡眠、休眠与混合睡眠详解">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              <div class="md-ellipsis">
+                Windows 睡眠、休眠与混合睡眠详解
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../Windows%E5%86%85%E5%AD%98%E5%8E%8B%E7%BC%A9%E5%8A%9F%E8%83%BD%E4%B8%8EMMAgent%E8%AE%BE%E7%BD%AE/" class="md-footer__link md-footer__link--next" aria-label="下一页: Windows 内存压缩功能与 MMAgent 设置">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              <div class="md-ellipsis">
+                Windows 内存压缩功能与 MMAgent 设置
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
       <div class="md-copyright">
@@ -3847,7 +3985,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.expand", "navigation.top", "navigation.footer", "navigation.tracking", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
     
     
       <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
