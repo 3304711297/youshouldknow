@@ -45,7 +45,9 @@ jobs:
 
   deploy:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    needs: build
+    # 必须同时等待 link-check:链接检查失败时不得部署,
+    # 否则死链会静默上线(lychee 的 fail:true 只能让 link-check 自己变红)
+    needs: [build, link-check]
     runs-on: ubuntu-latest
     timeout-minutes: 15
     permissions:
