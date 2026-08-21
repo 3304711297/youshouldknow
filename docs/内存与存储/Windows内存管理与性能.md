@@ -56,3 +56,13 @@ Get-CimInstance Win32_ComputerSystem | Select-Object AutomaticManagedPagefile
 - 改前记录：注册表 Hive/路径/值名/类型/原值/是否存在、`Get-MMAgent` 原状态、页面文件托管状态与大小；
 - 改后验证：配置回读 + 重启 + 启动/加载/游戏/多任务的 A/B 对照 + 睡眠/唤醒稳定性；
 - 恢复：按记录逐项写回，原本不存在的值应删除；不要用另一台机器的值当通用恢复值。
+
+## 事实核查记录
+
+核验基准：tweakbyjie 仓库 main 分支源码（2026-08-21）。
+
+| 声明 | 核查结果 |
+| --- | --- |
+| EnablePrefetcher=0（主菜单 1→2）与 Disable-MMAgent -mc 有回读但无原值快照 | ✅ 属实：Verify-RegDword/Get-MMAgent 回读，无专用快照文件 |
+| 页面文件不在脚本自动化范围内 | ✅ 属实：源码无 pagefile 相关执行项（MEMORY-003） |
+| 恢复方式（手工写回 / Enable-MMAgent -mc） | ✅ 属实：与执行参考 MEMORY-001/002 一致 |
