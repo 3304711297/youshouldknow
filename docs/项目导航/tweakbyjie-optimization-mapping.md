@@ -170,4 +170,4 @@ CORE-* 对应主菜单 `1` 的核心游戏优化与系统行为子项，是 Cove
 6. 可复核的验证方法
 ## 事实核查记录
 
-核验机制：本映射与《全量执行参考》由 tweakbyjie 仓库的 Coverage 自动审计（tools/Test-CrossRepoCoverage.ps1）持续校验——三份资料 ID 并集必须覆盖 manifest 全部 44 项，且不得出现清单外编号。最近一次人工逐项校准：2026-08-21 对照 tweakbyjie main 源码完成（修正 CORE 总览范围与 NVMe 验证函数过时结论，补齐 CORE-001~016/POWER-001/REGISTRY-001 映射行，执行位置同步 docs/ 布局与 Registry/Nvme/Virtualization 模块迁移）。
+核验机制：本映射与《全量执行参考》由 tweakbyjie 仓库的 Coverage 自动审计（tools/Test-CrossRepoCoverage.ps1）持续校验——映射、执行参考、覆盖检查三份资料每一份都必须与 manifest 全部 44 项完全一致，缺少清单内编号与出现清单外编号均判失败。最近一次人工逐项校准：2026-08-21 对照 tweakbyjie main 源码完成（修正 CORE 总览范围与 NVMe 验证函数过时结论，补齐 CORE-001~016/POWER-001/REGISTRY-001 映射行，执行位置同步 docs/ 布局与 Registry/Nvme/Virtualization 模块迁移）。
