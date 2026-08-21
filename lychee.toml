@@ -17,4 +17,6 @@ exclude = [
   'https://ngabbs\.com/',
   'https://www\.chiphell\.com/',
   'https://www\.overclock\.net/',
+  # 联想知识库:CI(美国 runner)持续超时,20s×3 次尝试均未返回
+  'https://iknow\.lenovo\.com\.cn/',
 ]
