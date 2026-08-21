@@ -20,6 +20,8 @@ jobs:
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
@@ -27,8 +29,6 @@ jobs:
           cache-dependency-path: requirements-docs.txt
       - name: Install MkDocs
         run: pip install -r requirements-docs.txt
-      - name: Prepare docs/
-        run: bash scripts/prepare-docs.sh
       - name: Build site
         run: mkdocs build --strict
 
@@ -61,7 +61,5 @@ jobs:
           cache-dependency-path: requirements-docs.txt
       - name: Install MkDocs
         run: pip install -r requirements-docs.txt
-      - name: Prepare docs/
-        run: bash scripts/prepare-docs.sh
       - name: Build and deploy to gh-pages
         run: mkdocs gh-deploy --force --strict
