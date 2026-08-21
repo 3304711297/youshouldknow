@@ -104,3 +104,14 @@ Group B 和 Manual 组尤其需要按场景评估：`Spooler` 影响打印，`WS
 - 区分 Part 6 的可回滚启动类型调整与 Part 5 的高风险安全组件停用
 
 具体服务集合、源码入口、验证和恢复限制见 `youshouldknow/项目导航/tweakbyjie-optimization-mapping.md`。
+
+## 事实核查记录
+
+核验基准：tweakbyjie 仓库 main 分支源码（2026-08-21）。
+
+| 声明 | 核查结果 |
+| --- | --- |
+| Part 6 共 37 个目标服务：Group A 21 个 Disabled + Group B 9 个 Disabled + Manual 组 7 个 | ✅ 属实：groupAServices/groupBServices/manualServices 数组逐项一致（含 DialogBlockingService 至 edgeupdatem、DPS 至 SysMain、XboxGipSvc 至 BITS） |
+| 快照保存 Name/StartMode/State/DelayedAutostart，修改后按 StartMode 逐项验证 | ✅ 属实：Backup.Service.ps1 的 Ensure 与 Verify-ServiceStartupType 一致（DelayedAutostart 为本批新增字段） |
+| 6→2 按快照恢复启动类型，原本不存在的服务跳过，不强制恢复运行状态 | ✅ 属实：Restore-ServiceBackup 行为一致 |
+| SERVICE-002（Part 5）不使用 service-backup.json；策略值有 defender-policy-backup.json 快照可经 5→2 恢复；服务/任务/SecHealthUI 无精确回滚 | ✅ 属实：与 Backup.Defender.ps1 及 Invoke-DefenderModule 一致 |
