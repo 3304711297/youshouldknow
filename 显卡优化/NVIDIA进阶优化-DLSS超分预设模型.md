@@ -52,7 +52,7 @@ DLSS 超分（Super Resolution）的画质取决于背后的**模型**。不同�
 
 ## 六、进阶：DLSSTweaks
 
-开源工具 [DLSSTweaks](https://github.com/cursey/DLSSTweaks) 可以做比 App 更细的覆盖（模型 + 参数级），需要自行下载 DLSS 库文件并放到指定位置，操作门槛较高，有折腾需求的进阶用户使用。
+开源工具 [DLSSTweaks](https://github.com/emoose/DLSSTweaks) 可以做比 App 更细的覆盖（模型 + 参数级），需要自行下载 DLSS 库文件并放到指定位置，操作门槛较高，有折腾需求的进阶用户使用。
 
 ---
 
@@ -67,7 +67,7 @@ DLSS 超分（Super Resolution）的画质取决于背后的**模型**。不同�
 | RTX 20/30 也可用 DLSS 4 超分模型 | ✅ 属实：超分模型覆盖全系 RTX 可用（区别于帧生成的 40/50 限定） |
 | 设置路径：App → 图形 → 程序设置 → DLSS 超分模型覆盖 | ✅ 属实：官方公告及帮助文档给出的路径 |
 | 个别游戏兼容性问题（闪退 / 性能反降 / HDR 异常）、驱动更新重置覆盖 | ✅ 属实：社区普遍反馈，官方帮助亦有提示 |
-| DLSSTweaks 为开源进阶覆盖工具 | ✅ 属实：GitHub 开源项目（cursey/DLSSTweaks） |
+| DLSSTweaks 为开源进阶覆盖工具 | ✅ 属实：GitHub 开源项目（emoose/DLSSTweaks） |
 
 **参考来源：**
 
@@ -77,4 +77,4 @@ DLSS 超分（Super Resolution）的画质取决于背后的**模型**。不同�
 - [TechPowerUp — DLSS 4 Transformer 画质与性能实测](https://www.techpowerup.com/review/nvidia-dlss-4-transformers-image-quality/)
 - [Reddit r/nvidia — DLSS Preset Selection Guide](https://www.reddit.com/r/nvidia/comments/1q5f3bd/dlss_preset_selection_guide/)
 - [Reddit r/nvidia — 激活预设 K 指南](https://www.reddit.com/r/nvidia/comments/1if7y27/little_guide_to_activating_dlls_preset_k_which_is/)
-- [GitHub — cursey/DLSSTweaks](https://github.com/cursey/DLSSTweaks)
+- [GitHub — emoose/DLSSTweaks](https://github.com/emoose/DLSSTweaks)
