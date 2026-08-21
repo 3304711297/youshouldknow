@@ -58,7 +58,6 @@ ISR（Interrupt Service Routine）用于快速响应硬件中断；DPC（Deferre
 
 详见：
 
-- [Windows 计时器机制与输入延迟](./Windows计时器机制与输入延迟.md)；
 - [Windows 键鼠与 TCP 低延迟可选实验设置](./Windows键鼠与TCP低延迟可选实验设置.md)。
 
 ## 五、延迟来源和测试方法

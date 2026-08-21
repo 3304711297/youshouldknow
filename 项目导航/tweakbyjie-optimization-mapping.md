@@ -15,6 +15,33 @@
 
 完整逐项执行参考见：[tweakbyjie 全量执行参考](./tweakbyjie全量执行参考.md)。本页保留分类级快速映射；全量参考记录路径、类型、目标值、备份粒度、源码行号和已知缺陷。
 
+## CORE 逐项映射
+
+CORE-* 对应主菜单 `1` 的核心游戏优化与系统行为子项，是 Coverage Manifest 的第一组编号。其中多项与 CPU/GPU/Memory/Storage 编号指向同一注册表值或命令（重叠关系见表后说明），编号并存是为了与 Manifest 一一对应。
+
+共同执行入口：`Modules/Menu.ps1`（Part 1）+ `Modules/Common.ps1/Set-RegDword`。
+
+| 编号 | tweakbyjie 实际项目 | 执行位置与目标 | 当前验证范围 | 恢复方式与状态 |
+| --- | --- | --- | --- | --- |
+| CORE-001 | GameDVR `AppCaptureEnabled` | `HKCU\Software\Microsoft\Windows\CurrentVersion\GameDVR\AppCaptureEnabled` → DWORD `0` | 无专用回读 | 无原值快照；手工记录并写回或删除 |
+| CORE-002 | `GameDVR_Enabled` | `HKCU\System\GameConfigStore\GameDVR_Enabled` → DWORD `0` | 无专用回读 | 无原值快照 |
+| CORE-003 | GameBar Presence `ActivationType` | Windows Runtime PresenceServer `ActivationType` → DWORD `0`；含 SYSTEM 计划任务重试 | `reg QUERY` 验证 | 无原值快照 |
+| CORE-004 | `UseNexusForGameBarEnabled` | `HKCU\Software\Microsoft\GameBar\UseNexusForGameBarEnabled` → DWORD `0` | 无专用回读 | 无原值快照 |
+| CORE-005 | `NetworkThrottlingIndex` | 同 CPU-004 → DWORD `0xFFFFFFFF` | 见 CPU-004 | 见 CPU-004 |
+| CORE-006 | `SystemResponsiveness` | 同 CPU-003 → DWORD `10` | 见 CPU-003 | 见 CPU-003 |
+| CORE-007 | `Win32PrioritySeparation` | 同 CPU-001 → DWORD `38/0x26` | `Verify-RegDword` 回读 | 见 CPU-001 |
+| CORE-008 | HAGS / `HwSchMode` | 同 GPU-001 → DWORD `2` | `Verify-RegDword` 回读；需重启 | 见 GPU-001 |
+| CORE-009 | `Tasks\Games` 七值 | 同 CPU-005 | 见 CPU-005 | 见 CPU-005 |
+| CORE-010 | 自动 Game Mode | `HKCU\Software\Microsoft\GameBar` 的 `AutoGameModeEnabled`、`AllowAutoGameMode` → DWORD `0`（实际为关闭自动 Game Mode） | 无回读 | 无原值快照 |
+| CORE-011 | Search / Bing / Cortana | `BingSearchEnabled`、`AllowSearchToUseLocation`、`CortanaConsent` → DWORD `0` | 无回读 | 无原值快照 |
+| CORE-012 | `EnablePrefetcher` | 同 MEMORY-001 → DWORD `0` | `Verify-RegDword` 回读 | 见 MEMORY-001 |
+| CORE-013 | NTFS 8.3 短文件名 | 同 STORAGE-001 → DWORD `1` | 无专门回读 | 见 STORAGE-001 |
+| CORE-014 | Memory Compression | 同 MEMORY-002；`Disable-MMAgent -mc` | `Get-MMAgent` 验证 | 手动 `Enable-MMAgent -mc` 后重启 |
+| CORE-015 | TRIM | 同 STORAGE-002；`fsutil behavior set DisableDeleteNotify 0` | 全局查询验证 | 无原策略快照 |
+| CORE-016 | 视觉效果 | HKCU 视觉效果约 15 项（`VisualFXSetting`、FontSmoothing、UserPreferencesMask 等） | 无逐项回读 | 无快照；影响体验与辅助功能 |
+
+重叠关系：CORE-007=CPU-001、CORE-008=GPU-001、CORE-009=CPU-005、CORE-005=CPU-004、CORE-006=CPU-003、CORE-012=MEMORY-001、CORE-013=STORAGE-001、CORE-014=MEMORY-002、CORE-015=STORAGE-002。
+
 ## CPU 逐项映射
 
 共同执行入口：`tweakbyjie.ps1` 主菜单 `1` → `Part 1` 核心游戏优化 → 子项 `1`。对应知识文档：[`CPU 优化与 tweakbyjie 对应说明`](./CPU优化与tweakbyjie对应说明.md)。
@@ -109,15 +136,27 @@
 
 对应知识文档：[`Windows启动配置与 tweakbyjie 对应说明`](../系统知识/Windows启动配置与tweakbyjie对应说明.md)。
 
+## Power 逐项映射
+
+| 编号 | tweakbyjie 实际项目 | 执行位置与目标 | 当前验证范围 | 恢复方式与状态 |
+| --- | --- | --- | --- | --- |
+| POWER-001 | 超性能电源计划 | 主菜单 `7`；导入仓库根目录 `ultimate-performance.pow` 并设为活动计划；首次应用前导出当前计划到 `power-backup.pow`；源码 `Modules/Menu.ps1`（Part 7） | `powercfg /getactivescheme` 人工确认当前计划 | 子项 `2` 导入 `power-backup.pow` 恢复最初计划；备份只保留最初快照 |
+
+对应知识文档：[`电源计划创建与优化指南`](../系统知识/电源计划创建与优化指南.md)；`.pow` 文件的来源与哈希校验见 tweakbyjie 仓库 `docs/POWER-PLAN-SOURCE.md`。
+
 ## Registry 逐项边界
 
 当前脚本还存在大量独立注册表执行项，不能只用 CPU/GPU/Memory 分类概括：
+
+| 编号 | 范围 | 说明 |
+| --- | --- | --- |
+| REGISTRY-001 | Defender / 安全注册表删除 | Part 5 约 95 个策略值无统一备份/回读/恢复；`defender-removal.ps1` 高风险且不可逆 |
 
 - Part 1：GameDVR、GameBar、Search、视觉效果、ActivationType、Prefetch、NTFS、HAGS、MMCSS 等；其中只有少数项目有回读，核心多数没有原值备份。
 - Part 5：Defender、SmartScreen、Security Center、CI/Smart App Control 等策略注册表值；没有统一原值备份、完整回读或自动恢复，且与服务/任务/Appx 删除操作相互影响。
 - `defender-removal.ps1`：独立的高风险删除脚本，会删除 Defender 服务注册、WinRT/Svchost、CLSID/App/Shell/Autologger 等键和值及实体文件；只有前置查询和有限验证，没有备份，脚本本身明确不可逆。
 
-对应原则文档：[`注册表优化原则`](../系统调优与安全/注册表优化原则.md)。这些项目后续应继续按稳定编号拆分；本阶段不把概念性注册表文章当作已完成的逐项执行覆盖。
+对应原则文档：[`Windows 优化原则与风险`](../系统调优与安全/Windows优化原则与风险.md)（原"注册表优化原则"已并入该主文）。这些项目后续应继续按稳定编号拆分；本阶段不把概念性注册表文章当作已完成的逐项执行覆盖。
 
 ## 原则
 

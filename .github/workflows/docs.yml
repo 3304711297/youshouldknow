@@ -10,60 +10,58 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: docs-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+          cache: pip
+          cache-dependency-path: requirements-docs.txt
       - name: Install MkDocs
         run: pip install -r requirements-docs.txt
+      - name: Prepare docs/
+        run: bash scripts/prepare-docs.sh
       - name: Build site
-        run: |
-          mkdir -p docs
-          # 将根目录的 Markdown 与各分类复制到 docs/，满足 mkdocs 默认 docs_dir
-          cp README.md docs/index.md
-          for dir in "BIOS与固件" "CPU与延迟" "GPU与显示" "内存与存储" "内存超频" "显卡优化" "笔电相关" "系统知识" "系统调优与安全" "网络通信" "软件技巧" "项目导航" "验机相关"; do
-            if [ -d "$dir" ]; then
-              cp -r "$dir" "docs/$dir"
-            fi
-          done
-          mkdocs build --strict
+        run: mkdocs build --strict
 
   link-check:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Check markdown links (lychee)
         uses: lycheeverse/lychee-action@v2
         with:
-          args: --no-progress --verbose "./**/*.md"
-          fail: false
+          args: --no-progress --config lychee.toml "./**/*.md"
+          fail: true
 
   deploy:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs: build
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+          cache: pip
+          cache-dependency-path: requirements-docs.txt
       - name: Install MkDocs
         run: pip install -r requirements-docs.txt
+      - name: Prepare docs/
+        run: bash scripts/prepare-docs.sh
       - name: Build and deploy to gh-pages
-        run: |
-          mkdir -p docs
-          cp README.md docs/index.md
-          for dir in "BIOS与固件" "CPU与延迟" "GPU与显示" "内存与存储" "内存超频" "显卡优化" "笔电相关" "系统知识" "系统调优与安全" "网络通信" "软件技巧" "项目导航" "验机相关"; do
-            if [ -d "$dir" ]; then
-              cp -r "$dir" "docs/$dir"
-            fi
-          done
-          mkdocs gh-deploy --force
+        run: mkdocs gh-deploy --force --strict
