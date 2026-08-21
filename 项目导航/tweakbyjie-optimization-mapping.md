@@ -119,7 +119,7 @@ CORE-* 对应主菜单 `1` 的核心游戏优化与系统行为子项，是 Cove
 | 编号 | tweakbyjie 实际项目 | 执行位置与目标 | 当前验证范围 | 恢复方式与状态 |
 | --- | --- | --- | --- | --- |
 | SERVICE-001 | Part 6 服务启动类型 | 主菜单 `6 → 1`；Group A 21 个 + Group B 9 个设为 `Disabled`，Xbox/Bluetooth/Embedded/BITS 7 个设为 `Manual`；源码 `Modules/Menu.ps1`（Part 6）+ `Modules/Backup.Service.ps1` | `Verify-ServiceStartupType` 使用 `Win32_Service.StartMode` 逐项验证；不验证运行状态和依赖功能 | 修改前创建/校验 `service-backup.json`；`6 → 2` 恢复原启动类型，不强制恢复运行状态 |
-| SERVICE-002 | Part 5 Defender/Security Center 服务与策略 | 主菜单 `5`；`WinDefend` 及额外 Defender 服务停止并禁用，同时写入 Defender/SmartScreen/Security Center 策略，额外分支还删除任务、启动项和 `SecHealthUI`；源码 `Modules/Menu.ps1`（Part 5） | 该入口没有统一启动类型回读；策略和删除操作没有完整配置层验证 | 不使用 `service-backup.json`，没有统一自动恢复；属于高风险、可能不可逆的安全组件停用 |
+| SERVICE-002 | Part 5 Defender/Security Center 服务与策略 | 主菜单 `5 → 1`；`WinDefend` 及额外 Defender 服务停止并禁用，同时写入约 95 个 Defender/SmartScreen/Security Center 策略值（定义见 `Modules/Backup.Defender.ps1`），可选分支删除任务、启动项和 `SecHealthUI`；源码 `Modules/Defender.ps1`（Invoke-DefenderModule） | 策略写入无逐项回读；首次应用前自动快照到 `defender-policy-backup.json` | 注册表策略值经主菜单 `5 → 2` 按快照恢复；服务停用、任务删除与 SecHealthUI 移除无精确回滚 |
 
 对应知识文档：[`Windows服务优化原则`](../系统调优与安全/Windows服务优化原则.md)、[`Windows系统服务对应注册表路径`](../系统知识/Windows系统服务对应注册表路径.md)。
 
@@ -150,7 +150,7 @@ CORE-* 对应主菜单 `1` 的核心游戏优化与系统行为子项，是 Cove
 
 | 编号 | 范围 | 说明 |
 | --- | --- | --- |
-| REGISTRY-001 | Defender / 安全注册表删除 | Part 5 约 95 个策略值无统一备份/回读/恢复；`defender-removal.ps1` 高风险且不可逆 |
+| REGISTRY-001 | Defender / 安全注册表删除 | Part 5 约 95 个策略值已有快照与恢复入口（`5 → 2`）但无逐项回读；`defender-removal.ps1` 高风险且不可逆 |
 
 - Part 1：GameDVR、GameBar、Search、视觉效果、ActivationType、Prefetch、NTFS、HAGS、MMCSS 等；其中只有少数项目有回读，核心多数没有原值备份。
 - Part 5：Defender、SmartScreen、Security Center、CI/Smart App Control 等策略注册表值；没有统一原值备份、完整回读或自动恢复，且与服务/任务/Appx 删除操作相互影响。

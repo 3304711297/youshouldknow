@@ -89,7 +89,7 @@ Group B 和 Manual 组尤其需要按场景评估：`Spooler` 影响打印，`WS
 
 ### SERVICE-002：Part 5 安全中心/Defender 停用
 
-主菜单 `5` 会停止并禁用 `WinDefend`；选择额外分支时还会处理一组 Defender/Security Center 相关服务，并可能删除 Defender 计划任务、启动项和 `SecHealthUI`。该入口没有使用 `service-backup.json`，也没有统一的启动类型回读或自动原始状态恢复；相关策略注册表写入同样没有统一备份闭环。
+主菜单 `5 → 1` 会停止并禁用 `WinDefend`；选择额外分支时还会处理一组 Defender/Security Center 相关服务，并可能删除 Defender 计划任务、启动项和 `SecHealthUI`。该入口不使用 `service-backup.json`，也没有统一的启动类型回读；约 95 个策略注册表值在首次应用前会自动快照到 `defender-policy-backup.json`，可经 `5 → 2` 按快照恢复，但服务停用、任务删除与 SecHealthUI 移除仍无精确回滚。
 
 这不是普通服务优化。它可能降低实时防护、篡改防护、SmartScreen、安全中心提示、更新和企业安全策略的有效性。除非明确理解安全影响并准备手工恢复/系统修复方案，否则不应执行。
 
