@@ -3,6 +3,7 @@ site_description: Windows 系统、硬件、游戏性能与日常使用知识库
 site_url: https://3304711297.github.io/youshouldknow/
 repo_url: https://github.com/3304711297/youshouldknow
 edit_uri: edit/main/
+# 内容位于 docs/（标准 MkDocs 布局）；修订日期插件读取真实文件的 git 历史
 theme:
   name: material
   language: zh
@@ -32,11 +33,19 @@ markdown_extensions:
       permalink: true
   - pymdownx.details
   - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
   - pymdownx.tabbed:
       alternate_style: true
 plugins:
   - search:
       lang: zh
+  - git-revision-date-localized:
+      type: date
+      enable_creation_date: true
+      fallback_to_build_date: true
+      enable_git_follow: false
   - redirects:
       redirect_maps:
         'CPU与延迟/DPC与ISR延迟机制.md': 'CPU与延迟/CPU调度与游戏线程.md'
@@ -51,7 +60,7 @@ plugins:
         '系统调优与安全/注册表优化原则.md': '系统调优与安全/Windows优化原则与风险.md'
         '系统调优与安全/Windows电源计划与性能调度.md': '系统知识/电源计划创建与优化指南.md'
 nav:
-  - 首页: index.md
+  - 首页: README.md
   - 验机相关:
     - 验机相关/README.md
     - Windows 审核模式 AuditMode 与 OOBE: 验机相关/Windows审核模式_AuditMode与OOBE.md
