@@ -30,7 +30,7 @@
 | GPU/显示 | GPU-001 至 GPU-002 | HAGS 有回读无快照；MPO 有四值快照和恢复 |
 | Memory/Storage | MEMORY-001/002、STORAGE-001 至 004 | Prefetch/压缩/TRIM 回读但无完整原值恢复；NVMe 有专用快照 |
 | Security | SECURITY-001 至 003 | CPU 缓解有快照；VBS/EFI 非精确回滚 |
-| Service | SERVICE-001/002 | Part 6 有 37 项快照；Part 5 无统一回滚 |
+| Service | SERVICE-001/002 | Part 6 有 37 项快照；Part 5 策略值有快照（`5→2` 恢复），服务/任务/Appx 无精确回滚 |
 | Boot | BOOT-001 至 006 | BCD-001/002 有快照；测试模式/EFI/VBS 部分不可精确恢复 |
 | Power | POWER-001 | `power-backup.pow` 恢复最初电源计划 |
 | NVMe | STORAGE-004 | `nvme-backup.json`，失败可回滚；运行时验证由 `Modules/Backup.Nvme.ps1` 的 `Test-NativeNvme*` 提供 |
@@ -208,7 +208,9 @@
 
 ### SERVICE-002 Part 5
 
-WinDefend/Defender 服务停止禁用、约 95 个策略值、任务/启动项/SecHealthUI 操作位于 `:977-1300`；没有统一备份、完整回读或自动恢复，属于高风险安全组件操作。
+- 实现位于 `Modules/Defender.ps1`（Invoke-DefenderModule）；约 95 个策略值统一定义在 `Modules/Backup.Defender.ps1` 的 `$script:defenderPolicyValues`。
+- 首次应用前自动快照全部策略值与 4 个自启动项的原始状态到 `defender-policy-backup.json`（Version 1，含结构校验，已有快照不覆盖）；备份失败会阻止修改。
+- 子选项 `5 → 2` 按快照恢复注册表值（按快照记录的原始类型写回）；服务停用、计划任务删除与 SecHealthUI 移除不在快照范围内，仍属高风险、部分不可逆操作。
 
 ## 九、POWER-001
 
@@ -217,7 +219,7 @@ WinDefend/Defender 服务停止禁用、约 95 个策略值、任务/启动项/S
 ## 十、REGISTRY 高风险边界
 
 - Part 1 的普通注册表项大多由 `Set-RegDword/Set-RegString/Set-RegBinary` 写入，没有原值快照；只有 ActivationType、Win32Priority、HAGS 等有限回读。
-- Part 5 的 Defender/SmartScreen/Security Center 约 95 个策略值没有统一备份/回读/恢复，并与服务、任务和 Appx 删除相互影响。
+- Part 5 的 Defender/SmartScreen/Security Center 约 95 个策略值已有快照与恢复入口（`5 → 2`）但无逐项回读，并与服务、任务和 Appx 删除相互影响。
 - `defender-removal.ps1` 删除大量 Defender 注册、组件和文件，没有完整备份，脚本本身不可逆；不应归类为普通优化。
 
 ## 文档状态
