@@ -15,4 +15,6 @@ exclude = [
   'https://blog\.csdn\.net/',
   'https://bbs\.nga\.cn/',
   'https://ngabbs\.com/',
+  'https://www\.chiphell\.com/',
+  'https://www\.overclock\.net/',
 ]
