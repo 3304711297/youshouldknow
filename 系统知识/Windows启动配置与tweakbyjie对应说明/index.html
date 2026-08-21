@@ -3647,10 +3647,10 @@
 <h2 id="boot-001-bcd">BOOT-001 高级 BCD 计时器配置<a class="headerlink" href="#boot-001-bcd" title="Permanent link">&para;</a></h2>
 <h3 id="_2">执行入口与目标<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <p>主菜单 <code>2. 高级 BCD / 计时器与启动安全</code>，源码 <code>Modules/Menu.ps1</code>（Part 2）+ <code>Modules/Backup.Bcd.ps1</code>/<code>Modules/Common.ps1</code>：</p>
-<div class="highlight"><pre><span></span><code>useplatformclock    = No
-useplatformtick     = No
-disabledynamictick   = Yes
-tscsyncpolicy       = Enhanced
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>useplatformclock    = No
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>useplatformtick     = No
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>disabledynamictick   = Yes
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>tscsyncpolicy       = Enhanced
 </code></pre></div>
 <p>这些值通过 <code>bcdedit</code> 写入当前启动项，意图测试平台时钟、动态 tick 和 TSC 同步策略对计时与延迟的影响。它们不是所有硬件的通用性能优化。</p>
 <h3 id="_3">适用环境与风险<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
@@ -3660,9 +3660,9 @@ tscsyncpolicy       = Enhanced
 <h2 id="boot-002-bcd">BOOT-002 高级启动安全 BCD 配置<a class="headerlink" href="#boot-002-bcd" title="Permanent link">&para;</a></h2>
 <h3 id="_5">执行入口与目标<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <p>同为主菜单 <code>2</code>，源码 <code>Modules/Menu.ps1</code>（Part 2）+ <code>Modules/Backup.Bcd.ps1</code>/<code>Modules/Common.ps1</code>：</p>
-<div class="highlight"><pre><span></span><code>nx               = AlwaysOff
-tpmbootentropy    = ForceDisable
-nointegritychecks = Yes
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>nx               = AlwaysOff
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>tpmbootentropy    = ForceDisable
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>nointegritychecks = Yes
 </code></pre></div>
 <p>这些值会削弱或绕过部分启动安全/完整性检查，只能在明确理解驱动签名、TPM 和系统安全影响时测试。<code>nointegritychecks</code> 与测试模式相关，不应作为普通游戏优化使用。</p>
 <h3 id="_6">验证与恢复<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
@@ -3670,10 +3670,10 @@ nointegritychecks = Yes
 <h2 id="boot-003">BOOT-003 开启测试模式<a class="headerlink" href="#boot-003" title="Permanent link">&para;</a></h2>
 <h3 id="_7">执行入口与目标<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
 <p>主菜单 <code>3. 开启测试模式</code>，源码 <code>Modules/Menu.ps1</code>（Part 3）：</p>
-<div class="highlight"><pre><span></span><code>bcdedit /set testsigning on
-bcdedit /debug on
-bcdedit /dbgsettings local
-bcdedit /set nointegritychecks on
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>bcdedit /set testsigning on
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>bcdedit /debug on
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>bcdedit /dbgsettings local
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>bcdedit /set nointegritychecks on
 </code></pre></div>
 <p>该入口用于测试驱动或调试环境，不是性能优化。它没有独立的原始 BCD 快照，也没有完整的自动回读闭环。</p>
 <h3 id="_8">影响与恢复<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
@@ -3681,8 +3681,8 @@ bcdedit /set nointegritychecks on
 <h2 id="boot-004">BOOT-004 关闭测试模式<a class="headerlink" href="#boot-004" title="Permanent link">&para;</a></h2>
 <h3 id="_9">执行入口与目标<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
 <p>主菜单 <code>4. 关闭测试模式</code>，源码 <code>Modules/Menu.ps1</code>（Part 4）。当前脚本删除：</p>
-<div class="highlight"><pre><span></span><code>bcdedit /deletevalue testsigning
-bcdedit /deletevalue debug
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>bcdedit /deletevalue testsigning
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>bcdedit /deletevalue debug
 </code></pre></div>
 <p>并明确保留 <code>nointegritychecks</code>。该模块没有独立备份，也没有完整回读；删除不存在的值可能产生失败提示。源码中的用户提示已修正为：重新开启测试模式应使用主菜单选项 <code>3</code>。</p>
 <h2 id="boot-005-device-guard-efi">BOOT-005 Device Guard EFI 锁定清除<a class="headerlink" href="#boot-005-device-guard-efi" title="Permanent link">&para;</a></h2>
@@ -3699,9 +3699,9 @@ bcdedit /deletevalue debug
 <p>该流程涉及 EFI 变量、BitLocker 和一次性启动顺序。脚本会清理临时 BCD 项和盘符，但没有保存原始 EFI 变量、原始 <code>bootsequence</code> 或精确恢复 <code>SecConfig.efi</code> 文件；清理临时项不等于恢复 Device Guard 原状态。执行前必须保留 BitLocker 恢复密钥，确认确实需要清除 EFI 锁定，并准备离线恢复方案。</p>
 <h2 id="boot-006-vbshvcihyper-v">BOOT-006 VBS/HVCI/Hyper-V 的启动部分<a class="headerlink" href="#boot-006-vbshvcihyper-v" title="Permanent link">&para;</a></h2>
 <p>主菜单 <code>10</code> 除注册表和 Windows 可选功能外，还处理：</p>
-<div class="highlight"><pre><span></span><code>hypervisorlaunchtype = Off
-vsmlaunchtype        = Off
-isolatedcontext      = No
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>hypervisorlaunchtype = Off
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>vsmlaunchtype        = Off
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>isolatedcontext      = No
 </code></pre></div>
 <p>关闭子项对这些 BCD 值有回读验证；恢复子项删除脚本覆盖并尝试启用 Hyper-V，但没有保存原始 BCD、可选功能或策略状态，因此不是精确回滚。运行时是否仍有 Hypervisor 必须重启后检查。</p>
 <h2 id="_12">重要边界<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
@@ -3717,6 +3717,38 @@ isolatedcontext      = No
 
 
 
+  
+    
+  
+  
+    
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="最后更新">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月21日 08:15:18 UTC">2026年8月21日</span>
+  </span>
+
+    
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="创建日期">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月21日 08:15:18 UTC">2026年8月21日</span>
+  </span>
+
+    
+    
+    
+  </aside>
 
 
 

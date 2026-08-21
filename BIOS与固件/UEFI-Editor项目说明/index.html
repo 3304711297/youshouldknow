@@ -3563,7 +3563,7 @@
 <li>使用 <code>setup_var_cv</code> 读取或写入指定变量。</li>
 </ul>
 <p>命令形式类似：</p>
-<div class="highlight"><pre><span></span><code>setup_var_cv VarStoreName VarOffset Size Value
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>setup_var_cv VarStoreName VarOffset Size Value
 </code></pre></div>
 <p>这条路线不一定需要刷入完整修改版 BIOS，但它仍然直接修改 UEFI 变量，可能导致设置错误、无法启动或需要清除 CMOS。它不是低风险方案，也不是所有固件都支持。</p>
 <p>项目 README 的示例还提醒，遇到异常时可能需要强制关机并重置 CMOS；这不等于完整恢复方案。执行前仍应有官方恢复路径和硬件级维修后备方案。</p>
@@ -3581,11 +3581,11 @@
 <p>项目 README 还明确提到：有多个 Setup 区域时，需要确认哪个区域和实际 BIOS 设置匹配；不同 BIOS 版本之间不能随意混用提取文件和偏移。</p>
 <h2 id="_5">与刷写流程的关系<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <p>必须把以下三个阶段分开：</p>
-<div class="highlight"><pre><span></span><code>读取/提取 BIOS
-    ↓
-编辑 BIOS 镜像或 UEFI 变量
-    ↓
-通过官方更新、Flashback、FPT 或编程器写入
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>读取/提取 BIOS
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    ↓
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>编辑 BIOS 镜像或 UEFI 变量
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    ↓
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>通过官方更新、Flashback、FPT 或编程器写入
 </code></pre></div>
 <p>UEFI Editor 主要位于第二阶段。即使编辑器成功导出文件，也不代表第三阶段安全可行。尤其是华硕等具有严格校验的主板，普通方式可能拒绝修改后的镜像，可能需要官方 Flashback 或专业编程器；具体以主板文档为准。</p>
 <h2 id="_6">安全使用原则<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
@@ -3615,6 +3615,38 @@
 
 
 
+  
+    
+  
+  
+    
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="最后更新">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月21日 08:15:18 UTC">2026年8月21日</span>
+  </span>
+
+    
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="创建日期">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月21日 08:15:18 UTC">2026年8月21日</span>
+  </span>
+
+    
+    
+    
+  </aside>
 
 
 

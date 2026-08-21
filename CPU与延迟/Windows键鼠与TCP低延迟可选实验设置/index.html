@@ -3563,7 +3563,7 @@
 <h3 id="1">1. 控制面板设置<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
 <p>键盘重复延迟和重复速度属于用户体验偏好。控制面板中把重复延迟调短、重复速度调快，只会改变按键重复行为，不等于降低 USB/HID 扫描延迟，也不等于提高游戏轮询率。</p>
 <p>注册表位置：</p>
-<div class="highlight"><pre><span></span><code>HKEY_CURRENT_USER\Control Panel\Keyboard
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>HKEY_CURRENT_USER\Control Panel\Keyboard
 </code></pre></div>
 <p>常见值包括：</p>
 <ul>
@@ -3574,13 +3574,13 @@
 <p>修改后应测试文本输入、长按重复、游戏内按键和辅助功能。不要为了“最快”把超出控制面板范围的数值写入系统。</p>
 <h3 id="2-keyboard-response">2. Keyboard Response 与辅助功能<a class="headerlink" href="#2-keyboard-response" title="Permanent link">&para;</a></h3>
 <p>以下路径与筛选键、粘滞键、重复键等辅助功能有关：</p>
-<div class="highlight"><pre><span></span><code>HKEY_USERS\.DEFAULT\Control Panel\Accessibility\Keyboard Response
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>HKEY_USERS\.DEFAULT\Control Panel\Accessibility\Keyboard Response
 </code></pre></div>
 <p>不建议把页面中的所有值批量改成 <code>0</code>。这样可能关闭或改变用户主动启用的辅助功能，且不同值承担的功能不同。只有在明确知道某个值的作用、记录原值并确认用户不需要该辅助功能时，才应单独调整。</p>
 <h3 id="3">3. 输入队列大小<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
 <p>常见路径：</p>
-<div class="highlight"><pre><span></span><code>HKLM\SYSTEM\CurrentControlSet\Services\kbdclass\Parameters
-HKLM\SYSTEM\CurrentControlSet\Services\mouclass\Parameters
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>HKLM\SYSTEM\CurrentControlSet\Services\kbdclass\Parameters
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>HKLM\SYSTEM\CurrentControlSet\Services\mouclass\Parameters
 </code></pre></div>
 <p>相关值可能包括：</p>
 <ul>
@@ -3591,12 +3591,12 @@ HKLM\SYSTEM\CurrentControlSet\Services\mouclass\Parameters
 <p>因此本项目不推荐将这两个值加入主脚本，也不推荐普通用户为了游戏延迟主动修改它们。出现输入丢失时，应先检查 HID/芯片组驱动、USB 连接、设备轮询设置、应用和硬件。</p>
 <h2 id="foldertype">四、FolderType：文件夹视图实验<a class="headerlink" href="#foldertype" title="Permanent link">&para;</a></h2>
 <p>可选命令：</p>
-<div class="highlight"><pre><span></span><code><span class="nb">Set-ItemProperty</span> <span class="p">`</span>
-  <span class="s1">'HKCU:\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\Bags\AllFolders\Shell'</span> <span class="p">`</span>
-  <span class="n">-Name</span> <span class="n">FolderType</span> <span class="p">`</span>
-  <span class="n">-Value</span> <span class="n">NotSpecified</span> <span class="p">`</span>
-  <span class="n">-Type</span> <span class="n">String</span> <span class="p">`</span>
-  <span class="n">-Force</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nb">Set-ItemProperty</span> <span class="p">`</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>  <span class="s1">'HKCU:\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\Bags\AllFolders\Shell'</span> <span class="p">`</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>  <span class="n">-Name</span> <span class="n">FolderType</span> <span class="p">`</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>  <span class="n">-Value</span> <span class="n">NotSpecified</span> <span class="p">`</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>  <span class="n">-Type</span> <span class="n">String</span> <span class="p">`</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>  <span class="n">-Force</span>
 </code></pre></div>
 <p>该设置主要影响 Windows 文件夹模板/视图识别，可能减少文件夹类型自动变化带来的困扰。它不是键鼠低延迟、CPU 调度或网络优化，不应宣传为游戏性能提升。</p>
 <p>修改前应导出相关注册表项或记录原值；如果文件夹视图异常，恢复原值或删除新增的 <code>FolderType</code>，然后重启 Explorer。使用前关闭重要文件操作，避免把界面体验问题误判成性能问题。</p>
@@ -3605,12 +3605,12 @@ HKLM\SYSTEM\CurrentControlSet\Services\mouclass\Parameters
 <p>这两个值常用于测试 TCP 小包发送和 ACK 行为，可能与 Nagle 算法及延迟确认有关。它们只影响特定 TCP 流量，不适用于所有游戏：许多游戏使用 UDP，或者网络延迟主要来自线路、服务器、Wi-Fi、路由和排队。</p>
 <h3 id="2">2. 网卡路径<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
 <p>常见路径：</p>
-<div class="highlight"><pre><span></span><code>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces\{网卡 GUID}
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces\{网卡 GUID}
 </code></pre></div>
 <p>应根据当前网卡实际存在的 <code>DhcpIPAddress</code> 或 <code>IPAddress</code> 判断接口，不能照抄别人电脑的 GUID。无线、网线、虚拟网卡和 VPN 可能对应不同接口。</p>
 <p>常见实验值：</p>
-<div class="highlight"><pre><span></span><code>TCPNoDelay       = 1
-TcpAckFrequency  = 1
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>TCPNoDelay       = 1
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>TcpAckFrequency  = 1
 </code></pre></div>
 <p>这不是全局“低延迟开关”，也不保证游戏 RTT 下降。关闭或改变 Nagle/ACK 行为可能增加小包数量、CPU/带宽开销，某些应用反而更差。</p>
 <h3 id="3_1">3. 测试方法<a class="headerlink" href="#3_1" title="Permanent link">&para;</a></h3>
@@ -3661,6 +3661,38 @@ TcpAckFrequency  = 1
 
 
 
+  
+    
+  
+  
+    
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="最后更新">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月21日 08:15:18 UTC">2026年8月21日</span>
+  </span>
+
+    
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="创建日期">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月21日 08:15:18 UTC">2026年8月21日</span>
+  </span>
+
+    
+    
+    
+  </aside>
 
 
 

@@ -4055,7 +4055,7 @@
 <p>控制中心开关只可能改变界面或解锁入口，不会凭空增加 BIOS、CPU、VRM 或 EC 的能力。任何高级菜单操作都应先确认官方机型资料、当前 BIOS/EC 版本和恢复方法。</p>
 <h2 id="dgpu-only">三、显示路径：dGPU Only / 独显直连<a class="headerlink" href="#dgpu-only" title="Permanent link">&para;</a></h2>
 <p>可能的菜单示例：</p>
-<div class="highlight"><pre><span></span><code>Advanced → Switchable Graphics → Display Mode → dGPU Only
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Advanced → Switchable Graphics → Display Mode → dGPU Only
 </code></pre></div>
 <h3 id="_3">作用与边界<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p><code>dGPU Only</code> 通常是 OEM 对 MUX/独显直连路径的命名：内屏或部分输出可能绕过混合显卡路径，直接由独显输出。它不是 Intel 通用 BIOS 标准，是否存在、对哪些接口生效、是否需要重启，完全依赖机型。</p>
@@ -4070,32 +4070,32 @@
 <h2 id="e-core-cpu">四、E-core、超线程与 CPU 资源<a class="headerlink" href="#e-core-cpu" title="Permanent link">&para;</a></h2>
 <h3 id="1-active-efficient-cores-0">1. Active Efficient-cores = 0<a class="headerlink" href="#1-active-efficient-cores-0" title="Permanent link">&para;</a></h3>
 <p>可能的菜单示例：</p>
-<div class="highlight"><pre><span></span><code>Advanced → CPU Configuration → Active Efficient-cores → 0
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Advanced → CPU Configuration → Active Efficient-cores → 0
 </code></pre></div>
 <p>在支持该选项的 Intel 混合架构平台上，<code>0</code> 通常表示不启用 E-core，但是否允许该值、是否需要重启、BIOS 是否真正应用，取决于 CPU、微码和固件。</p>
 <p>不要把它写成“关闭小核会丢失小核缓存”。更准确的说法是：禁用 E-core 会改变可用核心数量、线程调度和缓存/拓扑资源，具体缓存可用量和行为应以该平台拓扑和实测为准。</p>
 <p>Intel i9-12900K 的官方规格可作为代际示例：8 个 P-core、8 个 E-core、16 核 24 线程、14MB L2 和 30MB Smart Cache。该代 E-core 不提供 Hyper-Threading，但不能把这个结论跨代套用到所有混合架构 CPU。</p>
 <h3 id="2-hyper-threading">2. Hyper-Threading<a class="headerlink" href="#2-hyper-threading" title="Permanent link">&para;</a></h3>
 <p>可能的菜单示例：</p>
-<div class="highlight"><pre><span></span><code>Advanced → CPU Configuration → Hyper Threading → Disabled
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Advanced → CPU Configuration → Hyper Threading → Disabled
 </code></pre></div>
 <p>E-core 与 P-core 的 Hyper-Threading 不是互相替代的同一开关：该代 Intel E-core 通常没有 HT，而 P-core 的 HT 是独立线程能力。关闭 HT 会减少可见线程数，可能降低部分并行工作负载性能，也可能改变少数延迟敏感应用的行为。</p>
 <p>“6 个大核及以下不要关闭超线程”不是通用技术规则。是否值得关闭，应根据应用线程数、功耗、温度、延迟目标和实测结果决定；笔记本还要考虑续航和风扇噪声。</p>
 <h3 id="3-e-core">3. 分簇禁用 E-core<a class="headerlink" href="#3-e-core" title="Permanent link">&para;</a></h3>
 <p>可能的菜单示例：</p>
-<div class="highlight"><pre><span></span><code>Advanced → Overclocking Performance Menu → Processor
-→ Per Core Disable Configuration → Enabled
-→ Processor Disable
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Advanced → Overclocking Performance Menu → Processor
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>→ Per Core Disable Configuration → Enabled
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>→ Processor Disable
 </code></pre></div>
 <p>原始个案把 <code>0–7</code> 视为大核、<code>8–15</code> 视为小核，并建议按簇关闭部分 E-core。这个编号只适用于特定平台和 BIOS，不能复制到其他 CPU。执行前必须确认 BIOS 对编号、簇大小和核心拓扑的定义。</p>
 <h2 id="_5">五、电压、电流与保护机制<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <h3 id="1-overclocking-lock-undervolt-protection">1. Overclocking Lock / Undervolt Protection<a class="headerlink" href="#1-overclocking-lock-undervolt-protection" title="Permanent link">&para;</a></h3>
 <p>可能的菜单示例：</p>
-<div class="highlight"><pre><span></span><code>Advanced → Power &amp; Performance → CPU - Power Management Control
-→ CPU Lock Configuration → Overclocking Lock → Disabled
-
-Advanced → Overclocking Performance Menu → Overclocking Feature → Enabled
-→ Undervolt Protection → Disabled
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Advanced → Power &amp; Performance → CPU - Power Management Control
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>→ CPU Lock Configuration → Overclocking Lock → Disabled
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>Advanced → Overclocking Performance Menu → Overclocking Feature → Enabled
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>→ Undervolt Protection → Disabled
 </code></pre></div>
 <p>这些标签在部分 Intel/OEM 平台中确实存在，但不能概括为“关闭后所有电压和功耗限制都解锁”：</p>
 <ul>
@@ -4107,23 +4107,23 @@ Advanced → Overclocking Performance Menu → Overclocking Feature → Enabled
 <p>Intel 的电压保护资料可用于理解背景，但不能证明某个机械革命 BIOS 标签一定具有相同实现。优先使用厂商 BIOS、CPU 型号和工具的官方说明。</p>
 <h3 id="2-cepcurrent-excursion-protection">2. CEP（Current Excursion Protection）<a class="headerlink" href="#2-cepcurrent-excursion-protection" title="Permanent link">&para;</a></h3>
 <p>可能的菜单示例：</p>
-<div class="highlight"><pre><span></span><code>CEP Disable → IA CEP Enable / GT CEP Enable → Disabled
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>CEP Disable → IA CEP Enable / GT CEP Enable → Disabled
 </code></pre></div>
 <p>CEP 是处理器/平台的电流、电压异常保护机制，可能在检测到模型异常时触发限制或降频。它不是简单的 ICCMAX，也不是“关闭后必然提升性能”的开关。</p>
 <p>IA 通常指 CPU 核心域，GT 通常指核显域；GT CEP 不等于独显保护。是否有 IA/GT CEP 开关、关闭后是否影响性能、稳定性或保护边界，必须由具体平台验证。</p>
 <p>不要把“禁用 CEP + 手动降压”写成正确答案。它最多是高风险实验方向，必须同时观察性能、温度、功耗、WHEA 事件、蓝屏和长时间稳定性。</p>
 <h3 id="3-ia-iccmax-ia-icc-unlimited">3. IA ICCMAX / IA ICC Unlimited<a class="headerlink" href="#3-ia-iccmax-ia-icc-unlimited" title="Permanent link">&para;</a></h3>
 <p>可能的菜单示例：</p>
-<div class="highlight"><pre><span></span><code>Advanced → Overclocking Performance Menu
-→ VR ICCMAX Current Override → IA ICC Unlimited Mode
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>Advanced → Overclocking Performance Menu
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>→ VR ICCMAX Current Override → IA ICC Unlimited Mode
 </code></pre></div>
 <p>“Unlimited”通常意味着将 CPU 核心域的电流上限写到较高编码或取消某一软件限流，不是物理无限，也不等于解除 PL1/PL2、温度墙、VRM 保护或电源适配器限制。</p>
 <p>GT/核显域的电流设置只针对核显，不应当当成独显电流解锁。应保留核显电流保护，并以平台规格和稳定性验证为准，不使用跨机型的固定数值。</p>
 <h3 id="4-acdc-loadline">4. AC/DC Loadline<a class="headerlink" href="#4-acdc-loadline" title="Permanent link">&para;</a></h3>
 <p>可能的菜单示例：</p>
-<div class="highlight"><pre><span></span><code>Advanced → Power &amp; Performance → CPU Power Management Control
-→ CPU VR Settings → Core/IA VR Settings → AC Loadline
-→ GT VR Settings → AC/DC Loadline
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>Advanced → Power &amp; Performance → CPU Power Management Control
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>→ CPU VR Settings → Core/IA VR Settings → AC Loadline
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>→ GT VR Settings → AC/DC Loadline
 </code></pre></div>
 <p>AC loadline 通常参与按电流估算和请求 VID，DC loadline 通常参与电压/电流/功耗遥测校准。实际单位、VRM LLC、CEP 互动和可调范围由平台决定。</p>
 <p>不能笼统地说“数值越低越好”，也不能把个案中的 <code>50</code>、<code>110</code> 当作通用答案。DC 与实际负载线不匹配可能造成功耗/电流报告失真、错误限功耗、CEP 触发或稳定性异常。</p>
@@ -4132,10 +4132,10 @@ Advanced → Overclocking Performance Menu → Overclocking Feature → Enabled
 <h3 id="1-thermal-velocity-boosttvb">1. Thermal Velocity Boost（TVB）<a class="headerlink" href="#1-thermal-velocity-boosttvb" title="Permanent link">&para;</a></h3>
 <p>TVB 是在温度、功耗和电流等条件有余量时的机会性加频，不是固定超频档，也不能保证打开后增加某个固定 MHz。是否支持 TVB 以及 BIOS 中是否有对应开关，取决于 CPU SKU 和代际。</p>
 <p>可能的菜单示例：</p>
-<div class="highlight"><pre><span></span><code>Advanced → Overclocking Performance Menu → Processor
-→ Thermal Velocity Boost → Disabled
-→ TVB Voltage Optimizations → Disabled
-→ Enhanced Thermal Velocity Boost → Disabled
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>Advanced → Overclocking Performance Menu → Processor
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>→ Thermal Velocity Boost → Disabled
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>→ TVB Voltage Optimizations → Disabled
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>→ Enhanced Thermal Velocity Boost → Disabled
 </code></pre></div>
 <p>关闭这些选项可能影响峰值频率、温度和功耗行为，不应为了让某个降压软件工作就盲目关闭。先确认工具、CPU 和 BIOS 的官方要求，再决定是否测试。</p>
 <h3 id="2-vbshvci">2. VBS/HVCI<a class="headerlink" href="#2-vbshvci" title="Permanent link">&para;</a></h3>
@@ -4143,18 +4143,18 @@ Advanced → Overclocking Performance Menu → Overclocking Feature → Enabled
 <p>关闭“内核隔离/内存完整性”可能影响驱动安全、凭据保护、WSL2、Docker、虚拟机和企业策略。不要把关闭 VBS 写成降压的默认前置条件；只有在确认工具确实有此要求、理解安全代价并准备恢复方案时，才进行独立测试。</p>
 <h3 id="3-c-states-c1e">3. C-states 与 C1E<a class="headerlink" href="#3-c-states-c1e" title="Permanent link">&para;</a></h3>
 <p>可能的菜单示例：</p>
-<div class="highlight"><pre><span></span><code>Advanced → Power &amp; Performance → CPU Power Management Control
-→ C-States → Enhanced C1E → Disabled
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>Advanced → Power &amp; Performance → CPU Power Management Control
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>→ C-States → Enhanced C1E → Disabled
 </code></pre></div>
 <p>C1E 是增强的 C1 空闲状态选项，不等同于关闭所有 C2/C6 等更深层 C-state。关闭后可能减少某些唤醒延迟，但也可能增加空闲功耗、温度和笔记本续航损失；现代待机还涉及操作系统、电源计划、驱动和平台协作。</p>
 <p>不要把 C1E 关闭当成普遍性能优化。只有在存在可重复的电源状态切换、延迟或稳定性问题时，才适合做 A/B 测试。</p>
 <h2 id="_6">七、内存选项与超频<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <h3 id="1-warm-boot-test-power-down-mode">1. Warm Boot Test 与 Power Down Mode<a class="headerlink" href="#1-warm-boot-test-power-down-mode" title="Permanent link">&para;</a></h3>
 <p>可能的菜单示例：</p>
-<div class="highlight"><pre><span></span><code>Chipset → System Agent (SA) Configuration
-→ Memory Configuration
-→ Memory Test On Warm Boot → Disabled
-→ Power Down Mode → No Power Down
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>Chipset → System Agent (SA) Configuration
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>→ Memory Configuration
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>→ Memory Test On Warm Boot → Disabled
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>→ Power Down Mode → No Power Down
 </code></pre></div>
 <p><code>Memory Test On Warm Boot</code> 不是 Intel/UEFI 统一标准名称，可能影响暖重启后的内存检测、训练或快速启动策略。不能简单断言关闭它只会节省时间。</p>
 <p><code>Power Down Mode</code> 通常指 DRAM 的低功耗状态，不是整机断电，也不是 CPU C-state。关闭它可能改变空闲功耗、退出延迟和稳定性，具体取决于 DDR 世代、内存条、IMC 和 BIOS。</p>
@@ -4172,28 +4172,28 @@ Advanced → Overclocking Performance Menu → Overclocking Feature → Enabled
 <p>“能进系统”不是稳定标准。出现训练失败时，优先等待平台的自动回退/训练流程；不要连续强制断电。</p>
 <h3 id="3">3. 控制台注册表开关<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
 <p>个案提到：</p>
-<div class="highlight"><pre><span></span><code>HKEY_LOCAL_MACHINE\SOFTWARE\OEM\GamingCenter2\ItemSupport
-CPUPerfomanceAndOverClockMenuSupport = 0
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>HKEY_LOCAL_MACHINE\SOFTWARE\OEM\GamingCenter2\ItemSupport
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>CPUPerfomanceAndOverClockMenuSupport = 0
 </code></pre></div>
 <p>该类 OEM 注册表值不是 Windows 通用接口，名称本身还可能因版本存在拼写差异。修改前应导出目标键、记录原值并确认控制中心版本；优先使用控制中心自带的高级 BIOS 开关或旧版官方控制台，不要把注册表改值当成通用超频方案。</p>
 <p>修改注册表只可能改变控制台界面显示，不会凭空增加 BIOS 能力，也不会解除 CPU、微码、VRM 或 OEM 固件限制。</p>
 <h2 id="tpmpttxdci-dmi">八、TPM/PTT、xDCI 与 DMI<a class="headerlink" href="#tpmpttxdci-dmi" title="Permanent link">&para;</a></h2>
 <h3 id="1-tpmptt">1. TPM/PTT<a class="headerlink" href="#1-tpmptt" title="Permanent link">&para;</a></h3>
 <p>可能的菜单示例：</p>
-<div class="highlight"><pre><span></span><code>Advanced → PCH FW Configuration → PTT Configuration
-→ TPM Device Selection → Disabled
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>Advanced → PCH FW Configuration → PTT Configuration
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>→ TPM Device Selection → Disabled
 </code></pre></div>
 <p>Intel PTT 是固件 TPM 实现，Windows 可以把它作为 TPM 2.0 使用。关闭或清除 TPM/PTT 不是性能优化默认项，可能影响 BitLocker、Windows 11、Windows Hello、凭据保护和 Secure Boot 测量。</p>
 <p>如果必须修改，先保存 BitLocker 恢复密钥，并区分“禁用 TPM 设备”和“清除 TPM 密钥”这两个完全不同的操作。</p>
 <h3 id="2-xdci">2. xDCI<a class="headerlink" href="#2-xdci" title="Permanent link">&para;</a></h3>
 <p>可能的菜单示例：</p>
-<div class="highlight"><pre><span></span><code>Chipset → PCH IO Configuration → USB Configuration → xDCI Support
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>Chipset → PCH IO Configuration → USB Configuration → xDCI Support
 </code></pre></div>
 <p>xDCI 通常与 USB device/gadget 控制器能力相关，使平台在特定场景下充当 USB 设备；它不是普通 USB 速度开关，也不等于 USB 调试。某些设备需要该能力，某些设备可能完全不使用它。</p>
 <p>“把 USB Configuration 全部设为 Enabled 能改善接口失效”只能作为特定机型排障经验，不能保证有效。修改前应确认哪个端口、设备或启动流程受影响。</p>
 <h3 id="3-dmi-max-link-speed">3. DMI Max Link Speed<a class="headerlink" href="#3-dmi-max-link-speed" title="Permanent link">&para;</a></h3>
 <p>可能的菜单示例：</p>
-<div class="highlight"><pre><span></span><code>Chipset → DMI/OPI Configuration → DMI Max Link Speed
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>Chipset → DMI/OPI Configuration → DMI Max Link Speed
 </code></pre></div>
 <p>DMI 是 CPU 与 PCH/芯片组之间的互联，不是独显 PCIe 链路。把 DMI 从 Gen4 降到 Gen3 可能降低互联能力，也可能用于某些平台的兼容性排障，但“必然改善南桥温度”没有通用证据，不应当作为普遍优化。</p>
 <p>Intel Z690/B660 等平台资料列出 DMI 4.0 和不同的通道数，说明 DMI 代际、通道数和实际 BIOS 选项由平台决定。修改后必须验证存储、USB、网卡、扩展设备和温度，不能只看某个传感器数值。</p>
@@ -4304,6 +4304,38 @@ CPUPerfomanceAndOverClockMenuSupport = 0
 
 
 
+  
+    
+  
+  
+    
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="最后更新">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月21日 08:15:18 UTC">2026年8月21日</span>
+  </span>
+
+    
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="创建日期">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月21日 08:15:18 UTC">2026年8月21日</span>
+  </span>
+
+    
+    
+    
+  </aside>
 
 
 

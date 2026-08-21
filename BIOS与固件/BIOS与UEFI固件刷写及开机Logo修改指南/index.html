@@ -3753,14 +3753,14 @@
 <p>关闭 Secure Boot 会降低启动链验证能力，也可能触发 BitLocker 恢复、影响 Windows 安全策略或阻止依赖安全启动的功能。修改前保存 BitLocker 恢复密钥，恢复后检查 Secure Boot 和 BitLocker 保护状态。</p>
 <h3 id="2_1">2. 查询平台信息<a class="headerlink" href="#2_1" title="Permanent link">&para;</a></h3>
 <p>在管理员 CMD 中进入工具所在目录后，案例使用：</p>
-<div class="highlight"><pre><span></span><code>cd C:\BIOS修改工具\BIOS修改工具
-fptw64.exe -i
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>cd C:\BIOS修改工具\BIOS修改工具
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>fptw64.exe -i
 </code></pre></div>
 <p>示例路径只是作者设备的路径。不要把目录、工具版本或输出结果当成通用固定值。<code>-i</code> 的目的在于确认工具看到的平台信息，不能替代厂商兼容性确认。</p>
 <h3 id="3-bios">3. 保存原始 BIOS<a class="headerlink" href="#3-bios" title="Permanent link">&para;</a></h3>
 <p>案例展示了两种备份：</p>
-<div class="highlight"><pre><span></span><code>fptw64.exe -d full_backup.bin
-fptw64.exe -bios -d bios_backup.bin
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>fptw64.exe -d full_backup.bin
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>fptw64.exe -bios -d bios_backup.bin
 </code></pre></div>
 <p>通常可以这样理解：</p>
 <ul>
@@ -3770,7 +3770,7 @@ fptw64.exe -bios -d bios_backup.bin
 <p>实际 FPT 工具参数、可读区域和输出内容以当前版本帮助和平台响应为准。备份完成后应检查文件是否存在、大小是否合理、能否被工具读取，并将至少一份复制到外部介质。只生成一个文件但没有验证，不能称为可靠备份。</p>
 <h3 id="4-uefitool-logo">4. 用 UEFITool 查找 Logo<a class="headerlink" href="#4-uefitool-logo" title="Permanent link">&para;</a></h3>
 <p>案例使用 UEFITool 打开 <code>bios_backup.bin</code>，通过 GUID：</p>
-<div class="highlight"><pre><span></span><code>7BB28B99-61BB-11D5-9A5D-0090273FC14D
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>7BB28B99-61BB-11D5-9A5D-0090273FC14D
 </code></pre></div>
 <p>定位可能的 Logo 模块，再进入 Raw section。流程中包括：</p>
 <ol>
@@ -3791,7 +3791,7 @@ fptw64.exe -bios -d bios_backup.bin
 <p>不要用普通图片查看器反复打开并重新保存从固件中导出的原始资源，以免改变字节内容。</p>
 <h3 id="6-bios">6. 写入修改后的 BIOS 区域<a class="headerlink" href="#6-bios" title="Permanent link">&para;</a></h3>
 <p>案例最后使用：</p>
-<div class="highlight"><pre><span></span><code>fptw64.exe -bios -f modified_bios.bin
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>fptw64.exe -bios -f modified_bios.bin
 </code></pre></div>
 <p>这一步是整个流程中风险最高的阶段。只有在以下检查全部通过时才应考虑继续：</p>
 <ul>
@@ -3856,6 +3856,38 @@ fptw64.exe -bios -d bios_backup.bin
 
 
 
+  
+    
+  
+  
+    
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="最后更新">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月21日 08:15:18 UTC">2026年8月21日</span>
+  </span>
+
+    
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="创建日期">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月21日 08:15:18 UTC">2026年8月21日</span>
+  </span>
+
+    
+    
+    
+  </aside>
 
 
 

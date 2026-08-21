@@ -3644,10 +3644,10 @@
 <li>入口：主菜单 <code>1</code> → 核心游戏优化 <code>1</code></li>
 <li>写入函数：<code>Set-RegDword</code></li>
 </ul>
-<div class="highlight"><pre><span></span><code>路径：HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers
-值名：HwSchMode
-类型：REG_DWORD
-脚本目标值：2
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>路径：HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>值名：HwSchMode
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>类型：REG_DWORD
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>脚本目标值：2
 </code></pre></div>
 <p><code>HwSchMode=2</code> 表示请求启用 HAGS；最终是否实际启用仍受硬件、驱动和系统支持情况影响。</p>
 <h3 id="_2">修改目的<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
@@ -3658,9 +3658,9 @@
 <p>可能改善部分游戏的帧时间或调度延迟，也可能无明显收益，甚至引入卡顿、驱动重置、录屏/覆盖层兼容性问题。平均 FPS 不能单独证明有效，应同时观察 1% Low、帧时间、输入延迟、GPU 利用率、录屏和多显示器行为。</p>
 <h3 id="_5">验证方法<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <p>脚本在 <code>Modules/Common.ps1/Verify-RegDword</code> 使用 <code>Verify-RegDword</code> 回读 <code>HwSchMode=2</code>。这只证明注册表配置层写入成功，不等于驱动已经采用 HAGS 运行时路径。可进一步检查 Windows 图形设置、<code>dxdiag</code> 和实际游戏测试结果：</p>
-<div class="highlight"><pre><span></span><code><span class="nb">Get-ItemPropertyValue</span> <span class="p">`</span>
-  <span class="s1">'HKLM:\SYSTEM\CurrentControlSet\Control\GraphicsDrivers'</span> <span class="p">`</span>
-  <span class="s1">'HwSchMode'</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">Get-ItemPropertyValue</span> <span class="p">`</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>  <span class="s1">'HKLM:\SYSTEM\CurrentControlSet\Control\GraphicsDrivers'</span> <span class="p">`</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>  <span class="s1">'HwSchMode'</span>
 </code></pre></div>
 <p>修改后通常需要重启，再进行相同场景、相同驱动和相同显示设置的对照测试。</p>
 <h3 id="_6">恢复方式<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
@@ -3732,7 +3732,7 @@
 <p>首次执行方案 A/B/C 前，脚本会把四个受管理值的存在状态、类型和值保存到 <code>mpo-backup.json</code>，已有有效备份不会覆盖。执行 <code>11 → 4</code> 时按备份逐项写回；备份中原本不存在的值会被删除。没有备份时，脚本只能删除受管理值并恢复系统默认，不能恢复此前的自定义值。备份损坏或无法读取时，脚本会阻止新的 MPO 修改。</p>
 <h2 id="directx">DirectX 与图形管线边界<a class="headerlink" href="#directx" title="Permanent link">&para;</a></h2>
 <p>游戏画面通常经历：</p>
-<div class="highlight"><pre><span></span><code>CPU 游戏逻辑 → DirectX → GPU 队列 → 显示合成 → 显示器刷新
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>CPU 游戏逻辑 → DirectX → GPU 队列 → 显示合成 → 显示器刷新
 </code></pre></div>
 <p>DirectX、GPU 队列和 MPO/HAGS 之间存在运行时关系，但当前 <code>tweakbyjie.ps1</code> 没有直接修改 DirectX 版本、渲染 API、游戏引擎配置或 GPU 硬件时钟。平均 FPS 不能完全反映体验，应同时关注帧时间波动、1% Low、GPU 使用率、CPU 瓶颈、输入延迟和稳定性。</p>
 <h2 id="gpu_1">GPU 类核对结论<a class="headerlink" href="#gpu_1" title="Permanent link">&para;</a></h2>
@@ -3749,6 +3749,38 @@
 
 
 
+  
+    
+  
+  
+    
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="最后更新">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月21日 08:15:18 UTC">2026年8月21日</span>
+  </span>
+
+    
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="创建日期">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月21日 08:15:18 UTC">2026年8月21日</span>
+  </span>
+
+    
+    
+    
+  </aside>
 
 
 

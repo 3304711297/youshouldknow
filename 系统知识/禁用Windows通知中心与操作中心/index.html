@@ -3279,10 +3279,10 @@
 <hr />
 <h2 id="disablenotificationcenter">一、正确方法：DisableNotificationCenter<a class="headerlink" href="#disablenotificationcenter" title="Permanent link">&para;</a></h2>
 <p>新建文本文件，粘贴以下内容，保存为 <code>禁用通知中心.reg</code> 后双击导入，<strong>注销或重启</strong>生效：</p>
-<div class="highlight"><pre><span></span><code>Windows Registry Editor Version 5.00
-
-[HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows\Explorer]
-"DisableNotificationCenter"=dword:00000001
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Windows Registry Editor Version 5.00
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>[HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows\Explorer]
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>"DisableNotificationCenter"=dword:00000001
 </code></pre></div>
 <ul>
 <li>对应组策略：<strong>用户配置 → 管理模板 →「开始」菜单和任务栏 → 删除通知和操作中心</strong>（启用）；</li>
@@ -3296,8 +3296,8 @@
 <p><strong>副作用提示</strong>：禁用后<strong>所有应用通知将无处显示</strong>（包括系统更新提醒、安全中心警告等），请确认自己确实想要完全清净。若只是嫌弹窗烦，更温和的方案是：设置 → 系统 → 通知 中关闭个别应用的通知，或开启「勿扰 / 专注模式」。</p>
 <h2 id="noautotraynotify">二、勘误：NoAutoTrayNotify 并不能禁用通知中心<a class="headerlink" href="#noautotraynotify" title="Permanent link">&para;</a></h2>
 <p>一些流传脚本把下面这段与 <code>DisableNotificationCenter</code> 并列，标为「禁用通知中心」：</p>
-<div class="highlight"><pre><span></span><code>[HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows\Explorer]
-"NoAutoTrayNotify"=dword:00000001
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>[HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows\Explorer]
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>"NoAutoTrayNotify"=dword:00000001
 </code></pre></div>
 <p><strong>经核实这是误用</strong>，两个问题：</p>
 <ol>
@@ -3305,10 +3305,10 @@
 <li><strong>路径也不对</strong>：该值的官方路径是 <code>HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer</code>（旧版资源管理器策略键），写在 <code>...\Policies\Microsoft\Windows\Explorer</code> 下不会产生预期效果。</li>
 </ol>
 <p><strong>如果你的真实需求是「显示全部托盘图标」</strong>，正确做法任选其一：</p>
-<div class="highlight"><pre><span></span><code>Windows Registry Editor Version 5.00
-
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer]
-"NoAutoTrayNotify"=dword:00000001
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Windows Registry Editor Version 5.00
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer]
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>"NoAutoTrayNotify"=dword:00000001
 </code></pre></div>
 <p>或更简单：任务栏右键 → 任务栏设置 → 其他系统托盘图标 → 全部开启（图形界面等效操作）。</p>
 <h2 id="_1">三、相关但不同的值（避免混淆）<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
@@ -3383,6 +3383,38 @@
 
 
 
+  
+    
+  
+  
+    
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="最后更新">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月21日 08:15:18 UTC">2026年8月21日</span>
+  </span>
+
+    
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="创建日期">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月21日 08:15:18 UTC">2026年8月21日</span>
+  </span>
+
+    
+    
+    
+  </aside>
 
 
 
