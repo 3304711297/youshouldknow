@@ -3480,85 +3480,28 @@
 </tbody>
 </table>
 <h2 id="_2">二、进阶调优细则<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p><img alt="DDR5 时序进阶调优速查" src="../images/01-DDR5%E6%97%B6%E5%BA%8F%E8%BF%9B%E9%98%B6%E8%B0%83%E4%BC%98%E9%80%9F%E6%9F%A5.png" /></p>
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>细则</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Memory Ratio</td>
-<td>CPU 体质优先，CL 其次，频率最后</td>
-</tr>
-<tr>
-<td>tRCD / tRP</td>
-<td>最低 = tCL，正常 tCL + 2；高频必须放宽，7000 以上推荐 44 以上</td>
-</tr>
-<tr>
-<td>tRAS</td>
-<td>= tRTP + tRCD；压低会影响耐温，取合理值即可</td>
-</tr>
-<tr>
-<td>tCWL</td>
-<td>固定 tCL − 2</td>
-</tr>
-<tr>
-<td>tRTP</td>
-<td>生效值仅 12 / 14 / 15 / 17 / 18 / 20 / 21 / 23 / 24 档位；压低影响 1% low，逐档自摸取 1% low 最优值</td>
-</tr>
-<tr>
-<td>tWR</td>
-<td>= tRTP × 4</td>
-</tr>
-<tr>
-<td>tRFC</td>
-<td>= tRFC2 × 295 / 160（先看 tRFCpb）；295/160 与 JEDEC 16Gb 颗粒 tRFC1/tRFC2（295ns/160ns）比值一致</td>
-</tr>
-<tr>
-<td>tRFC2</td>
-<td>= tRFCpb / 0.8125 − 1</td>
-</tr>
-<tr>
-<td>tRFCpb</td>
-<td>= 频率 / 2000 × 130，可压小数</td>
-</tr>
-<tr>
-<td>tRRD / tWTR / tRFC4</td>
-<td>部分平台上为无效参数（不生效）</td>
-</tr>
-<tr>
-<td>tRRD_L</td>
-<td>最低生效值 8，不稳则以 +2 步进放宽</td>
-</tr>
-<tr>
-<td>tCCD_L</td>
-<td>= 5 × 频率 / 2000，可压小数</td>
-</tr>
-<tr>
-<td>NMode</td>
-<td>固定 2</td>
-</tr>
-<tr>
-<td>内存电压</td>
-<td>适度即可，对帧率无感</td>
-</tr>
-<tr>
-<td>VDDQ</td>
-<td>高频上不去时可尝试微调摸索（图中标注「15 的步进」，推测为 0.015V）</td>
-</tr>
-<tr>
-<td>VPP</td>
-<td>在 VDD 基础上 +0.05～0.1V</td>
-</tr>
-<tr>
-<td>SA 电压（按频率）</td>
-<td>6800：默认 0.9V；7000：0.96～0.97V；7200：0.97～1.0V；7400：1.0～1.05V</td>
-</tr>
-</tbody>
-</table>
+<blockquote>
+<p>本节整理自社区经验资料（原始截图内容已完全文字化，见下表与第一节速查表）。
+| 参数 | 细则 |
+| --- | --- |
+| Memory Ratio | CPU 体质优先，CL 其次，频率最后 |
+| tRCD / tRP | 最低 = tCL，正常 tCL + 2；高频必须放宽，7000 以上推荐 44 以上 |
+| tRAS | = tRTP + tRCD；压低会影响耐温，取合理值即可 |
+| tCWL | 固定 tCL − 2 |
+| tRTP | 生效值仅 12 / 14 / 15 / 17 / 18 / 20 / 21 / 23 / 24 档位；压低影响 1% low，逐档自摸取 1% low 最优值 |
+| tWR | = tRTP × 4 |
+| tRFC | = tRFC2 × 295 / 160（先看 tRFCpb）；295/160 与 JEDEC 16Gb 颗粒 tRFC1/tRFC2（295ns/160ns）比值一致 |
+| tRFC2 | = tRFCpb / 0.8125 − 1 |
+| tRFCpb | = 频率 / 2000 × 130，可压小数 |
+| tRRD / tWTR / tRFC4 | 部分平台上为无效参数（不生效） |
+| tRRD_L | 最低生效值 8，不稳则以 +2 步进放宽 |
+| tCCD_L | = 5 × 频率 / 2000，可压小数 |
+| NMode | 固定 2 |
+| 内存电压 | 适度即可，对帧率无感 |
+| VDDQ | 高频上不去时可尝试微调摸索（社区原资料标注「15 的步进」，推测为 0.015V） |
+| VPP | 在 VDD 基础上 +0.05～0.1V |
+| SA 电压（按频率） | 6800：默认 0.9V；7000：0.96～0.97V；7200：0.97～1.0V；7400：1.0～1.05V |</p>
+</blockquote>
 <h3 id="_3">与基础版速查表的差异说明<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -3597,10 +3540,9 @@
 </tbody>
 </table>
 <h2 id="am5-bios">三、AM5 内存超频步骤要点（BIOS 设置）<a class="headerlink" href="#am5-bios" title="Permanent link">&para;</a></h2>
-<p><img alt="AM5 内存超频步骤图解" src="../images/02-AM5%E5%86%85%E5%AD%98%E8%B6%85%E9%A2%91%E6%AD%A5%E9%AA%A4%E5%9B%BE%E8%A7%A3.png" /></p>
 <ol>
-<li>进入高级页：点击左上角红色箭头处；</li>
-<li>点击第二行箭头处进入 OC 设置；</li>
+<li>进入 BIOS 的 <strong>Advanced（高级）</strong> 页；</li>
+<li>进入 <strong>OC（超频）设置</strong> 页；</li>
 <li><strong>内存频率（Memory Ratio）</strong>选择 AMD 超频模式：<strong>8000↑ 即 1:2 模式、6400↓ 即 1:1 模式</strong>；</li>
 <li><strong>VDDIO</strong>：1.3V（1.35V 亦属安全电压，但在部分游戏中可能造成显卡掉驱动）；</li>
 <li><strong>SOC 电压</strong>：固定 1.25V；</li>
@@ -3611,7 +3553,6 @@
 <li>设置内存时序与内存电压：<strong>VDD 1.4V、VDDQ 1.3V</strong>（时序与电压需按体质自摸）。</li>
 </ol>
 <h2 id="tm5">四、TM5 报错序号参考与修复经验<a class="headerlink" href="#tm5" title="Permanent link">&para;</a></h2>
-<p><img alt="TM5 报错序号参考" src="../images/03-TM5%E6%8A%A5%E9%94%99%E5%BA%8F%E5%8F%B7%E5%8F%82%E8%80%83.png" /></p>
 <p>TM5（TestMem5）是社区最常用的内存稳定性测试工具（推荐配合 anta777 Extreme 等配置，跑 3~5 个循环）。报错界面会显示序号（如 <code>#4</code>、<code>#13</code>），可按下表定位原因：</p>
 <table>
 <thead>
@@ -3820,7 +3761,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月21日 08:15:18 UTC">2026年8月21日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月21日 12:47:54 UTC">2026年8月21日</span>
   </span>
 
     
