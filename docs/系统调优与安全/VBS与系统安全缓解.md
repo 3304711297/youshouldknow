@@ -98,3 +98,16 @@ VBS 是否影响性能取决于：
 ## 与 tweakbyjie 的关系
 
 `tweakbyjie` 中涉及 VBS、Hyper-V、Device Guard 的功能属于高级配置，应独立测试。这类修改影响系统安全模型，不应与普通游戏优化混合执行。项目编号、源码行号、验证和恢复状态见 `youshouldknow/项目导航/tweakbyjie-optimization-mapping.md`。
+
+## 事实核查记录
+
+核验基准：tweakbyjie 仓库 main 分支源码（2026-08-21，模块化收尾后）。
+
+| 声明 | 核查结果 |
+| --- | --- |
+| SECURITY-001 写入 FeatureSettingsOverride/Mask=3，有 security-mitigation-backup.json 快照且子项可恢复 | ✅ 属实：Modules/Registry.ps1 + Backup.SecurityMitigation.ps1 |
+| SECURITY-002 将 5 个 Device Guard/VBS 注册表值设为 0，BCD 设 hypervisorlaunchtype off / isolatedcontext no / vsmlaunchtype off 并禁用 Hyper-V | ✅ 属实：Modules/Virtualization.ps1 的 Invoke-VbsModule 与源码一致 |
+| SECURITY-002 的 BCD 有回读验证、注册表无专用回读 | ✅ 属实：Verify-BcdValue 存在，注册表写入无对应 Verify |
+| SECURITY-003 先检查 BitLocker 再用 SecConfig.efi + 一次性 BCD 清除 EFI 锁定 | ✅ 属实：Invoke-DeviceGuardModule 含 BitLocker 预检查与拒绝逻辑 |
+| InSpectre 为 GRC 发布的 Spectre/Meltdown 图形化管理工具 | ✅ 属实：GRC 官方页面存在（该站对 CI 网络有连接重置，浏览器可访问） |
+| 部分杀毒软件将 InSpectre 识别为 PUAT | ⚠️ 依赖社区反馈，未逐一验证杀软厂商官方声明 |

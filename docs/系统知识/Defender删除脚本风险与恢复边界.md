@@ -41,3 +41,14 @@
 - 不应在没有完整系统备份、恢复介质和明确授权的机器上运行。
 - 本项目当前只记录其行为和风险，不建议为了补齐优化数量而修改或扩展该脚本。
 - 在 `tweakbyjie → youshouldknow` 映射中，它属于 Registry/Security 高风险独立项目，状态应保持“有执行项但不可逆、说明需谨慎”，不能标记为具备完整恢复闭环。
+
+## 事实核查记录
+
+核验基准：tweakbyjie 仓库 main 分支源码（2026-08-21）。
+
+| 声明 | 核查结果 |
+| --- | --- |
+| defender-removal.ps1 删除 Defender 服务注册、WinRT/Svchost、CLSID/App/Shell/Autologger 键值与实体文件 | ✅ 属实：357 行源码含上述对象的大量删除项 |
+| 受保护对象以管理员尝试后按 SYSTEM 批量重试 | ✅ 属实：源码注释与实现一致（TrustedInstaller 保护键） |
+| 无原始状态备份、无撤销命令、脚本不可逆 | ✅ 属实：全文无 backup/restore 路径 |
+| 与 Part 5 是不同入口，Part 5 的 Defender 策略值有快照而删除脚本没有 | ✅ 属实：defender-policy-backup.json 仅覆盖 Part 5 |

@@ -37,7 +37,7 @@ Windows 服务优化不是简单地关闭所有后台服务。
 - Group B：9 个按需服务设为 `Disabled`；
 - Manual 组：`XboxGipSvc`、`XblAuthManager`、`XboxNetApiSvc`、`XblGameSave`、`bthserv`、`embeddedmode`、`BITS` 共 7 个设为 `Manual`。
 
-脚本在修改前创建或校验 `service-backup.json`，保存每个目标服务的 `Name`、`StartMode` 和 `State`；修改后用 `Win32_Service.StartMode` 逐项验证。主菜单 `6 → 2` 按快照恢复启动类型，原本不存在的服务跳过。恢复只保证启动类型，不强制恢复服务当前运行状态，通常需要重启。
+脚本在修改前创建或校验 `service-backup.json`，保存每个目标服务的 `Name`、`StartMode`、`State` 和 `DelayedAutostart`（延迟启动标记，旧版快照无此字段时恢复按普通 Auto 处理）；修改后用 `Win32_Service.StartMode` 逐项验证。主菜单 `6 → 2` 按快照恢复启动类型，原本不存在的服务跳过。恢复只保证启动类型，不强制恢复服务当前运行状态，通常需要重启。
 
 #### Part 6 逐项目标清单
 
