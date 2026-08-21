@@ -944,6 +944,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        事实核查记录
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3562,6 +3573,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        事实核查记录
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3724,6 +3746,42 @@
 <li><a href="https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/sysprep-process-overview?view=windows-11">Microsoft Learn：Sysprep Process Overview</a></li>
 <li><a href="https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/audituser?view=windows-11">Microsoft Learn：auditUser</a></li>
 </ul>
+<h2 id="_10">事实核查记录<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
+<p>核验基准：Microsoft Learn《Audit mode Overview》（2026-08-21 在线核验）。</p>
+<table>
+<thead>
+<tr>
+<th>声明</th>
+<th>核查结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Audit Mode 允许在 OOBE 前进入桌面安装驱动/应用/运行脚本</td>
+<td>✅ 属实：官方页面 Benefits 一节原文一致</td>
+</tr>
+<tr>
+<td>进入 Audit Mode 后以内置 Administrator 账户自动登录，无需 lusrmgr.msc 手动启用</td>
+<td>✅ 属实：官方"Audit mode account"一节原文一致</td>
+</tr>
+<tr>
+<td>审核模式可绕过 OOBE（Bypass OOBE）</td>
+<td>✅ 属实：官方 Benefits 一节原文</td>
+</tr>
+<tr>
+<td>Ctrl+Shift+F3 进入审核模式、Sysprep /oobe 返回 OOBE、Unattend Reseal Mode=audit</td>
+<td>✅ 属实：官方 Boot to Audit mode / Sysprep / Unattend 文档记载（组合键详见官方 Boot to Audit mode or OOBE 页）</td>
+</tr>
+<tr>
+<td>修改 HKLM\SYSTEM\Setup 状态值跳过联网属非官方技巧</td>
+<td>✅ 判断合理：官方文档未记载此方法，正文已按非官方标注</td>
+</tr>
+<tr>
+<td>补充边界</td>
+<td>⚠️ 官方注明审核模式账户在 auditUser 阶段后即被禁用、不应用于测试验证场景——本文未展开，读者可查阅原页 Notes</td>
+</tr>
+</tbody>
+</table>
 
 
 
@@ -3746,7 +3804,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月21日 08:15:18 UTC">2026年8月21日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月21日 10:37:01 UTC">2026年8月21日</span>
   </span>
 
     

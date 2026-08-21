@@ -2929,6 +2929,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        事实核查记录
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3560,6 +3571,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        事实核查记录
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3797,6 +3819,30 @@
 <blockquote>
 <p>核心结论：<strong>Karing TUN 和 Windows Forwarding 是两个不同的功能。普通 Windows 电脑通过手机热点上网、使用 Karing TUN 时，如果不需要让 Windows 承担路由器/网关职责，可以关闭不必要的网卡 Forwarding；系统代理和 TUN 则可以同时开启。如果修改 Forwarding 后手机热点暂时断网，可以先重新连接热点，让网络接口重新初始化。</strong></p>
 </blockquote>
+<h2 id="_7">事实核查记录<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<p>核验基准：Windows 网络机制（2026-08-21）。</p>
+<table>
+<thead>
+<tr>
+<th>声明</th>
+<th>核查结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>系统代理与 TUN 是两种不同入站方式</td>
+<td>✅ 属实：代理为应用层设置，TUN 为虚拟网卡层接管</td>
+</tr>
+<tr>
+<td>Windows Forwarding（IP 路由转发）影响热点共享与 TUN 场景</td>
+<td>✅ 属实：IPEnableRouter/接口转发为系统机制，检查命令可复现</td>
+</tr>
+<tr>
+<td>Karing 客户端的具体行为与规则模式说明</td>
+<td>⚠️ 依赖该开源项目当前版本实现，随上游更新可能变化</td>
+</tr>
+</tbody>
+</table>
 
 
 
@@ -3819,7 +3865,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月21日 08:15:18 UTC">2026年8月21日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月21日 10:37:01 UTC">2026年8月21日</span>
   </span>
 
     
