@@ -58,3 +58,16 @@ fsutil behavior query DisableDeleteNotify C:
 | 写入缓存 | 当前脚本未发现实际写入、验证或恢复命令 | 仅属于知识/检查范围，不计为脚本执行项 |
 
 脚本没有直接修改 SSD/NVMe 写入缓存策略，也没有对虚拟内存或页面文件执行设置。具体编号与脚本边界见 [全量逐项执行参考](../项目导航/tweakbyjie全量执行参考.md) 与 [优化项目映射](../项目导航/tweakbyjie-optimization-mapping.md)。
+
+## 事实核查记录
+
+核验基准：tweakbyjie 仓库 main 分支源码（2026-08-21）。
+
+| 声明 | 核查结果 |
+| --- | --- |
+| NTFS 8.3 写入 NtfsDisable8dot3NameCreation=1，无回读/备份/恢复 | ✅ 属实：STORAGE-001 与 Registry.ps1 一致 |
+| TRIM 执行 fsutil set DisableDeleteNotify 0，仅全局查询验证、无逐卷核验与原策略恢复 | ✅ 属实：STORAGE-002 与源码一致 |
+| BITS 经 Part 6 设为 Manual，有 service-backup.json 可恢复启动类型 | ✅ 属实：STORAGE-003 与 Backup.Service.ps1 一致 |
+| Native NVMe（主菜单 8）有专用快照、失败回滚与状态检查 | ✅ 属实：STORAGE-004 与 Backup.Nvme.ps1 一致 |
+| 写入缓存策略无脚本执行项 | ✅ 属实：STORAGE-005 不计为执行覆盖 |
+| fsutil 逐卷查询（DisableDeleteNotify C:）语法 | ✅ 属实：fsutil 支持按卷参数（微软文档行为） |
