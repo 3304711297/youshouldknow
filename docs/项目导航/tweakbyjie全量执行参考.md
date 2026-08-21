@@ -145,13 +145,13 @@
 
 ## 五、MEMORY/STORAGE
 
-### MEMORY-001/002
+### MEMORY-001 / MEMORY-002
 
 - `EnablePrefetcher=0`：`HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters`，源码 `:822`，回读 `:858`，无原值快照。
 - `Disable-MMAgent -mc`：源码 `:827`，回读 `:859`，手动 `Enable-MMAgent -mc` 恢复，无原状态快照。
 - **MEMORY-003** 页面文件：当前脚本没有自动修改、验证、备份或恢复，不计为执行项。
 
-### STORAGE-001/002
+### STORAGE-001 / STORAGE-002
 
 - NTFS 8.3：`HKLM\SYSTEM\CurrentControlSet\Control\FileSystem\NtfsDisable8dot3NameCreation=1`，源码 `:824`；无专门回读/恢复。
 - TRIM：`fsutil behavior set DisableDeleteNotify 0`，源码 `:832`；全局查询验证 `:704-706`，不代表每卷结果；无原策略快照。
@@ -172,14 +172,14 @@
 - 备份：`nvme-backup.json` Version 3，含 Feature、SafeBoot 和旧 Override 原始状态；支持失败回滚。
 - 运行时验证：`Test-NativeNvmeConfigured`/`Test-NativeNvmeEffective` 由 `Modules/Backup.Nvme.ps1` 提供，CI 在 Pester 下覆盖定义与返回结构；仍不等价于重启后的硬件行为验证。
 
-## 六、GPU-001/002
+## 六、GPU-001 / GPU-002
 
 - HAGS：`HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers\HwSchMode=2`，源码 `:798`，回读 `:814`，无专用快照，需重启和实际游戏测试。
 - MPO：四个 DWORD：`DisableMPO=1`、`DisableOverlays=1`、`OverlayTestMode=5`、`OverlayMinFPS=0`，源码 `:1933-2063`；`mpo-backup.json` Version 1 保存存在性、类型和值；子项 `11→4` 精确恢复；无备份时只能删除受管值恢复系统默认；验证主要依赖只读状态、dxdiag 和应用实测。
 
 ## 七、BOOT
 
-### BOOT-001/002 高级 BCD
+### BOOT-001 / BOOT-002 高级 BCD
 
 - **入口**：主菜单 `2`。
 - **计时器目标**：`useplatformclock=no`、`useplatformtick=no`、`disabledynamictick=yes`、`tscsyncpolicy=Enhanced`。
@@ -188,12 +188,12 @@
 - **备份/恢复**：`bcd-backup.json` 保存 `{current}` 下七项存在性和值；子项 `2/4` 按快照写回或删除。
 - **风险**：高级计时和安全项可能影响启动、安全和兼容性，不是普通性能开关。
 
-### BOOT-003/004 测试模式
+### BOOT-003 / BOOT-004 测试模式
 
 - 开启 `testsigning on`、`debug on`、`dbgsettings local`、`nointegritychecks on`，源码 `:923-945`；无独立快照和完整回读。
 - 关闭只删除 `testsigning`、`debug`，保留 `nointegritychecks`，源码 `:947-972`；不是原状态精确恢复，删除不存在值可能报告失败。
 
-### BOOT-005/006
+### BOOT-005 / BOOT-006
 
 - Device Guard EFI：主菜单 `9`，检查 BitLocker、复制 `SecConfig.efi`、创建一次性 BCD；无 EFI 文件/原 bootsequence 快照，清理临时项不是精确恢复。
 - VBS/Hyper-V：主菜单 `10` 子项 1 实际使用 `bcdedit /set hypervisorlaunchtype off`、`isolatedcontext no`、`vsmlaunchtype off`（`:1926`），不是 `deletevalue`；子项 2 才删除覆盖并尝试启用 Hyper-V，菜单明确不是原状态精确回滚。
@@ -228,4 +228,4 @@
 - “脚本执行”不等于“可恢复”；“配置层回读”不等于“运行时有效”；“知识说明”不等于“脚本支持”。
 ## 事实核查记录
 
-核验机制：由 tweakbyjie 仓库 Coverage 自动审计持续校验 ID 并集覆盖（manifest 44 项）；2026-08-21 对照 main 源码逐项校准一次（CORE 总览范围、NVMe 验证函数结论、SECURITY-002/003 与 MEMORY-003/STORAGE-005 编号补齐）。⚠️ 已知边界：正文表格中的 `:NNN` 为模块化前单文件源码的基线行号快照，仅作历史对照，不对应现行 Modules/ 结构；现行定位以 `Modules/函数名` 为准。
+核验机制：由 tweakbyjie 仓库 Coverage 自动审计持续校验，映射、执行参考、覆盖检查三份资料每一份都必须与 manifest 全部 44 项完全一致（缺少清单内编号与出现清单外编号均判失败）；2026-08-21 对照 main 源码逐项校准一次（CORE 总览范围、NVMe 验证函数结论、SECURITY-002/003 与 MEMORY-003/STORAGE-005 编号补齐，合并编号标题展开为完整 ID）。⚠️ 已知边界：正文表格中的 `:NNN` 为模块化前单文件源码的基线行号快照，仅作历史对照，不对应现行 Modules/ 结构；现行定位以 `Modules/函数名` 为准。
