@@ -133,6 +133,9 @@ nav:
   - 软件技巧:
     - 软件技巧/README.md
     - Steam 设置优化指南: 软件技巧/Steam设置优化指南.md
+  - AI工具:
+    - AI工具/README.md
+    - 让 AI 控制 Edge 浏览器：CDP 远程调试与 chrome-devtools-mcp 配置指南: AI工具/Edge浏览器CDP远程调试与AI接管指南.md
   - 项目导航:
     - 项目导航/README.md
     - tweakbyjie 关联说明: 项目导航/tweakbyjie关联说明.md
