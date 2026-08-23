@@ -3792,7 +3792,7 @@
 <li>按《<a href="../Windows%E4%BC%98%E5%8C%96%E5%8E%9F%E5%88%99%E4%B8%8E%E9%A3%8E%E9%99%A9/">Windows 优化原则与风险</a>》的风险分级，TPM/固件类修改属🔴高风险且部分不可逆——零收益换不可逆损失，是整份清单里最不该做的一条。</li>
 </ul>
 <h2 id="txt">三、《禁用设备列表.txt》：三档批量禁用清单辨析<a class="headerlink" href="#txt" title="Permanent link">&para;</a></h2>
-<p>这份清单以"基本优化→深度优化→勾选禁用 ACPI"三档递进，覆盖约二十个设备节点。整体判定比第一份更差：除重复收录上文已否决的条目外，还混入了真正危险的条目（系统计时器、ACPI 热区域）和对本机使用场景有直接杀伤的条目（NDIS 虚拟网络适配器枚举器）。表中"见上文条目❶❹❻"指《win11 优化拓展》辨析的对应小节。</p>
+<p>这份清单以"基本优化→深度优化→勾选禁用 ACPI"三档递进，覆盖约二十个设备节点。整体判定比第一份更差：除重复收录上文已否决的条目外，还混入了真正危险的条目（系统计时器、ACPI 热区域）和必须结合具体软件实现判断的条目（NDIS 虚拟网络适配器枚举器）。表中"见上文条目❶❹❻"指《win11 优化拓展》辨析的对应小节。</p>
 <table>
 <thead>
 <tr>
@@ -3830,8 +3830,8 @@
 <tr>
 <td>基本</td>
 <td>NDIS 虚拟网络适配器枚举器</td>
-<td>🔴 直接杀伤</td>
-<td>TUN/VPN/热点全走 NDIS 虚拟网卡，本机 Karing TUN 即此类</td>
+<td>⚠️ 条件相关</td>
+<td>具体 VPN/TUN/热点实现可能依赖，也可能自带独立适配器，不能一概而论</td>
 </tr>
 <tr>
 <td>基本</td>
@@ -3933,7 +3933,7 @@
 <td>ACPI</td>
 <td>ACPI 热区域</td>
 <td>🔴 最危险</td>
-<td>温度传感与风扇调速/过热降频的数据源，笔电禁用＝热管理失明</td>
+<td>温度传感与风扇调速/过热降频的数据源，笔记本禁用＝热管理失明</td>
 </tr>
 <tr>
 <td>ACPI</td>
@@ -3945,12 +3945,12 @@
 </table>
 <h3 id="_7">四个重点条目<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>NDIS 虚拟网络适配器枚举器（🔴 对本机有直接杀伤）</strong>：Wintun/WireGuard 类 TUN 虚拟网卡、移动热点、部分 VPN 客户端都以 NDIS 虚拟适配器形态工作。本机日常使用的 Karing TUN 模式正属此类——禁用它等于亲手断掉自己的代理链路。参见《<a href="../../%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/Karing-Windows-TUN%E4%B8%8EWindows%E7%BD%91%E7%BB%9C%E8%BD%AC%E5%8F%91%E8%AE%BE%E7%BD%AE/">Karing Windows TUN 与 Windows 网络转发设置</a>》。</li>
+<li><strong>NDIS 虚拟网络适配器枚举器（⚠️ 需按具体实现判断）</strong>：它可能参与某些 VPN、TUN、虚拟网卡或移动热点设备的枚举，但不能据此断言所有代理工具都依赖它。现代代理工具往往自带或安装独立的 TUN/Wintun 设备，具体是否受影响必须查软件文档、安装的适配器类型和实际启动日志；某些代理工具自带 TUN 设备也不能简单等同于依赖该系统枚举器。对不使用任何相关虚拟网络功能的设备，停用通常不会影响普通物理网卡，但同样没有游戏性能收益。参见《<a href="../../%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/Karing-Windows-TUN%E4%B8%8EWindows%E7%BD%91%E7%BB%9C%E8%BD%AC%E5%8F%91%E8%AE%BE%E7%BD%AE/">Karing Windows TUN 与 Windows 网络转发设置</a>》。</li>
 <li><strong>系统计时器（🔴 危险）</strong>：这份清单两档里各塞了一个计时目标（HPET＋系统计时器），方向一致地朝计时基准开刀，而本库立场恰相反——计时设备不动、只调调用策略（BOOT-001）。停用系统计时器可能引入时钟漂移与音频异常，收益为零。</li>
 <li><strong>ACPI 热区域（🔴 全清单最危险）</strong>：温度传感→风扇调速→过热降频整条热管理链路都以其为数据源。禁用后系统对温度"失明"，轻则风扇行为异常，重则失去过热保护响应——在笔记本上这是实打实的安全边际问题。</li>
 <li><strong>PCI 加密/解密控制器（⚠️ 身份不明就别动）</strong>：该名称最常见的两种真身是缺驱动的固件安全设备（Intel PTT、AMD PSP，对应上文❻的反对理由）和 Intel 管理引擎接口（MEI）。看到名字就禁属于望文生义式误操作的高发区，应先按硬件 ID 确认身份再套用对应条目的结论。</li>
 </ul>
-<p>这份三档清单与《win11 优化拓展》同出一脉：把"能禁的都禁"包装成梯度话术（基本→深度→隐藏勾选），条目重复、身份不明也照单全收。判定不变：<strong>全部不进入 tweakbyjie 执行范围</strong>。</p>
+<p>这份三档清单与《win11 优化拓展》同出一脉：把"能禁的都禁"包装成梯度话术（基本→深度→隐藏勾选），条目重复、身份不明也照单全收。对于 NDIS 枚举器则应避免反向的一概而论：它既不是通用的游戏性能开关，也不能因为某个代理工具自带 TUN，就断言该工具一定依赖它。若确认所用代理、VPN 或热点软件自带独立 TUN/Wintun 设备，且不使用依赖该枚举器的其他功能，通常可以保持禁用；无法确认实现时不要把它当作优化项盲目停用。判定不变：<strong>全部不进入 tweakbyjie 执行范围</strong>。</p>
 <h2 id="_8">四、采纳边界与替代做法<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <p>本库立场：以上两份材料的条目均不进入 tweakbyjie 执行范围；唯一值得吸收的是"关闭节能以太网"这一网卡驱动侧可选项，以⚠️需实测的证据等级归入网络专题，而非执行脚本。</p>
 <table>
@@ -4048,8 +4048,8 @@
 <td>✅ 属实：NVMe/GPU/网卡均直接发起内存读写</td>
 </tr>
 <tr>
-<td>TUN/VPN/热点依赖 NDIS 虚拟适配器，停用其枚举器会失效</td>
-<td>✅ 属实：Wintun 类客户端与移动热点均注册 NDIS 虚拟迷你端口</td>
+<td>部分 TUN/VPN/热点实现可能依赖 NDIS 虚拟适配器枚举器</td>
+<td>⚠️ 需按软件实现核验：自带独立 TUN/Wintun 设备且不使用其他依赖功能时，通常可保持禁用</td>
 </tr>
 <tr>
 <td>挂载 ISO 光盘映像经 Microsoft 虚拟驱动器枚举器完成</td>
@@ -4103,7 +4103,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月23日 10:33:46 UTC">2026年8月23日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月23日 11:02:48 UTC">2026年8月23日</span>
   </span>
 
     
