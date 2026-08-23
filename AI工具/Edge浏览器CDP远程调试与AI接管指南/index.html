@@ -3064,10 +3064,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#profile" class="md-nav__link">
     <span class="md-ellipsis">
       
-        二、为什么不能用命令行参数开调试（重要前置认知）
+        二、为什么不能用传统命令行参数直接接管默认 Profile（重要前置认知）
       
     </span>
   </a>
@@ -3097,7 +3097,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
         五、第三步：连接授权弹窗（每个浏览器会话一次）
@@ -3108,7 +3108,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
         六、验证连接
@@ -3119,7 +3119,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
         七、常见症状与排错速查
@@ -3141,7 +3141,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
         九、备选方案对比（为什么不推荐）
@@ -3152,7 +3152,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
+  <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
         十、参考链接
@@ -3472,10 +3472,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#profile" class="md-nav__link">
     <span class="md-ellipsis">
       
-        二、为什么不能用命令行参数开调试（重要前置认知）
+        二、为什么不能用传统命令行参数直接接管默认 Profile（重要前置认知）
       
     </span>
   </a>
@@ -3505,7 +3505,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
         五、第三步：连接授权弹窗（每个浏览器会话一次）
@@ -3516,7 +3516,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
         六、验证连接
@@ -3527,7 +3527,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
         七、常见症状与排错速查
@@ -3549,7 +3549,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
         九、备选方案对比（为什么不推荐）
@@ -3560,7 +3560,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
+  <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
         十、参考链接
@@ -3606,14 +3606,15 @@
 <li><strong>chrome-devtools-mcp</strong>：ChromeDevTools 官方的 MCP 服务器，基于 Puppeteer。</li>
 </ul>
 <p>关键认知：<strong>目标是接管"正在使用的那个 Edge"（默认用户数据目录）</strong>，而不是让 AI 另起一个全新 Profile——后者正是很多 AI 浏览器方案"账号全是初始状态"的原因。</p>
-<h2 id="_2">二、为什么不能用命令行参数开调试（重要前置认知）<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p>传统做法是给浏览器加启动参数 <code>--remote-debugging-port=9222</code>。但从 <strong>Chromium 136 起，使用默认用户数据目录时该参数会被直接忽略</strong>（防止 Cookie 被外部程序窃取的安全加固），且：</p>
+<h2 id="profile">二、为什么不能用传统命令行参数直接接管默认 Profile（重要前置认知）<a class="headerlink" href="#profile" title="Permanent link">&para;</a></h2>
+<p>传统做法是给浏览器加启动参数 <code>--remote-debugging-port=9222</code>。但从 <strong>Chromium 136 起，使用默认用户数据目录时这类外部远程调试参数受到安全限制</strong>，直接依赖该参数接管日常 Profile 已不再是推荐路径。</p>
+<p>需要特别区分两件事：</p>
 <ul>
-<li>显式传 <code>--user-data-dir</code> 指向同一个默认目录：<strong>同样无效</strong>；</li>
-<li>注册表策略 <code>RemoteDebuggingAllowed=1</code>：<strong>无效</strong>；</li>
-<li>junction/符号链接改路径伪装成非默认目录：端口能通，但会触发 Profile 完整性保护，<strong>曾导致全部扩展被注销清空</strong>，强烈不建议。</li>
+<li><strong>浏览器策略不是无效的</strong>：Edge 的 <code>RemoteDebuggingAllowed=1</code> 策略可以允许远程调试，但它不能用来绕过 Chromium 对默认用户数据目录的安全限制。</li>
+<li><strong>显式传 <code>--user-data-dir</code> 指向同一个默认目录</strong>：同样不能把默认 Profile 简单伪装成普通的自动化 Profile 来规避安全限制。</li>
+<li><strong>junction/符号链接改路径伪装成非默认目录</strong>：端口能通，但会触发 Profile 完整性保护，<strong>曾导致全部扩展被注销清空</strong>，强烈不建议。</li>
 </ul>
-<p>正确路径是微软官方提供的浏览器内开关（下一节）。</p>
+<p>对于本文目标——<strong>在保留日常 Edge 登录态、Cookie 和扩展的前提下，让 MCP 接管已经运行的浏览器</strong>——正确路径是微软官方提供的浏览器内远程调试开关（下一节）。</p>
 <h2 id="edgeinspect">三、第一步：开启 edge://inspect 远程调试开关<a class="headerlink" href="#edgeinspect" title="Permanent link">&para;</a></h2>
 <ol>
 <li>在 Edge 地址栏输入 <code>edge://inspect</code> 回车；</li>
@@ -3649,14 +3650,14 @@
 <li><code>--user-data-dir</code> 按实际渠道填写：Stable 为 <code>...\Microsoft\Edge\User Data</code>，Beta 为 <code>...\Microsoft\Edge Beta\...</code>，Dev 为 <code>...\Microsoft\Edge Dev\User Data</code>。</li>
 <li>改完配置需重启 MCP 客户端（如 ZCode）生效。</li>
 </ul>
-<h2 id="_3">五、第三步：连接授权弹窗（每个浏览器会话一次）<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<h2 id="_2">五、第三步：连接授权弹窗（每个浏览器会话一次）<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p>Edge 重启后的<strong>第一次</strong>外部连接会弹出确认框：</p>
 <blockquote>
 <p>是否允许远程调试？——某个外部应用希望完全控制此 Microsoft Edge 会话以对其进行调试……</p>
 </blockquote>
 <p>点<strong>允许</strong>即可，本次浏览器会话内后续连接不再询问（隔较久的新连接可能再次弹出）。这是 Chromium 144+ 上游的安全设计，换任何 Chromium 系浏览器都一样。</p>
 <p><strong>日常使用节奏</strong>：Edge 照常从任务栏启动；每次新开浏览器后，AI 第一次操作时点一次「允许」，仅此而已。若 AI 的工具调用超时无响应，大概率就是这个弹窗在等点击——点掉后让它重试。</p>
-<h2 id="_4">六、验证连接<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<h2 id="_3">六、验证连接<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">curl</span><span class="p">.</span><span class="n">exe</span> <span class="p">-</span><span class="n">-noproxy</span> <span class="s2">"*"</span> <span class="n">http</span><span class="p">://</span><span class="n">127</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">1</span><span class="p">:</span><span class="n">9222</span><span class="p">/</span><span class="n">json</span><span class="p">/</span><span class="n">version</span>
 </code></pre></div>
 <p>注意两点：</p>
@@ -3664,7 +3665,7 @@
 <li>记得绕过本机代理（加 <code>--noproxy "*"</code> 或系统代理排除 127.0.0.1）；</li>
 <li>该端点的 HTTP 接口返回空 404 属<strong>正常现象</strong>（见第四节），不代表失败。真正的判据是 <code>DevToolsActivePort</code> 文件存在 + MCP 工具能列出标签页。</li>
 </ul>
-<h2 id="_5">七、常见症状与排错速查<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<h2 id="_4">七、常见症状与排错速查<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -3720,7 +3721,7 @@
 <p class="admonition-title">解压版扩展注意事项</p>
 <p>加载后<strong>不要移动或删除源文件夹</strong>，否则扩展失效。建议在 manifest 中加入随机生成的 <code>"key"</code> 字段固定扩展 ID，之后移动文件夹 ID 不变、数据不丢。</p>
 </div>
-<h2 id="_6">九、备选方案对比（为什么不推荐）<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<h2 id="_5">九、备选方案对比（为什么不推荐）<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -3744,7 +3745,7 @@
 </tbody>
 </table>
 <p>如果核心诉求就是「AI 接管原封不动的日常 Edge」，本文方案是当前摩擦最小的形态。</p>
-<h2 id="_7">十、参考链接<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<h2 id="_6">十、参考链接<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="https://learn.microsoft.com/en-us/microsoft-edge/web-platform/devtools-mcp-server">微软官方文档：Let agents inspect your site with Chrome DevTools MCP</a></li>
 <li><a href="https://developer.chrome.com/blog/chrome-devtools-mcp-debug-your-browser-session">Chrome 官方博客：Debug your browser session</a></li>
@@ -3773,7 +3774,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月23日 03:37:07 UTC">2026年8月23日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月23日 06:47:52 UTC">2026年8月23日</span>
   </span>
 
     
