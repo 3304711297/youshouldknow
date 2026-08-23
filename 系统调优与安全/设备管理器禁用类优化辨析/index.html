@@ -2799,13 +2799,30 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
+  <a href="#txt" class="md-nav__link">
     <span class="md-ellipsis">
       
-        三、采纳边界与替代做法
+        三、《禁用设备列表.txt》：三档批量禁用清单辨析
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="三、《禁用设备列表.txt》：三档批量禁用清单辨析">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四个重点条目
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -2813,7 +2830,7 @@
   <a href="#_8" class="md-nav__link">
     <span class="md-ellipsis">
       
-        四、风险与恢复
+        四、采纳边界与替代做法
       
     </span>
   </a>
@@ -2822,6 +2839,17 @@
       
         <li class="md-nav__item">
   <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、风险与恢复
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
     <span class="md-ellipsis">
       
         事实核查记录
@@ -3602,13 +3630,30 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
+  <a href="#txt" class="md-nav__link">
     <span class="md-ellipsis">
       
-        三、采纳边界与替代做法
+        三、《禁用设备列表.txt》：三档批量禁用清单辨析
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="三、《禁用设备列表.txt》：三档批量禁用清单辨析">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四个重点条目
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -3616,7 +3661,7 @@
   <a href="#_8" class="md-nav__link">
     <span class="md-ellipsis">
       
-        四、风险与恢复
+        四、采纳边界与替代做法
       
     </span>
   </a>
@@ -3625,6 +3670,17 @@
       
         <li class="md-nav__item">
   <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、风险与恢复
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
     <span class="md-ellipsis">
       
         事实核查记录
@@ -3656,8 +3712,8 @@
 
 <h1 id="_1">设备管理器禁用类优化辨析<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
 <blockquote>
-<p>辨析对象：社区流传的《win11 优化拓展》清单，自称"仅针对游戏玩家的极致优化"，同时警告"进行如下操作可能导致部分功能不可用"。2026-08 由用户提供文本收录辨析。</p>
-<p>结论先行：<strong>该清单整体不进入 tweakbyjie 执行范围</strong>。六组条目中仅两组有条件成立，其余为安慰剂或有害项；本文逐条给出机制、代价与替代做法，证据等级按全库惯例标注。</p>
+<p>辨析对象：两份社区流传的"设备禁用"材料——①《win11 优化拓展》清单（自称"仅针对游戏玩家的极致优化"，并警告操作可能导致部分功能不可用）；②《禁用设备列表.txt》（"基本优化／深度优化／勾选禁用 ACPI"三档批量禁用清单）。2026-08 由用户提供文本与截图收录辨析。</p>
+<p>结论先行：<strong>两份材料整体均不进入 tweakbyjie 执行范围</strong>。第一份六组条目中仅两组有条件成立；第二份三档约二十项里安慰剂占多数，还混入了系统计时器、ACPI 热区域等危险条目。本文逐条给出机制、代价与替代做法，证据等级按全库惯例标注。</p>
 </blockquote>
 <h2 id="_2">一、为什么"批量停用设备"不是性能优化<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <ul>
@@ -3735,8 +3791,168 @@
 <li>代价却很实在：清除 TPM 会销毁其中存储的全部密钥（Windows Hello 凭据、证书等），且不可逆；BitLocker/设备加密盘必须先备好恢复密钥（原文只提醒了 BitLocker，并不完整）；Windows Hello 登录、未来 Windows 11 升级资格（TPM 2.0 是微软最低硬件要求）以及依赖 TPM 的安全特性一并受损。</li>
 <li>按《<a href="../Windows%E4%BC%98%E5%8C%96%E5%8E%9F%E5%88%99%E4%B8%8E%E9%A3%8E%E9%99%A9/">Windows 优化原则与风险</a>》的风险分级，TPM/固件类修改属🔴高风险且部分不可逆——零收益换不可逆损失，是整份清单里最不该做的一条。</li>
 </ul>
-<h2 id="_7">三、采纳边界与替代做法<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
-<p>本库立场：以上条目均不进入 tweakbyjie 执行范围；唯一值得吸收的是"关闭节能以太网"这一网卡驱动侧可选项，以⚠️需实测的证据等级归入网络专题，而非执行脚本。</p>
+<h2 id="txt">三、《禁用设备列表.txt》：三档批量禁用清单辨析<a class="headerlink" href="#txt" title="Permanent link">&para;</a></h2>
+<p>这份清单以"基本优化→深度优化→勾选禁用 ACPI"三档递进，覆盖约二十个设备节点。整体判定比第一份更差：除重复收录上文已否决的条目外，还混入了真正危险的条目（系统计时器、ACPI 热区域）和对本机使用场景有直接杀伤的条目（NDIS 虚拟网络适配器枚举器）。表中"见上文条目❶❹❻"指《win11 优化拓展》辨析的对应小节。</p>
+<table>
+<thead>
+<tr>
+<th>档位</th>
+<th>条目</th>
+<th>判定</th>
+<th>结论</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>基本</td>
+<td>直接存储器存取控制器</td>
+<td>❌ 安慰剂</td>
+<td>现代 PCIe 设备自行总线主控 DMA，遗留 DMA 控制器近乎闲置</td>
+</tr>
+<tr>
+<td>基本</td>
+<td>高精度事件计时器（HPET）</td>
+<td>❌ 已有定论</td>
+<td>见上文条目❹：走 BOOT-001，不动设备</td>
+</tr>
+<tr>
+<td>基本</td>
+<td>Microsoft GS 波表合成器</td>
+<td>❌ 安慰剂</td>
+<td>见上文条目❶</td>
+</tr>
+<tr>
+<td>基本</td>
+<td>远程桌面设备重定向程序总线</td>
+<td>❌ 安慰剂</td>
+<td>见上文条目❹</td>
+</tr>
+<tr>
+<td>基本</td>
+<td>NDIS 虚拟网络适配器枚举器</td>
+<td>🔴 直接杀伤</td>
+<td>TUN/VPN/热点全走 NDIS 虚拟网卡，本机 Karing TUN 即此类</td>
+</tr>
+<tr>
+<td>基本</td>
+<td>Microsoft 虚拟驱动器枚举器</td>
+<td>❌ 得不偿失</td>
+<td>双击挂载 ISO 靠它完成，禁用后镜像挂载失效</td>
+</tr>
+<tr>
+<td>基本</td>
+<td>UMBus Root Bus Enumerator</td>
+<td>❌ 已有定论</td>
+<td>见上文条目❹</td>
+</tr>
+<tr>
+<td>基本</td>
+<td>Legacy device</td>
+<td>❌ 安慰剂</td>
+<td>遗留设备枚举占位节点，禁不禁无任何差别</td>
+</tr>
+<tr>
+<td>基本</td>
+<td>Numeric data processor</td>
+<td>❌ 安慰剂</td>
+<td>x87 协处理器遗物节点</td>
+</tr>
+<tr>
+<td>基本</td>
+<td>Hyper-V 虚拟化结构基础驱动程序</td>
+<td>❌ 层次错误</td>
+<td>见上文条目❹：走菜单 10 功能层</td>
+</tr>
+<tr>
+<td>深度</td>
+<td>系统计时器</td>
+<td>🔴 危险</td>
+<td>计时基准设备，本库立场是不动设备、只调调用策略</td>
+</tr>
+<tr>
+<td>深度</td>
+<td>Numeric Data Processor</td>
+<td>❌ 重复</td>
+<td>与基本档重复收录，暴露清单未经梳理</td>
+</tr>
+<tr>
+<td>深度</td>
+<td>PCI 加密/解密控制器</td>
+<td>⚠️ 先查身份</td>
+<td>多为缺驱动的 TPM/PSP 或 Intel MEI，按对应条目结论处理</td>
+</tr>
+<tr>
+<td>深度</td>
+<td>通信端口（COM1）</td>
+<td>❌ 安慰剂</td>
+<td>不接串口设备则常年闲置，禁了也无帧率</td>
+</tr>
+<tr>
+<td>深度</td>
+<td>资源中心代理设备</td>
+<td>❌ 无收益</td>
+<td>SoC 平台资源聚合代理，个别笔电按钮/传感功能可能受影响</td>
+</tr>
+<tr>
+<td>深度</td>
+<td>Microsoft 管理程序服务</td>
+<td>❌ 层次错误</td>
+<td>与 Hyper-V 结构驱动同族，应走功能层</td>
+</tr>
+<tr>
+<td>深度</td>
+<td>Microsoft 存储空间控制器</td>
+<td>⚠️ 场景相关</td>
+<td>用了存储空间（软 RAID）的机器禁用即掉池</td>
+</tr>
+<tr>
+<td>深度</td>
+<td>Intel Platform Monitoring Technology Device</td>
+<td>⚠️ 与游戏无关</td>
+<td>Intel 监控/遥测栈，隐私动机可另议，帧率无涉</td>
+</tr>
+<tr>
+<td>深度</td>
+<td>复合总线枚举器</td>
+<td>❌ 无收益</td>
+<td>组合型设备的枚举依赖它，禁用徒增设备识别异常风险</td>
+</tr>
+<tr>
+<td>ACPI</td>
+<td>ACPI 处理器聚合器</td>
+<td>❌ 可能反噬</td>
+<td>参与平台协同功耗管理，禁用或干扰空闲协调、增耗发热</td>
+</tr>
+<tr>
+<td>ACPI</td>
+<td>ACPI 唤醒警报</td>
+<td>❌ 得不偿失</td>
+<td>定时唤醒（自动维护/计划任务从睡眠唤醒）失效</td>
+</tr>
+<tr>
+<td>ACPI</td>
+<td>ACPI 热区域</td>
+<td>🔴 最危险</td>
+<td>温度传感与风扇调速/过热降频的数据源，笔电禁用＝热管理失明</td>
+</tr>
+<tr>
+<td>ACPI</td>
+<td>Windows Management Interface for ACPI</td>
+<td>❌ 得不偿失</td>
+<td>WMI-ACPI 映射层，亮度/快捷键类功能可能失效</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_7">四个重点条目<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>NDIS 虚拟网络适配器枚举器（🔴 对本机有直接杀伤）</strong>：Wintun/WireGuard 类 TUN 虚拟网卡、移动热点、部分 VPN 客户端都以 NDIS 虚拟适配器形态工作。本机日常使用的 Karing TUN 模式正属此类——禁用它等于亲手断掉自己的代理链路。参见《<a href="../../%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/Karing-Windows-TUN%E4%B8%8EWindows%E7%BD%91%E7%BB%9C%E8%BD%AC%E5%8F%91%E8%AE%BE%E7%BD%AE/">Karing Windows TUN 与 Windows 网络转发设置</a>》。</li>
+<li><strong>系统计时器（🔴 危险）</strong>：这份清单两档里各塞了一个计时目标（HPET＋系统计时器），方向一致地朝计时基准开刀，而本库立场恰相反——计时设备不动、只调调用策略（BOOT-001）。停用系统计时器可能引入时钟漂移与音频异常，收益为零。</li>
+<li><strong>ACPI 热区域（🔴 全清单最危险）</strong>：温度传感→风扇调速→过热降频整条热管理链路都以其为数据源。禁用后系统对温度"失明"，轻则风扇行为异常，重则失去过热保护响应——在笔记本上这是实打实的安全边际问题。</li>
+<li><strong>PCI 加密/解密控制器（⚠️ 身份不明就别动）</strong>：该名称最常见的两种真身是缺驱动的固件安全设备（Intel PTT、AMD PSP，对应上文❻的反对理由）和 Intel 管理引擎接口（MEI）。看到名字就禁属于望文生义式误操作的高发区，应先按硬件 ID 确认身份再套用对应条目的结论。</li>
+</ul>
+<p>这份三档清单与《win11 优化拓展》同出一脉：把"能禁的都禁"包装成梯度话术（基本→深度→隐藏勾选），条目重复、身份不明也照单全收。判定不变：<strong>全部不进入 tweakbyjie 执行范围</strong>。</p>
+<h2 id="_8">四、采纳边界与替代做法<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<p>本库立场：以上两份材料的条目均不进入 tweakbyjie 执行范围；唯一值得吸收的是"关闭节能以太网"这一网卡驱动侧可选项，以⚠️需实测的证据等级归入网络专题，而非执行脚本。</p>
 <table>
 <thead>
 <tr>
@@ -3767,14 +3983,14 @@
 </tr>
 </tbody>
 </table>
-<h2 id="_8">四、风险与恢复<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<h2 id="_9">五、风险与恢复<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
 <ul>
 <li>设备管理器中"停用"的设备：右键"启用"即可回滚，属可逆操作；但停用期间对应功能持续缺失（音频、摄像头、RDP 重定向等），故障可能被延迟发现。</li>
 <li><strong>清除 TPM 不可逆</strong>：密钥销毁后无法找回。这是本文对条目❻投反对票的决定性理由。</li>
 <li>动手前遵循主文统一流程：检测→记录→备份→单项修改→配置验证→运行时测试，确保每一步可回退。</li>
 </ul>
-<h2 id="_9">事实核查记录<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
-<p>核验基准：微软官方文档（Win11 最低硬件要求、TPM 管理与清除后果）、AMD 官方公告及 AGESA V2 1.2.0.7 修复报道（2022）、x64 中断控制机制常识，并与本库既有条目交叉核对（2026-08-23）。</p>
+<h2 id="_10">事实核查记录<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
+<p>核验基准：微软官方文档（Win11 最低硬件要求、TPM 管理与清除后果）、AMD 官方公告及 AGESA V2 1.2.0.7 修复报道（2022）、x64 中断控制机制与 NDIS 虚拟适配器/存储空间/ACPI 热管理的公开机制资料，并与本库既有条目交叉核对（2026-08-23）。</p>
 <table>
 <thead>
 <tr>
@@ -3827,6 +4043,42 @@
 <td>Windows 11 最低硬件要求包含 TPM 2.0</td>
 <td>✅ 属实：微软官方系统要求</td>
 </tr>
+<tr>
+<td>现代 PCIe 设备自行总线主控 DMA，遗留 DMA 控制器近乎闲置</td>
+<td>✅ 属实：NVMe/GPU/网卡均直接发起内存读写</td>
+</tr>
+<tr>
+<td>TUN/VPN/热点依赖 NDIS 虚拟适配器，停用其枚举器会失效</td>
+<td>✅ 属实：Wintun 类客户端与移动热点均注册 NDIS 虚拟迷你端口</td>
+</tr>
+<tr>
+<td>挂载 ISO 光盘映像经 Microsoft 虚拟驱动器枚举器完成</td>
+<td>✅ 属实：停用后映像挂载不可用</td>
+</tr>
+<tr>
+<td>系统计时器与 HPET 同属计时基准设备，不应停用</td>
+<td>✅ 与「HPET 辨析」一致：只调 BCD 调用策略，不动设备</td>
+</tr>
+<tr>
+<td>"PCI 加密/解密控制器"常见真身为 TPM/PSP 或 Intel MEI</td>
+<td>⚠️ 依机型而异：须按硬件 ID 确认后再套用对应条目结论</td>
+</tr>
+<tr>
+<td>存储空间控制器承载"存储空间"软 RAID 池</td>
+<td>✅ 属实：使用存储空间的机器停用会导致池脱机</td>
+</tr>
+<tr>
+<td>ACPI 热区域是温度传感/风扇调速/过热降频的数据源</td>
+<td>✅ 属实：热管理链路依赖 Thermal Zone 定义</td>
+</tr>
+<tr>
+<td>ACPI 处理器聚合器参与平台协同功耗管理</td>
+<td>⚠️ 机制层面成立：禁用的影响依平台实现而异，且无任何收益证据</td>
+</tr>
+<tr>
+<td>三档清单存在重复条目（Numeric Data Processor 两现）</td>
+<td>✅ 截图可证：基本档与深度档各收录一次</td>
+</tr>
 </tbody>
 </table>
 
@@ -3851,7 +4103,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月23日 10:22:30 UTC">2026年8月23日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月23日 10:33:46 UTC">2026年8月23日</span>
   </span>
 
     
