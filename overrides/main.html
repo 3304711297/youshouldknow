@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+  {% if page.meta.status and page.meta.risk and page.meta.applies_to and page.meta.verified_on %}
+    {% set status_labels = {"stable": "稳定维护", "reference": "参考资料", "experimental": "实验性内容"} %}
+    {% set risk_labels = {"low": "低风险", "medium": "中风险", "high": "高风险"} %}
+    <aside class="doc-meta" aria-label="文档元数据">
+      <div class="doc-meta__item">
+        <span class="doc-meta__label">状态</span>
+        <span class="doc-meta__value">{{ status_labels[page.meta.status] }}</span>
+      </div>
+      <div class="doc-meta__item doc-meta__item--risk-{{ page.meta.risk }}">
+        <span class="doc-meta__label">风险</span>
+        <span class="doc-meta__value">{{ risk_labels[page.meta.risk] }}</span>
+      </div>
+      <div class="doc-meta__item">
+        <span class="doc-meta__label">适用范围</span>
+        <span class="doc-meta__value">{{ page.meta.applies_to | join("；") }}</span>
+      </div>
+      <div class="doc-meta__item">
+        <span class="doc-meta__label">最近核验</span>
+        <time class="doc-meta__value" datetime="{{ page.meta.verified_on }}">{{ page.meta.verified_on }}</time>
+      </div>
+    </aside>
+  {% endif %}
+  {{ super() }}
+{% endblock %}

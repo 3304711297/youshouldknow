@@ -1,3 +1,12 @@
+---
+status: reference
+risk: low
+applies_to:
+  - Windows 10/11 命令提示符与 PowerShell
+  - Windows 系统目录和用户路径定位
+verified_on: 2026-08-21
+---
+
 # Windows 常用环境变量列表
 
 > **分类**：系统知识 · 系统机制

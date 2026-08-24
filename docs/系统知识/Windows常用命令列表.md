@@ -1,3 +1,12 @@
+---
+status: reference
+risk: medium
+applies_to:
+  - Windows 10/11 Win + R、命令提示符与 PowerShell
+  - 系统管理工具和诊断命令速查
+verified_on: 2026-08-21
+---
+
 # Windows 常用命令列表（Win + R 运行速查）
 
 > **分类**：系统知识 · 命令速查

@@ -32,6 +32,23 @@ jobs:
       - name: Build site
         run: mkdocs build --strict
 
+  front-matter-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: requirements-docs.txt
+      - name: Install documentation dependencies
+        run: pip install -r requirements-docs.txt
+      - name: Test Front Matter checker
+        run: python -m unittest tools/test_check_front_matter.py
+      - name: Check Front Matter
+        run: python tools/check_front_matter.py
+
   link-check:
     runs-on: ubuntu-latest
     timeout-minutes: 15
@@ -47,7 +64,7 @@ jobs:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     # 必须同时等待 link-check:链接检查失败时不得部署,
     # 否则死链会静默上线(lychee 的 fail:true 只能让 link-check 自己变红)
-    needs: [build, link-check]
+    needs: [build, link-check, front-matter-check]
     runs-on: ubuntu-latest
     timeout-minutes: 15
     permissions:

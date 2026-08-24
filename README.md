@@ -10,5 +10,9 @@ Windows 系统、硬件、游戏性能与日常使用知识库（中文）。
 
 ```bash
 pip install -r requirements-docs.txt
+python tools/check_front_matter.py
+mkdocs build --strict
 mkdocs serve   # 实时预览
 ```
+
+`tools/check_front_matter.py` 只校验已经加入 YAML Front Matter 的文章；旧文章可以按分类逐步迁移。链接检查由 CI 中的 lychee 任务负责。
