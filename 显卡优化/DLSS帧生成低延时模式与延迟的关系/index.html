@@ -2345,10 +2345,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#reflex" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        四、低延时模式 / Reflex：帧率≈，延迟↓
+        四、刷新率与多帧生成倍率：经验对应关系
       
     </span>
   </a>
@@ -2356,10 +2356,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#reflex" class="md-nav__link">
     <span class="md-ellipsis">
       
-        五、总结对照表
+        五、低延时模式 / Reflex：帧率≈，延迟↓
       
     </span>
   </a>
@@ -2368,6 +2368,17 @@
       
         <li class="md-nav__item">
   <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        六、总结对照表
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
         事实核查记录
@@ -3517,10 +3528,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#reflex" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        四、低延时模式 / Reflex：帧率≈，延迟↓
+        四、刷新率与多帧生成倍率：经验对应关系
       
     </span>
   </a>
@@ -3528,10 +3539,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#reflex" class="md-nav__link">
     <span class="md-ellipsis">
       
-        五、总结对照表
+        五、低延时模式 / Reflex：帧率≈，延迟↓
       
     </span>
   </a>
@@ -3540,6 +3551,17 @@
       
         <li class="md-nav__item">
   <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        六、总结对照表
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
         事实核查记录
@@ -3643,9 +3665,45 @@
 <li>各媒体实测帧生成对延迟的影响在 <strong>+5～15ms ～ -数 ms</strong> 之间浮动（取决于游戏与基础帧率），并非绝对零变化。</li>
 </ul>
 <p><strong>使用前提（官方建议）</strong>：基础帧率（不开帧生成的真实帧率）达到 <strong>60 FPS 以上</strong>再开帧生成——帧生成提升的是显示流畅度，不缩短原始渲染链路，基础帧率过低时「帧数很高但手感很卡」正是延迟没有被改善的体现。</p>
-<h2 id="reflex">四、低延时模式 / Reflex：帧率≈，延迟↓<a class="headerlink" href="#reflex" title="Permanent link">&para;</a></h2>
+<h2 id="_3">四、刷新率与多帧生成倍率：经验对应关系<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<p>下面的表格整理自用户提供的经验截图，讨论的是<strong>显示帧生成倍率</strong>与显示器刷新率的匹配，不代表输入延迟也按相同比例改善。它更适合作为选择测试起点，而不是固定配置表。</p>
+<table>
+<thead>
+<tr>
+<th>显示器刷新率</th>
+<th style="text-align: right;">截图建议的帧生成倍率</th>
+<th>体验说明与边界</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>60Hz</td>
+<td style="text-align: right;">不推荐任何多帧生成</td>
+<td>显示器刷新上限较低，额外的排队等待、帧 pacing 或撕裂风险可能抵消流畅度收益；不是所有场景都必须禁用，仍应以实测为准</td>
+</tr>
+<tr>
+<td>120～165Hz</td>
+<td style="text-align: right;">2×（截图还提到可尝试 2×～4×）</td>
+<td>作为享受多帧生成的起点；截图以基础游戏帧率约 60～70 FPS 举例，但实际还取决于游戏、VRR、显示器响应和 GPU 余量</td>
+</tr>
+<tr>
+<td>240Hz</td>
+<td style="text-align: right;">3×～4×</td>
+<td>面向高刷新率和高分辨率场景；高倍率需要足够的真实帧率和稳定的帧 pacing，不能只看显示计数器</td>
+</tr>
+<tr>
+<td>360Hz 及以上</td>
+<td style="text-align: right;">4×～6×</td>
+<td>面向极高刷新率和极致流畅度需求；倍率过高可能只是显示上限溢出，带来额外伪影或延迟而没有实际收益</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>不要混淆倍率含义</strong>：这里的 2×、3× 等是相对于真实渲染帧的显示帧生成策略，不等于真实渲染性能翻倍，也不等于输入延迟下降。基础帧率过低时，多帧生成只能增加显示帧，不能修复原始渲染链路的延迟。</p>
+</blockquote>
+<h2 id="reflex">五、低延时模式 / Reflex：帧率≈，延迟↓<a class="headerlink" href="#reflex" title="Permanent link">&para;</a></h2>
 <p>低延时模式（控制面板）与 Reflex（游戏内）直接攻击渲染队列：CPU 不再提前渲染过多帧排队，端到端延迟显著下降，帧率基本不变。支持 Reflex 的游戏以游戏内 Reflex 为准（效果优于控制面板低延时模式，见系列（三）第 9 项说明）。</p>
-<h2 id="_3">五、总结对照表<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<h2 id="_4">六、总结对照表<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -3683,7 +3741,7 @@
 <li><strong>低配救急别指望帧生成</strong>：先靠超分把基础帧率拉到 60+，再考虑帧生成。</li>
 </ul>
 <hr />
-<h2 id="_4">事实核查记录<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<h2 id="_5">事实核查记录<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -3715,6 +3773,14 @@
 <tr>
 <td>DLSS 超分同时降低延迟</td>
 <td>✅ 属实：帧渲染时间缩短，端到端延迟随帧率同步下降</td>
+</tr>
+<tr>
+<td>刷新率与多帧生成倍率的对应关系</td>
+<td>⚠️ 社区/视频经验：截图给出 60Hz 不推荐、120～165Hz 约 2×、240Hz 约 3×～4×、360Hz 以上约 4×～6×；不是 NVIDIA 官方保证，需结合基础帧率、VRR、帧 pacing 和显示器实测</td>
+</tr>
+<tr>
+<td>过高帧生成倍率一定更流畅</td>
+<td>❌ 不成立：超过显示器或游戏链路实际承载能力时，可能出现帧 pacing、伪影、排队或收益溢出</td>
 </tr>
 </tbody>
 </table>
@@ -3749,7 +3815,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月21日 08:15:18 UTC">2026年8月21日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月24日 13:41:20 UTC">2026年8月24日</span>
   </span>
 
     

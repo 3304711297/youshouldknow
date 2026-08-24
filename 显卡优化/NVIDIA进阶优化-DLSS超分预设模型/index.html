@@ -2403,6 +2403,45 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="六、进阶：DLSSTweaks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 部署与配置示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-ultra-performance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Ultra Performance 比例换算示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 验证、回滚与兼容性
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -3558,6 +3597,45 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="六、进阶：DLSSTweaks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 部署与配置示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-ultra-performance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Ultra Performance 比例换算示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 验证、回滚与兼容性
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -3685,7 +3763,57 @@
 <li>老游戏（DLSS 2.x DLL）覆盖后收益最明显，本来就是 DLSS 3.x 的游戏提升相对小一些。</li>
 </ul>
 <h2 id="dlsstweaks">六、进阶：DLSSTweaks<a class="headerlink" href="#dlsstweaks" title="Permanent link">&para;</a></h2>
-<p>开源工具 <a href="https://github.com/emoose/DLSSTweaks">DLSSTweaks</a> 可以做比 App 更细的覆盖（模型 + 参数级），需要自行下载 DLSS 库文件并放到指定位置，操作门槛较高，有折腾需求的进阶用户使用。</p>
+<p>开源工具 <a href="https://github.com/emoose/DLSSTweaks">DLSSTweaks</a> 可以做比 App 更细的覆盖（模型 + 参数级），需要自行下载 DLSS 库文件并放到指定位置，操作门槛较高，有折腾需求的进阶用户使用。它是第三方工具，不属于 <code>tweakbyjie</code> 的自动化执行范围。</p>
+<h3 id="61">6.1 部署与配置示例<a class="headerlink" href="#61" title="Permanent link">&para;</a></h3>
+<p>以下步骤整理自用户提供的配置截图，文件名和目录是<strong>某个版本、某个游戏的示例</strong>，不能假定所有游戏都完全相同：</p>
+<ol>
+<li>从 <a href="https://github.com/emoose/DLSSTweaks/releases">DLSSTweaks Releases</a> 获取与当前版本匹配的文件，并先阅读该版本的说明；</li>
+<li>将工具要求的运行时文件（截图示例为 <code>nvngx.dll</code>、<code>dlsstweaks.ini</code> 和 <code>DLSSTweaksConfig.exe</code>）放到目标游戏实际使用 DLSS 的目录。截图示例路径为“游戏根目录 / 虚幻引擎游戏目录 / Binaries / Win64”，实际文件名、目录和 DLL 要求以游戏目录结构及工具版本说明为准；</li>
+<li>运行 <code>DLSSTweaksConfig.exe</code>，在 <code>DLSSQualityLevels</code> 部分将 <code>Enable</code> 设为 <code>True</code>，再保存配置；</li>
+<li>进入游戏，将输出分辨率设为 4K，并选择 DLSS 的“超高性能（Ultra Performance）”档。不要把这个档位与 Windows 的 <code>Ultimate Performance</code> 电源计划混淆。</li>
+</ol>
+<h3 id="62-ultra-performance">6.2 Ultra Performance 比例换算示例<a class="headerlink" href="#62-ultra-performance" title="Permanent link">&para;</a></h3>
+<p>截图用目标输出高度 2160（4K）演示内部渲染高度比例：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">内部渲染高度</th>
+<th style="text-align: right;">目标输出高度</th>
+<th style="text-align: right;">换算</th>
+<th style="text-align: right;">截图示例输入</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">240p</td>
+<td style="text-align: right;">2160p</td>
+<td style="text-align: right;"><code>240 ÷ 2160 ≈ 0.111</code></td>
+<td style="text-align: right;"><code>0.11</code></td>
+</tr>
+<tr>
+<td style="text-align: right;">360p</td>
+<td style="text-align: right;">2160p</td>
+<td style="text-align: right;"><code>360 ÷ 2160 ≈ 0.167</code></td>
+<td style="text-align: right;"><code>0.17</code></td>
+</tr>
+<tr>
+<td style="text-align: right;">540p</td>
+<td style="text-align: right;">2160p</td>
+<td style="text-align: right;"><code>540 ÷ 2160 = 0.25</code></td>
+<td style="text-align: right;"><code>0.25</code></td>
+</tr>
+</tbody>
+</table>
+<p>这些数字只是纵向分辨率比例的计算示范，不等于每个版本的 <code>UltraPerformance</code> 配置字段语义，也不代表画质无损。比例越低，细节、稳定性、文字可读性和伪影风险通常越需要单独评估。</p>
+<h3 id="63">6.3 验证、回滚与兼容性<a class="headerlink" href="#63" title="Permanent link">&para;</a></h3>
+<ul>
+<li>保存后重启游戏，在游戏内选择 DLSS；不要只根据配置程序显示“已保存”就认定生效；</li>
+<li>可按截图思路在配置程序中启用调试 HUD，将 <code>OverrideDlssHud</code> 设为 <code>Force enable</code>，进入游戏后查看屏幕角落显示的实际渲染分辨率。字段名称和可用值可能随版本变化，以当前版本说明为准；</li>
+<li>使用 <a href="../../%E9%A1%B9%E7%9B%AE%E5%AF%BC%E8%88%AA/%E6%B8%B8%E6%88%8F%E6%80%A7%E8%83%BD%E9%AA%8C%E8%AF%81%E6%B5%81%E7%A8%8B/">游戏性能验证流程</a> 记录真实帧率、1% Low、帧时间、延迟、画质伪影和稳定性，不要只看右下角显示帧数；</li>
+<li>修改前备份游戏目录中的原始 DLSS DLL、配置文件和相关替换文件。游戏更新或验证文件完整性后，替换文件可能被覆盖，需要重新核对；</li>
+<li>出现闪退、黑屏、画面异常、反作弊提示或游戏无法启动时，先退出游戏，删除/移出 DLSSTweaks 替换文件并恢复原始 DLL，再回到游戏默认 DLSS 设置；联机游戏优先遵守游戏和反作弊系统的规则，不要在不确定时强行使用 DLL 替换；</li>
+<li>DLSSTweaks 修改的是游戏运行时 DLL/配置，不等同于 NVCleanstall 中的 NVIDIA DLSS SDK，也不等同于 NVIDIA App 的官方模型覆盖。</li>
+</ul>
 <hr />
 <h2 id="_3">事实核查记录<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <table>
@@ -3728,6 +3856,22 @@
 <td>DLSSTweaks 为开源进阶覆盖工具</td>
 <td>✅ 属实：GitHub 开源项目（emoose/DLSSTweaks）</td>
 </tr>
+<tr>
+<td>截图示例中的部署文件和目录</td>
+<td>⚠️ 版本/游戏相关：<code>nvngx.dll</code>、<code>dlsstweaks.ini</code>、<code>DLSSTweaksConfig.exe</code> 与 <code>Binaries/Win64</code> 只是用户提供截图中的示例，实际名称和目录必须以当前 Release 说明及目标游戏为准</td>
+</tr>
+<tr>
+<td>Ultra Performance 比例 <code>0.11</code> / <code>0.17</code> / <code>0.25</code></td>
+<td>⚠️ 算术示例：分别由 <code>240/2160</code>、<code>360/2160</code>、<code>540/2160</code> 换算，不能外推为所有版本配置字段或画质保证</td>
+</tr>
+<tr>
+<td><code>OverrideDlssHud = Force enable</code> 可显示实际渲染分辨率</td>
+<td>⚠️ 版本相关：截图所示字段和显示行为需以当前 DLSSTweaks 版本验证，不能保证所有版本都存在</td>
+</tr>
+<tr>
+<td>DLSSTweaks 文件替换可在游戏更新或完整性验证后保留</td>
+<td>❌ 不成立：更新或完整性验证可能覆盖替换文件，需重新核对并准备原文件回滚</td>
+</tr>
 </tbody>
 </table>
 <p><strong>参考来源：</strong></p>
@@ -3762,7 +3906,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月21日 08:15:18 UTC">2026年8月21日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月24日 13:41:20 UTC">2026年8月24日</span>
   </span>
 
     

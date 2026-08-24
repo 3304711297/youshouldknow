@@ -2104,10 +2104,49 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#amd-ddr5-oc-6200c26" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、AMD DDR5 OC 补充公式与 6200C26 演示
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、AMD DDR5 OC 补充公式与 6200C26 演示">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        公式整理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6200c26" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6200C26 示例值（仅用于演示公式核对）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#am5-bios" class="md-nav__link">
     <span class="md-ellipsis">
       
-        三、AM5 内存超频步骤要点（BIOS 设置）
+        四、AM5 内存超频步骤要点（BIOS 设置）
       
     </span>
   </a>
@@ -2118,7 +2157,7 @@
   <a href="#tm5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        四、TM5 报错序号参考与修复经验
+        五、TM5 报错序号参考与修复经验
       
     </span>
   </a>
@@ -2126,7 +2165,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
         使用建议
@@ -2137,7 +2176,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
         事实核查记录
@@ -3562,10 +3601,49 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#amd-ddr5-oc-6200c26" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、AMD DDR5 OC 补充公式与 6200C26 演示
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、AMD DDR5 OC 补充公式与 6200C26 演示">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        公式整理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6200c26" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6200C26 示例值（仅用于演示公式核对）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#am5-bios" class="md-nav__link">
     <span class="md-ellipsis">
       
-        三、AM5 内存超频步骤要点（BIOS 设置）
+        四、AM5 内存超频步骤要点（BIOS 设置）
       
     </span>
   </a>
@@ -3576,7 +3654,7 @@
   <a href="#tm5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        四、TM5 报错序号参考与修复经验
+        五、TM5 报错序号参考与修复经验
       
     </span>
   </a>
@@ -3584,7 +3662,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
         使用建议
@@ -3595,7 +3673,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
         事实核查记录
@@ -3636,10 +3714,11 @@
 </blockquote>
 <hr />
 <h2 id="_1">背景<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>手动收紧内存时序（缩时序）是继频率之后进一步提升内存性能的手段。本篇速查分四部分：</p>
+<p>手动收紧内存时序（缩时序）是继频率之后进一步提升内存性能的手段。本篇速查分五部分：</p>
 <ol>
 <li><strong>时序公式速查表</strong>——按目标频率快速推算各参数起步值；</li>
 <li><strong>进阶调优细则</strong>——逐参数的有效值、优先级与经验细则；</li>
+<li><strong>AMD DDR5 OC 补充公式</strong>——将一份社区参数笔记整理为可读的公式与验证边界；</li>
 <li><strong>AM5 内存超频步骤</strong>——BIOS 中的频率模式、电压与 FCLK 设置要点；</li>
 <li><strong>TM5 报错序号参考</strong>——压测报错后按序号定位原因。</li>
 </ol>
@@ -3797,7 +3876,200 @@
 </tr>
 </tbody>
 </table>
-<h2 id="am5-bios">三、AM5 内存超频步骤要点（BIOS 设置）<a class="headerlink" href="#am5-bios" title="Permanent link">&para;</a></h2>
+<h2 id="amd-ddr5-oc-6200c26">三、AMD DDR5 OC 补充公式与 6200C26 演示<a class="headerlink" href="#amd-ddr5-oc-6200c26" title="Permanent link">&para;</a></h2>
+<p>下面把一份 AMD DDR5 超频参数笔记中的规则整理为公式，作为<strong>起步推算和复核清单</strong>使用。它补充第一节的基础表，不替代主板 AUTO 值、颗粒体质和稳定性测试。截图右侧的数值只是 <code>6200C26</code> 的演示样例，不是通用推荐参数。</p>
+<h3 id="_4">公式整理<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>截图笔记中的规则</th>
+<th>使用边界</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>tCK</td>
+<td><code>2000 / 内存频率</code>（ns）</td>
+<td>这里的频率按 MT/s 处理；用于把周期换算为时间</td>
+</tr>
+<tr>
+<td>tCL</td>
+<td>手动设定的 CAS 延迟</td>
+<td>截图示例为 <code>26</code>；需满足主板、IMC 与颗粒体质</td>
+</tr>
+<tr>
+<td>tRCD / tRP</td>
+<td>截图原文均为“往下压即可”</td>
+<td>这不是无条件越低越好，必须以训练结果和稳定性测试为边界</td>
+</tr>
+<tr>
+<td>tRAS</td>
+<td>截图列出多个经验关系：<code>tRCD+tCL+tRP</code>、<code>tRCD+tRP</code>、<code>tRP</code>、<code>tCL+tRCD+2</code></td>
+<td>这些写法彼此并不等价，不能同时当作硬性公式；应以 AUTO、平台生效值和实测为准</td>
+</tr>
+<tr>
+<td>tRC</td>
+<td><code>tRP + tRAS</code></td>
+<td>示例 <code>36 + 72 = 108</code>，算术上与右侧示例一致</td>
+</tr>
+<tr>
+<td>tWR</td>
+<td>约 <code>20ns × 内存频率 / 2000</code></td>
+<td>截图右侧 <code>48</code> 与该公式在 6200 MT/s 下不一致（公式约为 62），暂不替截图修正</td>
+</tr>
+<tr>
+<td>tRFC</td>
+<td><code>系数(ns) × 内存频率 / 2000</code>；截图给出 A-die 常见 <code>120ns～160ns</code>、M-die 常见 <code>160ns～200ns</code></td>
+<td>截图中的系数写作占位的“ns”，没有给出可直接复算的单一值；不能跨颗粒照搬</td>
+</tr>
+<tr>
+<td>tRFCsb</td>
+<td><code>系数(ns) × 内存频率 / 2000</code>；截图给出 A-die 常见 <code>80ns～100ns</code>、M-die 常见约 <code>100ns</code></td>
+<td>截图写作 <code>tRFCsb</code>，不同 BIOS 可能使用不同命名；示例值仍需平台确认</td>
+</tr>
+<tr>
+<td>tREFI</td>
+<td>可尝试 <code>32767</code>、<code>46800</code> 或 <code>65535</code> 等档位</td>
+<td>截图特别提示要考验内存耐温；高 tREFI 可能增加高温下刷新风险</td>
+</tr>
+<tr>
+<td>tRTP</td>
+<td><code>1/4 tWR</code></td>
+<td>离散档位和平台实现可能使结果取整或落在相邻档位</td>
+</tr>
+<tr>
+<td>tRRD_L</td>
+<td><code>tRRD_S×2</code>、<code>tRRD_S</code> 或在其基础上增加 <code>2</code> 以上</td>
+<td>截图原文是多种经验写法，不是单一硬性公式</td>
+</tr>
+<tr>
+<td>tRRD_S</td>
+<td>截图写“建议 4 及以上”</td>
+<td>与本文基础表中 A-die 的 <code>8</code> 经验下限不一致，应以 BIOS 生效值和稳定性测试为准</td>
+</tr>
+<tr>
+<td>tFAW</td>
+<td><code>4 × tRRD_S</code></td>
+<td>与第一节的四激活窗口规则一致</td>
+</tr>
+<tr>
+<td>tWTR_L</td>
+<td><code>tWTR_S+2</code>、<code>4</code> 以上，或 <code>4 × tWTR_S</code></td>
+<td>截图原笔记存在并列写法，不能当作单一硬性公式</td>
+</tr>
+<tr>
+<td>tWTR_S</td>
+<td>建议 <code>4</code> 及以上</td>
+<td>平台生效下限可能不同</td>
+</tr>
+<tr>
+<td>tRDRDSCL</td>
+<td>可先逐步下压</td>
+<td>截图写“往下压即可”，不代表所有平台都能取同一最低值</td>
+</tr>
+<tr>
+<td>tRDRDSC</td>
+<td>通常为 <code>1</code></td>
+<td>具体名称和生效范围依 BIOS 实现而异</td>
+</tr>
+<tr>
+<td>tRDRDSD / tRDRDDD</td>
+<td>均可逐步下压；<code>tRDRDDD</code> 可先参考 <code>tRDRDSD</code></td>
+<td>需结合单双面、Rank 和主板布局验证</td>
+</tr>
+<tr>
+<td>tWRWRSCL</td>
+<td><code>tRDRDSC+tRDRDSD+3</code>（截图注明双面 A-die 低频至 6000 及以上），或常见 <code>6/7</code>，也可参考 <code>tRDRDSCL</code></td>
+<td>截图是社区经验汇总，条件和命名需按 BIOS 字段确认</td>
+</tr>
+<tr>
+<td>tWRWRSC / tWRWRSD / tWRWRDD</td>
+<td><code>tWRWRSC</code> 通常为 <code>1</code>；其余可逐步下压，<code>tWRWRDD</code> 可先参考 <code>tWRWRSD</code></td>
+<td>属于 turnaround 时序，不能只按示例值套用</td>
+</tr>
+<tr>
+<td>tRDWR</td>
+<td>可参考 <code>tWRWRSCL-tRDRDSD+tRDRDSCL-2</code>，或 <code>tWRWRSCL-tRDRDSCL+5</code>；截图建议优先按后一种计算，也可直接尝试 <code>12</code> / <code>14</code></td>
+<td>截图示例为 <code>15</code>；常见 A-die/长鑫与 M-die 的经验值写法不一致，需逐档验证</td>
+</tr>
+</tbody>
+</table>
+<h3 id="6200c26">6200C26 示例值（仅用于演示公式核对）<a class="headerlink" href="#6200c26" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align: right;">示例值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>tCL</td>
+<td style="text-align: right;">26</td>
+</tr>
+<tr>
+<td>tRCD / tRP</td>
+<td style="text-align: right;">36 / 36</td>
+</tr>
+<tr>
+<td>tRAS / tRC</td>
+<td style="text-align: right;">72 / 108</td>
+</tr>
+<tr>
+<td>tWR</td>
+<td style="text-align: right;">48（与左侧公式不一致，待确认）</td>
+</tr>
+<tr>
+<td>tRFC / tRFCsb</td>
+<td style="text-align: right;">372 / 279</td>
+</tr>
+<tr>
+<td>tREFI</td>
+<td style="text-align: right;">65535</td>
+</tr>
+<tr>
+<td>tRTP</td>
+<td style="text-align: right;">12</td>
+</tr>
+<tr>
+<td>tRRD_L / tRRD_S</td>
+<td style="text-align: right;">8 / 8</td>
+</tr>
+<tr>
+<td>tFAW</td>
+<td style="text-align: right;">32</td>
+</tr>
+<tr>
+<td>tWTR_L / tWTR_S</td>
+<td style="text-align: right;">16 / 4</td>
+</tr>
+<tr>
+<td>tRDRDSCL / tRDRDSC</td>
+<td style="text-align: right;">5 / 1</td>
+</tr>
+<tr>
+<td>tRDRDSD / tRDRDDD</td>
+<td style="text-align: right;">7 / 7</td>
+</tr>
+<tr>
+<td>tWRWRSCL / tWRWRSC / tWRWRSD</td>
+<td style="text-align: right;">15 / 1 / 7</td>
+</tr>
+<tr>
+<td>tWRWRDD</td>
+<td style="text-align: right;">7</td>
+</tr>
+<tr>
+<td>tRDWR</td>
+<td style="text-align: right;">15</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>示例边界</strong>：<code>6200C26</code> 代表一组具体频率、主时序和平台调参结果；它不能证明任意 A-die、M-die、主板或内存控制器都能稳定运行。截图没有提供主板型号、颗粒批次、电压、温度、训练结果或完整测试记录，因此不把这组数值写成“推荐配置”。</p>
+</blockquote>
+<h2 id="am5-bios">四、AM5 内存超频步骤要点（BIOS 设置）<a class="headerlink" href="#am5-bios" title="Permanent link">&para;</a></h2>
 <ol>
 <li>进入 BIOS 的 <strong>Advanced（高级）</strong> 页；</li>
 <li>进入 <strong>OC（超频）设置</strong> 页；</li>
@@ -3810,7 +4082,7 @@
 <li>将 <strong>FCLK MODE</strong> 切换至 as UI（异步）模式；</li>
 <li>设置内存时序与内存电压：<strong>VDD 1.4V、VDDQ 1.3V</strong>（时序与电压需按体质自摸）。</li>
 </ol>
-<h2 id="tm5">四、TM5 报错序号参考与修复经验<a class="headerlink" href="#tm5" title="Permanent link">&para;</a></h2>
+<h2 id="tm5">五、TM5 报错序号参考与修复经验<a class="headerlink" href="#tm5" title="Permanent link">&para;</a></h2>
 <p>TM5（TestMem5）是社区最常用的内存稳定性测试工具（推荐配合 anta777 Extreme 等配置，跑 3~5 个循环）。报错界面会显示序号（如 <code>#4</code>、<code>#13</code>），可按下表定位原因：</p>
 <table>
 <thead>
@@ -3889,7 +4161,7 @@
 <blockquote>
 <p>注：序号 8/9/12 中「12 代」指 Intel 第 12 代酷睿（Alder Lake），「SA / IO」为 Intel 平台内存控制器相关电压（VCCSA / VCCIO）；AMD 平台可对应参考 SOC / VDDIO 电压排查思路。</p>
 </blockquote>
-<h2 id="_4">使用建议<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<h2 id="_5">使用建议<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <ol>
 <li>先定频率和 tCL，再按公式推算其余参数作为<strong>保守起步值</strong>；</li>
 <li>每收紧一项参数后用 TM5 压测验证稳定性，报错则按上表定位回退该项；</li>
@@ -3897,8 +4169,8 @@
 <li>超频有风险：可能影响稳定性、硬件寿命及保修，数据请提前备份，后果自负。</li>
 </ol>
 <hr />
-<h2 id="_5">事实核查记录<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
-<p>本文公式与经验已对照 DDR5 领域公认规则及多家超频社区信源核实，结论：<strong>核心结构性规则与平台设置均属实；部分数值公式为社区经验估算，整体可靠，可作为起步参考</strong>。</p>
+<h2 id="_6">事实核查记录<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<p>本文公式与经验已对照 DDR5 领域公认规则及多家超频社区信源核实，结论：<strong>核心结构性规则与平台设置均属实；部分数值公式为社区经验估算，整体可靠，可作为起步参考</strong>。本次新增的 AMD DDR5 OC 补充节来自用户提供的参数笔记截图；截图右侧仅作 <code>6200C26</code> 示例，不作为通用推荐。</p>
 <table>
 <thead>
 <tr>
@@ -3979,6 +4251,30 @@
 <td>tWR 公式（频率/400×4 或 tRTP×4）</td>
 <td>❓ 两个版本均无独立佐证，建议按主板 AUTO 值保守处理</td>
 </tr>
+<tr>
+<td>截图新增的 tRC = tRAS + tRP</td>
+<td>✅ 算术关系与 6200C26 示例 <code>72 + 36 = 108</code> 一致；作为平台规则仍需以 BIOS 实际生效值确认</td>
+</tr>
+<tr>
+<td>截图新增的 tFAW = 4 × tRRD_S</td>
+<td>✅ 与基础表的四激活窗口规则一致；示例 <code>4 × 8 = 32</code></td>
+</tr>
+<tr>
+<td>截图新增的 tRFC / tRFCsb 示例 372 / 279</td>
+<td>⚠️ 仅完成示例算术与字段转写，截图缺少颗粒、容量、温度、电压和测试记录，不能外推为通用值</td>
+</tr>
+<tr>
+<td>截图新增的 tWR 示例 48</td>
+<td>❌ 与截图左侧 <code>20ns × 频率 / 2000</code> 在 6200 MT/s 下不一致；按左式约为 62，暂保留原示例并标注冲突</td>
+</tr>
+<tr>
+<td>截图新增的 tRDWR 示例 15</td>
+<td>⚠️ 作为截图中的 6200C26 示例保留；不同公式和平台命名存在差异，需以 BIOS 字段与稳定性测试确认</td>
+</tr>
+<tr>
+<td>截图新增的 tRDRDSC / tWRWRSC 等 turnaround 参数</td>
+<td>⚠️ 已按截图转写为经验起步值；名称、生效范围和单双面/Rank 关系依 BIOS 实现而异</td>
+</tr>
 </tbody>
 </table>
 <p><strong>参考来源：</strong></p>
@@ -4019,7 +4315,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月21日 13:23:47 UTC">2026年8月21日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月24日 13:41:20 UTC">2026年8月24日</span>
   </span>
 
     
