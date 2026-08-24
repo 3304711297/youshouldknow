@@ -14,8 +14,8 @@ NVIDIA / AMD 显卡驱动、控制面板、DLSS、ReBAR 与接口知识分类。
 - [NVIDIA 进阶优化 - App 设置与超频](./NVIDIA进阶优化-App设置与超频.md) — NVIDIA App 内的性能与超频路径
 
 ### DLSS / 帧生成与延迟
-- [DLSS 帧生成、低延时模式与延迟的关系](./DLSS帧生成低延时模式与延迟的关系.md) — 超分/帧生成/Reflex 对帧率与延迟的不同影响
-- [NVIDIA 进阶优化 - DLSS 超分预设模型](./NVIDIA进阶优化-DLSS超分预设模型.md) — DLSS 预设与画质/性能权衡
+- [DLSS 帧生成、低延时模式与延迟的关系](./DLSS帧生成低延时模式与延迟的关系.md) — 超分/帧生成/Reflex、刷新率与多帧生成倍率对帧率与延迟的影响
+- [NVIDIA 进阶优化 - DLSS 超分预设模型](./NVIDIA进阶优化-DLSS超分预设模型.md) — DLSS 预设、DLSSTweaks 与 Ultra Performance 比例示例
 
 ### 硬件能力与接口
 - [NVIDIA 进阶优化 - ReBAR 强制开启](./NVIDIA进阶优化-ReBAR强制开启.md) — Resizable BAR 的开启条件与验证
