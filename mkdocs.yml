@@ -6,6 +6,7 @@ edit_uri: edit/main/
 # 内容位于 docs/（标准 MkDocs 布局）；修订日期插件读取真实文件的 git 历史
 theme:
   name: material
+  custom_dir: overrides
   language: zh
   features:
     - navigation.tabs
@@ -30,6 +31,7 @@ theme:
         icon: material/brightness-4
         name: Switch to light mode
 markdown_extensions:
+  - meta
   - admonition
   - toc:
       permalink: true
@@ -40,6 +42,8 @@ markdown_extensions:
   - pymdownx.inlinehilite
   - pymdownx.tabbed:
       alternate_style: true
+extra_css:
+  - stylesheets/extra.css
 plugins:
   - search:
       lang: zh

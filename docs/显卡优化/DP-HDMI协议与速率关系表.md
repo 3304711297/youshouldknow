@@ -1,3 +1,12 @@
+---
+status: reference
+risk: low
+applies_to:
+  - Windows 10/11 PC 显示输出
+  - DisplayPort / HDMI 显示器与线材选购
+verified_on: 2026-08-21
+---
+
 # DP / HDMI 协议与速率关系表
 
 > **分类**：显卡优化 · 显示输出
