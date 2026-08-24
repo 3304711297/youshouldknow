@@ -4,6 +4,10 @@
 
 - [Windows 优化原则与风险](./Windows优化原则与风险.md)：全库优化前置、风险等级、备份、验证和恢复
 
+## 执行层
+
+- [tweakbyjie](https://github.com/3304711297/tweakbyjie)：与本知识库对应的 Windows 优化执行项目；知识库负责原理、边界、风险与验证，脚本负责实际执行。
+
 ## 专题
 
 - [Windows 服务优化原则](./Windows服务优化原则.md)：服务分组、37 项脚本映射和 Defender 边界
