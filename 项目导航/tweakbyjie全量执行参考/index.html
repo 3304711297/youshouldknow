@@ -4239,7 +4239,7 @@
 
 <h1 id="tweakbyjie">tweakbyjie 全量逐项执行参考<a class="headerlink" href="#tweakbyjie" title="Permanent link">&para;</a></h1>
 <blockquote>
-<p>已与 <code>tweakbyjie</code> 模块化结构同步：执行逻辑现位于 <code>Modules/Menu.ps1</code> 与 <code>Modules/Common.ps1</code>（通用写入/验证）、<code>Modules/Backup.*.ps1</code>（备份闭环）；此处不再使用 <code>tweakbyjie.ps1:行号</code> 定位，以 <code>Modules/函数名</code> 为准。详见 <code>tweakbyjie/docs/design/CODE-REFACTOR-STATUS.md</code>。</p>
+<p>已与 <code>tweakbyjie</code> 模块化结构同步：<code>Modules/Menu.ps1</code> 只负责菜单调度，执行逻辑位于各业务模块（<code>Registry/Bcd/Defender/Mpo/Nvme/Power/Service/Virtualization.ps1</code>）与 <code>Modules/Common.ps1</code>（通用写入/验证）、<code>Modules/Backup.*.ps1</code>（备份闭环）；正文表格中的 <code>:NNN</code> 为模块化前单文件源码的历史行号快照（见文末边界说明），现行定位以 <code>Modules/文件.ps1</code> 和函数名为准。详见 <code>tweakbyjie/docs/design/CODE-REFACTOR-STATUS.md</code>。</p>
 <p><strong>用途</strong>：把 <code>tweakbyjie/tweakbyjie.ps1</code> 当前实际执行项转换为可核对的参考手册。</p>
 <p><strong>源码基线</strong>：<code>tweakbyjie.ps1</code> 当前 <code>main</code> 分支源码；行号随源码变化，更新脚本后必须重新核对。</p>
 <p><strong>重要边界</strong>：本文描述脚本实际行为，不等于推荐所有用户执行。配置层写入成功不等于运行时收益，也不等于拥有精确恢复能力。</p>
@@ -4328,7 +4328,7 @@
 <h2 id="cpu-002-cpu-005mmcss-games">二、CPU-002 至 CPU-005：MMCSS 与 Games<a class="headerlink" href="#cpu-002-cpu-005mmcss-games" title="Permanent link">&para;</a></h2>
 <h3 id="cpu-002-multimediasystemprofile">CPU-002 <code>Multimedia\SystemProfile</code><a class="headerlink" href="#cpu-002-multimediasystemprofile" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>入口/源码</strong>：主菜单 <code>1→1</code>；<code>Modules/Menu.ps1</code>。</li>
+<li><strong>入口/源码</strong>：主菜单 <code>1→1</code>；<code>Modules/Registry.ps1</code>（<code>Invoke-RegistryModule</code>）。</li>
 <li><strong>目标对象</strong>：<code>HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile</code>。</li>
 <li><strong>实际子项</strong>：<code>SystemResponsiveness=10</code>、<code>NetworkThrottlingIndex=0xFFFFFFFF</code>，以及 <code>Tasks\Games</code> 七项；它们应分别核对，不应把路径当成单一值。</li>
 <li><strong>验证/恢复</strong>：除 CPU-001/HAGS 外没有统一回读；无统一原值备份；必须人工记录每个值的存在性、类型和值。</li>
@@ -4673,7 +4673,7 @@
 <li>“脚本执行”不等于“可恢复”；“配置层回读”不等于“运行时有效”；“知识说明”不等于“脚本支持”。</li>
 </ul>
 <h2 id="_4">事实核查记录<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
-<p>核验机制：由 tweakbyjie 仓库 Coverage 自动审计持续校验，映射、执行参考、覆盖检查三份资料每一份都必须与 manifest 全部 44 项完全一致（缺少清单内编号与出现清单外编号均判失败）；2026-08-21 对照 main 源码逐项校准一次（CORE 总览范围、NVMe 验证函数结论、SECURITY-002/003 与 MEMORY-003/STORAGE-005 编号补齐，合并编号标题展开为完整 ID）。⚠️ 已知边界：正文表格中的 <code>:NNN</code> 为模块化前单文件源码的基线行号快照，仅作历史对照，不对应现行 Modules/ 结构；现行定位以 <code>Modules/函数名</code> 为准。</p>
+<p>核验机制：由 tweakbyjie 仓库 Coverage 自动审计持续校验，映射、执行参考、覆盖检查三份资料每一份都必须与 manifest 全部 44 项完全一致（缺少清单内编号与出现清单外编号均判失败）；正文 <code>Modules/文件.ps1</code> 引用由审计器校验文件存在与函数定义。2026-08-25 对照 tweakbyjie main（commit <code>cd95802</code>）校准：页首定位说明改为“Menu 仅调度、执行在各业务模块”，CPU-002 源码定位修正为 <code>Modules/Registry.ps1</code>。⚠️ 已知边界：正文表格中的 <code>:NNN</code> 为模块化前单文件源码的基线行号快照，仅作历史对照，不对应现行 Modules/ 结构；现行定位以 <code>Modules/函数名</code> 为准。</p>
 
 
 
@@ -4696,7 +4696,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月21日 14:21:25 UTC">2026年8月21日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月25日 13:58:18 UTC">2026年8月25日</span>
   </span>
 
     

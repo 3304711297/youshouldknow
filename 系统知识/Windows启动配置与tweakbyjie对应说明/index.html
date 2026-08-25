@@ -3964,12 +3964,12 @@
 <h1 id="windows-tweakbyjie">Windows 启动配置与 tweakbyjie 对应说明<a class="headerlink" href="#windows-tweakbyjie" title="Permanent link">&para;</a></h1>
 <h2 id="_1">对应范围<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <blockquote>
-<p>已与 <code>tweakbyjie</code> 模块化结构同步：执行逻辑现位于 <code>Modules/Menu.ps1</code> 与 <code>Modules/Common.ps1</code>（通用写入/验证）、<code>Modules/Backup.*.ps1</code>（备份闭环）；此处不再使用 <code>tweakbyjie.ps1:行号</code> 定位，以 <code>Modules/函数名</code> 为准。详见 <code>tweakbyjie/docs/design/CODE-REFACTOR-STATUS.md</code>。</p>
+<p>已与 <code>tweakbyjie</code> 模块化结构同步：<code>Modules/Menu.ps1</code> 只负责菜单调度，BCD/测试模式执行逻辑位于 <code>Modules/Bcd.ps1</code>，通用写入/验证在 <code>Modules/Common.ps1</code>，备份闭环在 <code>Modules/Backup.*.ps1</code>；此处不再使用 <code>tweakbyjie.ps1:行号</code> 定位，以 <code>Modules/文件.ps1</code> 和函数名为准。详见 <code>tweakbyjie/docs/design/CODE-REFACTOR-STATUS.md</code>。</p>
 </blockquote>
 <p>本页对应 <code>tweakbyjie/tweakbyjie.ps1</code> 的 BCD、测试模式和 Device Guard 启动项操作。启动配置会影响系统能否正常启动、驱动完整性和安全边界，不能与普通游戏优化混合执行。</p>
 <h2 id="boot-001-bcd">BOOT-001 高级 BCD 计时器配置<a class="headerlink" href="#boot-001-bcd" title="Permanent link">&para;</a></h2>
 <h3 id="_2">执行入口与目标<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
-<p>主菜单 <code>2. 高级 BCD / 计时器与启动安全</code>，源码 <code>Modules/Menu.ps1</code>（Part 2）+ <code>Modules/Backup.Bcd.ps1</code>/<code>Modules/Common.ps1</code>：</p>
+<p>主菜单 <code>2. 高级 BCD / 计时器与启动安全</code>，源码 <code>Modules/Bcd.ps1</code>（<code>Invoke-BcdAdvancedModule</code>）+ <code>Modules/Backup.Bcd.ps1</code>/<code>Modules/Common.ps1</code>：</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>useplatformclock    = No
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>useplatformtick     = No
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>disabledynamictick   = Yes
@@ -3992,7 +3992,7 @@
 <p>恢复时把 <code>/set xxx yes|no</code> 写法换成 <code>bcdedit /deletevalue &lt;值名&gt;</code> 后重启即可。延伸参考：B站文章<a href="https://b23.tv/cOH0RxB">《【Win优化】Bcdedit 参数与高精度计时器 HPET》</a>。注意：以上均为调用策略层面的调整，HPET 设备本身不在 tweakbyjie 的执行范围内。</p>
 <h2 id="boot-002-bcd">BOOT-002 高级启动安全 BCD 配置<a class="headerlink" href="#boot-002-bcd" title="Permanent link">&para;</a></h2>
 <h3 id="_5">执行入口与目标<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
-<p>同为主菜单 <code>2</code>，源码 <code>Modules/Menu.ps1</code>（Part 2）+ <code>Modules/Backup.Bcd.ps1</code>/<code>Modules/Common.ps1</code>：</p>
+<p>同为主菜单 <code>2</code>，源码 <code>Modules/Bcd.ps1</code>（<code>Invoke-BcdAdvancedModule</code> 启动安全子项）+ <code>Modules/Backup.Bcd.ps1</code>/<code>Modules/Common.ps1</code>：</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>nx               = AlwaysOff
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>tpmbootentropy    = ForceDisable
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>nointegritychecks = Yes
@@ -4002,7 +4002,7 @@
 <p>脚本对 BCD 目标值进行回读验证，并与 BOOT-001 共用 <code>bcd-backup.json</code>。恢复必须按备份恢复原始存在状态；没有有效备份时不能把“删除当前值”描述成恢复原配置。</p>
 <h2 id="boot-003">BOOT-003 开启测试模式<a class="headerlink" href="#boot-003" title="Permanent link">&para;</a></h2>
 <h3 id="_7">执行入口与目标<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
-<p>主菜单 <code>3. 开启测试模式</code>，源码 <code>Modules/Menu.ps1</code>（Part 3）：</p>
+<p>主菜单 <code>3. 开启测试模式</code>，源码 <code>Modules/Bcd.ps1</code>（<code>Invoke-TestModeEnableModule</code>）：</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>bcdedit /set testsigning on
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>bcdedit /debug on
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>bcdedit /dbgsettings local
@@ -4016,7 +4016,7 @@
 </blockquote>
 <h2 id="boot-004">BOOT-004 关闭测试模式<a class="headerlink" href="#boot-004" title="Permanent link">&para;</a></h2>
 <h3 id="_9">执行入口与目标<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
-<p>主菜单 <code>4. 关闭测试模式</code>，源码 <code>Modules/Menu.ps1</code>（Part 4）。当前脚本删除：</p>
+<p>主菜单 <code>4. 关闭测试模式</code>，源码 <code>Modules/Bcd.ps1</code>（<code>Invoke-TestModeDisableModule</code>）。当前脚本删除：</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>bcdedit /deletevalue testsigning
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>bcdedit /deletevalue debug
 </code></pre></div>
@@ -4137,7 +4137,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月21日 12:28:38 UTC">2026年8月21日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月25日 13:58:18 UTC">2026年8月25日</span>
   </span>
 
     

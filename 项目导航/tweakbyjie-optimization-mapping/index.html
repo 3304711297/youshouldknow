@@ -3983,34 +3983,34 @@
 <td>CPU-001</td>
 <td><code>Win32PrioritySeparation</code></td>
 <td><code>HKLM\SYSTEM\CurrentControlSet\Control\PriorityControl\Win32PrioritySeparation</code> → <code>REG_DWORD 38</code>（十进制，<code>0x26</code>）；源码 <code>Modules/Registry.ps1</code>+ <code>Modules/Common.ps1/Set-RegDword</code></td>
-<td>源码 <code>:813</code> 使用 <code>Verify-RegDword</code> 回读目标值 <code>38</code></td>
+<td>写入后使用 <code>Modules/Common.ps1/Verify-RegDword</code> 回读目标值 <code>38</code></td>
 <td>修改前记录原始 DWORD，恢复原值；当前脚本未提供该项自动备份/恢复</td>
 </tr>
 <tr>
 <td>CPU-002</td>
 <td><code>Multimedia SystemProfile</code></td>
-<td><code>HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile</code>；源码 <code>:793-794</code> 写入该路径下的独立值</td>
+<td><code>HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile</code>；<code>Modules/Registry.ps1</code> 写入该路径下的独立值</td>
 <td>没有对该组配置进行统一回读</td>
 <td>逐项记录并恢复原值；当前脚本未提供统一备份/恢复</td>
 </tr>
 <tr>
 <td>CPU-003</td>
 <td><code>SystemResponsiveness</code></td>
-<td><code>...\Multimedia\SystemProfile\SystemResponsiveness</code> → <code>REG_DWORD 10</code>；源码 <code>:794</code></td>
+<td><code>...\Multimedia\SystemProfile\SystemResponsiveness</code> → <code>REG_DWORD 10</code>；源码 <code>Modules/Registry.ps1</code></td>
 <td>当前源码没有调用 <code>Verify-RegDword</code> 验证该值</td>
 <td>修改前记录原始 DWORD，恢复原值；当前脚本未提供自动备份/恢复</td>
 </tr>
 <tr>
 <td>CPU-004</td>
 <td><code>NetworkThrottlingIndex</code></td>
-<td><code>...\Multimedia\SystemProfile\NetworkThrottlingIndex</code> → <code>REG_DWORD 0xFFFFFFFF</code>；源码 <code>:793</code></td>
+<td><code>...\Multimedia\SystemProfile\NetworkThrottlingIndex</code> → <code>REG_DWORD 0xFFFFFFFF</code>；源码 <code>Modules/Registry.ps1</code></td>
 <td>当前源码没有对该值进行回读验证</td>
 <td>修改前记录原始 DWORD，恢复原值；当前脚本未提供自动备份/恢复</td>
 </tr>
 <tr>
 <td>CPU-005</td>
 <td><code>Tasks\Games</code></td>
-<td><code>...\Multimedia\SystemProfile\Tasks\Games</code>；源码 <code>:800-807</code> 写入七个值：<code>Affinity=0</code>、<code>Background Only=False</code>、<code>Clock Rate=10000</code>、<code>GPU Priority=8</code>、<code>Priority=6</code>、<code>Scheduling Category=High</code>、<code>SFIO Priority=High</code></td>
+<td><code>...\Multimedia\SystemProfile\Tasks\Games</code>；<code>Modules/Registry.ps1</code> 写入七个值：<code>Affinity=0</code>、<code>Background Only=False</code>、<code>Clock Rate=10000</code>、<code>GPU Priority=8</code>、<code>Priority=6</code>、<code>Scheduling Category=High</code>、<code>SFIO Priority=High</code></td>
 <td>当前源码没有对七个值进行回读验证</td>
 <td>修改前记录每个值的存在状态、类型和值；恢复时逐项写回，原本不存在的值应删除；当前脚本未提供自动备份/恢复</td>
 </tr>
@@ -4039,13 +4039,13 @@
 <td>GPU-001</td>
 <td>HAGS / <code>HwSchMode</code></td>
 <td>主菜单 <code>1</code> → 核心游戏优化 <code>1</code>；<code>HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers\HwSchMode</code> → <code>REG_DWORD 2</code>；源码 <code>Modules/Registry.ps1</code>+ <code>Modules/Common.ps1/Set-RegDword</code></td>
-<td>源码 <code>:814</code> 使用 <code>Verify-RegDword</code> 回读 <code>HwSchMode=2</code>；仍需重启和实际游戏测试</td>
+<td>写入后使用 <code>Modules/Common.ps1/Verify-RegDword</code> 回读 <code>HwSchMode=2</code>；仍需重启和实际游戏测试</td>
 <td>当前核心路径未提供独立自动备份/恢复；修改前记录原值，恢复时写回或删除原本不存在的值</td>
 </tr>
 <tr>
 <td>GPU-002</td>
 <td>MPO / Overlay</td>
-<td>主菜单 <code>11. MPO 设置管理</code>；管理 <code>DisableMPO</code>、<code>OverlayTestMode</code>、<code>DisableOverlays</code>、<code>OverlayMinFPS</code> 四个值；源码 <code>Modules/Menu.ps1</code>（Part 11）+ <code>Modules/Backup.Mpo.ps1</code></td>
+<td>主菜单 <code>11. MPO 设置管理</code>；管理 <code>DisableMPO</code>、<code>OverlayTestMode</code>、<code>DisableOverlays</code>、<code>OverlayMinFPS</code> 四个值；源码 <code>Modules/Mpo.ps1</code>（<code>Invoke-MpoModule</code>）+ <code>Modules/Backup.Mpo.ps1</code></td>
 <td><code>11 → 0</code> 只读查看注册表值；重启后用 <code>dxdiag</code> 作辅助判断，并结合浏览器、视频、多显示器、窗口化游戏、DX12、HDR、录屏和覆盖层实测</td>
 <td>首次方案 A/B/C 前保存 <code>mpo-backup.json</code>；<code>11 → 4</code> 按原始存在状态、类型和值恢复；无备份时只能删除受管理值恢复系统默认</td>
 </tr>
@@ -4073,15 +4073,15 @@
 <tr>
 <td>MEMORY-001</td>
 <td><code>EnablePrefetcher</code></td>
-<td>主菜单 <code>1</code> → 系统行为优化 <code>2</code>；<code>HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters\EnablePrefetcher</code> → <code>REG_DWORD 0</code>；源码 <code>Modules/Registry.ps1</code>+ <code>Modules/Common.ps1/Verify-RegDword</code></td>
-<td>源码 <code>:858</code> 使用 <code>Verify-RegDword</code> 回读 <code>0</code>；需重启后结合应用启动测试</td>
+<td>主菜单 <code>1</code> → 系统行为优化 <code>2</code>；<code>HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters\EnablePrefetcher</code> → <code>REG_DWORD 0</code>；源码 <code>Modules/Registry.ps1</code>+ <code>Modules/Common.ps1/Set-RegDword</code></td>
+<td>写入后使用 <code>Modules/Common.ps1/Verify-RegDword</code> 回读 <code>0</code>；需重启后结合应用启动测试</td>
 <td>当前脚本未保存原值，也没有自动恢复入口；恢复前应记录原值/存在状态，恢复时写回或删除</td>
 </tr>
 <tr>
 <td>MEMORY-002</td>
 <td>Memory Compression</td>
-<td>主菜单 <code>1</code> → 系统行为优化 <code>2</code>；执行 <code>Disable-MMAgent -mc</code>；源码 <code>Modules/Menu.ps1</code>（Part 1，<code>Disable-MMAgent</code>）</td>
-<td>源码 <code>:859</code> 使用 <code>Verify-MemoryCompressionDisabled</code> / <code>Get-MMAgent</code> 检查关闭状态；需重启</td>
+<td>主菜单 <code>1</code> → 系统行为优化 <code>2</code>；执行 <code>Disable-MMAgent -mc</code>；源码 <code>Modules/Registry.ps1</code>（<code>Disable-MMAgent</code>）</td>
+<td><code>Verify-MemoryCompressionDisabled</code> / <code>Get-MMAgent</code> 检查关闭状态；需重启</td>
 <td>当前脚本未保存原状态；手动恢复使用 <code>Enable-MMAgent -mc</code> 后重启</td>
 </tr>
 <tr>
@@ -4122,14 +4122,14 @@
 <tr>
 <td>STORAGE-002</td>
 <td>NTFS TRIM</td>
-<td>主菜单 <code>1</code> → 系统行为优化 <code>2</code>；执行 <code>fsutil.exe behavior set DisableDeleteNotify 0</code>；源码 <code>Modules/Menu.ps1</code>（Part 1，<code>fsutil</code>）</td>
-<td>源码 <code>:860</code> 使用 <code>Verify-TrimEnabled</code> 查询全局 <code>DisableDeleteNotify=0</code>；不代表每个卷都已单独核验</td>
+<td>主菜单 <code>1</code> → 系统行为优化 <code>2</code>；执行 <code>fsutil.exe behavior set DisableDeleteNotify 0</code>；源码 <code>Modules/Registry.ps1</code>（<code>fsutil</code>）</td>
+<td><code>Verify-TrimEnabled</code> 查询全局 <code>DisableDeleteNotify=0</code>；不代表每个卷都已单独核验</td>
 <td>脚本未备份原状态；恢复应根据修改前策略谨慎处理，不应无条件关闭 TRIM</td>
 </tr>
 <tr>
 <td>STORAGE-003</td>
 <td>BITS 启动类型</td>
-<td>主菜单 <code>6</code> 服务优化；<code>BITS</code> 在手动服务组中设为 <code>Manual</code>；源码 <code>Modules/Menu.ps1</code>（Part 6）+ <code>Modules/Backup.Service.ps1</code></td>
+<td>主菜单 <code>6</code> 服务优化；<code>BITS</code> 在手动服务组中设为 <code>Manual</code>；源码 <code>Modules/Service.ps1</code>（<code>Invoke-ServiceModule</code>）+ <code>Modules/Backup.Service.ps1</code></td>
 <td><code>Verify-ServiceStartupType</code> 验证 <code>Manual</code></td>
 <td>服务优化前写入 <code>service-backup.json</code>，选项 <code>6 → 2</code> 按快照恢复原启动类型；当前恢复不保证恢复服务运行状态</td>
 </tr>
@@ -4165,7 +4165,7 @@
 <tr>
 <td>SECURITY-001</td>
 <td>CPU 安全缓解覆盖</td>
-<td>主菜单 <code>1</code> → CPU 安全缓解子项 <code>2</code>；<code>HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\FeatureSettingsOverride=3</code>、<code>FeatureSettingsOverrideMask=3</code>；源码 <code>Modules/Menu.ps1</code>（Part 1，CPU 缓解）+ <code>Modules/Backup.SecurityMitigation.ps1</code></td>
+<td>主菜单 <code>1</code> → CPU 安全缓解子项 <code>2</code>；<code>HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\FeatureSettingsOverride=3</code>、<code>FeatureSettingsOverrideMask=3</code>；源码 <code>Modules/Registry.ps1</code>（CPU 缓解子项）+ <code>Modules/Backup.SecurityMitigation.ps1</code></td>
 <td>写入后分别用 <code>Verify-RegDword</code> 回读；专用备份快照保存存在性和原值</td>
 <td><code>security-mitigation-backup.json</code> 记录原状态，子项 <code>3</code> 按快照恢复</td>
 </tr>
@@ -4201,7 +4201,7 @@
 <tr>
 <td>SERVICE-001</td>
 <td>Part 6 服务启动类型</td>
-<td>主菜单 <code>6 → 1</code>；Group A 21 个 + Group B 9 个设为 <code>Disabled</code>，Xbox/Bluetooth/Embedded/BITS 7 个设为 <code>Manual</code>；源码 <code>Modules/Menu.ps1</code>（Part 6）+ <code>Modules/Backup.Service.ps1</code></td>
+<td>主菜单 <code>6 → 1</code>；Group A 21 个 + Group B 9 个设为 <code>Disabled</code>，Xbox/Bluetooth/Embedded/BITS 7 个设为 <code>Manual</code>；源码 <code>Modules/Service.ps1</code>（<code>Invoke-ServiceModule</code>）+ <code>Modules/Backup.Service.ps1</code></td>
 <td><code>Verify-ServiceStartupType</code> 使用 <code>Win32_Service.StartMode</code> 逐项验证；不验证运行状态和依赖功能</td>
 <td>修改前创建/校验 <code>service-backup.json</code>；<code>6 → 2</code> 恢复原启动类型，不强制恢复运行状态</td>
 </tr>
@@ -4230,7 +4230,7 @@
 <tr>
 <td>BOOT-001</td>
 <td>高级 BCD 计时器</td>
-<td>主菜单 <code>2</code>；<code>useplatformclock=no</code>、<code>useplatformtick=no</code>、<code>disabledynamictick=yes</code>、<code>tscsyncpolicy=Enhanced</code>；源码 <code>Modules/Menu.ps1</code>（Part 2）+ <code>Modules/Backup.Bcd.ps1</code>/<code>Modules/Common.ps1</code></td>
+<td>主菜单 <code>2</code>；<code>useplatformclock=no</code>、<code>useplatformtick=no</code>、<code>disabledynamictick=yes</code>、<code>tscsyncpolicy=Enhanced</code>；源码 <code>Modules/Bcd.ps1</code>（<code>Invoke-BcdAdvancedModule</code>）+ <code>Modules/Backup.Bcd.ps1</code>/<code>Modules/Common.ps1</code></td>
 <td><code>Verify-BcdValue</code> 回读</td>
 <td>与 BOOT-002 共用 <code>bcd-backup.json</code>，按快照恢复原值或删除</td>
 </tr>
@@ -4244,14 +4244,14 @@
 <tr>
 <td>BOOT-003</td>
 <td>开启测试模式</td>
-<td>主菜单 <code>3</code>；开启 <code>testsigning</code>、<code>debug</code>、<code>dbgsettings local</code>、<code>nointegritychecks</code>；源码 <code>Modules/Menu.ps1</code>（Part 3）</td>
+<td>主菜单 <code>3</code>；开启 <code>testsigning</code>、<code>debug</code>、<code>dbgsettings local</code>、<code>nointegritychecks</code>；源码 <code>Modules/Bcd.ps1</code>（<code>Invoke-TestModeEnableModule</code>）</td>
 <td>无完整自动回读</td>
 <td>无独立快照；改变安全模型，需手工检查恢复</td>
 </tr>
 <tr>
 <td>BOOT-004</td>
 <td>关闭测试模式</td>
-<td>主菜单 <code>4</code>；删除 <code>testsigning</code>、<code>debug</code>，保留 <code>nointegritychecks</code>；源码 <code>Modules/Menu.ps1</code>（Part 4）</td>
+<td>主菜单 <code>4</code>；删除 <code>testsigning</code>、<code>debug</code>，保留 <code>nointegritychecks</code>；源码 <code>Modules/Bcd.ps1</code>（<code>Invoke-TestModeDisableModule</code>）</td>
 <td>无完整自动回读</td>
 <td>无精确原状态恢复；删除不存在值可能报告失败</td>
 </tr>
@@ -4287,7 +4287,7 @@
 <tr>
 <td>POWER-001</td>
 <td>超性能电源计划</td>
-<td>主菜单 <code>7</code>；导入仓库根目录 <code>ultimate-performance.pow</code> 并设为活动计划；首次应用前导出当前计划到 <code>power-backup.pow</code>；源码 <code>Modules/Menu.ps1</code>（Part 7）</td>
+<td>主菜单 <code>7</code>；导入仓库根目录 <code>ultimate-performance.pow</code> 并设为活动计划；首次应用前导出当前计划到 <code>power-backup.pow</code>；源码 <code>Modules/Power.ps1</code>（<code>Invoke-PowerModule</code>）</td>
 <td><code>powercfg /getactivescheme</code> 人工确认当前计划</td>
 <td>子项 <code>2</code> 导入 <code>power-backup.pow</code> 恢复最初计划；备份只保留最初快照</td>
 </tr>
@@ -4329,7 +4329,7 @@
 <li>可复核的验证方法</li>
 </ol>
 <h2 id="_3">事实核查记录<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<p>核验机制：本映射与《全量执行参考》由 tweakbyjie 仓库的 Coverage 自动审计（tools/Test-CrossRepoCoverage.ps1）持续校验——映射、执行参考、覆盖检查三份资料每一份都必须与 manifest 全部 44 项完全一致，缺少清单内编号与出现清单外编号均判失败。最近一次人工逐项校准：2026-08-21 对照 tweakbyjie main 源码完成（修正 CORE 总览范围与 NVMe 验证函数过时结论，补齐 CORE-001~016/POWER-001/REGISTRY-001 映射行，执行位置同步 docs/ 布局与 Registry/Nvme/Virtualization 模块迁移）。</p>
+<p>核验机制：本映射与《全量执行参考》由 tweakbyjie 仓库的 Coverage 自动审计（tools/Test-CrossRepoCoverage.ps1）持续校验——映射、执行参考、覆盖检查三份资料每一份都必须与 manifest 全部 44 项完全一致，缺少清单内编号与出现清单外编号均判失败；源码引用（<code>Modules/文件.ps1</code> 及 <code>/函数名</code> 后缀）由审计器校验文件存在与函数定义。最近一次人工逐项校准：2026-08-25 对照 tweakbyjie main（commit <code>cd95802</code>）完成——修正映射表中 10 处 <code>Modules/Menu.ps1</code>（Part N）为实际业务模块（Registry/Bcd/Service/Power/Mpo），清理 CPU/GPU/MEMORY 行的裸 <code>:NNN</code> 旧行号；此前 2026-08-21 完成模块化迁移同步与 44 项 ID 校准。</p>
 
 
 
@@ -4352,7 +4352,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月25日 13:13:07 UTC">2026年8月25日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月25日 13:58:18 UTC">2026年8月25日</span>
   </span>
 
     
