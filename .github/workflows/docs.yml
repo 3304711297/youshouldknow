@@ -65,6 +65,11 @@ jobs:
     # 必须同时等待 link-check:链接检查失败时不得部署,
     # 否则死链会静默上线(lychee 的 fail:true 只能让 link-check 自己变红)
     needs: [build, link-check, front-matter-check]
+    # 部署互斥:连续 main push 时,新部署开始会取消进行中的旧部署,
+    # 防止旧提交的 gh-deploy --force 晚到并把线上站点回退到旧版本
+    concurrency:
+      group: docs-deploy-${{ github.repository }}
+      cancel-in-progress: true
     runs-on: ubuntu-latest
     timeout-minutes: 15
     permissions:
