@@ -48,11 +48,11 @@ CORE-* 对应主菜单 `1` 的核心游戏优化与系统行为子项，是 Cove
 
 | 编号 | tweakbyjie 实际项目 | 执行位置与目标 | 当前验证范围 | 恢复方式与状态 |
 | --- | --- | --- | --- | --- |
-| CPU-001 | `Win32PrioritySeparation` | `HKLM\SYSTEM\CurrentControlSet\Control\PriorityControl\Win32PrioritySeparation` → `REG_DWORD 38`（十进制，`0x26`）；源码 `Modules/Registry.ps1`+ `Modules/Common.ps1/Set-RegDword` | 源码 `:813` 使用 `Verify-RegDword` 回读目标值 `38` | 修改前记录原始 DWORD，恢复原值；当前脚本未提供该项自动备份/恢复 |
-| CPU-002 | `Multimedia SystemProfile` | `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile`；源码 `:793-794` 写入该路径下的独立值 | 没有对该组配置进行统一回读 | 逐项记录并恢复原值；当前脚本未提供统一备份/恢复 |
-| CPU-003 | `SystemResponsiveness` | `...\Multimedia\SystemProfile\SystemResponsiveness` → `REG_DWORD 10`；源码 `:794` | 当前源码没有调用 `Verify-RegDword` 验证该值 | 修改前记录原始 DWORD，恢复原值；当前脚本未提供自动备份/恢复 |
-| CPU-004 | `NetworkThrottlingIndex` | `...\Multimedia\SystemProfile\NetworkThrottlingIndex` → `REG_DWORD 0xFFFFFFFF`；源码 `:793` | 当前源码没有对该值进行回读验证 | 修改前记录原始 DWORD，恢复原值；当前脚本未提供自动备份/恢复 |
-| CPU-005 | `Tasks\Games` | `...\Multimedia\SystemProfile\Tasks\Games`；源码 `:800-807` 写入七个值：`Affinity=0`、`Background Only=False`、`Clock Rate=10000`、`GPU Priority=8`、`Priority=6`、`Scheduling Category=High`、`SFIO Priority=High` | 当前源码没有对七个值进行回读验证 | 修改前记录每个值的存在状态、类型和值；恢复时逐项写回，原本不存在的值应删除；当前脚本未提供自动备份/恢复 |
+| CPU-001 | `Win32PrioritySeparation` | `HKLM\SYSTEM\CurrentControlSet\Control\PriorityControl\Win32PrioritySeparation` → `REG_DWORD 38`（十进制，`0x26`）；源码 `Modules/Registry.ps1`+ `Modules/Common.ps1/Set-RegDword` | 写入后使用 `Modules/Common.ps1/Verify-RegDword` 回读目标值 `38` | 修改前记录原始 DWORD，恢复原值；当前脚本未提供该项自动备份/恢复 |
+| CPU-002 | `Multimedia SystemProfile` | `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile`；`Modules/Registry.ps1` 写入该路径下的独立值 | 没有对该组配置进行统一回读 | 逐项记录并恢复原值；当前脚本未提供统一备份/恢复 |
+| CPU-003 | `SystemResponsiveness` | `...\Multimedia\SystemProfile\SystemResponsiveness` → `REG_DWORD 10`；源码 `Modules/Registry.ps1` | 当前源码没有调用 `Verify-RegDword` 验证该值 | 修改前记录原始 DWORD，恢复原值；当前脚本未提供自动备份/恢复 |
+| CPU-004 | `NetworkThrottlingIndex` | `...\Multimedia\SystemProfile\NetworkThrottlingIndex` → `REG_DWORD 0xFFFFFFFF`；源码 `Modules/Registry.ps1` | 当前源码没有对该值进行回读验证 | 修改前记录原始 DWORD，恢复原值；当前脚本未提供自动备份/恢复 |
+| CPU-005 | `Tasks\Games` | `...\Multimedia\SystemProfile\Tasks\Games`；`Modules/Registry.ps1` 写入七个值：`Affinity=0`、`Background Only=False`、`Clock Rate=10000`、`GPU Priority=8`、`Priority=6`、`Scheduling Category=High`、`SFIO Priority=High` | 当前源码没有对七个值进行回读验证 | 修改前记录每个值的存在状态、类型和值；恢复时逐项写回，原本不存在的值应删除；当前脚本未提供自动备份/恢复 |
 
 ### CPU 映射说明
 
@@ -65,8 +65,8 @@ CORE-* 对应主菜单 `1` 的核心游戏优化与系统行为子项，是 Cove
 
 | 编号 | tweakbyjie 实际项目 | 执行位置与目标 | 当前验证范围 | 恢复方式与状态 |
 | --- | --- | --- | --- | --- |
-| GPU-001 | HAGS / `HwSchMode` | 主菜单 `1` → 核心游戏优化 `1`；`HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers\HwSchMode` → `REG_DWORD 2`；源码 `Modules/Registry.ps1`+ `Modules/Common.ps1/Set-RegDword` | 源码 `:814` 使用 `Verify-RegDword` 回读 `HwSchMode=2`；仍需重启和实际游戏测试 | 当前核心路径未提供独立自动备份/恢复；修改前记录原值，恢复时写回或删除原本不存在的值 |
-| GPU-002 | MPO / Overlay | 主菜单 `11. MPO 设置管理`；管理 `DisableMPO`、`OverlayTestMode`、`DisableOverlays`、`OverlayMinFPS` 四个值；源码 `Modules/Menu.ps1`（Part 11）+ `Modules/Backup.Mpo.ps1` | `11 → 0` 只读查看注册表值；重启后用 `dxdiag` 作辅助判断，并结合浏览器、视频、多显示器、窗口化游戏、DX12、HDR、录屏和覆盖层实测 | 首次方案 A/B/C 前保存 `mpo-backup.json`；`11 → 4` 按原始存在状态、类型和值恢复；无备份时只能删除受管理值恢复系统默认 |
+| GPU-001 | HAGS / `HwSchMode` | 主菜单 `1` → 核心游戏优化 `1`；`HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers\HwSchMode` → `REG_DWORD 2`；源码 `Modules/Registry.ps1`+ `Modules/Common.ps1/Set-RegDword` | 写入后使用 `Modules/Common.ps1/Verify-RegDword` 回读 `HwSchMode=2`；仍需重启和实际游戏测试 | 当前核心路径未提供独立自动备份/恢复；修改前记录原值，恢复时写回或删除原本不存在的值 |
+| GPU-002 | MPO / Overlay | 主菜单 `11. MPO 设置管理`；管理 `DisableMPO`、`OverlayTestMode`、`DisableOverlays`、`OverlayMinFPS` 四个值；源码 `Modules/Mpo.ps1`（`Invoke-MpoModule`）+ `Modules/Backup.Mpo.ps1` | `11 → 0` 只读查看注册表值；重启后用 `dxdiag` 作辅助判断，并结合浏览器、视频、多显示器、窗口化游戏、DX12、HDR、录屏和覆盖层实测 | 首次方案 A/B/C 前保存 `mpo-backup.json`；`11 → 4` 按原始存在状态、类型和值恢复；无备份时只能删除受管理值恢复系统默认 |
 
 对应知识文档：[`GPU 调度与显示管线`](./GPU调度与显示管线.md)。
 
@@ -80,8 +80,8 @@ CORE-* 对应主菜单 `1` 的核心游戏优化与系统行为子项，是 Cove
 
 | 编号 | tweakbyjie 实际项目 | 执行位置与目标 | 当前验证范围 | 恢复方式与状态 |
 | --- | --- | --- | --- | --- |
-| MEMORY-001 | `EnablePrefetcher` | 主菜单 `1` → 系统行为优化 `2`；`HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters\EnablePrefetcher` → `REG_DWORD 0`；源码 `Modules/Registry.ps1`+ `Modules/Common.ps1/Verify-RegDword` | 源码 `:858` 使用 `Verify-RegDword` 回读 `0`；需重启后结合应用启动测试 | 当前脚本未保存原值，也没有自动恢复入口；恢复前应记录原值/存在状态，恢复时写回或删除 |
-| MEMORY-002 | Memory Compression | 主菜单 `1` → 系统行为优化 `2`；执行 `Disable-MMAgent -mc`；源码 `Modules/Menu.ps1`（Part 1，`Disable-MMAgent`） | 源码 `:859` 使用 `Verify-MemoryCompressionDisabled` / `Get-MMAgent` 检查关闭状态；需重启 | 当前脚本未保存原状态；手动恢复使用 `Enable-MMAgent -mc` 后重启 |
+| MEMORY-001 | `EnablePrefetcher` | 主菜单 `1` → 系统行为优化 `2`；`HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters\EnablePrefetcher` → `REG_DWORD 0`；源码 `Modules/Registry.ps1`+ `Modules/Common.ps1/Set-RegDword` | 写入后使用 `Modules/Common.ps1/Verify-RegDword` 回读 `0`；需重启后结合应用启动测试 | 当前脚本未保存原值，也没有自动恢复入口；恢复前应记录原值/存在状态，恢复时写回或删除 |
+| MEMORY-002 | Memory Compression | 主菜单 `1` → 系统行为优化 `2`；执行 `Disable-MMAgent -mc`；源码 `Modules/Registry.ps1`（`Disable-MMAgent`） | `Verify-MemoryCompressionDisabled` / `Get-MMAgent` 检查关闭状态；需重启 | 当前脚本未保存原状态；手动恢复使用 `Enable-MMAgent -mc` 后重启 |
 | MEMORY-003 | 虚拟内存 / 页面文件 | 当前 `tweakbyjie.ps1` 未发现 pagefile、分页文件或 `AutomaticManagedPagefile` 的执行项 | 知识文档提供 GUI 和系统托管原则，不属于脚本运行时验证 | 不存在脚本修改或脚本恢复项；不要把知识教程误记为自动化覆盖 |
 
 对应知识文档：[`Windows内存压缩功能与MMAgent设置`](../系统知识/Windows内存压缩功能与MMAgent设置.md)、[`Windows虚拟内存设置指南`](../系统知识/Windows虚拟内存设置指南.md)。
@@ -97,8 +97,8 @@ CORE-* 对应主菜单 `1` 的核心游戏优化与系统行为子项，是 Cove
 | 编号 | tweakbyjie 实际项目 | 执行位置与目标 | 当前验证范围 | 恢复方式与状态 |
 | --- | --- | --- | --- | --- |
 | STORAGE-001 | NTFS 8.3 短文件名 | 主菜单 `1` → 系统行为优化 `2`；`HKLM\SYSTEM\CurrentControlSet\Control\FileSystem\NtfsDisable8dot3NameCreation` → `REG_DWORD 1`；源码 `Modules/Registry.ps1` | 当前源码没有专门回读验证，也没有按卷核验 | 当前脚本没有原值备份或恢复入口；恢复需先记录原值/存在状态后写回或删除，并结合卷级状态检查 |
-| STORAGE-002 | NTFS TRIM | 主菜单 `1` → 系统行为优化 `2`；执行 `fsutil.exe behavior set DisableDeleteNotify 0`；源码 `Modules/Menu.ps1`（Part 1，`fsutil`） | 源码 `:860` 使用 `Verify-TrimEnabled` 查询全局 `DisableDeleteNotify=0`；不代表每个卷都已单独核验 | 脚本未备份原状态；恢复应根据修改前策略谨慎处理，不应无条件关闭 TRIM |
-| STORAGE-003 | BITS 启动类型 | 主菜单 `6` 服务优化；`BITS` 在手动服务组中设为 `Manual`；源码 `Modules/Menu.ps1`（Part 6）+ `Modules/Backup.Service.ps1` | `Verify-ServiceStartupType` 验证 `Manual` | 服务优化前写入 `service-backup.json`，选项 `6 → 2` 按快照恢复原启动类型；当前恢复不保证恢复服务运行状态 |
+| STORAGE-002 | NTFS TRIM | 主菜单 `1` → 系统行为优化 `2`；执行 `fsutil.exe behavior set DisableDeleteNotify 0`；源码 `Modules/Registry.ps1`（`fsutil`） | `Verify-TrimEnabled` 查询全局 `DisableDeleteNotify=0`；不代表每个卷都已单独核验 | 脚本未备份原状态；恢复应根据修改前策略谨慎处理，不应无条件关闭 TRIM |
+| STORAGE-003 | BITS 启动类型 | 主菜单 `6` 服务优化；`BITS` 在手动服务组中设为 `Manual`；源码 `Modules/Service.ps1`（`Invoke-ServiceModule`）+ `Modules/Backup.Service.ps1` | `Verify-ServiceStartupType` 验证 `Manual` | 服务优化前写入 `service-backup.json`，选项 `6 → 2` 按快照恢复原启动类型；当前恢复不保证恢复服务运行状态 |
 | STORAGE-004 | Native NVMe Driver | 主菜单 `8`；按系统版本、NVMe 和 ViVeTool 条件管理 Feature/SafeBoot/驱动状态；源码 `Modules/Nvme.ps1`+ `Modules/Backup.Nvme.ps1` | 重启后检查 `nvmedisk` 驱动状态；模块有失败回滚和状态检查 | 使用 NVMe 专用快照恢复 Feature、SafeBoot 和旧 Override；该模块不是写入缓存设置 |
 | STORAGE-005 | 写入缓存策略 | 当前 `tweakbyjie.ps1` 未发现实际写入项 | 无脚本验证 | 仅有知识/检查文档提及，不计作脚本执行覆盖 |
 
@@ -108,7 +108,7 @@ CORE-* 对应主菜单 `1` 的核心游戏优化与系统行为子项，是 Cove
 
 | 编号 | tweakbyjie 实际项目 | 执行位置与目标 | 当前验证范围 | 恢复方式与状态 |
 | --- | --- | --- | --- | --- |
-| SECURITY-001 | CPU 安全缓解覆盖 | 主菜单 `1` → CPU 安全缓解子项 `2`；`HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\FeatureSettingsOverride=3`、`FeatureSettingsOverrideMask=3`；源码 `Modules/Menu.ps1`（Part 1，CPU 缓解）+ `Modules/Backup.SecurityMitigation.ps1` | 写入后分别用 `Verify-RegDword` 回读；专用备份快照保存存在性和原值 | `security-mitigation-backup.json` 记录原状态，子项 `3` 按快照恢复 |
+| SECURITY-001 | CPU 安全缓解覆盖 | 主菜单 `1` → CPU 安全缓解子项 `2`；`HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\FeatureSettingsOverride=3`、`FeatureSettingsOverrideMask=3`；源码 `Modules/Registry.ps1`（CPU 缓解子项）+ `Modules/Backup.SecurityMitigation.ps1` | 写入后分别用 `Verify-RegDword` 回读；专用备份快照保存存在性和原值 | `security-mitigation-backup.json` 记录原状态，子项 `3` 按快照恢复 |
 | SECURITY-002 | VBS/HVCI/Credential Guard/Hyper-V 关闭 | 主菜单 `10` 子项 `1`；写入 5 个 Device Guard 相关注册表值为 `0`，设置 BCD `hypervisorlaunchtype off`、`isolatedcontext no`、`vsmlaunchtype off`，禁用 Hyper-V；源码 `Modules/Virtualization.ps1`+ `Modules/Common.ps1`（`Set-RegDword`/`Verify-BcdValue`） | BCD 有 `Verify-BcdValue`；注册表没有专门回读；运行状态需重启后检查 | 子项 `2` 删除脚本覆盖并尝试启用 Hyper-V，但脚本明确不是原始状态精确回滚，未保存原始注册表/功能状态 |
 | SECURITY-003 | Device Guard EFI 锁定清除 | 主菜单 `9`；检查 BitLocker，复制/调用 `SecConfig.efi`，创建一次性 BCD 引导项清除 EFI 变量；源码 `Modules/Virtualization.ps1` | 重启后用 `msinfo32` 等检查；有临时 BCD 清理 | 没有 EFI 变量原始快照或精确恢复；清理子项只能删除临时引导项，EFI 状态重新启用需系统安全设置手工处理 |
 
@@ -118,7 +118,7 @@ CORE-* 对应主菜单 `1` 的核心游戏优化与系统行为子项，是 Cove
 
 | 编号 | tweakbyjie 实际项目 | 执行位置与目标 | 当前验证范围 | 恢复方式与状态 |
 | --- | --- | --- | --- | --- |
-| SERVICE-001 | Part 6 服务启动类型 | 主菜单 `6 → 1`；Group A 21 个 + Group B 9 个设为 `Disabled`，Xbox/Bluetooth/Embedded/BITS 7 个设为 `Manual`；源码 `Modules/Menu.ps1`（Part 6）+ `Modules/Backup.Service.ps1` | `Verify-ServiceStartupType` 使用 `Win32_Service.StartMode` 逐项验证；不验证运行状态和依赖功能 | 修改前创建/校验 `service-backup.json`；`6 → 2` 恢复原启动类型，不强制恢复运行状态 |
+| SERVICE-001 | Part 6 服务启动类型 | 主菜单 `6 → 1`；Group A 21 个 + Group B 9 个设为 `Disabled`，Xbox/Bluetooth/Embedded/BITS 7 个设为 `Manual`；源码 `Modules/Service.ps1`（`Invoke-ServiceModule`）+ `Modules/Backup.Service.ps1` | `Verify-ServiceStartupType` 使用 `Win32_Service.StartMode` 逐项验证；不验证运行状态和依赖功能 | 修改前创建/校验 `service-backup.json`；`6 → 2` 恢复原启动类型，不强制恢复运行状态 |
 | SERVICE-002 | Part 5 Defender/Security Center 服务与策略 | 主菜单 `5 → 1`；`WinDefend` 及额外 Defender 服务停止并禁用，同时写入约 95 个 Defender/SmartScreen/Security Center 策略值（定义见 `Modules/Backup.Defender.ps1`），可选分支删除任务、启动项和 `SecHealthUI`；源码 `Modules/Defender.ps1`（Invoke-DefenderModule） | 策略写入无逐项回读；首次应用前自动快照到 `defender-policy-backup.json` | 注册表策略值经主菜单 `5 → 2` 按快照恢复；服务停用、任务删除与 SecHealthUI 移除无精确回滚 |
 
 对应知识文档：[`Windows服务优化原则`](../系统调优与安全/Windows服务优化原则.md)、[`Windows系统服务对应注册表路径`](../系统知识/Windows系统服务对应注册表路径.md)。
@@ -127,10 +127,10 @@ CORE-* 对应主菜单 `1` 的核心游戏优化与系统行为子项，是 Cove
 
 | 编号 | tweakbyjie 实际项目 | 执行位置与目标 | 当前验证范围 | 恢复方式与状态 |
 | --- | --- | --- | --- | --- |
-| BOOT-001 | 高级 BCD 计时器 | 主菜单 `2`；`useplatformclock=no`、`useplatformtick=no`、`disabledynamictick=yes`、`tscsyncpolicy=Enhanced`；源码 `Modules/Menu.ps1`（Part 2）+ `Modules/Backup.Bcd.ps1`/`Modules/Common.ps1` | `Verify-BcdValue` 回读 | 与 BOOT-002 共用 `bcd-backup.json`，按快照恢复原值或删除 |
+| BOOT-001 | 高级 BCD 计时器 | 主菜单 `2`；`useplatformclock=no`、`useplatformtick=no`、`disabledynamictick=yes`、`tscsyncpolicy=Enhanced`；源码 `Modules/Bcd.ps1`（`Invoke-BcdAdvancedModule`）+ `Modules/Backup.Bcd.ps1`/`Modules/Common.ps1` | `Verify-BcdValue` 回读 | 与 BOOT-002 共用 `bcd-backup.json`，按快照恢复原值或删除 |
 | BOOT-002 | 启动安全 BCD | 主菜单 `2`；`nx=AlwaysOff`、`tpmbootentropy=ForceDisable`、`nointegritychecks=Yes` | `Verify-BcdValue` 回读 | 依赖有效 `bcd-backup.json`；无备份时拒绝声称恢复 |
-| BOOT-003 | 开启测试模式 | 主菜单 `3`；开启 `testsigning`、`debug`、`dbgsettings local`、`nointegritychecks`；源码 `Modules/Menu.ps1`（Part 3） | 无完整自动回读 | 无独立快照；改变安全模型，需手工检查恢复 |
-| BOOT-004 | 关闭测试模式 | 主菜单 `4`；删除 `testsigning`、`debug`，保留 `nointegritychecks`；源码 `Modules/Menu.ps1`（Part 4） | 无完整自动回读 | 无精确原状态恢复；删除不存在值可能报告失败 |
+| BOOT-003 | 开启测试模式 | 主菜单 `3`；开启 `testsigning`、`debug`、`dbgsettings local`、`nointegritychecks`；源码 `Modules/Bcd.ps1`（`Invoke-TestModeEnableModule`） | 无完整自动回读 | 无独立快照；改变安全模型，需手工检查恢复 |
+| BOOT-004 | 关闭测试模式 | 主菜单 `4`；删除 `testsigning`、`debug`，保留 `nointegritychecks`；源码 `Modules/Bcd.ps1`（`Invoke-TestModeDisableModule`） | 无完整自动回读 | 无精确原状态恢复；删除不存在值可能报告失败 |
 | BOOT-005 | Device Guard EFI 锁定清除 | 主菜单 `9`；BitLocker 检查、SecConfig.efi、一次性 BCD 引导项；源码 `Modules/Virtualization.ps1` | 重启后 `msinfo32` 等人工检查；清理临时 BCD | 无 EFI/bootsequence 原始快照；只能清理临时项，不是精确回滚 |
 | BOOT-006 | VBS/Hyper-V 启动项 | 主菜单 `10`；`hypervisorlaunchtype`、`vsmlaunchtype`、`isolatedcontext`；源码 `Modules/Virtualization.ps1`+ `Modules/Common.ps1`（`Set-RegDword`/`Verify-BcdValue`） | BCD 值有回读，运行状态需重启 | 删除覆盖并尝试启用 Hyper-V，不恢复原 BCD/功能状态 |
 
@@ -140,7 +140,7 @@ CORE-* 对应主菜单 `1` 的核心游戏优化与系统行为子项，是 Cove
 
 | 编号 | tweakbyjie 实际项目 | 执行位置与目标 | 当前验证范围 | 恢复方式与状态 |
 | --- | --- | --- | --- | --- |
-| POWER-001 | 超性能电源计划 | 主菜单 `7`；导入仓库根目录 `ultimate-performance.pow` 并设为活动计划；首次应用前导出当前计划到 `power-backup.pow`；源码 `Modules/Menu.ps1`（Part 7） | `powercfg /getactivescheme` 人工确认当前计划 | 子项 `2` 导入 `power-backup.pow` 恢复最初计划；备份只保留最初快照 |
+| POWER-001 | 超性能电源计划 | 主菜单 `7`；导入仓库根目录 `ultimate-performance.pow` 并设为活动计划；首次应用前导出当前计划到 `power-backup.pow`；源码 `Modules/Power.ps1`（`Invoke-PowerModule`） | `powercfg /getactivescheme` 人工确认当前计划 | 子项 `2` 导入 `power-backup.pow` 恢复最初计划；备份只保留最初快照 |
 
 对应知识文档：[`电源计划创建与优化指南`](../系统知识/电源计划创建与优化指南.md)；`.pow` 文件的来源与哈希校验见 tweakbyjie 仓库 `docs/POWER-PLAN-SOURCE.md`。
 
@@ -170,4 +170,4 @@ CORE-* 对应主菜单 `1` 的核心游戏优化与系统行为子项，是 Cove
 6. 可复核的验证方法
 ## 事实核查记录
 
-核验机制：本映射与《全量执行参考》由 tweakbyjie 仓库的 Coverage 自动审计（tools/Test-CrossRepoCoverage.ps1）持续校验——映射、执行参考、覆盖检查三份资料每一份都必须与 manifest 全部 44 项完全一致，缺少清单内编号与出现清单外编号均判失败。最近一次人工逐项校准：2026-08-21 对照 tweakbyjie main 源码完成（修正 CORE 总览范围与 NVMe 验证函数过时结论，补齐 CORE-001~016/POWER-001/REGISTRY-001 映射行，执行位置同步 docs/ 布局与 Registry/Nvme/Virtualization 模块迁移）。
+核验机制：本映射与《全量执行参考》由 tweakbyjie 仓库的 Coverage 自动审计（tools/Test-CrossRepoCoverage.ps1）持续校验——映射、执行参考、覆盖检查三份资料每一份都必须与 manifest 全部 44 项完全一致，缺少清单内编号与出现清单外编号均判失败；源码引用（`Modules/文件.ps1` 及 `/函数名` 后缀）由审计器校验文件存在与函数定义。最近一次人工逐项校准：2026-08-25 对照 tweakbyjie main（commit `cd95802`）完成——修正映射表中 10 处 `Modules/Menu.ps1`（Part N）为实际业务模块（Registry/Bcd/Service/Power/Mpo），清理 CPU/GPU/MEMORY 行的裸 `:NNN` 旧行号；此前 2026-08-21 完成模块化迁移同步与 44 项 ID 校准。

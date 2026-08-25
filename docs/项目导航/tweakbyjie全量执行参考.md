@@ -1,7 +1,7 @@
 # tweakbyjie 全量逐项执行参考
 
 
-> 已与 `tweakbyjie` 模块化结构同步：执行逻辑现位于 `Modules/Menu.ps1` 与 `Modules/Common.ps1`（通用写入/验证）、`Modules/Backup.*.ps1`（备份闭环）；此处不再使用 `tweakbyjie.ps1:行号` 定位，以 `Modules/函数名` 为准。详见 `tweakbyjie/docs/design/CODE-REFACTOR-STATUS.md`。
+> 已与 `tweakbyjie` 模块化结构同步：`Modules/Menu.ps1` 只负责菜单调度，执行逻辑位于各业务模块（`Registry/Bcd/Defender/Mpo/Nvme/Power/Service/Virtualization.ps1`）与 `Modules/Common.ps1`（通用写入/验证）、`Modules/Backup.*.ps1`（备份闭环）；正文表格中的 `:NNN` 为模块化前单文件源码的历史行号快照（见文末边界说明），现行定位以 `Modules/文件.ps1` 和函数名为准。详见 `tweakbyjie/docs/design/CODE-REFACTOR-STATUS.md`。
 
 > **用途**：把 `tweakbyjie/tweakbyjie.ps1` 当前实际执行项转换为可核对的参考手册。
 >
@@ -52,7 +52,7 @@
 
 ### CPU-002 `Multimedia\SystemProfile`
 
-- **入口/源码**：主菜单 `1→1`；`Modules/Menu.ps1`。
+- **入口/源码**：主菜单 `1→1`；`Modules/Registry.ps1`（`Invoke-RegistryModule`）。
 - **目标对象**：`HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile`。
 - **实际子项**：`SystemResponsiveness=10`、`NetworkThrottlingIndex=0xFFFFFFFF`，以及 `Tasks\Games` 七项；它们应分别核对，不应把路径当成单一值。
 - **验证/恢复**：除 CPU-001/HAGS 外没有统一回读；无统一原值备份；必须人工记录每个值的存在性、类型和值。
@@ -228,4 +228,4 @@
 - “脚本执行”不等于“可恢复”；“配置层回读”不等于“运行时有效”；“知识说明”不等于“脚本支持”。
 ## 事实核查记录
 
-核验机制：由 tweakbyjie 仓库 Coverage 自动审计持续校验，映射、执行参考、覆盖检查三份资料每一份都必须与 manifest 全部 44 项完全一致（缺少清单内编号与出现清单外编号均判失败）；2026-08-21 对照 main 源码逐项校准一次（CORE 总览范围、NVMe 验证函数结论、SECURITY-002/003 与 MEMORY-003/STORAGE-005 编号补齐，合并编号标题展开为完整 ID）。⚠️ 已知边界：正文表格中的 `:NNN` 为模块化前单文件源码的基线行号快照，仅作历史对照，不对应现行 Modules/ 结构；现行定位以 `Modules/函数名` 为准。
+核验机制：由 tweakbyjie 仓库 Coverage 自动审计持续校验，映射、执行参考、覆盖检查三份资料每一份都必须与 manifest 全部 44 项完全一致（缺少清单内编号与出现清单外编号均判失败）；正文 `Modules/文件.ps1` 引用由审计器校验文件存在与函数定义。2026-08-25 对照 tweakbyjie main（commit `cd95802`）校准：页首定位说明改为“Menu 仅调度、执行在各业务模块”，CPU-002 源码定位修正为 `Modules/Registry.ps1`。⚠️ 已知边界：正文表格中的 `:NNN` 为模块化前单文件源码的基线行号快照，仅作历史对照，不对应现行 Modules/ 结构；现行定位以 `Modules/函数名` 为准。

@@ -2,7 +2,7 @@
 
 ## 对应范围
 
-> 已与 `tweakbyjie` 模块化结构同步：执行逻辑现位于 `Modules/Menu.ps1` 与 `Modules/Common.ps1`（通用写入/验证）、`Modules/Backup.*.ps1`（备份闭环）；此处不再使用 `tweakbyjie.ps1:行号` 定位，以 `Modules/函数名` 为准。详见 `tweakbyjie/docs/design/CODE-REFACTOR-STATUS.md`。
+> 已与 `tweakbyjie` 模块化结构同步：`Modules/Menu.ps1` 只负责菜单调度，BCD/测试模式执行逻辑位于 `Modules/Bcd.ps1`，通用写入/验证在 `Modules/Common.ps1`，备份闭环在 `Modules/Backup.*.ps1`；此处不再使用 `tweakbyjie.ps1:行号` 定位，以 `Modules/文件.ps1` 和函数名为准。详见 `tweakbyjie/docs/design/CODE-REFACTOR-STATUS.md`。
 
 
 本页对应 `tweakbyjie/tweakbyjie.ps1` 的 BCD、测试模式和 Device Guard 启动项操作。启动配置会影响系统能否正常启动、驱动完整性和安全边界，不能与普通游戏优化混合执行。
@@ -11,7 +11,7 @@
 
 ### 执行入口与目标
 
-主菜单 `2. 高级 BCD / 计时器与启动安全`，源码 `Modules/Menu.ps1`（Part 2）+ `Modules/Backup.Bcd.ps1`/`Modules/Common.ps1`：
+主菜单 `2. 高级 BCD / 计时器与启动安全`，源码 `Modules/Bcd.ps1`（`Invoke-BcdAdvancedModule`）+ `Modules/Backup.Bcd.ps1`/`Modules/Common.ps1`：
 
 ```text
 useplatformclock    = No
@@ -47,7 +47,7 @@ HPET（High Precision Event Timer，高精度事件定时器）是主板上的�
 
 ### 执行入口与目标
 
-同为主菜单 `2`，源码 `Modules/Menu.ps1`（Part 2）+ `Modules/Backup.Bcd.ps1`/`Modules/Common.ps1`：
+同为主菜单 `2`，源码 `Modules/Bcd.ps1`（`Invoke-BcdAdvancedModule` 启动安全子项）+ `Modules/Backup.Bcd.ps1`/`Modules/Common.ps1`：
 
 ```text
 nx               = AlwaysOff
@@ -65,7 +65,7 @@ nointegritychecks = Yes
 
 ### 执行入口与目标
 
-主菜单 `3. 开启测试模式`，源码 `Modules/Menu.ps1`（Part 3）：
+主菜单 `3. 开启测试模式`，源码 `Modules/Bcd.ps1`（`Invoke-TestModeEnableModule`）：
 
 ```text
 bcdedit /set testsigning on
@@ -86,7 +86,7 @@ bcdedit /set nointegritychecks on
 
 ### 执行入口与目标
 
-主菜单 `4. 关闭测试模式`，源码 `Modules/Menu.ps1`（Part 4）。当前脚本删除：
+主菜单 `4. 关闭测试模式`，源码 `Modules/Bcd.ps1`（`Invoke-TestModeDisableModule`）。当前脚本删除：
 
 ```text
 bcdedit /deletevalue testsigning

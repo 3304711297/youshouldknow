@@ -326,7 +326,7 @@ Get-ItemProperty `
 ### 执行位置
 
 - 路径定义：`Modules/Registry.ps1`
-- 写入位置：`Modules/Menu.ps1`（Part 1，Games 任务七项）
+- 写入位置：`Modules/Registry.ps1`（`Invoke-RegistryModule` 核心游戏子项，Games 任务七项）
 - 入口：主菜单 `1` → 核心游戏优化 `1`
 
 ### 注册表位置与目标值

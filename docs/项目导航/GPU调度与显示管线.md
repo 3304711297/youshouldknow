@@ -71,7 +71,7 @@ MPO 相关异常可能表现为闪屏、切屏黑屏、副屏冻结、Chromium �
 
 ### tweakbyjie 执行位置
 
-- 源码：`Modules/Menu.ps1`（Part 11）+ `Modules/Backup.Mpo.ps1`
+- 源码：`Modules/Mpo.ps1`（`Invoke-MpoModule`）+ `Modules/Backup.Mpo.ps1`
 - 入口：主菜单 `11. MPO 设置管理`
 - 修改前调用 `Ensure-MpoBackup`，首次保存脚本目录下的 `mpo-backup.json`
 - 修改后需重启；`11 → 4` 用于恢复
