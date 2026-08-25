@@ -53,7 +53,7 @@
 
 | 声明 | 核查结果 |
 | --- | --- |
-| tweakbyjie 采用 Loader + `Modules/` 模块化结构 | ✅ 属实：Loader 约 100 行，点源 12 个模块文件 |
-| 模块清单为 Common + 5 个 Backup.* + Menu | ❌ 勘误并已更新：现为 Common + 6 个 `Backup.*`（含 Defender）+ Registry/Nvme/Virtualization/Defender 四个编排模块 + Menu |
-| 执行位置采用 `Modules/函数名` 定位而非行号 | ✅ 属实：映射表与执行参考均已迁移 |
-| `Menu.ps1` 含 11 个 Part | ✅ 属实：菜单选项 1–11 对应 11 个功能模块函数 |
+| tweakbyjie 采用 Loader + `Modules/` 模块化结构 | ✅ 属实：Loader 约 127 行，点源 16 个模块文件（由 Coverage Loader 契约自动校验） |
+| 模块清单为 Common + 5 个 Backup.* + Menu | ❌ 勘误并已更新：现为 Common + 6 个 `Backup.*`（含 Defender）+ Bcd/Defender/Mpo/Nvme/Power/Registry/Service/Virtualization 八个执行模块 + Menu（共 16 个点源文件） |
+| 执行位置采用 `Modules/函数名` 定位而非行号 | ✅ 属实：映射表与执行参考均已迁移；2026-08-25 校准后映射表中 Part N 级 `Modules/Menu.ps1` 引用已替换为实际业务模块 |
+| `Menu.ps1` 含 11 个 Part | ✅ 属实：菜单选项 1–11 对应 11 个功能模块函数（由 Coverage 菜单契约自动校验） |
