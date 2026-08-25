@@ -2,7 +2,7 @@
 
 ## 目的
 
-> 已与 `tweakbyjie` 模块化结构同步：`Modules/Menu.ps1` 只负责菜单调度，实际执行逻辑位于各业务模块（如 `Registry.ps1`、`Bcd.ps1`、`Service.ps1`、`Power.ps1`、`Nvme.ps1`、`Virtualization.ps1`、`Defender.ps1`、`Mpo.ps1`）及 `Common.ps1`/`Backup.*.ps1`；此处不再使用 `tweakbyjie.ps1:行号` 定位，以 `Modules/File.ps1#FunctionName` 为准。详见 `tweakbyjie/docs/design/CODE-REFACTOR-STATUS.md`。
+> 已与 `tweakbyjie` 模块化结构同步：`Modules/Menu.ps1` 只负责菜单调度，实际执行逻辑位于各业务模块（如 `Registry.ps1`、`Bcd.ps1`、`Service.ps1`、`Power.ps1`、`Nvme.ps1`、`Virtualization.ps1`、`Defender.ps1`、`Mpo.ps1`）及 `Common.ps1`/`Backup.*.ps1`；此处不再使用 `tweakbyjie.ps1:行号` 定位，应结合实际模块文件和函数名核对。详见 `tweakbyjie/docs/design/CODE-REFACTOR-STATUS.md`。
 
 
 建立知识说明与实际优化之间的对应关系。逐项映射必须以 `tweakbyjie/tweakbyjie.ps1`（脚本位于 tweakbyjie 仓库根目录） 当前源码为准，不能只根据概念标题判断已经覆盖。
@@ -13,7 +13,7 @@
 知识原理 → 优化项目 → 执行位置 → 验证方式 → 恢复方式
 ```
 
-完整逐项执行参考见：[tweakbyjie 全量执行参考](./tweakbyjie全量执行参考.md)。本页保留分类级快速映射；全量参考记录路径、类型、目标值、备份粒度、源码行号和已知缺陷。
+完整逐项执行参考见：[tweakbyjie 全量执行参考](./tweakbyjie全量执行参考.md)。本页保留分类级快速映射；全量参考记录路径、类型、目标值、备份粒度、源码定位和已知缺陷。Coverage 审计主要保证清单编号和约定的源码文件引用不漂移，不等同于功能收益、安全性或精确回滚认证；高风险项目仍需人工复核和隔离环境验证。
 
 ## CORE 逐项映射
 
