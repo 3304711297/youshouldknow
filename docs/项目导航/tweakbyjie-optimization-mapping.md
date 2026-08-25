@@ -2,7 +2,7 @@
 
 ## 目的
 
-> 已与 `tweakbyjie` 模块化结构同步：执行逻辑现位于 `Modules/Menu.ps1` 与 `Modules/Common.ps1`（通用写入/验证）、`Modules/Backup.*.ps1`（备份闭环）；此处不再使用 `tweakbyjie.ps1:行号` 定位，以 `Modules/函数名` 为准。详见 `tweakbyjie/docs/design/CODE-REFACTOR-STATUS.md`。
+> 已与 `tweakbyjie` 模块化结构同步：`Modules/Menu.ps1` 只负责菜单调度，实际执行逻辑位于各业务模块（如 `Registry.ps1`、`Bcd.ps1`、`Service.ps1`、`Power.ps1`、`Nvme.ps1`、`Virtualization.ps1`、`Defender.ps1`、`Mpo.ps1`）及 `Common.ps1`/`Backup.*.ps1`；此处不再使用 `tweakbyjie.ps1:行号` 定位，以 `Modules/File.ps1#FunctionName` 为准。详见 `tweakbyjie/docs/design/CODE-REFACTOR-STATUS.md`。
 
 
 建立知识说明与实际优化之间的对应关系。逐项映射必须以 `tweakbyjie/tweakbyjie.ps1`（脚本位于 tweakbyjie 仓库根目录） 当前源码为准，不能只根据概念标题判断已经覆盖。
