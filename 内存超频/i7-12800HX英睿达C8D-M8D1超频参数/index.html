@@ -3553,7 +3553,7 @@
 <blockquote>
 <p><strong>定位</strong>：i7-12800HX（Alder Lake HX 移动端）+ 英睿达 DDR5 <strong>2×16GB 双条</strong>（Micron 颗粒 C8D / M8D1，模组型号 CT16G56C46S5.M8D1）平台的内存超频实机作业记录。</p>
 <p>收录四组频率作业：原厂 5400c38 → 6000（基础/收紧两版）→ 6200C42 → 6400。</p>
-<p>⚠️ 本文为个人/社区作业笔记整理，未经独立横向验证；四组数据的内部换算自洽性已核对，见<a href="#事实核查记录">事实核查记录</a>。海力士颗粒（A-die/M-die）平台的作业另见 <a href="../DDR5-%E5%86%85%E5%AD%98%E8%B6%85%E9%A2%91%E6%97%B6%E5%BA%8F%E5%8F%82%E6%95%B0%E5%85%AC%E5%BC%8F%E9%80%9F%E6%9F%A5/">DDR5 时序公式速查</a> 与 <a href="../i7-12800HX%E6%B5%B7%E5%8A%9B%E5%A3%ABM-die%E8%B6%85%E9%A2%91%E5%8F%82%E6%95%B0/">i7-12800HX 海力士 M-die 超频参数</a>，<strong>不同颗粒的 tRFC 系列差异巨大，不可混用</strong>。</p>
+<p>⚠️ 本文为个人/社区作业笔记整理，未经独立横向验证；四组数据的内部换算自洽性已核对，见<a href="#fact-check">事实核查记录</a>。海力士颗粒（A-die/M-die）平台的作业另见 <a href="../DDR5-%E5%86%85%E5%AD%98%E8%B6%85%E9%A2%91%E6%97%B6%E5%BA%8F%E5%8F%82%E6%95%B0%E5%85%AC%E5%BC%8F%E9%80%9F%E6%9F%A5/">DDR5 时序公式速查</a> 与 <a href="../i7-12800HX%E6%B5%B7%E5%8A%9B%E5%A3%ABM-die%E8%B6%85%E9%A2%91%E5%8F%82%E6%95%B0/">i7-12800HX 海力士 M-die 超频参数</a>，<strong>不同颗粒的 tRFC 系列差异巨大，不可混用</strong>。</p>
 </blockquote>
 <h2 id="_1">阅读说明<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
@@ -3814,8 +3814,9 @@
 <li>6200 组的 tRFC 940 明显高于 6400 组的 824，若从 6200 直接升 6400，记得同步下调 tRFC；</li>
 <li>电压四组统一 1.10/1.10/1.80V，复现时建议先保持原值，稳定后再考虑小步调整。</li>
 </ol>
+<p><a id="fact-check"></a></p>
 <h2 id="_5">事实核查记录<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
-<p>核验基准：原始作业笔记截图（共五张，2026-08-21 整理）+ 内部换算自洽性检验。</p>
+<p>核验基准：原始作业笔记截图（共五张，2026-08-21（本次未重新核验） 整理）+ 内部换算自洽性检验。</p>
 <table>
 <thead>
 <tr>
@@ -3876,7 +3877,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月21日 13:50:16 UTC">2026年8月21日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月26日 14:25:59 UTC">2026年8月26日</span>
   </span>
 
     
