@@ -180,7 +180,7 @@ pnputil /delete-driver oemXX.inf /uninstall
 
 ## 事实核查记录
 
-核验基准：单机案例记录 + Driver Store Explorer 工具公开资料（2026-08-21）。
+核验基准：单机案例记录 + Driver Store Explorer 工具公开资料（2026-08-21（本次未重新核验））。
 
 | 声明 | 核查结果 |
 | --- | --- |

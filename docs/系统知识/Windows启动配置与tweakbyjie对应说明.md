@@ -143,7 +143,7 @@ isolatedcontext      = No
 - 任何测试模式、`nointegritychecks`、VBS/HVCI 或 EFI 操作都应独立测试并保留恢复介质。
 ## 事实核查记录
 
-核验基准：tweakbyjie 仓库 main 分支源码（2026-08-21）。
+核验基准：tweakbyjie 仓库 main 分支源码（2026-08-21（本次未重新核验））。
 
 | 声明 | 核查结果 |
 | --- | --- |

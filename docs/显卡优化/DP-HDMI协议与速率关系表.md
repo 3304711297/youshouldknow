@@ -5,6 +5,7 @@ applies_to:
   - Windows 10/11 PC 显示输出
   - DisplayPort / HDMI 显示器与线材选购
 verified_on: 2026-08-21
+# 本次收尾未重新核验外部事实，verified_on 保留上次核验日期
 ---
 
 # DP / HDMI 协议与速率关系表

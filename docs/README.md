@@ -67,6 +67,7 @@ risk: low
 applies_to:
   - Windows 10/11
 verified_on: 2026-08-21
+# 本次收尾未重新核验外部事实，verified_on 保留上次核验日期
 ---
 ```
 

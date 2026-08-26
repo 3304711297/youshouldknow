@@ -5,6 +5,7 @@ applies_to:
   - Windows 10/11 命令提示符与 PowerShell
   - Windows 系统目录和用户路径定位
 verified_on: 2026-08-21
+# 本次收尾未重新核验外部事实，verified_on 保留上次核验日期
 ---
 
 # Windows 常用环境变量列表

@@ -96,7 +96,7 @@ Prefetch 是 Windows 改善启动和程序加载的机制。关闭后可能减�
 
 ## 事实核查记录
 
-核验基准：tweakbyjie 仓库 main 分支源码与 youshouldknow 映射文档（2026-08-21）。
+核验基准：tweakbyjie 仓库 main 分支源码与 youshouldknow 映射文档（2026-08-21（本次未重新核验））。
 
 | 声明 | 核查结果 |
 | --- | --- |

@@ -5,6 +5,7 @@ applies_to:
   - Windows 10/11 Win + R、命令提示符与 PowerShell
   - 系统管理工具和诊断命令速查
 verified_on: 2026-08-21
+# 本次收尾未重新核验外部事实，verified_on 保留上次核验日期
 ---
 
 # Windows 常用命令列表（Win + R 运行速查）
