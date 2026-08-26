@@ -170,4 +170,4 @@ CORE-* 对应主菜单 `1` 的核心游戏优化与系统行为子项，是 Cove
 6. 可复核的验证方法
 ## 事实核查记录
 
-核验机制：本映射与《全量执行参考》由 tweakbyjie 仓库的 Coverage 自动审计（tools/Test-CrossRepoCoverage.ps1）持续校验——映射、执行参考、覆盖检查三份资料每一份都必须与 manifest 全部 44 项完全一致，缺少清单内编号与出现清单外编号均判失败；源码引用（`Modules/文件.ps1` 及 `/函数名` 后缀）由审计器校验文件存在与函数定义。最近一次人工逐项校准：2026-08-25 对照 tweakbyjie main（commit `cd95802`）完成——修正映射表中 10 处 `Modules/Menu.ps1`（Part N）为实际业务模块（Registry/Bcd/Service/Power/Mpo），清理 CPU/GPU/MEMORY 行的裸 `:NNN` 旧行号；此前 2026-08-21 完成模块化迁移同步与 44 项 ID 校准。
+核验机制：本映射与《全量执行参考》由 tweakbyjie 仓库的 Coverage 自动审计（tools/Test-CrossRepoCoverage.ps1）持续校验——映射、执行参考、覆盖检查三份资料每一份都必须与 manifest 全部 44 项完全一致，缺少清单内编号与出现清单外编号均判失败；源码引用（`Modules/文件.ps1` 及 `/函数名` 后缀）由审计器校验文件存在与函数定义。最近一次人工逐项校准：2026-08-25 对照 tweakbyjie main（commit `cd95802`）完成——修正映射表中 10 处 `Modules/Menu.ps1`（Part N）为实际业务模块（Registry/Bcd/Service/Power/Mpo），清理 CPU/GPU/MEMORY 行的裸 `:NNN` 旧行号；此前 2026-08-21（本次未重新核验） 完成模块化迁移同步与 44 项 ID 校准。

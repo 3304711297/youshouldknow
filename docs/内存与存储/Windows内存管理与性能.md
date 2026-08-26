@@ -59,7 +59,7 @@ Get-CimInstance Win32_ComputerSystem | Select-Object AutomaticManagedPagefile
 
 ## 事实核查记录
 
-核验基准：tweakbyjie 仓库 main 分支源码（2026-08-21）。
+核验基准：tweakbyjie 仓库 main 分支源码（2026-08-21（本次未重新核验））。
 
 | 声明 | 核查结果 |
 | --- | --- |

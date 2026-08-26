@@ -141,7 +141,7 @@ UEFI Editor 和 BIOS 固件修改不属于 `tweakbyjie` 的 Windows 优化执行
 
 ## 事实核查记录
 
-核验基准：UEFI-Editor 上游项目资料与 UEFI Setup 规范概念（2026-08-21）。
+核验基准：UEFI-Editor 上游项目资料与 UEFI Setup 规范概念（2026-08-21（本次未重新核验））。
 
 | 声明 | 核查结果 |
 | --- | --- |
