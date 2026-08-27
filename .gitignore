@@ -11,3 +11,7 @@ Thumbs.db
 # 编辑器
 .vscode/
 .idea/
+
+# Python tooling side effects (front matter tooling)
+__pycache__/
+*.pyc
