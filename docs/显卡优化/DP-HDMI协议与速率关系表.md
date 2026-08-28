@@ -4,8 +4,8 @@ risk: low
 applies_to:
   - Windows 10/11 PC 显示输出
   - DisplayPort / HDMI 显示器与线材选购
-verified_on: 2026-08-21
-# 本次收尾未重新核验外部事实，verified_on 保留上次核验日期
+verified_on: 2026-08-28
+# 2026-08-28 重核 HDMI 2.2 上市状态：Ultra96 线材已上市，满带宽整机预计 2027 年
 ---
 
 # DP / HDMI 协议与速率关系表
@@ -40,7 +40,7 @@ verified_on: 2026-08-21
 | HDMI 2.0 | 18 Gbps | 4K@60 |
 | HDMI 2.1 | 48 Gbps（FRL） | **4K@120 / 8K@60** |
 | HDMI 2.1a | 48 Gbps | 同 2.1（新增 SBTM 源码直通） |
-| HDMI 2.2 | 96 Gbps | 8K@120 HDR / 10K@85（规范已发布，设备尚未上市） |
+| HDMI 2.2 | 96 Gbps | 8K@120 HDR / 10K@85（2025 年初发布规范；满带宽整机尚未上市，Ultra96 认证线已先行上市） |
 
 ## 三、两个关键概念
 
@@ -78,7 +78,7 @@ DSC 可在同等带宽下传输更高分辨率 / 刷新率——有损压缩但�
 | UHBR13.5 为 DP 2.1 新增档位；DP 2.0 原有 UHBR10/20 | ✅ 属实 |
 | HDMI 带宽：1.4 10.2 / 2.0 18 / 2.1 48 / 2.2 96 Gbps | ✅ 属实：HDMI 规范口径 |
 | HDMI 2.1a 与 2.1 带宽相同（新增 SBTM） | ✅ 属实 |
-| HDMI 2.2 已发布规范、设备未上市 | ✅ 属实（2025 年初发布规范） |
+| HDMI 2.2 上市状态 | ⚠️ 原表述"设备尚未上市"已部分过时，2026-08-28 重核：2025 年初发布规范；**Ultra96 认证线自 2025 Q3 起已上市**；CES 2026 仅有原型机展出，满带宽（96Gbps）显示器/整机预计 2027 年起上市（依据：[VideoCardz](https://videocardz.com/newz/first-96-gbps-hdmi-2-2-products-expected-in-2027)、[HDMI.org](https://www.hdmi.org/spec/hdmi2)）；另注意 2026 年部分产品仅实现 FRL/DSC 部分特性即标注 HDMI 2.2，不等于 96Gbps 满带宽 |
 | 编码开销：8b/10b 20%、128b/132b ~3%、FRL 16b/18b ~11% | ✅ 属实：各协议编码标准 |
 | 「HDMI 2.1 TMDS」实为 18Gbps 的 2.0 传输模式 | ✅ 属实：HDMI Forum 授权的命名规则，为已知选购陷阱 |
 | DSC 有损但视觉无损、需两端支持 | ✅ 属实：VESA DSC 标准定位 |
