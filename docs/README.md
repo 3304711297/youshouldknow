@@ -17,6 +17,7 @@ Windows 系统、硬件、游戏性能与日常使用知识库。
 | 了解网络和低延迟通信 | [网络通信](./网络通信/README.md)、[TCP 可选实验设置](./CPU与延迟/Windows键鼠与TCP低延迟可选实验设置.md) |
 | 使用 `tweakbyjie` 执行 Windows 优化 | [项目导航](./项目导航/README.md)、[tweakbyjie 优化项目映射](./项目导航/tweakbyjie-optimization-mapping.md) |
 | 学习常用软件设置 | [软件技巧](./软件技巧/README.md) |
+| 让 AI 助手接管浏览器、配置 MCP 工具链 | [AI 工具](./AI工具/README.md) |
 
 ## 📂 按主题浏览
 
@@ -34,6 +35,7 @@ Windows 系统、硬件、游戏性能与日常使用知识库。
 | [笔电相关](./笔电相关/README.md) | 电池、电源、控制中心和笔记本硬件排障 | [控制中心与 Uniwill 驱动冲突排查](./笔电相关/控制中心与Uniwill驱动冲突排查.md)<br>[目录](./笔电相关/README.md) |
 | [网络通信](./网络通信/README.md) | 运营商、APN、代理和网络转发 | [目录](./网络通信/README.md) |
 | [软件技巧](./软件技巧/README.md) | 常用软件和客户端设置 | [目录](./软件技巧/README.md) |
+| [AI 工具](./AI工具/README.md) | AI 编程助手、浏览器自动化与 MCP 工具链 | [目录](./AI工具/README.md) |
 | [项目导航](./项目导航/README.md) | `tweakbyjie` 对应关系、测试流程和执行说明 | [目录](./项目导航/README.md) |
 
 ## 🧭 tweakbyjie 对应索引
