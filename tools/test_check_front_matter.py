@@ -148,5 +148,84 @@ verified_on: 2026-08-21
             self.assertEqual(result.errors, [])
 
 
+class NavCoverageTests(unittest.TestCase):
+    def _make_tree(self, root: Path) -> None:
+        docs = root / "docs"
+        (docs / "分类A").mkdir(parents=True)
+        (docs / "README.md").write_text("# 首页\n[分类A](./分类A/README.md)\n", encoding="utf-8")
+        (docs / "分类A" / "README.md").write_text("# 索引\n[文章](./文章一.md)\n", encoding="utf-8")
+        (docs / "分类A" / "文章一.md").write_text("# 文章一\n", encoding="utf-8")
+        (root / "mkdocs.yml").write_text(
+            "nav:\n  - 首页: README.md\n  - 分类A:\n    - 分类A/README.md\n    - 文章: 分类A/文章一.md\n",
+            encoding="utf-8",
+        )
+
+    def test_complete_tree_passes_both_directions(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            self._make_tree(root)
+            self.assertEqual(MODULE.check_nav_coverage(root), [])
+            self.assertEqual(MODULE.check_index_coverage(root), [])
+
+    def test_file_missing_from_nav_is_reported(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            self._make_tree(root)
+            (root / "docs" / "分类A" / "文章二.md").write_text("# 文章二\n", encoding="utf-8")
+            errors = MODULE.check_nav_coverage(root)
+            self.assertEqual(errors, ["docs/分类A/文章二.md: 文件未收录进 mkdocs.yml nav"])
+
+    def test_nav_pointing_to_missing_file_is_reported(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            self._make_tree(root)
+            (root / "docs" / "分类A" / "文章一.md").unlink()
+            errors = MODULE.check_nav_coverage(root)
+            self.assertEqual(
+                errors,
+                ["mkdocs.yml nav 指向不存在的文件: docs/分类A/文章一.md"],
+            )
+
+    def test_external_links_in_nav_are_ignored(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            self._make_tree(root)
+            mkdocs = root / "mkdocs.yml"
+            mkdocs.write_text(
+                "nav:\n  - 首页: README.md\n  - 外部: https://example.com/x\n  - 分类A:\n"
+                "    - 分类A/README.md\n    - 文章: 分类A/文章一.md\n",
+                encoding="utf-8",
+            )
+            self.assertEqual(MODULE.check_nav_coverage(root), [])
+
+    def test_unlinked_article_in_category_index_is_reported(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            self._make_tree(root)
+            (root / "docs" / "分类A" / "文章二.md").write_text("# 文章二\n", encoding="utf-8")
+            (root / "mkdocs.yml").write_text(
+                "nav:\n  - 首页: README.md\n  - 分类A:\n    - 分类A/README.md\n"
+                "    - 文章: 分类A/文章一.md\n    - 文章: 分类A/文章二.md\n",
+                encoding="utf-8",
+            )
+            errors = MODULE.check_index_coverage(root)
+            self.assertEqual(
+                errors,
+                ["docs/分类A/README.md: 未链接同分类文章 文章二.md"],
+            )
+
+    def test_category_missing_from_home_is_reported(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            self._make_tree(root)
+            home = root / "docs" / "README.md"
+            home.write_text("# 首页\n", encoding="utf-8")
+            errors = MODULE.check_index_coverage(root)
+            self.assertEqual(
+                errors,
+                ["docs/README.md: 未链接分类索引 分类A/README.md"],
+            )
+
+
 if __name__ == "__main__":
     unittest.main()

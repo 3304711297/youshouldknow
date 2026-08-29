@@ -15,7 +15,7 @@ NVCleanstall 是 **TechPowerUp 开发**的免费绿色工具，用于在安装 N
 | **官方（推荐）** | `techpowerup.com/download/techpowerup-nvcleanstall/` | TechPowerUp 是 NVCleanstall 的开发方，此为官方下载页 |
 | 官方产品页 | `techpowerup.com/nvcleanstall/` | 功能介绍与下载入口 |
 
-> ⚠️ **勘误**：`nvcleanstall.net` 这个域名**不是可用的官网**——实测它只返回一个 "OK" 占位响应，没有任何页面内容（该域名归 TechPowerUp 所有，推测仅作内部用途）。网上部分教程把它写成"官网"，实际下载请认准 TechPowerUp。当前最新版本为 v1.19.0。
+> ⚠️ **勘误**：`nvcleanstall.net` 这个域名**不是可用的官网**——实测它只返回一个 "OK" 占位响应，没有任何页面内容（该域名归 TechPowerUp 所有，推测仅作内部用途）。网上部分教程把它写成"官网"，实际下载请认准 TechPowerUp。当前最新版本为 v1.19.0（信息截至 2026-08-28 复核仍为最新，以 [TechPowerUp 下载页](https://www.techpowerup.com/download/techpowerup-nvcleanstall/)为准）。
 
 ## 三、获取驱动
 
