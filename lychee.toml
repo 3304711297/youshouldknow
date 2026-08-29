@@ -41,4 +41,5 @@ exclude = [
   'https://superuser\.com/',
   # 2026-08-29 起 CI runner 访问返回 403(此前正常),见 tools/lychee-excluded-domains.md
   'https://forums\.tomshardware\.com/',
+  'https://techcommunity\.microsoft\.com/',
 ]

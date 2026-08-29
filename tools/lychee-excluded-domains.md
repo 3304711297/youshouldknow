@@ -36,3 +36,4 @@
 | zhuanlan.zhihu.com | 站点拒绝爬虫 | 2026-08-28 建档（未单独复核） |
 | superuser.com | CI 上 403 | 2026-08-28 建档（未单独复核） |
 | forums.tomshardware.com | 2026-08-29 起站点对 CI runner 返回 403（此前可达），链接为目标帖两处 | 2026-08-29 建档（目标帖内容此前核查属实） |
+| techcommunity.microsoft.com | 2026-08-29 起站点对 CI runner 返回 403（此前可达），涉及驱动签名与 TPM 绕过讨论帖等 3 处引用 | 2026-08-29 建档（微软官方社区，内容此前核查属实；后续可考虑改链 learn.microsoft.com 存档） |
