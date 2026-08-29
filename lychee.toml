@@ -45,4 +45,7 @@ exclude = [
   'https://www\.asus\.com/',
   'https://www\.digitalfoundry\.net/',
   'https://cn\.game-console\.org/',
+  # 2026-08-29 起对 CI runner 返回 412(反爬前置校验,本地可达),见台账
+  'https://www\.bilibili\.com/',
+  'https://b23\.tv/',
 ]
