@@ -51,7 +51,7 @@ fsutil behavior query DisableDeleteNotify C:
 
 | 项目 | 脚本入口与实际行为 | 验证/恢复边界 |
 | --- | --- | --- |
-| NTFS 8.3 | 主菜单 `1` → 系统行为 `2`，写入 `HKLM\SYSTEM\CurrentControlSet\Control\FileSystem\NtfsDisable8dot3NameCreation=1` | 当前没有专门回读、原值备份或恢复入口 |
+| NTFS 8.3 | 主菜单 `1` → 系统行为 `2`，写入 `HKLM\SYSTEM\CurrentControlSet\Control\FileSystem\NtfsDisable8dot3NameCreation=1` | 写入前自动纳入系统行为快照（`registry-backup.json`），可经主菜单 `1` → `4` 恢复；仍无专门的回读验证 |
 | TRIM | 主菜单 `1` → 系统行为 `2`，执行 `fsutil behavior set DisableDeleteNotify 0` | 脚本查询全局 `DisableDeleteNotify=0`；未做每卷独立验证，也没有按原策略自动恢复 |
 | BITS | 主菜单 `6` 服务优化，把 BITS 启动类型设为 `Manual` | 与目标服务一起保存 `service-backup.json`，可通过 `6 → 2` 恢复原启动类型；不恢复原运行状态 |
 | Native NVMe Driver | 主菜单 `8`，按版本和硬件条件管理 NVMe Feature/SafeBoot/驱动配置 | 有 NVMe 专用快照、失败回滚和重启后驱动状态检查；这不是写入缓存设置 |
@@ -61,11 +61,11 @@ fsutil behavior query DisableDeleteNotify C:
 
 ## 事实核查记录
 
-核验基准：tweakbyjie 仓库 main 分支源码（2026-08-21（本次未重新核验））。
+核验基准：tweakbyjie 仓库 main 分支源码（2026-08-29 重核：机制类内容稳定，无需实质变更；脚本声明已对照 HEAD b905950 复核，NTFS 8.3 备份结论有勘误，见下表与正文第五节）。
 
 | 声明 | 核查结果 |
 | --- | --- |
-| NTFS 8.3 写入 NtfsDisable8dot3NameCreation=1，无回读/备份/恢复 | ✅ 属实：STORAGE-001 与 Registry.ps1 一致 |
+| NTFS 8.3 写入 NtfsDisable8dot3NameCreation=1，无回读/备份/恢复 | ⚠️ 2026-08-29 勘误：写入属实且仍无专门回读；但"无备份/恢复"已过时——现行源码（HEAD b905950）已将该值纳入 registry-backup.json 系统快照，可经主菜单 1→4 恢复 |
 | TRIM 执行 fsutil set DisableDeleteNotify 0，仅全局查询验证、无逐卷核验与原策略恢复 | ✅ 属实：STORAGE-002 与源码一致 |
 | BITS 经 Part 6 设为 Manual，有 service-backup.json 可恢复启动类型 | ✅ 属实：STORAGE-003 与 Backup.Service.ps1 一致 |
 | Native NVMe（主菜单 8）有专用快照、失败回滚与状态检查 | ✅ 属实：STORAGE-004 与 Backup.Nvme.ps1 一致 |

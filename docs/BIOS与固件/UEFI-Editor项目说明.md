@@ -141,10 +141,10 @@ UEFI Editor 和 BIOS 固件修改不属于 `tweakbyjie` 的 Windows 优化执行
 
 ## 事实核查记录
 
-核验基准：UEFI-Editor 上游项目资料与 UEFI Setup 规范概念（2026-08-21（本次未重新核验））。
+核验基准：UEFI-Editor 上游项目资料与 UEFI Setup 规范概念（2026-08-29 重核：BoringBoredom/UEFI-Editor 仓库仍存在且截至当日仍无正式 Release 标签，在线页面 boringboredom.github.io/UEFI-Editor 可正常访问；配套工具链接均有效——UEFITool NE 仍在维护（最新 A75，2026-07-10 发布）、UEFITool 0.28.0 标签存在、IFRExtractor-RS 最新 v1.6.1（2026-03-11 发布））。
 
 | 声明 | 核查结果 |
 | --- | --- |
 | Setup/Form/Suppress If/Access Level/VarStore/VarOffset 为 UEFI Setup 的真实概念 | ✅ 属实：与 EDK2/UEFI 规范术语一致 |
-| 项目功能与配套工具描述 | ⚠️ 以上游 README 为准，随项目版本演进可能变化 |
+| 项目功能与配套工具描述 | ⚠️ 以上游 README 为准，随项目版本演进可能变化（2026-08-29 重核：仓库在线、README 流程描述未变，无正式 Release） |
 | 不刷修改版 BIOS 也可用 VarStore/Shell 变量方式调整部分选项 | ⚠️ 社区路线，可行性依机型固件而异 |

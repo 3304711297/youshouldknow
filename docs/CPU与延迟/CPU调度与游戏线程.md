@@ -105,7 +105,7 @@ ISR（Interrupt Service Routine）用于快速响应硬件中断；DPC（Deferre
 
 ## 事实核查记录
 
-核验基准：tweakbyjie 仓库 main 分支源码与本文关联映射文档（2026-08-21（本次未重新核验））。
+核验基准：tweakbyjie 仓库 main 分支源码与本文关联映射文档（2026-08-29 重核：机制类内容稳定，无需实质变更；脚本声明已对照 tweak 源码 HEAD b905950 复核——Registry.ps1 仍仅写入 Win32PrioritySeparation=38/0x26 并经 Verify-RegDword 回读，无 24/0x18 写入路径）。
 
 | 声明 | 核查结果 |
 | --- | --- |

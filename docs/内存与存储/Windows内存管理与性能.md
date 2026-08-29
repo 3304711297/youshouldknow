@@ -47,7 +47,7 @@ Get-CimInstance Win32_ComputerSystem | Select-Object AutomaticManagedPagefile
 
 ## 四、与 tweakbyjie 的关系
 
-- `EnablePrefetcher=0`（`tweakbyjie` 主菜单 `1 → 2`）与 `Disable-MMAgent -mc` 有回读但无原值快照；恢复需手工写回或 `Enable-MMAgent -mc`。
+- `EnablePrefetcher=0`（`tweakbyjie` 主菜单 `1 → 2`）有回读，且现行源码在写入前自动执行原值快照（`registry-backup.json`），可经主菜单 `1 → 4` 恢复；`Disable-MMAgent -mc` 有回读但无原值快照，恢复需手工写回或 `Enable-MMAgent -mc`。
 - 页面文件当前不在脚本自动化范围内，知识文档的 GUI/系统托管原则不计为脚本覆盖。
 - 具体编号、路径、类型与恢复边界见 [全量执行参考](../项目导航/tweakbyjie全量执行参考.md)。
 
@@ -59,10 +59,10 @@ Get-CimInstance Win32_ComputerSystem | Select-Object AutomaticManagedPagefile
 
 ## 事实核查记录
 
-核验基准：tweakbyjie 仓库 main 分支源码（2026-08-21（本次未重新核验））。
+核验基准：tweakbyjie 仓库 main 分支源码（2026-08-29 重核：机制类内容稳定，无需实质变更；脚本声明已对照 HEAD b905950 复核，EnablePrefetcher 快照结论有勘误，见下表与正文第四节）。
 
 | 声明 | 核查结果 |
 | --- | --- |
-| EnablePrefetcher=0（主菜单 1→2）与 Disable-MMAgent -mc 有回读但无原值快照 | ✅ 属实：Verify-RegDword/Get-MMAgent 回读，无专用快照文件 |
+| EnablePrefetcher=0（主菜单 1→2）与 Disable-MMAgent -mc 有回读但无原值快照 | ⚠️ 2026-08-29 勘误：回读属实；但 EnablePrefetcher 自现行源码（HEAD b905950）起已纳入 registry-backup.json 系统快照并可经主菜单 1→4 恢复；Disable-MMAgent -mc 仍无原值快照，恢复方式（Enable-MMAgent -mc / 手工写回）不变 |
 | 页面文件不在脚本自动化范围内 | ✅ 属实：源码无 pagefile 相关执行项（MEMORY-003） |
 | 恢复方式（手工写回 / Enable-MMAgent -mc） | ✅ 属实：与执行参考 MEMORY-001/002 一致 |

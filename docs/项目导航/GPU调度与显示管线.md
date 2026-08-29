@@ -59,7 +59,7 @@ Get-ItemPropertyValue `
 
 ### 恢复方式
 
-修改前应读取并记录原始值及其是否存在。当前核心游戏优化路径没有为 `HwSchMode` 建立独立备份文件或自动恢复入口；恢复时应将原始 `REG_DWORD` 写回，原本不存在时删除该值。若要恢复系统默认，不能简单假定所有系统的默认值都是同一个数字。
+修改前应读取并记录原始值及其是否存在。当前核心游戏优化路径没有为 `HwSchMode` 建立 HAGS 专用备份文件；但该值已纳入 Part 1 统一快照（`registry-backup.json`，机器绑定），可通过子项 4 按快照自动恢复（原不存在时删除该值）。若需脱离脚本独立留底，仍建议手工记录原始 `REG_DWORD`；恢复系统默认时，不能简单假定所有系统的默认值都是同一个数字。
 
 ## GPU-002 MPO（Multi-Plane Overlay）
 
@@ -124,17 +124,17 @@ DirectX、GPU 队列和 MPO/HAGS 之间存在运行时关系，但当前 `tweakb
 ## GPU 类核对结论
 
 - GPU-001 和 GPU-002 已与当前脚本的 HAGS、MPO 执行入口逐项对应。
-- HAGS 是核心优化中的单个 `HwSchMode` 写入，当前有配置层回读，但没有独立自动备份/恢复。
+- HAGS 是核心优化中的单个 `HwSchMode` 写入，当前有配置层回读；无 HAGS 专用备份，但已纳入 Part 1 统一快照（`registry-backup.json`）并可经子项 4 恢复。
 - MPO 是独立排障模块，包含四个受管理值、互斥方案、备份、恢复和辅助验证；它不应与核心优化中的 HAGS 混为一项。
 - 当前脚本没有直接执行 DirectX 优化项，因此 DirectX 相关内容属于知识背景，不计作遗漏的脚本执行项。
 ## 事实核查记录
 
-核验基准：tweakbyjie 仓库 main 分支源码（2026-08-21（本次未重新核验））。
+核验基准：tweakbyjie 仓库源码（2026-08-29 重核：对照 tweak `b905950` 源码逐项复核）。
 
 | 声明 | 核查结果 |
 | --- | --- |
-| GPU-001 写入 HwSchMode=2，经 Verify-RegDword 回读，需重启 | ✅ 属实：Modules/Registry.ps1 + Common.ps1 |
-| GPU-002 管理四个 MPO 值（DisableMPO/OverlayTestMode/DisableOverlays/OverlayMinFPS），方案 A/B/C 互斥 | ✅ 属实：与 Menu.ps1（Part 11）及 mpoManagedValues 定义一致 |
-| MPO 首次修改前快照 mpo-backup.json，已有备份不覆盖，11→4 恢复，备份损坏时阻止修改 | ✅ 属实：Backup.Mpo.ps1 的 Ensure/Restore 逻辑一致（含写后回读校验） |
-| HAGS 无独立自动备份/恢复 | ✅ 属实：核心路径仅写入+回读 |
+| GPU-001 写入 HwSchMode=2，经 Verify-RegDword 回读，需重启 | ✅ 属实（2026-08-29 对照 b905950 复核）：Modules/Registry.ps1 + Common.ps1 |
+| GPU-002 管理四个 MPO 值（DisableMPO/OverlayTestMode/DisableOverlays/OverlayMinFPS），方案 A/B/C 互斥 | ✅ 属实：与 Modules/Mpo.ps1（Part 11）及 mpoManagedValues 定义一致，切换方案时自动清除其他方案值 |
+| MPO 首次修改前快照 mpo-backup.json，已有备份不覆盖，11→4 恢复，备份损坏时阻止修改 | ✅ 属实：Modules/Backup.Mpo.ps1 的 Ensure/Restore 逻辑一致（含写后回读校验） |
+| HAGS 无独立自动备份/恢复 | ⚠️ 部分属实并已更新（2026-08-29 重核）：“无 HAGS 专用备份文件”属实；但 b905950 已将 HwSchMode 纳入核心统一快照（`registry-backup.json`），可经 Part 1 子项 4 按快照恢复，正文已同步更新 |
 | HAGS 执行位置标注为 Modules/Menu.ps1（Part 1） | ❌ 勘误并已更新：已随 Part 1 迁至 Modules/Registry.ps1 |

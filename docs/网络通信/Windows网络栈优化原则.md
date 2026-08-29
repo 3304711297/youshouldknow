@@ -85,10 +85,10 @@
 
 ## 事实核查记录
 
-核验基准：tweakbyjie 仓库 main 分支源码（2026-08-21（本次未重新核验））。
+核验基准：tweakbyjie 仓库 main 分支源码（上次 2026-08-21；2026-08-29 重核，HEAD b905950）。
 
 | 声明 | 核查结果 |
 | --- | --- |
-| tweakbyjie 没有网络栈的自动注册表/驱动修改项 | ✅ 属实：全源码无 TcpAckFrequency/TCPNoDelay/netsh 等网络栈写入（NetworkThrottlingIndex 属 MMCSS 多媒体调度，不是 TCP/IP 栈参数） |
-| Nagle/Delayed ACK/ECN/RWIN/拥塞控制的机制描述 | ✅ 属实：与 TCP/IP 通行技术资料一致，正文已声明阈值需实测 |
-| 低延迟与高吞吐的取舍关系 | ✅ 属实：缓冲/窗口参数的两难为通行结论 |
+| tweakbyjie 没有网络栈的自动注册表/驱动修改项 | ✅ 属实（2026-08-29 重核：对 HEAD b905950 全源码关键字检索，仍无 TcpAckFrequency/TCPNoDelay/TcpDelAckTicks/DefaultTTL/Tcp1323Opts/netsh/CongestionProvider/Set-NetIPInterface 等写入；唯一命中的 NetworkThrottlingIndex 属 MMCSS 多媒体调度，不是 TCP/IP 栈参数） |
+| Nagle/Delayed ACK/ECN/RWIN/拥塞控制的机制描述 | ✅ 属实（2026-08-29 复核：通读确认与 TCP/IP 通行技术资料一致，机制类内容无时效变化，正文已声明阈值需实测） |
+| 低延迟与高吞吐的取舍关系 | ✅ 属实（2026-08-29 复核：通读确认，缓冲/窗口参数的两难为通行结论） |

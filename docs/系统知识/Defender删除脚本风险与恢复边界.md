@@ -6,7 +6,7 @@
 
 ## 脚本行为
 
-`defender-removal.ps1` 不只是把服务改为 Disabled。根据当前源码，它会在前置查询和权限检查后，尝试删除 Defender 相关服务注册、WinRT/Svchost 注册、CLSID/App/Shell/Autologger 等注册表键和值，并删除相关实体文件；受保护对象可能通过 SYSTEM 重试。脚本提供有限的查询/删除后检查，但没有把完整原始系统状态保存成可恢复备份。
+`defender-removal.ps1` 不只是把服务改为 Disabled。根据当前源码，它会在管理员权限检查后，尝试删除 Defender 相关服务注册、WinRT/Svchost 注册、CLSID/App/Shell/Autologger 等注册表键和值，并删除相关实体文件（`C:\ProgramData\Microsoft\Windows Defender` 目录连同隔离区数据一并删除）。受 TrustedInstaller 保护而删除失败的键不会被自动以 SYSTEM 重试：脚本只报告 `[FAIL]`，并提示借助 NSudo/PowerRun 等提权工具手动重试（源码头部中文注释仍写有“再以 SYSTEM 批量重试”，与英文注释和实际实现矛盾，以实现为准）。脚本只在删除前查询对象是否存在（不存在则跳过），删除后没有回读检查，也没有把完整原始系统状态保存成可恢复备份。
 
 这类操作可能影响：
 
@@ -21,7 +21,7 @@
 | --- | --- | --- |
 | 主要动作 | 停止/禁用服务、写入安全策略，可选删除任务/启动项/SecHealthUI | 删除大量服务注册、系统注册表对象和实体文件 |
 | 备份 | 没有完整统一备份/自动恢复 | 没有原始状态备份 |
-| 验证 | 有限的查询/状态输出，缺少完整回读闭环 | 主要是删除前检查和有限删除后查询 |
+| 验证 | 有限的查询/状态输出，缺少完整回读闭环 | 删除前存在性查询（不存在即跳过），无删除后回读 |
 | 恢复 | 需要手工检查、系统修复或重新安装相关组件 | 脚本本身不可逆，不能声称可恢复 |
 
 ## 恢复边界
@@ -44,11 +44,12 @@
 
 ## 事实核查记录
 
-核验基准：tweakbyjie 仓库 main 分支源码（2026-08-21（本次未重新核验））。
+核验基准：tweakbyjie 仓库 main 分支源码（2026-08-29 重核：对照 HEAD b905950 的 `defender-removal.ps1`（342 行）逐条复核，并确认 DryRun 默认、-Execute 显式执行与无备份路径仍成立）。
 
 | 声明 | 核查结果 |
 | --- | --- |
-| defender-removal.ps1 删除 Defender 服务注册、WinRT/Svchost、CLSID/App/Shell/Autologger 键值与实体文件 | ✅ 属实：357 行源码含上述对象的大量删除项 |
-| 受保护对象以管理员尝试后按 SYSTEM 批量重试 | ✅ 属实：源码注释与实现一致（TrustedInstaller 保护键） |
-| 无原始状态备份、无撤销命令、脚本不可逆 | ✅ 属实：全文无 backup/restore 路径 |
-| 与 Part 5 是不同入口，Part 5 的 Defender 策略值有快照而删除脚本没有 | ✅ 属实：defender-policy-backup.json 仅覆盖 Part 5 |
+| defender-removal.ps1 删除 Defender 服务注册、WinRT/Svchost、CLSID/App/Shell/Autologger 键值与实体文件 | ✅ 属实：342 行源码含上述对象的大量删除项（2026-08-29 重核） |
+| 受保护对象以管理员尝试后按 SYSTEM 批量重试 | ❌ 勘误（2026-08-29 重核）：当前实现不自动以 SYSTEM 重试；TrustedInstaller 保护键删除失败仅报 `[FAIL]`，提示借助 NSudo/PowerRun 提权后手动重试。源码头部中文注释与实现矛盾，已按实现修正正文 |
+| 无原始状态备份、无撤销命令、脚本不可逆 | ✅ 属实：全文无 backup/restore 路径（2026-08-29 重核） |
+| 默认 DryRun，需显式 -Execute 才会修改系统 | ✅ 属实：不带 `-Execute` 时仅打印 DryRun 清单即退出（2026-08-29 重核补充） |
+| 与 Part 5 是不同入口，Part 5 的 Defender 策略值有快照而删除脚本没有 | ✅ 属实：defender-policy-backup.json 仅覆盖 Part 5（2026-08-29 重核） |
