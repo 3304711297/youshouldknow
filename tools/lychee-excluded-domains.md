@@ -37,3 +37,5 @@
 | superuser.com | CI 上 403 | 2026-08-28 建档（未单独复核） |
 | forums.tomshardware.com | 2026-08-29 起站点对 CI runner 返回 403（此前可达），链接为目标帖两处 | 2026-08-29 建档（目标帖内容此前核查属实） |
 | techcommunity.microsoft.com | 2026-08-29 起站点对 CI runner 返回 403（此前可达），涉及驱动签名与 TPM 绕过讨论帖等 3 处引用 | 2026-08-29 建档（微软官方社区，内容此前核查属实；后续可考虑改链 learn.microsoft.com 存档） |
+| www.asus.com | 2026-08-29 CI runner 访问 403（封锁呈间歇性，本地经代理可达） | 2026-08-29 建档 |
+| www.digitalfoundry.net | 2026-08-29 访问 403（DLSS 4.5 Preset L 实测文，2026-08-28 核查时可达；封锁呈间歇性） | 2026-08-29 建档（内容 2026-08-28 核查属实） |
