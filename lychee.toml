@@ -44,4 +44,5 @@ exclude = [
   'https://techcommunity\.microsoft\.com/',
   'https://www\.asus\.com/',
   'https://www\.digitalfoundry\.net/',
+  'https://cn\.game-console\.org/',
 ]
