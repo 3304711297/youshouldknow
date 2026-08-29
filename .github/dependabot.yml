@@ -1,0 +1,11 @@
+# 供应链配套:actions 已固定完整 commit SHA,由 Dependabot 负责提示升级(会以注释形式
+# 展示新 SHA),人工确认后合并。每周一检查一次,避免锁定依赖静默老化。
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    commit-message:
+      prefix: chore
+      include: scope

@@ -23,8 +23,8 @@ DLSS 超分（Super Resolution）的画质取决于背后的**模型**。不同�
 | E | CNN · DLSS 3.x | **DLSS 3 时代游戏默认**（DLAA / 质量 / 平衡档），CNN 架构最佳 |
 | F | CNN · DLSS 3.x | 性能 / 超高性能档位使用的 CNN |
 | **J** | **Transformer · DLSS 4 初版** | 随 RTX 50 系 / DLSS 4 首发（2025-01） |
-| **K** | **Transformer · DLSS 4 精修版** | 当前官方「最新 / 推荐」选项：较 J 更稳、鬼影更少 |
-| L / M | Transformer · DLSS 4.5（2026） | 更新一代模型 |
+| **K** | **Transformer · DLSS 4 精修版** | DLAA / 质量 / 平衡档的官方默认：较 J 更稳、鬼影更少，性能开销低于 L |
+| **L** | **Transformer · DLSS 4.5（2026-01）** | 官方称迄今最强画质（3×3 上采样），开销高于 K，官方定位偏 4K 超分场景；M 为衍生变体 |
 
 > ✏️ **勘误**：部分流传资料把 DLSS 4 的 Transformer 模型称作「预设 E」——**错误**。预设 E 是 DLSS 3.x 的 CNN 模型；Transformer 是**预设 J / K**（DLSS 4.5 为 L/M）。另注意：同一字母在不同画质档位（质量 / 平衡 / 性能）含义可能不同，覆盖时以 App 选项描述为准。
 
@@ -40,8 +40,8 @@ DLSS 超分（Super Resolution）的画质取决于背后的**模型**。不同�
 2. 找到 **「DLSS 超分模型覆盖」（DLSS Override – Model Preset）**；
 3. 选项含义：
    - **使用游戏设置**——不覆盖（默认）；
-   - **最新 / 推荐**——使用最新 Transformer 模型（预设 K 或更新），**推荐直接选这个**；
-   - **指定预设**——手动选 A～F / J / K 等做对比测试；
+   - **推荐（Recommended）**——DLSS 4.5 起 App 以「Recommended」取代原先的「Latest」：多数画质档位指向预设 K，**推荐直接选这个**；4K 超分场景可指定 L 对比画质与性能取舍；
+   - **指定预设**——手动选 A～F / J / K / L 等做对比测试；
 4. 应用后重启游戏生效。
 
 ## 五、风险与注意事项
@@ -93,6 +93,7 @@ DLSS 超分（Super Resolution）的画质取决于背后的**模型**。不同�
 | Transformer 模型为预设 J（DLSS 4 初版）/ K（2025-01 精修，官方推荐）/ L、M（DLSS 4.5） | ✅ 属实：NVIDIA 官方 App 更新公告与 DLSS 4.5 公告、Reddit 预设指南一致 |
 | 「预设 E = DLSS 4 Transformer」 | ❌ 勘误：预设 E 是 DLSS 3.x 的 CNN 模型（DLAA/质量/平衡档默认）；Transformer 是 J/K |
 | Transformer 2 倍参数量、更稳更少鬼影、1080p/4K 细节提升 | ✅ 属实：官方与 TechPowerUp 画质实测一致 |
+| 预设 K 为官方「最新 / 推荐」选项 | ⚠️ 已过时，2026-08-28 重核更新：DLSS 4.5（2026-01）引入预设 L（画质更强、开销更高，定位 4K 超分），且 App 以「Recommended」取代「Latest」——多数档位的推荐指向 K，4K 场景可选 L（依据：[NVIDIA DLSS 4.5 公告](https://www.nvidia.com/en-us/geforce/news/dlss-4-5-super-resolution-available-now/)、[Digital Foundry 实测](https://www.digitalfoundry.net/features/dlss-4-5-preset-l-tested-how-good-can-a-4k-upscale-from-720p-look)、[社区选型指南](https://www.reddit.com/r/nvidia/comments/1q5f3bd/dlss_preset_selection_guide/)） |
 | 开销约 1～4%（老卡偏高、40/50 最低） | ✅ 属实：TechPowerUp 实测区间 |
 | RTX 20/30 也可用 DLSS 4 超分模型 | ✅ 属实：超分模型覆盖全系 RTX 可用（区别于帧生成的 40/50 限定） |
 | 设置路径：App → 图形 → 程序设置 → DLSS 超分模型覆盖 | ✅ 属实：官方公告及帮助文档给出的路径 |
