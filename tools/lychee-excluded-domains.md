@@ -35,3 +35,4 @@
 | forum-en.msi.com | CI 上 403 | 2026-08-28 建档（未单独复核） |
 | zhuanlan.zhihu.com | 站点拒绝爬虫 | 2026-08-28 建档（未单独复核） |
 | superuser.com | CI 上 403 | 2026-08-28 建档（未单独复核） |
+| forums.tomshardware.com | 2026-08-29 起站点对 CI runner 返回 403（此前可达），链接为目标帖两处 | 2026-08-29 建档（目标帖内容此前核查属实） |
