@@ -180,11 +180,11 @@ pnputil /delete-driver oemXX.inf /uninstall
 
 ## 事实核查记录
 
-核验基准：单机案例记录 + Driver Store Explorer 工具公开资料（2026-08-21（本次未重新核验））。
+核验基准：单机案例记录 + Driver Store Explorer 工具公开资料（2026-08-29 重核：Driver Store Explorer 仓库活跃（最新版 v1.0.26，2026-03-31 发布，截至当日未归档），GitHub 链接有效；Microsoft Learn pnputil 与 DISM 驱动管理文档均可访问，命令用法与正文一致；控制中心与 Uniwill/UWACP 冲突为个案实录，不适用所有机型）。
 
 | 声明 | 核查结果 |
 | --- | --- |
 | 控制中心与 Uniwill/UWACP 驱动冲突的现象与机制推断 | ⚠️ 单机案例，机制为合理推断，未做跨机型复现 |
-| Driver Store Explorer（Rapr.exe）可用于枚举与删除重复驱动包 | ✅ 属实：开源工具，功能与文中流程一致 |
+| Driver Store Explorer（Rapr.exe）可用于枚举与删除重复驱动包 | ✅ 属实：开源工具，功能与文中流程一致（2026-08-29 重核：仓库活跃，最新 v1.0.26） |
 | 命令行 pnputil 方案作为备选 | ✅ 属实：pnputil 为系统内置工具 |
 | 注册表/残留文件清理列为最后手段 | ✅ 处置顺序合理 |

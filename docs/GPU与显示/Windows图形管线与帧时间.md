@@ -85,11 +85,11 @@ GPU 利用率低不一定代表显卡性能不足，可能是 CPU 主线程、�
 
 ## 事实核查记录
 
-核验基准：tweakbyjie 仓库 main 分支源码（2026-08-21（本次未重新核验））。
+核验基准：tweakbyjie 仓库 main 分支源码（2026-08-29 重核：机制类内容稳定，无需实质变更；脚本声明已对照 HEAD b905950 复核，HAGS"无快照"结论有勘误，见下表）。
 
 | 声明 | 核查结果 |
 | --- | --- |
-| HAGS 对应 HwSchMode=2 单值写入，有回读无快照 | ✅ 属实：与 Registry.ps1 及 GPU 调度文档一致 |
+| HAGS 对应 HwSchMode=2 单值写入，有回读无快照 | ⚠️ 2026-08-29 勘误：写入与回读属实；但"无快照"已过时——现行源码（HEAD b905950）在 Part 1 子项 1/2 写入前统一执行 Ensure-RegistryBackup，HwSchMode 已纳入 registry-backup.json 快照，可经主菜单 1→4 恢复 |
 | MPO 四值由 Part 11 独立管理（方案 A/B/C 互斥、有快照恢复） | ✅ 属实：与 Menu.ps1（Part 11）/Backup.Mpo.ps1 一致 |
 | 脚本无 DirectX 版本/引擎/GPU 时钟执行项 | ✅ 属实：源码无此类写入 |
 | 帧时间/1% Low 优于平均 FPS 单指标 | ✅ 属实：与验证流程文档口径一致 |

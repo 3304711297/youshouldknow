@@ -34,7 +34,7 @@
 | 模块 | 职责 | 说明 |
 |---|---|---|
 | `Common.ps1` | 通用注册表/BCD/验证/重启/电源计划去重 | `Set-Reg*`/`Invoke-BcdEdit`/`Verify-*`/`Invoke-PowerPlanDedupe` |
-| `Backup.Mpo/Bcd/Service/SecurityMitigation/Nvme/Defender` | 备份闭环 | 各自的 `Test/Ensure/Restore` 三元组与写后回读校验 |
+| `Backup.Mpo/Registry/Bcd/Service/SecurityMitigation/Nvme/Defender/Vbs` | 备份闭环 | 各自的 `Test/Ensure/Restore` 三元组与写后回读校验 |
 | `Registry.ps1` | Part 1 编排 | `Invoke-RegistryModule`（核心游戏/系统行为/CPU 缓解） |
 | `Nvme.ps1` | Part 8 编排 | `Invoke-NvmeModule`（备份逻辑在 `Backup.Nvme.ps1`） |
 | `Virtualization.ps1` | Part 9/10 编排 | `Invoke-DeviceGuardModule`/`Invoke-VbsModule` |
@@ -49,11 +49,11 @@
 
 ## 事实核查记录
 
-核验基准：tweakbyjie 仓库 `main` 分支源码（2026-08-21（本次未重新核验），模块化收尾提交后）。
+核验基准：tweakbyjie 仓库源码（2026-08-29 重核：对照 tweak `b905950` 源码逐项复核；发现 Loader 规模与模块清单自 08-21 基线后漂移，已勘误并更新正文，见下）。
 
 | 声明 | 核查结果 |
 | --- | --- |
-| tweakbyjie 采用 Loader + `Modules/` 模块化结构 | ✅ 属实：Loader 约 127 行，点源 16 个模块文件（由 Coverage Loader 契约自动校验） |
-| 模块清单为 Common + 5 个 Backup.* + Menu | ❌ 勘误并已更新：现为 Common + 6 个 `Backup.*`（含 Defender）+ Bcd/Defender/Mpo/Nvme/Power/Registry/Service/Virtualization 八个执行模块 + Menu（共 16 个点源文件） |
+| tweakbyjie 采用 Loader + `Modules/` 模块化结构 | ✅ 属实（2026-08-29 对照 b905950 复核）：Loader 现为 162 行，点源 19 个模块文件；❌ 勘误并已更新：08-21 基线记录的“约 127 行、点源 16 个文件”已过时 |
+| 模块清单为 Common + 5 个 Backup.* + Menu | ❌ 勘误并已更新（2026-08-29 重核）：现为 Common + Adapters + 8 个 `Backup.*`（Mpo/Registry/Bcd/Service/SecurityMitigation/Nvme/Defender/Vbs）+ Bcd/Defender/Mpo/Nvme/Power/Registry/Service/Virtualization 八个执行模块 + Menu（共 19 个点源文件）；08-21 基线漏计 Adapters、Backup.Registry、Backup.Vbs |
 | 执行位置采用 `Modules/函数名` 定位而非行号 | ✅ 属实：映射表与执行参考均已迁移；2026-08-25 校准后映射表中 Part N 级 `Modules/Menu.ps1` 引用已替换为实际业务模块 |
-| `Menu.ps1` 含 11 个 Part | ✅ 属实：菜单选项 1–11 对应 11 个功能模块函数（由 Coverage 菜单契约自动校验） |
+| `Menu.ps1` 含 11 个 Part | ✅ 属实（2026-08-29 对照 b905950 复核）：菜单选项 0–11，其中 1–11 对应 11 个功能模块函数（`Invoke-RegistryModule`/`Invoke-BcdAdvancedModule`/`Invoke-TestModeEnableModule`/`Invoke-TestModeDisableModule`/`Invoke-DefenderModule`/`Invoke-ServiceModule`/`Invoke-PowerModule`/`Invoke-NvmeModule`/`Invoke-DeviceGuardModule`/`Invoke-VbsModule`/`Invoke-MpoModule`）；Loader 支持 `-RunModule` 非交互队列（编号 0–11） |

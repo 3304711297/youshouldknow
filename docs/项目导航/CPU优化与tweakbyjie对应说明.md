@@ -7,7 +7,7 @@
 
 本章节逐项对应 `tweakbyjie/tweakbyjie.ps1` 当前“Part 1 → 核心游戏优化 → 子项 1”中的 CPU、MMCSS 多媒体调度和 Games 任务配置。脚本实际写入的路径、值名和目标值以当前源码为准。
 
-> 重要边界：当前脚本对这些项目没有统一的修改前备份/恢复流程；除 CPU-001 外，当前执行路径也没有为这些项目提供完整的回读验证。因此，下面的“恢复方式”是人工恢复前提，不代表脚本已经自动提供恢复功能。
+> 重要边界：当前脚本对这些注册表写入没有 CPU-001~005 专用备份文件；但自 tweak `b905950` 起，执行核心游戏/系统行为子项前有统一快照门禁（`registry-backup.json`，带机器绑定，备份失败则阻止修改），并可通过 Part 1 子项 4 按快照自动恢复（原不存在的值会被删除）。回读验证方面，除 CPU-001 外，当前执行路径仍没有为 CPU-003/004/005 提供逐值回读验证。因此，下面的“恢复方式”中人工记录原值仍是稳妥前提，脚本快照不能替代回读验证。
 
 ## CPU-001 Win32PrioritySeparation
 
@@ -37,7 +37,7 @@
 | 执行源码 | `Modules/Registry.ps1`+ `Modules/Common.ps1/Set-RegDword`，调用 `Set-RegDword` |
 | 验证源码 | `Modules/Common.ps1/Verify-RegDword`，调用 `Verify-RegDword` |
 | 配置对象 | `HKLM\SYSTEM\CurrentControlSet\Control\PriorityControl` 下的单个 DWORD |
-| 脚本行为 | 写入 `38`，成功后标记需要重启；不提供 CPU-001 专用快照 |
+| 脚本行为 | 写入 `38`，成功后标记需要重启；无 CPU-001 专用快照，但已纳入 Part 1 统一快照（`registry-backup.json`），可经子项 4 恢复 |
 | 文档状态 | 已绑定当前源码；其他编码仅为参考，不属于脚本菜单 |
 
 ### Windows 原理
@@ -158,7 +158,7 @@ Get-ItemPropertyValue `
 
 ### 备份与恢复
 
-当前脚本没有为 CPU-001 建立独立备份文件，也没有提供自动恢复入口。执行前应手工保存原始存在状态、注册表类型和值：
+当前脚本没有为 CPU-001 建立 CPU 专用备份文件；但该值已纳入 Part 1 统一快照（`registry-backup.json`，机器绑定，备份失败会阻止修改），并可通过子项 4 按快照自动恢复。执行前仍建议手工保存原始存在状态、注册表类型和值：
 
 ```powershell
 $path = 'HKLM:\SYSTEM\CurrentControlSet\Control\PriorityControl'
@@ -185,7 +185,7 @@ if ($exists) {
 
 ### 恢复方式
 
-上面的手工快照和恢复规则是本条目的恢复前提。`tweakbyjie` 当前只负责写入/验证 `38`，不负责保存或恢复 CPU-001 的原始值。
+上面的手工快照和恢复规则是本条目的恢复前提之一。`tweakbyjie` 当前负责写入/验证 `38`；CPU-001 原始状态的保存与恢复已由 Part 1 统一快照（`registry-backup.json`，子项 4 恢复）覆盖，人工留底仍是稳妥的补充。
 
 ## CPU-002 Multimedia SystemProfile
 
@@ -224,7 +224,7 @@ Windows 会使用系统默认的 MMCSS 策略；默认值应在目标机器上�
 
 ### 验证与恢复
 
-当前脚本没有对 `SystemProfile` 下所有写入值进行统一回读，也没有自动备份这组配置。验证时应分别读取 CPU-003、CPU-004 和 CPU-005 中列出的具体值；恢复时必须将执行前记录的每个原值逐项写回。
+当前脚本没有对 `SystemProfile` 下所有写入值进行统一回读；这组配置中的注册表值已纳入 Part 1 统一快照（`registry-backup.json`），可通过子项 4 按快照恢复。验证时应分别读取 CPU-003、CPU-004 和 CPU-005 中列出的具体值；恢复时仍建议将执行前记录的每个原值逐项核对。
 
 ## CPU-003 SystemResponsiveness
 
@@ -271,7 +271,7 @@ Get-ItemPropertyValue `
 
 ### 恢复方式
 
-修改前读取并保存原始 `REG_DWORD`；恢复时写回原值。当前脚本没有自动备份或恢复 CPU-003。
+修改前读取并保存原始 `REG_DWORD`；恢复时写回原值。当前脚本没有 CPU-003 专用备份；该值已纳入 Part 1 统一快照（`registry-backup.json`），可经子项 4 按快照恢复。
 
 ## CPU-004 NetworkThrottlingIndex
 
@@ -319,7 +319,7 @@ Get-ItemProperty `
 
 ### 恢复方式
 
-修改前记录原始 `REG_DWORD`，恢复时写回原值。当前脚本没有自动备份或恢复 CPU-004；不要把 `0xFFFFFFFF` 当作所有系统的默认值。
+修改前记录原始 `REG_DWORD`，恢复时写回原值。当前脚本没有 CPU-004 专用备份；该值已纳入 Part 1 统一快照（`registry-backup.json`），可经子项 4 按快照恢复。不要把 `0xFFFFFFFF` 当作所有系统的默认值。
 
 ## CPU-005 Tasks\\Games
 
@@ -374,23 +374,23 @@ Get-ItemProperty `
 
 ### 恢复方式
 
-修改前必须记录该路径下七个值的原始存在状态、类型和值；恢复时按记录逐项写回，原本不存在的值应删除。当前脚本没有为 CPU-005 提供自动备份、删除缺失值或恢复入口。
+修改前必须记录该路径下七个值的原始存在状态、类型和值。当前脚本没有为 CPU-005 提供专用备份；七个值已纳入 Part 1 统一快照（`registry-backup.json`），子项 4 恢复时逐项写回、原本不存在的值会被自动删除。
 
 ## CPU 类核对结论
 
 - CPU-001 至 CPU-005 均已与 `tweakbyjie.ps1` 当前源码逐项对应。
 - `Multimedia SystemProfile` 是配置路径/类别；`SystemResponsiveness`、`NetworkThrottlingIndex` 和 `Tasks\Games` 是其中的独立执行项目，不能合并后遗漏。
-- 当前脚本的写入成功提示不等于所有值都已回读验证；CPU-001 之外的这些项目仍存在验证和备份恢复缺口。
+- 当前脚本的写入成功提示不等于所有值都已回读验证；CPU-001 之外的这些项目仍存在逐值回读验证缺口（备份与恢复已由 Part 1 统一快照 `registry-backup.json` 覆盖）。
 - 实际是否改善性能，应使用可重复的游戏和系统负载测试验证，不能仅凭注册表目标值判断。
 ## 事实核查记录
 
-核验基准：tweakbyjie 仓库 main 分支源码（2026-08-21（本次未重新核验），模块化收尾后）。
+核验基准：tweakbyjie 仓库源码（2026-08-29 重核：对照 tweak `b905950` 源码逐项复核）。
 
 | 声明 | 核查结果 |
 | --- | --- |
-| CPU-001 写入 Win32PrioritySeparation=38（0x26），经 Verify-RegDword 回读 | ✅ 属实：Modules/Registry.ps1 调用 Set-RegDword 写入、Verify-RegDword 回读 |
-| CPU-003/004/005 写入后无专门回读验证 | ✅ 属实：源码仅写入，无对应 Verify 调用 |
-| Tasks\Games 七项目标值（Affinity=0、Clock Rate=10000、Scheduling Category=High 等） | ✅ 属实：与 Registry.ps1 源码逐项一致 |
-| 脚本未提供 CPU-001~005 的自动备份/恢复 | ✅ 属实：无专用快照文件与恢复入口 |
+| CPU-001 写入 Win32PrioritySeparation=38（0x26），经 Verify-RegDword 回读 | ✅ 属实（2026-08-29 对照 b905950 复核）：Modules/Registry.ps1 调用 Set-RegDword 写入、Verify-RegDword 回读 |
+| CPU-003/004/005 写入后无专门回读验证 | ✅ 属实（2026-08-29 对照 b905950 复核）：源码仅回读 Win32PrioritySeparation 与 HAGS，CPU-003/004/005 仍无逐值回读 |
+| Tasks\Games 七项目标值（Affinity=0、Clock Rate=10000、Scheduling Category=High 等） | ✅ 属实：与 Modules/Registry.ps1 源码逐项一致 |
+| 脚本未提供 CPU-001~005 的自动备份/恢复 | ❌ 勘误（2026-08-29 重核）：该结论基于 2026-08-21/08-25 基线；b905950 已新增子项 1/2 写入前的统一快照（`registry-backup.json`，机器绑定，备份失败阻止修改）与子项 4 按快照恢复（含删除原不存在值），覆盖 CPU-001~005，正文已同步更新 |
 | 执行位置标注为 Modules/Menu.ps1（Part 1） | ❌ 勘误并已更新：Part 1 已迁至 Modules/Registry.ps1 |
 | 正文 `:813` 行号引用 | ❌ 勘误并已移除：模块化后行号失效，改为函数定位 |

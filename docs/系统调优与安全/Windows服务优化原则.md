@@ -37,7 +37,7 @@ Windows 服务优化不是简单地关闭所有后台服务。
 - Group B：9 个按需服务设为 `Disabled`；
 - Manual 组：`XboxGipSvc`、`XblAuthManager`、`XboxNetApiSvc`、`XblGameSave`、`bthserv`、`embeddedmode`、`BITS` 共 7 个设为 `Manual`。
 
-脚本在修改前创建或校验 `service-backup.json`，保存每个目标服务的 `Name`、`StartMode`、`State` 和 `DelayedAutostart`（延迟启动标记，旧版快照无此字段时恢复按普通 Auto 处理）；修改后用 `Win32_Service.StartMode` 逐项验证。主菜单 `6 → 2` 按快照恢复启动类型，原本不存在的服务跳过。恢复只保证启动类型，不强制恢复服务当前运行状态，通常需要重启。
+脚本在修改前创建或校验 `service-backup.json`，保存每个目标服务的 `Name`、`StartMode`、`State` 和 `DelayedAutostart`（延迟启动标记，旧版快照无此字段时恢复按普通 Auto 处理）；修改后用 `Win32_Service.StartMode` 逐项验证。服务停止失败的输出消息有区分：已停止并禁用、仍在运行（重启后停止）、受保护服务拒绝停止。主菜单 `6 → 2` 按快照恢复启动类型，原本不存在的服务跳过。恢复只保证启动类型，不强制恢复服务当前运行状态，通常需要重启。
 
 #### Part 6 逐项目标清单
 
@@ -107,11 +107,12 @@ Group B 和 Manual 组尤其需要按场景评估：`Spooler` 影响打印，`WS
 
 ## 事实核查记录
 
-核验基准：tweakbyjie 仓库 main 分支源码（2026-08-21（本次未重新核验））。
+核验基准：tweakbyjie 仓库 main 分支源码（2026-08-29 重核：对照 HEAD b905950 的 `Modules/Service.ps1`、`Modules/Backup.Service.ps1`、`Modules/Defender.ps1`、`Modules/Backup.Defender.ps1` 逐条复核）。
 
 | 声明 | 核查结果 |
 | --- | --- |
-| Part 6 共 37 个目标服务：Group A 21 个 Disabled + Group B 9 个 Disabled + Manual 组 7 个 | ✅ 属实：groupAServices/groupBServices/manualServices 数组逐项一致（含 DialogBlockingService 至 edgeupdatem、DPS 至 SysMain、XboxGipSvc 至 BITS） |
-| 快照保存 Name/StartMode/State/DelayedAutostart，修改后按 StartMode 逐项验证 | ✅ 属实：Backup.Service.ps1 的 Ensure 与 Verify-ServiceStartupType 一致（DelayedAutostart 为本批新增字段） |
-| 6→2 按快照恢复启动类型，原本不存在的服务跳过，不强制恢复运行状态 | ✅ 属实：Restore-ServiceBackup 行为一致 |
-| SERVICE-002（Part 5）不使用 service-backup.json；策略值有 defender-policy-backup.json 快照可经 5→2 恢复；服务/任务/SecHealthUI 无精确回滚 | ✅ 属实：与 Backup.Defender.ps1 及 Invoke-DefenderModule 一致 |
+| Part 6 共 37 个目标服务：Group A 21 个 Disabled + Group B 9 个 Disabled + Manual 组 7 个 | ✅ 属实（2026-08-29 重核）：`$script:serviceGroupA`/`serviceGroupB`/`serviceManualGroup` 在 `Modules/Backup.Service.ps1` 唯一定义并逐项一致（A 含 DialogBlockingService 至 edgeupdatem，B 含 DPS 至 SysMain，Manual 含 XboxGipSvc 至 BITS）；`Service.ps1` 与 `Restore-ServiceBackup` 均引用该清单，无第二份手抄清单 |
+| 快照保存 Name/StartMode/State/DelayedAutostart，修改后按 StartMode 逐项验证 | ✅ 属实（2026-08-29 重核）：`Ensure-ServiceBackup` 保存四字段（机器绑定，备份失败阻止修改）；`Verify-ServiceStartupType` 用 `Win32_Service.StartMode` 逐项回读；服务停止失败的输出消息有区分（已停止并禁用 / 仍在运行待重启后停止 / 受保护服务拒绝停止） |
+| 旧版快照无 DelayedAutostart 字段时恢复按普通 Auto 处理 | ✅ 属实（2026-08-29 重核）：`Restore-ServiceBackup` 仅在 `StartMode=Auto 且 DelayedAutostart=$true` 时用 `sc.exe start= delayed-auto`，字段缺失按普通 Auto 还原 |
+| 6→2 按快照恢复启动类型，原本不存在的服务跳过，不强制恢复运行状态 | ✅ 属实（2026-08-29 重核）：`Restore-ServiceBackup` 对 StartMode 为空的记录跳过并提示，恢复只保证启动类型 |
+| SERVICE-002（Part 5）不使用 service-backup.json；策略值有 defender-policy-backup.json 快照可经 5→2 恢复；服务/任务/SecHealthUI 无精确回滚 | ✅ 属实（2026-08-29 重核）：`defenderPolicyValues` 共 95 个策略值 + 4 个启动项值在首次应用前快照；`Defender.ps1` 结尾提示明确服务/计划任务/SecHealthUI 不在快照范围 |

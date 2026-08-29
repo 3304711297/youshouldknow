@@ -199,7 +199,7 @@ Sysprep /oobe /shutdown
 
 ## 事实核查记录
 
-核验基准：Microsoft Learn《Audit mode Overview》（2026-08-21（本次未重新核验） 在线核验）。
+核验基准：Microsoft Learn《Audit mode Overview》（2026-08-29 重核：官方 audit-mode-overview 与 boot-windows-to-audit-mode-or-oobe 页面在线核验通过，正文各项声明与官方文档一致；官方仍注明"不应将审核模式用于测试验证场景"）。
 
 | 声明 | 核查结果 |
 | --- | --- |

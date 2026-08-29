@@ -74,11 +74,11 @@ bcdedit /dbgsettings local
 bcdedit /set nointegritychecks on
 ```
 
-该入口用于测试驱动或调试环境，不是性能优化。它没有独立的原始 BCD 快照，也没有完整的自动回读闭环。
+该入口用于测试驱动或调试环境，不是性能优化。开启前脚本会把 `testsigning`、`debug`、`nointegritychecks` 三个值的 `Present/Value` 快照到独立的 `testmode-backup.json`（机器绑定，与高级 BCD 的 `bcd-backup.json` 相互独立）；备份失败时会阻止开启。写入本身没有逐项回读验证。
 
 ### 影响与恢复
 
-测试签名、内核调试和完整性检查改变系统安全模型，可能显示桌面水印并允许不适合日常使用的驱动环境。主菜单 `4` 可以删除 `testsigning` 和 `debug`，但脚本明确保留 `nointegritychecks`；它不是原状态精确恢复。若需关闭保留项，应按当前系统需求手动检查 BCD。
+测试签名、内核调试和完整性检查改变系统安全模型，可能显示桌面水印并允许不适合日常使用的驱动环境。主菜单 `4` 优先按 `testmode-backup.json` 快照恢复 `testsigning` 和 `debug`（原本未设置的删除、原本开启的恢复为开启），无快照时退回直接删除这两个值；两种路径都明确保留 `nointegritychecks`，因此都不是原状态精确恢复。若需关闭保留项，应按当前系统需求手动检查 BCD。
 
 > ⚠️ **反作弊风险**：`/debug on` 开启的内核调试模式会被主流反作弊系统（EAC、BattlEye 等）识别为调试环境，可能导致游戏拒绝运行甚至账号封禁；⚠️ 该结论来自社区共识而非反作弊厂商官方声明。调试用途结束后应及时用主菜单 `4` 或 `bcdedit /deletevalue debug` 关闭。
 
@@ -86,14 +86,14 @@ bcdedit /set nointegritychecks on
 
 ### 执行入口与目标
 
-主菜单 `4. 关闭测试模式`，源码 `Modules/Bcd.ps1`（`Invoke-TestModeDisableModule`）。当前脚本删除：
+主菜单 `4. 关闭测试模式`，源码 `Modules/Bcd.ps1`（`Invoke-TestModeDisableModule`）。存在 `testmode-backup.json` 时按快照恢复 `testsigning` 和 `debug`（原本未设置的删除、原本开启的写回），无快照时退回删除：
 
 ```text
 bcdedit /deletevalue testsigning
 bcdedit /deletevalue debug
 ```
 
-并明确保留 `nointegritychecks`。该模块没有独立备份，也没有完整回读；删除不存在的值可能产生失败提示。源码中的用户提示已修正为：重新开启测试模式应使用主菜单选项 `3`。
+两种路径都明确保留 `nointegritychecks`。该模块没有逐项回读验证；无快照退回删除时，删除不存在的值可能产生失败提示。源码中的用户提示已修正为：重新开启测试模式应使用主菜单选项 `3`。
 
 ## BOOT-005 Device Guard EFI 锁定清除
 
@@ -113,7 +113,7 @@ bcdedit /deletevalue debug
 
 ## BOOT-006 VBS/HVCI/Hyper-V 的启动部分
 
-主菜单 `10` 除注册表和 Windows 可选功能外，还处理：
+主菜单 `10` 除注册表和 Windows 可选功能外，还处理以下 BCD 值。关闭子项（选项 10 子项 `1`）在写入前会把注册表 5 值、BCD 3 值和 Windows 可选功能 3 项快照到 `vbs-backup.json`（机器绑定，备份失败时阻止修改）：
 
 ```text
 hypervisorlaunchtype = Off
@@ -121,7 +121,7 @@ vsmlaunchtype        = Off
 isolatedcontext      = No
 ```
 
-关闭子项对这些 BCD 值有回读验证；恢复子项删除脚本覆盖并尝试启用 Hyper-V，但没有保存原始 BCD、可选功能或策略状态，因此不是精确回滚。运行时是否仍有 Hypervisor 必须重启后检查。
+关闭子项对这些 BCD 值有回读验证；恢复有两条路径：子项 `3` 按 `vbs-backup.json` 快照恢复注册表/BCD/功能状态（注册表和 BCD 按存在状态写回或删除，功能仅恢复原本启用项）；子项 `2` 只删除脚本覆盖并尝试启用 Hyper-V，不是精确回滚。UEFI 锁定（Device Guard EFI 变量）不在快照范围内。运行时是否仍有 Hypervisor 必须重启后检查。
 
 ## 已知但脚本未采纳的 BCD 项（仅知识记录）
 
@@ -143,14 +143,14 @@ isolatedcontext      = No
 - 任何测试模式、`nointegritychecks`、VBS/HVCI 或 EFI 操作都应独立测试并保留恢复介质。
 ## 事实核查记录
 
-核验基准：tweakbyjie 仓库 main 分支源码（2026-08-21（本次未重新核验））。
+核验基准：tweakbyjie 仓库 main 分支源码（2026-08-29 重核：对照 HEAD b905950 的 `Modules/Menu.ps1`、`Modules/Bcd.ps1`、`Modules/Backup.Bcd.ps1`、`Modules/Virtualization.ps1`、`Modules/Backup.Vbs.ps1` 及 `tweakbyjie.ps1` 中的清单定义逐条复核）。
 
 | 声明 | 核查结果 |
 | --- | --- |
-| 高级 BCD 管理 7 个值（useplatformclock/useplatformtick/disabledynamictick/tscsyncpolicy/nx/tpmbootentropy/nointegritychecks） | ✅ 属实：bcdManagedValues 定义一致 |
-| BCD 修改前备份 bcd-backup.json，恢复按快照写回或删除，无备份时拒绝声称恢复 | ✅ 属实：Backup.Bcd.ps1（含写后回读校验） |
-| 测试模式开启写入 testsigning/debug/dbgsettings/nointegritychecks；关闭仅删除 testsigning/debug、保留 nointegritychecks | ✅ 属实：Part 3/4 行为一致 |
-| 测试模式与 EFI/VBS 操作无精确原始状态回滚 | ✅ 属实：文档边界与源码行为一致 |
-| `bootux disabled` 可禁用启动动画；`loadoptions` 三合一组合可关闭签名强制/LSA 隔离/VBS 加载；`nx OptIn` 为仅 Windows 组件档位 | ⚠️ 社区资料记载，按知识记录收录；除 `DISABLE-LSA-ISO` 单值（BOOT-005）外脚本均不采纳 |
-| `/debug on` 会被主流反作弊识别，可能导致游戏拒跑或封号 | ⚠️ 社区共识（EAC/BattlEye 用户报告），无反作弊厂商官方声明 |
-| 直接禁用 HPET 设备不适合，应改用 BCD 计时器调用策略调整 | ✅ 判断合理：BOOT-001 即为此类调整；设备禁用的副作用已有社区案例 |
+| 高级 BCD 管理 7 个值（useplatformclock/useplatformtick/disabledynamictick/tscsyncpolicy/nx/tpmbootentropy/nointegritychecks） | ✅ 属实：`tweakbyjie.ps1` 中 bcdManagedValues 定义一致（2026-08-29 重核） |
+| BCD 修改前备份 bcd-backup.json，恢复按快照写回或删除，无备份时拒绝声称恢复 | ✅ 属实：Backup.Bcd.ps1（含写后回读校验与机器绑定）（2026-08-29 重核） |
+| 测试模式开启写入 testsigning/debug/dbgsettings/nointegritychecks；关闭仅删除 testsigning/debug、保留 nointegritychecks | ⚠️ 修正（2026-08-29 重核）：开启时确实写入这四项，但开启前会把 testsigning/debug/nointegritychecks 快照到独立的 `testmode-backup.json`（备份失败阻止修改）；关闭时优先按该快照恢复 testsigning/debug，无快照才退回删除，两种路径都保留 nointegritychecks。正文已同步修正 |
+| 测试模式与 EFI/VBS 操作无精确原始状态回滚 | ⚠️ 修正（2026-08-29 重核）：EFI 清除流程仍无原始 EFI 变量快照；但测试模式现有 `testmode-backup.json` 快照恢复（不覆盖 nointegritychecks），VBS 现有 `vbs-backup.json`（注册表 5 值 + BCD 3 值 + 功能 3 项）且子项 3 可按快照恢复，UEFI 锁定仍不在快照范围、子项 2 仍非精确回滚。正文已同步修正 |
+| `bootux disabled` 可禁用启动动画；`loadoptions` 三合一组合可关闭签名强制/LSA 隔离/VBS 加载；`nx OptIn` 为仅 Windows 组件档位 | ⚠️ 社区资料记载，按知识记录收录；除 `DISABLE-LSA-ISO` 单值（BOOT-005）外脚本均不采纳（2026-08-29 重核：源码确认仍无对应菜单项） |
+| `/debug on` 会被主流反作弊识别，可能导致游戏拒跑或封号 | ⚠️ 社区共识（EAC/BattlEye 用户报告），无反作弊厂商官方声明（2026-08-29 重核：维持原判，属知识性声明） |
+| 直接禁用 HPET 设备不适合，应改用 BCD 计时器调用策略调整 | ✅ 判断合理：BOOT-001 即为此类调整；设备禁用的副作用已有社区案例（2026-08-29 重核：源码确认 HPET 设备操作不在脚本范围内） |
