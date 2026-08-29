@@ -3881,7 +3881,7 @@
 </ul>
 <p>历史路径（注册表优化原则、优化等级说明、优化前准备与风险等级、优化误区）已并入本文，旧链接由站点重定向自动跳转。</p>
 <h2 id="_14">事实核查记录<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h2>
-<p>核验基准：tweakbyjie 仓库 main 分支源码与 youshouldknow 映射文档（2026-08-21（本次未重新核验））。</p>
+<p>核验基准：tweakbyjie 仓库 main 分支源码与 youshouldknow 映射文档（2026-08-29 重核：对照 HEAD b905950 的各 <code>Modules/Backup.*.ps1</code>（备份优先门禁、无备份拒绝声称恢复）与 <code>docs/项目导航/tweakbyjie-optimization-mapping.md</code>、<code>tweakbyjie全量执行参考.md</code> 复核）。</p>
 <table>
 <thead>
 <tr>
@@ -3892,19 +3892,19 @@
 <tbody>
 <tr>
 <td>三级风险分类（常规/环境相关/高风险）与全库映射表的风险标注一致</td>
-<td>✅ 属实：HAGS/MPO/内存压缩等归🟡，BCD/VBS/EFI/Defender 归🔴</td>
+<td>✅ 属实（2026-08-29 重核）：映射文档以文字标注风险级别，HAGS/MPO/内存压缩等按环境相关处理（需 A/B 与回滚），BCD/VBS/EFI/<code>defender-removal.ps1</code> 标注为高风险不可逆，与本文三级分类语义一致</td>
 </tr>
 <tr>
 <td>统一修改流程（检测→记录→备份→单项修改→配置验证→运行时测试→恢复）</td>
-<td>✅ 属实：与各 Backup.* 模块的 Ensure/Restore 实际行为一致</td>
+<td>✅ 属实（2026-08-29 重核）：与各 <code>Backup.*</code> 模块的 Ensure/Restore 实际行为一致——修改前强制备份、备份失败阻止修改、无备份时恢复入口拒绝声称已恢复；测试模式快照 <code>testmode-backup.json</code> 与 VBS 快照 <code>vbs-backup.json</code> 也符合该流程</td>
 </tr>
 <tr>
 <td>配置层写入/回读成功不等于运行时收益</td>
-<td>✅ 属实：与执行参考的验证边界声明一致</td>
+<td>✅ 属实（2026-08-29 重核）：与执行参考的验证边界声明一致</td>
 </tr>
 <tr>
 <td>「源码行号」表述</td>
-<td>❌ 勘误并已更新：模块化后以 <code>Modules/函数名</code> 定位，不使用行号</td>
+<td>❌ 勘误并已更新：模块化后以 <code>Modules/函数名</code> 定位，不使用行号（2026-08-29 重核：<code>tweakbyjie-optimization-mapping.md</code> 已按此约定；注意 <code>tweakbyjie全量执行参考.md</code> 尚残留少量模块化前的 <code>:行号</code> 引用，对应当前源码已失效，不作为定位依据）</td>
 </tr>
 </tbody>
 </table>
@@ -3930,7 +3930,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月26日 14:25:59 UTC">2026年8月26日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月29日 13:35:20 UTC">2026年8月29日</span>
   </span>
 
     

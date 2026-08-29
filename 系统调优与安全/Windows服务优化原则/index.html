@@ -3743,7 +3743,7 @@
 <li>Group B：9 个按需服务设为 <code>Disabled</code>；</li>
 <li>Manual 组：<code>XboxGipSvc</code>、<code>XblAuthManager</code>、<code>XboxNetApiSvc</code>、<code>XblGameSave</code>、<code>bthserv</code>、<code>embeddedmode</code>、<code>BITS</code> 共 7 个设为 <code>Manual</code>。</li>
 </ul>
-<p>脚本在修改前创建或校验 <code>service-backup.json</code>，保存每个目标服务的 <code>Name</code>、<code>StartMode</code>、<code>State</code> 和 <code>DelayedAutostart</code>（延迟启动标记，旧版快照无此字段时恢复按普通 Auto 处理）；修改后用 <code>Win32_Service.StartMode</code> 逐项验证。主菜单 <code>6 → 2</code> 按快照恢复启动类型，原本不存在的服务跳过。恢复只保证启动类型，不强制恢复服务当前运行状态，通常需要重启。</p>
+<p>脚本在修改前创建或校验 <code>service-backup.json</code>，保存每个目标服务的 <code>Name</code>、<code>StartMode</code>、<code>State</code> 和 <code>DelayedAutostart</code>（延迟启动标记，旧版快照无此字段时恢复按普通 Auto 处理）；修改后用 <code>Win32_Service.StartMode</code> 逐项验证。服务停止失败的输出消息有区分：已停止并禁用、仍在运行（重启后停止）、受保护服务拒绝停止。主菜单 <code>6 → 2</code> 按快照恢复启动类型，原本不存在的服务跳过。恢复只保证启动类型，不强制恢复服务当前运行状态，通常需要重启。</p>
 <h4 id="part-6">Part 6 逐项目标清单<a class="headerlink" href="#part-6" title="Permanent link">&para;</a></h4>
 <p>以下清单对应源码当前的 37 条服务记录；服务不存在时脚本会跳过，但仍会在首次快照中记录其不存在状态。Group A 与 Group B 在一次执行中都会处理，不是二选一。</p>
 <table>
@@ -3996,7 +3996,7 @@
 </ul>
 <p>具体服务集合、源码入口、验证和恢复限制见 <code>youshouldknow/项目导航/tweakbyjie-optimization-mapping.md</code>。</p>
 <h2 id="_6">事实核查记录<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
-<p>核验基准：tweakbyjie 仓库 main 分支源码（2026-08-21（本次未重新核验））。</p>
+<p>核验基准：tweakbyjie 仓库 main 分支源码（2026-08-29 重核：对照 HEAD b905950 的 <code>Modules/Service.ps1</code>、<code>Modules/Backup.Service.ps1</code>、<code>Modules/Defender.ps1</code>、<code>Modules/Backup.Defender.ps1</code> 逐条复核）。</p>
 <table>
 <thead>
 <tr>
@@ -4007,19 +4007,23 @@
 <tbody>
 <tr>
 <td>Part 6 共 37 个目标服务：Group A 21 个 Disabled + Group B 9 个 Disabled + Manual 组 7 个</td>
-<td>✅ 属实：groupAServices/groupBServices/manualServices 数组逐项一致（含 DialogBlockingService 至 edgeupdatem、DPS 至 SysMain、XboxGipSvc 至 BITS）</td>
+<td>✅ 属实（2026-08-29 重核）：<code>$script:serviceGroupA</code>/<code>serviceGroupB</code>/<code>serviceManualGroup</code> 在 <code>Modules/Backup.Service.ps1</code> 唯一定义并逐项一致（A 含 DialogBlockingService 至 edgeupdatem，B 含 DPS 至 SysMain，Manual 含 XboxGipSvc 至 BITS）；<code>Service.ps1</code> 与 <code>Restore-ServiceBackup</code> 均引用该清单，无第二份手抄清单</td>
 </tr>
 <tr>
 <td>快照保存 Name/StartMode/State/DelayedAutostart，修改后按 StartMode 逐项验证</td>
-<td>✅ 属实：Backup.Service.ps1 的 Ensure 与 Verify-ServiceStartupType 一致（DelayedAutostart 为本批新增字段）</td>
+<td>✅ 属实（2026-08-29 重核）：<code>Ensure-ServiceBackup</code> 保存四字段（机器绑定，备份失败阻止修改）；<code>Verify-ServiceStartupType</code> 用 <code>Win32_Service.StartMode</code> 逐项回读；服务停止失败的输出消息有区分（已停止并禁用 / 仍在运行待重启后停止 / 受保护服务拒绝停止）</td>
+</tr>
+<tr>
+<td>旧版快照无 DelayedAutostart 字段时恢复按普通 Auto 处理</td>
+<td>✅ 属实（2026-08-29 重核）：<code>Restore-ServiceBackup</code> 仅在 <code>StartMode=Auto 且 DelayedAutostart=$true</code> 时用 <code>sc.exe start= delayed-auto</code>，字段缺失按普通 Auto 还原</td>
 </tr>
 <tr>
 <td>6→2 按快照恢复启动类型，原本不存在的服务跳过，不强制恢复运行状态</td>
-<td>✅ 属实：Restore-ServiceBackup 行为一致</td>
+<td>✅ 属实（2026-08-29 重核）：<code>Restore-ServiceBackup</code> 对 StartMode 为空的记录跳过并提示，恢复只保证启动类型</td>
 </tr>
 <tr>
 <td>SERVICE-002（Part 5）不使用 service-backup.json；策略值有 defender-policy-backup.json 快照可经 5→2 恢复；服务/任务/SecHealthUI 无精确回滚</td>
-<td>✅ 属实：与 Backup.Defender.ps1 及 Invoke-DefenderModule 一致</td>
+<td>✅ 属实（2026-08-29 重核）：<code>defenderPolicyValues</code> 共 95 个策略值 + 4 个启动项值在首次应用前快照；<code>Defender.ps1</code> 结尾提示明确服务/计划任务/SecHealthUI 不在快照范围</td>
 </tr>
 </tbody>
 </table>
@@ -4045,7 +4049,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月26日 14:25:59 UTC">2026年8月26日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月29日 13:35:20 UTC">2026年8月29日</span>
   </span>
 
     

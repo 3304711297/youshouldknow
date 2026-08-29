@@ -4008,19 +4008,19 @@
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>bcdedit /dbgsettings local
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>bcdedit /set nointegritychecks on
 </code></pre></div>
-<p>该入口用于测试驱动或调试环境，不是性能优化。它没有独立的原始 BCD 快照，也没有完整的自动回读闭环。</p>
+<p>该入口用于测试驱动或调试环境，不是性能优化。开启前脚本会把 <code>testsigning</code>、<code>debug</code>、<code>nointegritychecks</code> 三个值的 <code>Present/Value</code> 快照到独立的 <code>testmode-backup.json</code>（机器绑定，与高级 BCD 的 <code>bcd-backup.json</code> 相互独立）；备份失败时会阻止开启。写入本身没有逐项回读验证。</p>
 <h3 id="_8">影响与恢复<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
-<p>测试签名、内核调试和完整性检查改变系统安全模型，可能显示桌面水印并允许不适合日常使用的驱动环境。主菜单 <code>4</code> 可以删除 <code>testsigning</code> 和 <code>debug</code>，但脚本明确保留 <code>nointegritychecks</code>；它不是原状态精确恢复。若需关闭保留项，应按当前系统需求手动检查 BCD。</p>
+<p>测试签名、内核调试和完整性检查改变系统安全模型，可能显示桌面水印并允许不适合日常使用的驱动环境。主菜单 <code>4</code> 优先按 <code>testmode-backup.json</code> 快照恢复 <code>testsigning</code> 和 <code>debug</code>（原本未设置的删除、原本开启的恢复为开启），无快照时退回直接删除这两个值；两种路径都明确保留 <code>nointegritychecks</code>，因此都不是原状态精确恢复。若需关闭保留项，应按当前系统需求手动检查 BCD。</p>
 <blockquote>
 <p>⚠️ <strong>反作弊风险</strong>：<code>/debug on</code> 开启的内核调试模式会被主流反作弊系统（EAC、BattlEye 等）识别为调试环境，可能导致游戏拒绝运行甚至账号封禁；⚠️ 该结论来自社区共识而非反作弊厂商官方声明。调试用途结束后应及时用主菜单 <code>4</code> 或 <code>bcdedit /deletevalue debug</code> 关闭。</p>
 </blockquote>
 <h2 id="boot-004">BOOT-004 关闭测试模式<a class="headerlink" href="#boot-004" title="Permanent link">&para;</a></h2>
 <h3 id="_9">执行入口与目标<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
-<p>主菜单 <code>4. 关闭测试模式</code>，源码 <code>Modules/Bcd.ps1</code>（<code>Invoke-TestModeDisableModule</code>）。当前脚本删除：</p>
+<p>主菜单 <code>4. 关闭测试模式</code>，源码 <code>Modules/Bcd.ps1</code>（<code>Invoke-TestModeDisableModule</code>）。存在 <code>testmode-backup.json</code> 时按快照恢复 <code>testsigning</code> 和 <code>debug</code>（原本未设置的删除、原本开启的写回），无快照时退回删除：</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>bcdedit /deletevalue testsigning
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>bcdedit /deletevalue debug
 </code></pre></div>
-<p>并明确保留 <code>nointegritychecks</code>。该模块没有独立备份，也没有完整回读；删除不存在的值可能产生失败提示。源码中的用户提示已修正为：重新开启测试模式应使用主菜单选项 <code>3</code>。</p>
+<p>两种路径都明确保留 <code>nointegritychecks</code>。该模块没有逐项回读验证；无快照退回删除时，删除不存在的值可能产生失败提示。源码中的用户提示已修正为：重新开启测试模式应使用主菜单选项 <code>3</code>。</p>
 <h2 id="boot-005-device-guard-efi">BOOT-005 Device Guard EFI 锁定清除<a class="headerlink" href="#boot-005-device-guard-efi" title="Permanent link">&para;</a></h2>
 <h3 id="_10">执行入口与目标<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
 <p>主菜单 <code>9. 清除 Device Guard EFI 锁定</code>，源码 <code>Modules/Virtualization.ps1</code>。流程包括：</p>
@@ -4034,12 +4034,12 @@
 <h3 id="_11">风险、验证与恢复<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
 <p>该流程涉及 EFI 变量、BitLocker 和一次性启动顺序。脚本会清理临时 BCD 项和盘符，但没有保存原始 EFI 变量、原始 <code>bootsequence</code> 或精确恢复 <code>SecConfig.efi</code> 文件；清理临时项不等于恢复 Device Guard 原状态。执行前必须保留 BitLocker 恢复密钥，确认确实需要清除 EFI 锁定，并准备离线恢复方案。</p>
 <h2 id="boot-006-vbshvcihyper-v">BOOT-006 VBS/HVCI/Hyper-V 的启动部分<a class="headerlink" href="#boot-006-vbshvcihyper-v" title="Permanent link">&para;</a></h2>
-<p>主菜单 <code>10</code> 除注册表和 Windows 可选功能外，还处理：</p>
+<p>主菜单 <code>10</code> 除注册表和 Windows 可选功能外，还处理以下 BCD 值。关闭子项（选项 10 子项 <code>1</code>）在写入前会把注册表 5 值、BCD 3 值和 Windows 可选功能 3 项快照到 <code>vbs-backup.json</code>（机器绑定，备份失败时阻止修改）：</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>hypervisorlaunchtype = Off
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>vsmlaunchtype        = Off
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>isolatedcontext      = No
 </code></pre></div>
-<p>关闭子项对这些 BCD 值有回读验证；恢复子项删除脚本覆盖并尝试启用 Hyper-V，但没有保存原始 BCD、可选功能或策略状态，因此不是精确回滚。运行时是否仍有 Hypervisor 必须重启后检查。</p>
+<p>关闭子项对这些 BCD 值有回读验证；恢复有两条路径：子项 <code>3</code> 按 <code>vbs-backup.json</code> 快照恢复注册表/BCD/功能状态（注册表和 BCD 按存在状态写回或删除，功能仅恢复原本启用项）；子项 <code>2</code> 只删除脚本覆盖并尝试启用 Hyper-V，不是精确回滚。UEFI 锁定（Device Guard EFI 变量）不在快照范围内。运行时是否仍有 Hypervisor 必须重启后检查。</p>
 <h2 id="bcd">已知但脚本未采纳的 BCD 项（仅知识记录）<a class="headerlink" href="#bcd" title="Permanent link">&para;</a></h2>
 <p>以下 BCD 用法在社区资料中流传，<code>tweakbyjie</code> 当前<strong>明确不采纳</strong>（无对应菜单项、无编号、无备份闭环），此处仅作知识记录；使用需自行承担验证与恢复责任。</p>
 <table>
@@ -4076,7 +4076,7 @@
 <li>任何测试模式、<code>nointegritychecks</code>、VBS/HVCI 或 EFI 操作都应独立测试并保留恢复介质。</li>
 </ul>
 <h2 id="_13">事实核查记录<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h2>
-<p>核验基准：tweakbyjie 仓库 main 分支源码（2026-08-21（本次未重新核验））。</p>
+<p>核验基准：tweakbyjie 仓库 main 分支源码（2026-08-29 重核：对照 HEAD b905950 的 <code>Modules/Menu.ps1</code>、<code>Modules/Bcd.ps1</code>、<code>Modules/Backup.Bcd.ps1</code>、<code>Modules/Virtualization.ps1</code>、<code>Modules/Backup.Vbs.ps1</code> 及 <code>tweakbyjie.ps1</code> 中的清单定义逐条复核）。</p>
 <table>
 <thead>
 <tr>
@@ -4087,31 +4087,31 @@
 <tbody>
 <tr>
 <td>高级 BCD 管理 7 个值（useplatformclock/useplatformtick/disabledynamictick/tscsyncpolicy/nx/tpmbootentropy/nointegritychecks）</td>
-<td>✅ 属实：bcdManagedValues 定义一致</td>
+<td>✅ 属实：<code>tweakbyjie.ps1</code> 中 bcdManagedValues 定义一致（2026-08-29 重核）</td>
 </tr>
 <tr>
 <td>BCD 修改前备份 bcd-backup.json，恢复按快照写回或删除，无备份时拒绝声称恢复</td>
-<td>✅ 属实：Backup.Bcd.ps1（含写后回读校验）</td>
+<td>✅ 属实：Backup.Bcd.ps1（含写后回读校验与机器绑定）（2026-08-29 重核）</td>
 </tr>
 <tr>
 <td>测试模式开启写入 testsigning/debug/dbgsettings/nointegritychecks；关闭仅删除 testsigning/debug、保留 nointegritychecks</td>
-<td>✅ 属实：Part 3/4 行为一致</td>
+<td>⚠️ 修正（2026-08-29 重核）：开启时确实写入这四项，但开启前会把 testsigning/debug/nointegritychecks 快照到独立的 <code>testmode-backup.json</code>（备份失败阻止修改）；关闭时优先按该快照恢复 testsigning/debug，无快照才退回删除，两种路径都保留 nointegritychecks。正文已同步修正</td>
 </tr>
 <tr>
 <td>测试模式与 EFI/VBS 操作无精确原始状态回滚</td>
-<td>✅ 属实：文档边界与源码行为一致</td>
+<td>⚠️ 修正（2026-08-29 重核）：EFI 清除流程仍无原始 EFI 变量快照；但测试模式现有 <code>testmode-backup.json</code> 快照恢复（不覆盖 nointegritychecks），VBS 现有 <code>vbs-backup.json</code>（注册表 5 值 + BCD 3 值 + 功能 3 项）且子项 3 可按快照恢复，UEFI 锁定仍不在快照范围、子项 2 仍非精确回滚。正文已同步修正</td>
 </tr>
 <tr>
 <td><code>bootux disabled</code> 可禁用启动动画；<code>loadoptions</code> 三合一组合可关闭签名强制/LSA 隔离/VBS 加载；<code>nx OptIn</code> 为仅 Windows 组件档位</td>
-<td>⚠️ 社区资料记载，按知识记录收录；除 <code>DISABLE-LSA-ISO</code> 单值（BOOT-005）外脚本均不采纳</td>
+<td>⚠️ 社区资料记载，按知识记录收录；除 <code>DISABLE-LSA-ISO</code> 单值（BOOT-005）外脚本均不采纳（2026-08-29 重核：源码确认仍无对应菜单项）</td>
 </tr>
 <tr>
 <td><code>/debug on</code> 会被主流反作弊识别，可能导致游戏拒跑或封号</td>
-<td>⚠️ 社区共识（EAC/BattlEye 用户报告），无反作弊厂商官方声明</td>
+<td>⚠️ 社区共识（EAC/BattlEye 用户报告），无反作弊厂商官方声明（2026-08-29 重核：维持原判，属知识性声明）</td>
 </tr>
 <tr>
 <td>直接禁用 HPET 设备不适合，应改用 BCD 计时器调用策略调整</td>
-<td>✅ 判断合理：BOOT-001 即为此类调整；设备禁用的副作用已有社区案例</td>
+<td>✅ 判断合理：BOOT-001 即为此类调整；设备禁用的副作用已有社区案例（2026-08-29 重核：源码确认 HPET 设备操作不在脚本范围内）</td>
 </tr>
 </tbody>
 </table>
@@ -4137,7 +4137,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月26日 14:25:59 UTC">2026年8月26日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月29日 13:35:20 UTC">2026年8月29日</span>
   </span>
 
     

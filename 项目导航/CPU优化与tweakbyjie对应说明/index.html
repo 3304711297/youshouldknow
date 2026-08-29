@@ -4740,7 +4740,7 @@
 </blockquote>
 <p>本章节逐项对应 <code>tweakbyjie/tweakbyjie.ps1</code> 当前“Part 1 → 核心游戏优化 → 子项 1”中的 CPU、MMCSS 多媒体调度和 Games 任务配置。脚本实际写入的路径、值名和目标值以当前源码为准。</p>
 <blockquote>
-<p>重要边界：当前脚本对这些项目没有统一的修改前备份/恢复流程；除 CPU-001 外，当前执行路径也没有为这些项目提供完整的回读验证。因此，下面的“恢复方式”是人工恢复前提，不代表脚本已经自动提供恢复功能。</p>
+<p>重要边界：当前脚本对这些注册表写入没有 CPU-001~005 专用备份文件；但自 tweak <code>b905950</code> 起，执行核心游戏/系统行为子项前有统一快照门禁（<code>registry-backup.json</code>，带机器绑定，备份失败则阻止修改），并可通过 Part 1 子项 4 按快照自动恢复（原不存在的值会被删除）。回读验证方面，除 CPU-001 外，当前执行路径仍没有为 CPU-003/004/005 提供逐值回读验证。因此，下面的“恢复方式”中人工记录原值仍是稳妥前提，脚本快照不能替代回读验证。</p>
 </blockquote>
 <h2 id="cpu-001-win32priorityseparation">CPU-001 Win32PrioritySeparation<a class="headerlink" href="#cpu-001-win32priorityseparation" title="Permanent link">&para;</a></h2>
 <h3 id="_2">执行位置<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
@@ -4791,7 +4791,7 @@
 </tr>
 <tr>
 <td>脚本行为</td>
-<td>写入 <code>38</code>，成功后标记需要重启；不提供 CPU-001 专用快照</td>
+<td>写入 <code>38</code>，成功后标记需要重启；无 CPU-001 专用快照，但已纳入 Part 1 统一快照（<code>registry-backup.json</code>），可经子项 4 恢复</td>
 </tr>
 <tr>
 <td>文档状态</td>
@@ -5030,7 +5030,7 @@
 </ul>
 <p>如果只观察一个游戏的一次平均 FPS，不能判断该值是否有效。建议先保留默认值作为基线，再测试目标值；不要同时修改 HAGS、MMCSS、Games 任务或电源计划，否则无法归因。</p>
 <h3 id="_13">备份与恢复<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
-<p>当前脚本没有为 CPU-001 建立独立备份文件，也没有提供自动恢复入口。执行前应手工保存原始存在状态、注册表类型和值：</p>
+<p>当前脚本没有为 CPU-001 建立 CPU 专用备份文件；但该值已纳入 Part 1 统一快照（<code>registry-backup.json</code>，机器绑定，备份失败会阻止修改），并可通过子项 4 按快照自动恢复。执行前仍建议手工保存原始存在状态、注册表类型和值：</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nv">$path</span> <span class="p">=</span> <span class="s1">'HKLM:\SYSTEM\CurrentControlSet\Control\PriorityControl'</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="nv">$key</span> <span class="p">=</span> <span class="nb">Get-Item</span> <span class="nv">$path</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="nv">$exists</span> <span class="p">=</span> <span class="nv">$key</span><span class="p">.</span><span class="n">GetValueNames</span><span class="p">()</span> <span class="o">-contains</span> <span class="s1">'Win32PrioritySeparation'</span>
@@ -5052,7 +5052,7 @@
 </ul>
 <p>不要把 <code>0x26</code>、<code>0x18</code> 或另一台电脑的值当作通用恢复值。</p>
 <h3 id="_14">恢复方式<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
-<p>上面的手工快照和恢复规则是本条目的恢复前提。<code>tweakbyjie</code> 当前只负责写入/验证 <code>38</code>，不负责保存或恢复 CPU-001 的原始值。</p>
+<p>上面的手工快照和恢复规则是本条目的恢复前提之一。<code>tweakbyjie</code> 当前负责写入/验证 <code>38</code>；CPU-001 原始状态的保存与恢复已由 Part 1 统一快照（<code>registry-backup.json</code>，子项 4 恢复）覆盖，人工留底仍是稳妥的补充。</p>
 <h2 id="cpu-002-multimedia-systemprofile">CPU-002 Multimedia SystemProfile<a class="headerlink" href="#cpu-002-multimedia-systemprofile" title="Permanent link">&para;</a></h2>
 <h3 id="_15">执行位置<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
 <ul>
@@ -5077,7 +5077,7 @@
 <h3 id="_19">潜在影响<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h3>
 <p>可能改变后台任务获得的处理器时间、网络线程调度或多媒体任务的稳定性。错误或不适配的值可能导致后台任务延迟、应用兼容性问题，且不一定带来帧率收益。</p>
 <h3 id="_20">验证与恢复<a class="headerlink" href="#_20" title="Permanent link">&para;</a></h3>
-<p>当前脚本没有对 <code>SystemProfile</code> 下所有写入值进行统一回读，也没有自动备份这组配置。验证时应分别读取 CPU-003、CPU-004 和 CPU-005 中列出的具体值；恢复时必须将执行前记录的每个原值逐项写回。</p>
+<p>当前脚本没有对 <code>SystemProfile</code> 下所有写入值进行统一回读；这组配置中的注册表值已纳入 Part 1 统一快照（<code>registry-backup.json</code>），可通过子项 4 按快照恢复。验证时应分别读取 CPU-003、CPU-004 和 CPU-005 中列出的具体值；恢复时仍建议将执行前记录的每个原值逐项核对。</p>
 <h2 id="cpu-003-systemresponsiveness">CPU-003 SystemResponsiveness<a class="headerlink" href="#cpu-003-systemresponsiveness" title="Permanent link">&para;</a></h2>
 <h3 id="_21">执行位置<a class="headerlink" href="#_21" title="Permanent link">&para;</a></h3>
 <ul>
@@ -5106,7 +5106,7 @@
 <a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>  <span class="s1">'SystemResponsiveness'</span>
 </code></pre></div>
 <h3 id="_27">恢复方式<a class="headerlink" href="#_27" title="Permanent link">&para;</a></h3>
-<p>修改前读取并保存原始 <code>REG_DWORD</code>；恢复时写回原值。当前脚本没有自动备份或恢复 CPU-003。</p>
+<p>修改前读取并保存原始 <code>REG_DWORD</code>；恢复时写回原值。当前脚本没有 CPU-003 专用备份；该值已纳入 Part 1 统一快照（<code>registry-backup.json</code>），可经子项 4 按快照恢复。</p>
 <h2 id="cpu-004-networkthrottlingindex">CPU-004 NetworkThrottlingIndex<a class="headerlink" href="#cpu-004-networkthrottlingindex" title="Permanent link">&para;</a></h2>
 <h3 id="_28">执行位置<a class="headerlink" href="#_28" title="Permanent link">&para;</a></h3>
 <ul>
@@ -5136,7 +5136,7 @@
 <a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>  <span class="nb">Select-Object</span> <span class="n">NetworkThrottlingIndex</span>
 </code></pre></div>
 <h3 id="_34">恢复方式<a class="headerlink" href="#_34" title="Permanent link">&para;</a></h3>
-<p>修改前记录原始 <code>REG_DWORD</code>，恢复时写回原值。当前脚本没有自动备份或恢复 CPU-004；不要把 <code>0xFFFFFFFF</code> 当作所有系统的默认值。</p>
+<p>修改前记录原始 <code>REG_DWORD</code>，恢复时写回原值。当前脚本没有 CPU-004 专用备份；该值已纳入 Part 1 统一快照（<code>registry-backup.json</code>），可经子项 4 按快照恢复。不要把 <code>0xFFFFFFFF</code> 当作所有系统的默认值。</p>
 <h2 id="cpu-005-tasksgames">CPU-005 Tasks\Games<a class="headerlink" href="#cpu-005-tasksgames" title="Permanent link">&para;</a></h2>
 <h3 id="_35">执行位置<a class="headerlink" href="#_35" title="Permanent link">&para;</a></h3>
 <ul>
@@ -5208,16 +5208,16 @@
 </code></pre></div>
 <p>应逐项核对值名、类型和目标值，而不是只确认注册表路径存在。</p>
 <h3 id="_41">恢复方式<a class="headerlink" href="#_41" title="Permanent link">&para;</a></h3>
-<p>修改前必须记录该路径下七个值的原始存在状态、类型和值；恢复时按记录逐项写回，原本不存在的值应删除。当前脚本没有为 CPU-005 提供自动备份、删除缺失值或恢复入口。</p>
+<p>修改前必须记录该路径下七个值的原始存在状态、类型和值。当前脚本没有为 CPU-005 提供专用备份；七个值已纳入 Part 1 统一快照（<code>registry-backup.json</code>），子项 4 恢复时逐项写回、原本不存在的值会被自动删除。</p>
 <h2 id="cpu">CPU 类核对结论<a class="headerlink" href="#cpu" title="Permanent link">&para;</a></h2>
 <ul>
 <li>CPU-001 至 CPU-005 均已与 <code>tweakbyjie.ps1</code> 当前源码逐项对应。</li>
 <li><code>Multimedia SystemProfile</code> 是配置路径/类别；<code>SystemResponsiveness</code>、<code>NetworkThrottlingIndex</code> 和 <code>Tasks\Games</code> 是其中的独立执行项目，不能合并后遗漏。</li>
-<li>当前脚本的写入成功提示不等于所有值都已回读验证；CPU-001 之外的这些项目仍存在验证和备份恢复缺口。</li>
+<li>当前脚本的写入成功提示不等于所有值都已回读验证；CPU-001 之外的这些项目仍存在逐值回读验证缺口（备份与恢复已由 Part 1 统一快照 <code>registry-backup.json</code> 覆盖）。</li>
 <li>实际是否改善性能，应使用可重复的游戏和系统负载测试验证，不能仅凭注册表目标值判断。</li>
 </ul>
 <h2 id="_42">事实核查记录<a class="headerlink" href="#_42" title="Permanent link">&para;</a></h2>
-<p>核验基准：tweakbyjie 仓库 main 分支源码（2026-08-21（本次未重新核验），模块化收尾后）。</p>
+<p>核验基准：tweakbyjie 仓库源码（2026-08-29 重核：对照 tweak <code>b905950</code> 源码逐项复核）。</p>
 <table>
 <thead>
 <tr>
@@ -5228,19 +5228,19 @@
 <tbody>
 <tr>
 <td>CPU-001 写入 Win32PrioritySeparation=38（0x26），经 Verify-RegDword 回读</td>
-<td>✅ 属实：Modules/Registry.ps1 调用 Set-RegDword 写入、Verify-RegDword 回读</td>
+<td>✅ 属实（2026-08-29 对照 b905950 复核）：Modules/Registry.ps1 调用 Set-RegDword 写入、Verify-RegDword 回读</td>
 </tr>
 <tr>
 <td>CPU-003/004/005 写入后无专门回读验证</td>
-<td>✅ 属实：源码仅写入，无对应 Verify 调用</td>
+<td>✅ 属实（2026-08-29 对照 b905950 复核）：源码仅回读 Win32PrioritySeparation 与 HAGS，CPU-003/004/005 仍无逐值回读</td>
 </tr>
 <tr>
 <td>Tasks\Games 七项目标值（Affinity=0、Clock Rate=10000、Scheduling Category=High 等）</td>
-<td>✅ 属实：与 Registry.ps1 源码逐项一致</td>
+<td>✅ 属实：与 Modules/Registry.ps1 源码逐项一致</td>
 </tr>
 <tr>
 <td>脚本未提供 CPU-001~005 的自动备份/恢复</td>
-<td>✅ 属实：无专用快照文件与恢复入口</td>
+<td>❌ 勘误（2026-08-29 重核）：该结论基于 2026-08-21/08-25 基线；b905950 已新增子项 1/2 写入前的统一快照（<code>registry-backup.json</code>，机器绑定，备份失败阻止修改）与子项 4 按快照恢复（含删除原不存在值），覆盖 CPU-001~005，正文已同步更新</td>
 </tr>
 <tr>
 <td>执行位置标注为 Modules/Menu.ps1（Part 1）</td>
@@ -5274,7 +5274,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月26日 14:25:59 UTC">2026年8月26日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月29日 13:35:20 UTC">2026年8月29日</span>
   </span>
 
     

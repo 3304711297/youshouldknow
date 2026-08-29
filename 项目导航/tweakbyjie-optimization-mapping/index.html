@@ -3856,28 +3856,28 @@
 <td>GameDVR <code>AppCaptureEnabled</code></td>
 <td><code>HKCU\Software\Microsoft\Windows\CurrentVersion\GameDVR\AppCaptureEnabled</code> → DWORD <code>0</code></td>
 <td>无专用回读</td>
-<td>无原值快照；手工记录并写回或删除</td>
+<td>已纳入 Part 1 统一快照（<code>registry-backup.json</code>）；子项 4 按快照恢复</td>
 </tr>
 <tr>
 <td>CORE-002</td>
 <td><code>GameDVR_Enabled</code></td>
 <td><code>HKCU\System\GameConfigStore\GameDVR_Enabled</code> → DWORD <code>0</code></td>
 <td>无专用回读</td>
-<td>无原值快照</td>
+<td>已纳入 Part 1 统一快照（<code>registry-backup.json</code>）；子项 4 按快照恢复</td>
 </tr>
 <tr>
 <td>CORE-003</td>
 <td>GameBar Presence <code>ActivationType</code></td>
 <td>Windows Runtime PresenceServer <code>ActivationType</code> → DWORD <code>0</code>；含 SYSTEM 计划任务重试</td>
 <td><code>reg QUERY</code> 验证</td>
-<td>无原值快照</td>
+<td>已纳入 Part 1 统一快照（<code>registry-backup.json</code>）；子项 4 按快照恢复</td>
 </tr>
 <tr>
 <td>CORE-004</td>
 <td><code>UseNexusForGameBarEnabled</code></td>
 <td><code>HKCU\Software\Microsoft\GameBar\UseNexusForGameBarEnabled</code> → DWORD <code>0</code></td>
 <td>无专用回读</td>
-<td>无原值快照</td>
+<td>已纳入 Part 1 统一快照（<code>registry-backup.json</code>）；子项 4 按快照恢复</td>
 </tr>
 <tr>
 <td>CORE-005</td>
@@ -3919,14 +3919,14 @@
 <td>自动 Game Mode</td>
 <td><code>HKCU\Software\Microsoft\GameBar</code> 的 <code>AutoGameModeEnabled</code>、<code>AllowAutoGameMode</code> → DWORD <code>0</code>（实际为关闭自动 Game Mode）</td>
 <td>无回读</td>
-<td>无原值快照</td>
+<td>已纳入 Part 1 统一快照（<code>registry-backup.json</code>）；子项 4 按快照恢复</td>
 </tr>
 <tr>
 <td>CORE-011</td>
 <td>Search / Bing / Cortana</td>
 <td><code>BingSearchEnabled</code>、<code>AllowSearchToUseLocation</code>、<code>CortanaConsent</code> → DWORD <code>0</code></td>
 <td>无回读</td>
-<td>无原值快照</td>
+<td>已纳入 Part 1 统一快照（<code>registry-backup.json</code> 系统行为组）；子项 4 按快照恢复</td>
 </tr>
 <tr>
 <td>CORE-012</td>
@@ -3961,7 +3961,7 @@
 <td>视觉效果</td>
 <td>HKCU 视觉效果约 15 项（<code>VisualFXSetting</code>、FontSmoothing、UserPreferencesMask 等）</td>
 <td>无逐项回读</td>
-<td>无快照；影响体验与辅助功能</td>
+<td>已纳入 Part 1 统一快照（<code>registry-backup.json</code> 系统行为组）；子项 4 按快照恢复；影响体验与辅助功能</td>
 </tr>
 </tbody>
 </table>
@@ -3984,35 +3984,35 @@
 <td><code>Win32PrioritySeparation</code></td>
 <td><code>HKLM\SYSTEM\CurrentControlSet\Control\PriorityControl\Win32PrioritySeparation</code> → <code>REG_DWORD 38</code>（十进制，<code>0x26</code>）；源码 <code>Modules/Registry.ps1</code>+ <code>Modules/Common.ps1/Set-RegDword</code></td>
 <td>写入后使用 <code>Modules/Common.ps1/Verify-RegDword</code> 回读目标值 <code>38</code></td>
-<td>修改前记录原始 DWORD，恢复原值；当前脚本未提供该项自动备份/恢复</td>
+<td>已纳入 Part 1 统一快照（<code>registry-backup.json</code>，机器绑定）；子项 4 按快照恢复；修改前手工记录原始 DWORD 仍是稳妥做法</td>
 </tr>
 <tr>
 <td>CPU-002</td>
 <td><code>Multimedia SystemProfile</code></td>
 <td><code>HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile</code>；<code>Modules/Registry.ps1</code> 写入该路径下的独立值</td>
 <td>没有对该组配置进行统一回读</td>
-<td>逐项记录并恢复原值；当前脚本未提供统一备份/恢复</td>
+<td>逐项记录并恢复原值；该组注册表值已纳入 Part 1 统一快照（<code>registry-backup.json</code>），子项 4 可恢复</td>
 </tr>
 <tr>
 <td>CPU-003</td>
 <td><code>SystemResponsiveness</code></td>
 <td><code>...\Multimedia\SystemProfile\SystemResponsiveness</code> → <code>REG_DWORD 10</code>；源码 <code>Modules/Registry.ps1</code></td>
 <td>当前源码没有调用 <code>Verify-RegDword</code> 验证该值</td>
-<td>修改前记录原始 DWORD，恢复原值；当前脚本未提供自动备份/恢复</td>
+<td>已纳入 Part 1 统一快照（<code>registry-backup.json</code>）；子项 4 按快照恢复</td>
 </tr>
 <tr>
 <td>CPU-004</td>
 <td><code>NetworkThrottlingIndex</code></td>
 <td><code>...\Multimedia\SystemProfile\NetworkThrottlingIndex</code> → <code>REG_DWORD 0xFFFFFFFF</code>；源码 <code>Modules/Registry.ps1</code></td>
 <td>当前源码没有对该值进行回读验证</td>
-<td>修改前记录原始 DWORD，恢复原值；当前脚本未提供自动备份/恢复</td>
+<td>已纳入 Part 1 统一快照（<code>registry-backup.json</code>）；子项 4 按快照恢复</td>
 </tr>
 <tr>
 <td>CPU-005</td>
 <td><code>Tasks\Games</code></td>
 <td><code>...\Multimedia\SystemProfile\Tasks\Games</code>；<code>Modules/Registry.ps1</code> 写入七个值：<code>Affinity=0</code>、<code>Background Only=False</code>、<code>Clock Rate=10000</code>、<code>GPU Priority=8</code>、<code>Priority=6</code>、<code>Scheduling Category=High</code>、<code>SFIO Priority=High</code></td>
 <td>当前源码没有对七个值进行回读验证</td>
-<td>修改前记录每个值的存在状态、类型和值；恢复时逐项写回，原本不存在的值应删除；当前脚本未提供自动备份/恢复</td>
+<td>七个值已纳入 Part 1 统一快照（<code>registry-backup.json</code>）；子项 4 恢复时逐项写回，原本不存在的值自动删除</td>
 </tr>
 </tbody>
 </table>
@@ -4021,7 +4021,7 @@
 <li><code>PriorityControl</code> 是注册表路径的一部分，CPU-001 的实际优化项目名称是 <code>Win32PrioritySeparation</code>，两者不能互相替代。</li>
 <li><code>Multimedia SystemProfile</code> 是配置路径/类别，不应覆盖或代替其下的 CPU-003、CPU-004 和 CPU-005 独立项目。</li>
 <li><code>Tasks\Games</code> 的 <code>Clock Rate</code> 属于 MMCSS 游戏任务类别配置，不是直接设置 GPU 硬件时钟。</li>
-<li>“知识说明已覆盖”与“脚本执行闭环已完成”是两个不同状态。本表记录了当前脚本确实缺少统一备份、恢复和部分回读验证的事实。</li>
+<li>“知识说明已覆盖”与“脚本执行闭环已完成”是两个不同状态。本表记录了当前脚本确实缺少部分回读验证的事实；备份与恢复已由 Part 1 统一快照（<code>registry-backup.json</code>）覆盖，但覆盖不等于逐值回读。</li>
 </ul>
 <h2 id="gpu">GPU 逐项映射<a class="headerlink" href="#gpu" title="Permanent link">&para;</a></h2>
 <table>
@@ -4040,7 +4040,7 @@
 <td>HAGS / <code>HwSchMode</code></td>
 <td>主菜单 <code>1</code> → 核心游戏优化 <code>1</code>；<code>HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers\HwSchMode</code> → <code>REG_DWORD 2</code>；源码 <code>Modules/Registry.ps1</code>+ <code>Modules/Common.ps1/Set-RegDword</code></td>
 <td>写入后使用 <code>Modules/Common.ps1/Verify-RegDword</code> 回读 <code>HwSchMode=2</code>；仍需重启和实际游戏测试</td>
-<td>当前核心路径未提供独立自动备份/恢复；修改前记录原值，恢复时写回或删除原本不存在的值</td>
+<td>无 HAGS 专用备份；<code>HwSchMode</code> 已纳入 Part 1 统一快照（<code>registry-backup.json</code>），子项 4 按快照恢复（原不存在时删除）；手工记录原值仍是稳妥做法</td>
 </tr>
 <tr>
 <td>GPU-002</td>
@@ -4075,7 +4075,7 @@
 <td><code>EnablePrefetcher</code></td>
 <td>主菜单 <code>1</code> → 系统行为优化 <code>2</code>；<code>HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters\EnablePrefetcher</code> → <code>REG_DWORD 0</code>；源码 <code>Modules/Registry.ps1</code>+ <code>Modules/Common.ps1/Set-RegDword</code></td>
 <td>写入后使用 <code>Modules/Common.ps1/Verify-RegDword</code> 回读 <code>0</code>；需重启后结合应用启动测试</td>
-<td>当前脚本未保存原值，也没有自动恢复入口；恢复前应记录原值/存在状态，恢复时写回或删除</td>
+<td>已纳入 Part 1 统一快照（<code>registry-backup.json</code> 系统行为组）；子项 4 按快照恢复；恢复前记录原值/存在状态仍是稳妥做法</td>
 </tr>
 <tr>
 <td>MEMORY-002</td>
@@ -4098,7 +4098,7 @@
 <ul>
 <li>脚本关闭的是传统 <code>EnablePrefetcher=0</code>，同时通过 <code>Disable-MMAgent -mc</code> 关闭 Memory Compression；两者是不同机制。</li>
 <li>现有知识文档已说明多数用户通常应保留 Prefetch 默认行为，脚本的强制关闭应视为需要基线和回滚的场景，不代表普适收益。</li>
-<li>当前脚本没有为 Memory-001/002 建立修改前快照；写入成功或回读成功不等于具备精确恢复能力。</li>
+<li>MEMORY-001（EnablePrefetcher）已纳入 Part 1 统一快照（<code>registry-backup.json</code>）；MEMORY-002（<code>Disable-MMAgent</code>）不是注册表值，不在快照范围内，写入成功或回读成功不等于具备精确恢复能力。</li>
 </ul>
 <h2 id="storage">Storage 逐项映射<a class="headerlink" href="#storage" title="Permanent link">&para;</a></h2>
 <table>
@@ -4117,7 +4117,7 @@
 <td>NTFS 8.3 短文件名</td>
 <td>主菜单 <code>1</code> → 系统行为优化 <code>2</code>；<code>HKLM\SYSTEM\CurrentControlSet\Control\FileSystem\NtfsDisable8dot3NameCreation</code> → <code>REG_DWORD 1</code>；源码 <code>Modules/Registry.ps1</code></td>
 <td>当前源码没有专门回读验证，也没有按卷核验</td>
-<td>当前脚本没有原值备份或恢复入口；恢复需先记录原值/存在状态后写回或删除，并结合卷级状态检查</td>
+<td>已纳入 Part 1 统一快照（<code>registry-backup.json</code> 系统行为组）；子项 4 按快照恢复，并结合卷级状态检查</td>
 </tr>
 <tr>
 <td>STORAGE-002</td>
@@ -4165,16 +4165,16 @@
 <tr>
 <td>SECURITY-001</td>
 <td>CPU 安全缓解覆盖</td>
-<td>主菜单 <code>1</code> → CPU 安全缓解子项 <code>2</code>；<code>HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\FeatureSettingsOverride=3</code>、<code>FeatureSettingsOverrideMask=3</code>；源码 <code>Modules/Registry.ps1</code>（CPU 缓解子项）+ <code>Modules/Backup.SecurityMitigation.ps1</code></td>
-<td>写入后分别用 <code>Verify-RegDword</code> 回读；专用备份快照保存存在性和原值</td>
-<td><code>security-mitigation-backup.json</code> 记录原状态，子项 <code>3</code> 按快照恢复</td>
+<td>主菜单 <code>1</code> → 子项 <code>3</code>（CPU 安全缓解）→ 内层 <code>2</code> 应用；<code>HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\FeatureSettingsOverride=3</code>、<code>FeatureSettingsOverrideMask=3</code>；源码 <code>Modules/Registry.ps1</code>（CPU 缓解子项）+ <code>Modules/Backup.SecurityMitigation.ps1</code></td>
+<td>写入后分别用 <code>Verify-RegDword</code> 回读；专用备份快照保存存在性和原值（2026-08-29 重核修正：入口为子项 3 内层 2/3，原表述"子项 2/子项 3"为旧菜单编号）</td>
+<td><code>security-mitigation-backup.json</code> 记录原状态，同层内层 <code>3</code> 按快照恢复</td>
 </tr>
 <tr>
 <td>SECURITY-002</td>
 <td>VBS/HVCI/Credential Guard/Hyper-V 关闭</td>
 <td>主菜单 <code>10</code> 子项 <code>1</code>；写入 5 个 Device Guard 相关注册表值为 <code>0</code>，设置 BCD <code>hypervisorlaunchtype off</code>、<code>isolatedcontext no</code>、<code>vsmlaunchtype off</code>，禁用 Hyper-V；源码 <code>Modules/Virtualization.ps1</code>+ <code>Modules/Common.ps1</code>（<code>Set-RegDword</code>/<code>Verify-BcdValue</code>）</td>
 <td>BCD 有 <code>Verify-BcdValue</code>；注册表没有专门回读；运行状态需重启后检查</td>
-<td>子项 <code>2</code> 删除脚本覆盖并尝试启用 Hyper-V，但脚本明确不是原始状态精确回滚，未保存原始注册表/功能状态</td>
+<td>子项 <code>1</code> 关闭前自动快照 <code>vbs-backup.json</code>（机器绑定，备份失败阻止修改），子项 <code>3</code> 按快照恢复原始注册表/BCD/功能状态；子项 <code>2</code> 删除脚本覆盖并尝试启用 Hyper-V，仍不是原始状态精确回滚</td>
 </tr>
 <tr>
 <td>SECURITY-003</td>
@@ -4246,14 +4246,14 @@
 <td>开启测试模式</td>
 <td>主菜单 <code>3</code>；开启 <code>testsigning</code>、<code>debug</code>、<code>dbgsettings local</code>、<code>nointegritychecks</code>；源码 <code>Modules/Bcd.ps1</code>（<code>Invoke-TestModeEnableModule</code>）</td>
 <td>无完整自动回读</td>
-<td>无独立快照；改变安全模型，需手工检查恢复</td>
+<td>开启前自动快照 <code>testmode-backup.json</code>（独立于高级 BCD 的 <code>bcd-backup.json</code>）；改变安全模型，需手工检查恢复</td>
 </tr>
 <tr>
 <td>BOOT-004</td>
 <td>关闭测试模式</td>
 <td>主菜单 <code>4</code>；删除 <code>testsigning</code>、<code>debug</code>，保留 <code>nointegritychecks</code>；源码 <code>Modules/Bcd.ps1</code>（<code>Invoke-TestModeDisableModule</code>）</td>
 <td>无完整自动回读</td>
-<td>无精确原状态恢复；删除不存在值可能报告失败</td>
+<td>优先按开启前快照（<code>testmode-backup.json</code>）恢复 <code>testsigning</code>/<code>debug</code>；无快照时删除；保留 <code>nointegritychecks</code></td>
 </tr>
 <tr>
 <td>BOOT-005</td>
@@ -4267,7 +4267,7 @@
 <td>VBS/Hyper-V 启动项</td>
 <td>主菜单 <code>10</code>；<code>hypervisorlaunchtype</code>、<code>vsmlaunchtype</code>、<code>isolatedcontext</code>；源码 <code>Modules/Virtualization.ps1</code>+ <code>Modules/Common.ps1</code>（<code>Set-RegDword</code>/<code>Verify-BcdValue</code>）</td>
 <td>BCD 值有回读，运行状态需重启</td>
-<td>删除覆盖并尝试启用 Hyper-V，不恢复原 BCD/功能状态</td>
+<td>子项 <code>1</code> 快照 <code>vbs-backup.json</code>、子项 <code>3</code> 按快照恢复原 BCD/注册表/功能状态；子项 <code>2</code> 删除覆盖并尝试启用 Hyper-V，不恢复原状态</td>
 </tr>
 </tbody>
 </table>
@@ -4287,7 +4287,7 @@
 <tr>
 <td>POWER-001</td>
 <td>超性能电源计划</td>
-<td>主菜单 <code>7</code>；导入仓库根目录 <code>ultimate-performance.pow</code> 并设为活动计划；首次应用前导出当前计划到 <code>power-backup.pow</code>；源码 <code>Modules/Power.ps1</code>（<code>Invoke-PowerModule</code>）</td>
+<td>主菜单 <code>7</code>；导入仓库根目录 <code>ultimate-performance.pow</code> 并设为活动计划（导入后计划统一改名为 <code>ultimate-performance</code>，便于去重与审计）；首次应用前导出当前计划到 <code>power-backup.pow</code>；源码 <code>Modules/Power.ps1</code>（<code>Invoke-PowerModule</code>）</td>
 <td><code>powercfg /getactivescheme</code> 人工确认当前计划</td>
 <td>子项 <code>2</code> 导入 <code>power-backup.pow</code> 恢复最初计划；备份只保留最初快照</td>
 </tr>
@@ -4313,8 +4313,8 @@
 </tbody>
 </table>
 <ul>
-<li>Part 1：GameDVR、GameBar、Search、视觉效果、ActivationType、Prefetch、NTFS、HAGS、MMCSS 等；其中只有少数项目有回读，核心多数没有原值备份。</li>
-<li>Part 5：Defender、SmartScreen、Security Center、CI/Smart App Control 等策略注册表值；没有统一原值备份、完整回读或自动恢复，且与服务/任务/Appx 删除操作相互影响。</li>
+<li>Part 1：GameDVR、GameBar、Search、视觉效果、ActivationType、Prefetch、NTFS、HAGS、MMCSS 等；其中只有少数项目有回读，核心/系统行为注册表值已纳入统一快照（<code>registry-backup.json</code>，机器绑定），Memory Compression 与 TRIM 不在快照范围内。</li>
+<li>Part 5：Defender、SmartScreen、Security Center、CI/Smart App Control 等策略注册表值；首次应用前自动快照到 <code>defender-policy-backup.json</code> 并可经 <code>5 → 2</code> 按快照恢复，但没有逐项回读，且与服务/任务/Appx 删除操作相互影响。</li>
 <li><code>defender-removal.ps1</code>：独立的高风险删除脚本，会删除 Defender 服务注册、WinRT/Svchost、CLSID/App/Shell/Autologger 等键和值及实体文件；只有前置查询和有限验证，没有备份，脚本本身明确不可逆。</li>
 </ul>
 <p>对应原则文档：<a href="../../%E7%B3%BB%E7%BB%9F%E8%B0%83%E4%BC%98%E4%B8%8E%E5%AE%89%E5%85%A8/Windows%E4%BC%98%E5%8C%96%E5%8E%9F%E5%88%99%E4%B8%8E%E9%A3%8E%E9%99%A9/"><code>Windows 优化原则与风险</code></a>（原"注册表优化原则"已并入该主文）。这些项目后续应继续按稳定编号拆分；本阶段不把概念性注册表文章当作已完成的逐项执行覆盖。</p>
@@ -4329,7 +4329,14 @@
 <li>可复核的验证方法</li>
 </ol>
 <h2 id="_3">事实核查记录<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<p>核验机制：本映射与《全量执行参考》由 tweakbyjie 仓库的 Coverage 自动审计（tools/Test-CrossRepoCoverage.ps1）持续校验——映射、执行参考、覆盖检查三份资料每一份都必须与 manifest 全部 44 项完全一致，缺少清单内编号与出现清单外编号均判失败；源码引用（<code>Modules/文件.ps1</code> 及 <code>/函数名</code> 后缀）由审计器校验文件存在与函数定义。最近一次人工逐项校准：2026-08-25 对照 tweakbyjie main（commit <code>cd95802</code>）完成——修正映射表中 10 处 <code>Modules/Menu.ps1</code>（Part N）为实际业务模块（Registry/Bcd/Service/Power/Mpo），清理 CPU/GPU/MEMORY 行的裸 <code>:NNN</code> 旧行号；此前 2026-08-21（本次未重新核验） 完成模块化迁移同步与 44 项 ID 校准。</p>
+<p>核验机制：本映射与《全量执行参考》由 tweakbyjie 仓库的 Coverage 自动审计（tools/Test-CrossRepoCoverage.ps1）持续校验——映射、执行参考、覆盖检查三份资料每一份都必须与 manifest 全部 44 项完全一致，缺少清单内编号与出现清单外编号均判失败；源码引用（<code>Modules/文件.ps1</code> 及 <code>/函数名</code> 后缀）由审计器校验文件存在与函数定义。最近一次人工逐项校准：2026-08-25 对照 tweakbyjie main（commit <code>cd95802</code>）完成——修正映射表中 10 处 <code>Modules/Menu.ps1</code>（Part N）为实际业务模块（Registry/Bcd/Service/Power/Mpo），清理 CPU/GPU/MEMORY 行的裸 <code>:NNN</code> 旧行号；此前 2026-08-21 完成模块化迁移同步与 44 项 ID 校准。2026-08-29 重核：对照 tweak <code>b905950</code> 源码逐项复核本文声明——44 项清单编号、模块与函数引用、菜单编号 0–11、服务分组（A 组 21 + B 组 9 + Manual 7，含 BITS）、Defender 约 95 个策略值、mpo/nvme/defender/service/power 备份文件名等均属实；但 <code>cd95802</code> 之后源码新增了多项备份/恢复能力（见下方勘误），本文相应表述已同步更新。</p>
+<p>2026-08-29 勘误（对照 tweak <code>b905950</code>，<code>cd95802</code> 后新增能力）：</p>
+<ul>
+<li>核心/系统行为注册表值（CORE-001~004、CORE-007~013、CORE-016、CPU-001~005、GPU-001、MEMORY-001、STORAGE-001）现于子项 1/2 写入前统一快照到 <code>registry-backup.json</code>（机器绑定，备份失败阻止修改），子项 4 可按快照恢复（原不存在的值自动删除）；Memory Compression（Disable-MMAgent）与 TRIM（fsutil）不在快照范围内。原“无原值快照/未提供自动备份恢复”表述已修正。</li>
+<li>VBS/Hyper-V（SECURITY-002、BOOT-006）现于子项 1 关闭前自动快照 <code>vbs-backup.json</code>，子项 3 按快照恢复原注册表/BCD/功能状态；原“未保存原始状态”表述已修正。</li>
+<li>测试模式（BOOT-003/004）现于开启前快照 <code>testmode-backup.json</code>（独立于 <code>bcd-backup.json</code>），关闭时优先按快照恢复；原“无独立快照/无精确原状态恢复”表述已修正。</li>
+<li>超性能电源计划（POWER-001）导入后统一改名为 <code>ultimate-performance</code>，已补充该事实。</li>
+</ul>
 
 
 
@@ -4352,7 +4359,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月26日 14:25:59 UTC">2026年8月26日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月29日 13:35:20 UTC">2026年8月29日</span>
   </span>
 
     

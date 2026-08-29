@@ -3763,7 +3763,7 @@
 </table>
 <p>几点观察：</p>
 <ul>
-<li>6000 基础版与 6000c38 收紧版的差异集中在 tCL（40→38）、tCWL（40→36）、tREFI（22400→21000）三项，其余完全一致；</li>
+<li>6000 基础版与 6000c38 收紧版的差异集中在 tCL（40→38）、tCWL（40→36）、tREFI（22400→21000）、tRAS（88→90）四项，其余完全一致；</li>
 <li>tRFC 并不随频率单调变化（824@6000、940@6200、824@6400），说明各组是独立实测的可行解，不是同一套 ns 换算出来的；</li>
 <li>原厂 5400 组的 tWR 48、tWTR_L 16、tWTR_S 4、NMode 1 明显区别于超频组，属于模组 XMP/默认行为记录。</li>
 </ul>
@@ -3816,7 +3816,7 @@
 </ol>
 <p><a id="fact-check"></a></p>
 <h2 id="_5">事实核查记录<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
-<p>核验基准：原始作业笔记截图（共五张，2026-08-21（本次未重新核验） 整理）+ 内部换算自洽性检验。</p>
+<p>核验基准：原始作业笔记截图（共五张，2026-08-21 整理）+ 内部换算自洽性检验（2026-08-29 重核：个案实机记录，不适用其他平台；换算复核无误——tRFCpb 稳定 ~130-139ns、tRFC2 稳定 ~160-170ns，并勘误 6000 两版差异漏计 tRAS，见正文）。</p>
 <table>
 <thead>
 <tr>
@@ -3835,7 +3835,7 @@
 </tr>
 <tr>
 <td>模组型号 CT16G56C46S5.M8D1（M8D1 颗粒）</td>
-<td>⚠️ 来自平台硬件信息截图，未在英睿达官网逐一复核型号命名</td>
+<td>⚠️ 部分复核：基础型号 CT16G56C46S5 已经英睿达官网确认为 DDR5-5600 CL46 1.1V 16GB SODIMM（2026-08-29）；.M8D1 颗粒/批次后缀仍来自平台硬件信息截图</td>
 </tr>
 <tr>
 <td>原厂 5400 组温度略高、建议压风</td>
@@ -3844,14 +3844,6 @@
 <tr>
 <td>各项参数的绝对有效性</td>
 <td>⚠️ 个人作业记录，未经独立横向验证；仅代表该台 12800HX + 英睿达 2×16G 平台的可行解</td>
-</tr>
-<tr>
-<td>EOF</td>
-<td></td>
-</tr>
-<tr>
-<td>echo OK</td>
-<td></td>
 </tr>
 </tbody>
 </table>
@@ -3877,7 +3869,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月26日 14:25:59 UTC">2026年8月26日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月29日 13:35:20 UTC">2026年8月29日</span>
   </span>
 
     

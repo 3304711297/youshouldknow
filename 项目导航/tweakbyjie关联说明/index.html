@@ -3626,7 +3626,7 @@
 <td><code>Set-Reg*</code>/<code>Invoke-BcdEdit</code>/<code>Verify-*</code>/<code>Invoke-PowerPlanDedupe</code></td>
 </tr>
 <tr>
-<td><code>Backup.Mpo/Bcd/Service/SecurityMitigation/Nvme/Defender</code></td>
+<td><code>Backup.Mpo/Registry/Bcd/Service/SecurityMitigation/Nvme/Defender/Vbs</code></td>
 <td>备份闭环</td>
 <td>各自的 <code>Test/Ensure/Restore</code> 三元组与写后回读校验</td>
 </tr>
@@ -3661,7 +3661,7 @@
 <h2 id="_4">原则<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <p>优化不是简单地关闭越多功能越好，而是在性能、延迟、稳定性之间寻找适合当前设备的配置。</p>
 <h2 id="_5">事实核查记录<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
-<p>核验基准：tweakbyjie 仓库 <code>main</code> 分支源码（2026-08-21（本次未重新核验），模块化收尾提交后）。</p>
+<p>核验基准：tweakbyjie 仓库源码（2026-08-29 重核：对照 tweak <code>b905950</code> 源码逐项复核；发现 Loader 规模与模块清单自 08-21 基线后漂移，已勘误并更新正文，见下）。</p>
 <table>
 <thead>
 <tr>
@@ -3672,11 +3672,11 @@
 <tbody>
 <tr>
 <td>tweakbyjie 采用 Loader + <code>Modules/</code> 模块化结构</td>
-<td>✅ 属实：Loader 约 127 行，点源 16 个模块文件（由 Coverage Loader 契约自动校验）</td>
+<td>✅ 属实（2026-08-29 对照 b905950 复核）：Loader 现为 162 行，点源 19 个模块文件；❌ 勘误并已更新：08-21 基线记录的“约 127 行、点源 16 个文件”已过时</td>
 </tr>
 <tr>
 <td>模块清单为 Common + 5 个 Backup.* + Menu</td>
-<td>❌ 勘误并已更新：现为 Common + 6 个 <code>Backup.*</code>（含 Defender）+ Bcd/Defender/Mpo/Nvme/Power/Registry/Service/Virtualization 八个执行模块 + Menu（共 16 个点源文件）</td>
+<td>❌ 勘误并已更新（2026-08-29 重核）：现为 Common + Adapters + 8 个 <code>Backup.*</code>（Mpo/Registry/Bcd/Service/SecurityMitigation/Nvme/Defender/Vbs）+ Bcd/Defender/Mpo/Nvme/Power/Registry/Service/Virtualization 八个执行模块 + Menu（共 19 个点源文件）；08-21 基线漏计 Adapters、Backup.Registry、Backup.Vbs</td>
 </tr>
 <tr>
 <td>执行位置采用 <code>Modules/函数名</code> 定位而非行号</td>
@@ -3684,7 +3684,7 @@
 </tr>
 <tr>
 <td><code>Menu.ps1</code> 含 11 个 Part</td>
-<td>✅ 属实：菜单选项 1–11 对应 11 个功能模块函数（由 Coverage 菜单契约自动校验）</td>
+<td>✅ 属实（2026-08-29 对照 b905950 复核）：菜单选项 0–11，其中 1–11 对应 11 个功能模块函数（<code>Invoke-RegistryModule</code>/<code>Invoke-BcdAdvancedModule</code>/<code>Invoke-TestModeEnableModule</code>/<code>Invoke-TestModeDisableModule</code>/<code>Invoke-DefenderModule</code>/<code>Invoke-ServiceModule</code>/<code>Invoke-PowerModule</code>/<code>Invoke-NvmeModule</code>/<code>Invoke-DeviceGuardModule</code>/<code>Invoke-VbsModule</code>/<code>Invoke-MpoModule</code>）；Loader 支持 <code>-RunModule</code> 非交互队列（编号 0–11）</td>
 </tr>
 </tbody>
 </table>
@@ -3710,7 +3710,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月26日 14:25:59 UTC">2026年8月26日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月29日 13:35:20 UTC">2026年8月29日</span>
   </span>
 
     

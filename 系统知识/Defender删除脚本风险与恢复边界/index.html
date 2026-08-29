@@ -3575,7 +3575,7 @@
 <h2 id="_1">文档范围<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <p>本文专门说明 <code>tweakbyjie/defender-removal.ps1</code>。它与 <code>tweakbyjie.ps1</code> 的 Part 5“关闭安全中心”不是同一个入口：前者是独立的高风险删除脚本，后者主要是停用服务、写入策略并可选删除部分组件。</p>
 <h2 id="_2">脚本行为<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p><code>defender-removal.ps1</code> 不只是把服务改为 Disabled。根据当前源码，它会在前置查询和权限检查后，尝试删除 Defender 相关服务注册、WinRT/Svchost 注册、CLSID/App/Shell/Autologger 等注册表键和值，并删除相关实体文件；受保护对象可能通过 SYSTEM 重试。脚本提供有限的查询/删除后检查，但没有把完整原始系统状态保存成可恢复备份。</p>
+<p><code>defender-removal.ps1</code> 不只是把服务改为 Disabled。根据当前源码，它会在管理员权限检查后，尝试删除 Defender 相关服务注册、WinRT/Svchost 注册、CLSID/App/Shell/Autologger 等注册表键和值，并删除相关实体文件（<code>C:\ProgramData\Microsoft\Windows Defender</code> 目录连同隔离区数据一并删除）。受 TrustedInstaller 保护而删除失败的键不会被自动以 SYSTEM 重试：脚本只报告 <code>[FAIL]</code>，并提示借助 NSudo/PowerRun 等提权工具手动重试（源码头部中文注释仍写有“再以 SYSTEM 批量重试”，与英文注释和实际实现矛盾，以实现为准）。脚本只在删除前查询对象是否存在（不存在则跳过），删除后没有回读检查，也没有把完整原始系统状态保存成可恢复备份。</p>
 <p>这类操作可能影响：</p>
 <ul>
 <li>Microsoft Defender 实时防护、篡改防护和安全中心；</li>
@@ -3606,7 +3606,7 @@
 <tr>
 <td>验证</td>
 <td>有限的查询/状态输出，缺少完整回读闭环</td>
-<td>主要是删除前检查和有限删除后查询</td>
+<td>删除前存在性查询（不存在即跳过），无删除后回读</td>
 </tr>
 <tr>
 <td>恢复</td>
@@ -3632,7 +3632,7 @@
 <li>在 <code>tweakbyjie → youshouldknow</code> 映射中，它属于 Registry/Security 高风险独立项目，状态应保持“有执行项但不可逆、说明需谨慎”，不能标记为具备完整恢复闭环。</li>
 </ul>
 <h2 id="_5">事实核查记录<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
-<p>核验基准：tweakbyjie 仓库 main 分支源码（2026-08-21（本次未重新核验））。</p>
+<p>核验基准：tweakbyjie 仓库 main 分支源码（2026-08-29 重核：对照 HEAD b905950 的 <code>defender-removal.ps1</code>（342 行）逐条复核，并确认 DryRun 默认、-Execute 显式执行与无备份路径仍成立）。</p>
 <table>
 <thead>
 <tr>
@@ -3643,19 +3643,23 @@
 <tbody>
 <tr>
 <td>defender-removal.ps1 删除 Defender 服务注册、WinRT/Svchost、CLSID/App/Shell/Autologger 键值与实体文件</td>
-<td>✅ 属实：357 行源码含上述对象的大量删除项</td>
+<td>✅ 属实：342 行源码含上述对象的大量删除项（2026-08-29 重核）</td>
 </tr>
 <tr>
 <td>受保护对象以管理员尝试后按 SYSTEM 批量重试</td>
-<td>✅ 属实：源码注释与实现一致（TrustedInstaller 保护键）</td>
+<td>❌ 勘误（2026-08-29 重核）：当前实现不自动以 SYSTEM 重试；TrustedInstaller 保护键删除失败仅报 <code>[FAIL]</code>，提示借助 NSudo/PowerRun 提权后手动重试。源码头部中文注释与实现矛盾，已按实现修正正文</td>
 </tr>
 <tr>
 <td>无原始状态备份、无撤销命令、脚本不可逆</td>
-<td>✅ 属实：全文无 backup/restore 路径</td>
+<td>✅ 属实：全文无 backup/restore 路径（2026-08-29 重核）</td>
+</tr>
+<tr>
+<td>默认 DryRun，需显式 -Execute 才会修改系统</td>
+<td>✅ 属实：不带 <code>-Execute</code> 时仅打印 DryRun 清单即退出（2026-08-29 重核补充）</td>
 </tr>
 <tr>
 <td>与 Part 5 是不同入口，Part 5 的 Defender 策略值有快照而删除脚本没有</td>
-<td>✅ 属实：defender-policy-backup.json 仅覆盖 Part 5</td>
+<td>✅ 属实：defender-policy-backup.json 仅覆盖 Part 5（2026-08-29 重核）</td>
 </tr>
 </tbody>
 </table>
@@ -3681,7 +3685,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月26日 14:25:59 UTC">2026年8月26日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月29日 13:35:20 UTC">2026年8月29日</span>
   </span>
 
     
