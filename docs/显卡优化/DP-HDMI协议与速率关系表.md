@@ -6,6 +6,7 @@ applies_to:
   - DisplayPort / HDMI 显示器与线材选购
 verified_on: 2026-08-28
 # 2026-08-28 重核 HDMI 2.2 上市状态：Ultra96 线材已上市，满带宽整机预计 2027 年
+tweak_module: []
 ---
 
 # DP / HDMI 协议与速率关系表

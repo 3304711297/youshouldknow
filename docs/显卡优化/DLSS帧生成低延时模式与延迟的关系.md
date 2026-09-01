@@ -1,3 +1,11 @@
+---
+applies_to:
+  - Windows 11
+  - NVIDIA RTX 40/50 系
+risk: medium
+tweak_module: []
+---
+
 # DLSS、帧生成、低延时模式与延迟的关系
 
 > **分类**：显卡优化 · NVIDIA

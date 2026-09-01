@@ -1,3 +1,11 @@
+---
+applies_to:
+  - Windows 10
+  - Windows 11
+risk: low
+tweak_module: []
+---
+
 # Windows 优化原则与风险
 
 > **定位**：系统调优的统一前置主文。

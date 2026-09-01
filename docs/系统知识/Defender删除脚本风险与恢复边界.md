@@ -1,3 +1,11 @@
+---
+applies_to:
+  - Windows 10
+  - Windows 11
+risk: high
+tweak_module: [5]
+---
+
 # defender-removal.ps1 风险与恢复边界
 
 ## 文档范围

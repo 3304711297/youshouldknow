@@ -44,9 +44,16 @@ markdown_extensions:
       alternate_style: true
 extra_css:
   - stylesheets/extra.css
+# P2-13/P2-15：页面顶部徽章（applies_to/risk/tweak_module → Material admonition）
+# 与 Material tags 注入；纯渲染层 hook，不改变既有构建链路
+hooks:
+  - hooks/badges.py
 plugins:
   - search:
       lang: zh
+  # P2-15:Material 内置 tags 插件——页面 tags 由 hooks/badges.py 注入 page.meta['tags']
+  - material/tags:
+      tags: false
   - git-revision-date-localized:
       type: date
       enable_creation_date: true
@@ -146,6 +153,7 @@ nav:
     - tweakbyjie 关联说明: 项目导航/tweakbyjie关联说明.md
     - tweakbyjie 优化项目映射: 项目导航/tweakbyjie-optimization-mapping.md
     - tweakbyjie 全量执行参考: 项目导航/tweakbyjie全量执行参考.md
+    - tweakbyjie 覆盖矩阵（模块 ↔ 文章，自动生成）: 项目导航/覆盖矩阵.md
     - CPU 优化与 tweakbyjie 对应说明: 项目导航/CPU优化与tweakbyjie对应说明.md
     - GPU 调度与显示管线: 项目导航/GPU调度与显示管线.md
     - 游戏性能验证流程: 项目导航/游戏性能验证流程.md

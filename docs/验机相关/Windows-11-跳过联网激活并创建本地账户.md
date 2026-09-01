@@ -1,3 +1,10 @@
+---
+applies_to:
+  - Windows 11
+risk: medium
+tweak_module: []
+---
+
 # Windows 11 跳过联网激活并创建本地账户
 
 > **分类**：验机相关 · 验机教程

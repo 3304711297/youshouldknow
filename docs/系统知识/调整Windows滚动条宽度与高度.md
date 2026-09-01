@@ -1,3 +1,11 @@
+---
+applies_to:
+  - Windows 10
+  - Windows 11
+risk: low
+tweak_module: []
+---
+
 # 调整 Windows 滚动条宽度与高度
 
 > **分类**：系统知识 · 界面优化

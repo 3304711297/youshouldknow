@@ -1,3 +1,11 @@
+---
+applies_to:
+  - Windows 11
+  - NVIDIA App / RTX 显卡
+risk: medium
+tweak_module: []
+---
+
 # NVIDIA 进阶优化（二）：App 设置要点与笔记本显卡超频
 
 > **分类**：显卡优化 · NVIDIA

@@ -1,3 +1,12 @@
+---
+applies_to:
+  - Windows 10
+  - Windows 11
+  - USB/无线外设
+risk: medium
+tweak_module: []
+---
+
 # Windows 键鼠与 TCP 低延迟可选实验设置
 
 > **定位**：高级实验设置，不是通用性能优化。

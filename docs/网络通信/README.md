@@ -1,3 +1,11 @@
+---
+applies_to:
+  - Windows 10
+  - Windows 11
+risk: low
+tweak_module: []
+---
+
 # 网络通信
 
 Windows 网络栈、代理/TUN 转发与运营商速查的知识分类。

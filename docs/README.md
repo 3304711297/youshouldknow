@@ -1,3 +1,11 @@
+---
+applies_to:
+  - Windows 10
+  - Windows 11
+risk: low
+tweak_module: []
+---
+
 # YouShouldKnow
 
 Windows 系统、硬件、游戏性能与日常使用知识库。

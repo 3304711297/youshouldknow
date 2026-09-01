@@ -1,3 +1,11 @@
+---
+applies_to:
+  - Windows 10
+  - Windows 11
+risk: medium
+tweak_module: [1]
+---
+
 # Windows 内存压缩功能与 MMAgent 设置
 
 > **分类**：系统知识 · 内存管理

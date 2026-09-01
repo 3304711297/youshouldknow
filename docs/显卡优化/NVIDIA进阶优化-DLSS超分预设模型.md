@@ -1,3 +1,11 @@
+---
+applies_to:
+  - Windows 11
+  - NVIDIA RTX 显卡
+risk: medium
+tweak_module: []
+---
+
 # NVIDIA 进阶优化（四）：DLSS 超分预设模型
 
 > **分类**：显卡优化 · NVIDIA

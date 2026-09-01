@@ -1,3 +1,12 @@
+---
+applies_to:
+  - Windows 10/11
+  - Microsoft Edge（Dev/稳定版）
+  - chrome-devtools-mcp 使用者
+risk: medium
+tweak_module: []
+---
+
 # 让 AI 控制 Edge 浏览器：CDP 远程调试与 chrome-devtools-mcp 配置指南
 
 > 本文目标：让 AI 编程助手（ZCode、Claude Code、Copilot 等）通过 chrome-devtools-mcp **接管你日常正在使用的 Microsoft Edge**——保留全部登录态、Cookie 和扩展，而不是另开一个干净的临时浏览器。

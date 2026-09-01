@@ -1,3 +1,11 @@
+---
+applies_to:
+  - Windows 10
+  - Windows 11
+risk: low
+tweak_module: []
+---
+
 # 项目导航
 
 ## tweakbyjie 联动
@@ -5,6 +13,7 @@
 - [tweakbyjie 关联说明](./tweakbyjie关联说明.md)
 - [逐项优化映射](./tweakbyjie-optimization-mapping.md)
 - [全量逐项执行参考](./tweakbyjie全量执行参考.md)
+- [tweakbyjie 覆盖矩阵（模块 ↔ 文章，自动生成）](./覆盖矩阵.md)
 - [CPU 优化与 tweakbyjie 对应说明](./CPU优化与tweakbyjie对应说明.md)
 - [GPU 调度与显示管线](./GPU调度与显示管线.md)
 

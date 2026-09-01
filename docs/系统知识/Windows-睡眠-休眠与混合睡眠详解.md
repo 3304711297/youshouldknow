@@ -1,3 +1,11 @@
+---
+applies_to:
+  - Windows 10
+  - Windows 11
+risk: low
+tweak_module: []
+---
+
 # Windows 睡眠、休眠与混合睡眠详解
 
 > **分类**：系统知识 · 电源管理

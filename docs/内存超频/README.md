@@ -1,3 +1,11 @@
+---
+applies_to:
+  - Windows 10
+  - Windows 11
+risk: low
+tweak_module: []
+---
+
 # 内存超频
 
 DDR5 时序、AM5 平台与稳定性测试的知识分类。

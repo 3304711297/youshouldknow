@@ -1,3 +1,11 @@
+---
+applies_to:
+  - Windows 11
+  - Windows 11 安装介质
+risk: high
+tweak_module: []
+---
+
 # 安装系统时跳过硬件和 TPM 检测
 
 > **分类**：系统知识 · 系统安装

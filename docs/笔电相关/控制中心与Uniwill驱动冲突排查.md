@@ -1,3 +1,11 @@
+---
+applies_to:
+  - Windows 11
+  - Uniwill/同方模具笔电
+risk: medium
+tweak_module: []
+---
+
 # 笔记本控制中心与 Uniwill/UWACP 驱动冲突排查
 
 > **分类**：笔电相关 · 厂商控制中心与驱动排障

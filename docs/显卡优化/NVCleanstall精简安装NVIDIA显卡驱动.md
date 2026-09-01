@@ -1,3 +1,12 @@
+---
+applies_to:
+  - Windows 10
+  - Windows 11
+  - NVIDIA 显卡
+risk: low
+tweak_module: []
+---
+
 # NVCleanstall 精简安装 NVIDIA 显卡驱动
 
 > **分类**：显卡优化

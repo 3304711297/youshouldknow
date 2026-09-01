@@ -1,3 +1,11 @@
+---
+applies_to:
+  - Windows 10
+  - Windows 11
+risk: low
+tweak_module: []
+---
+
 # 系统知识
 
 Windows 系统机制、电源管理、排障工具与常用命令的知识分类。

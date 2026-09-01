@@ -1,3 +1,11 @@
+---
+applies_to:
+  - Windows 11
+  - 国内四大运营商移动网络
+risk: low
+tweak_module: []
+---
+
 # 四大运营商网络频段、速率与 APN 设置速查
 
 > **分类**：网络通信 · 移动网络

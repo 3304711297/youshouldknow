@@ -1,3 +1,12 @@
+---
+applies_to:
+  - Windows 10
+  - Windows 11
+  - Karing 客户端
+risk: medium
+tweak_module: []
+---
+
 # Karing Windows TUN、系统代理与 Windows 网络转发
 
 ## 一、适用场景

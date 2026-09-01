@@ -1,3 +1,11 @@
+---
+applies_to:
+  - Windows 10
+  - Windows 11
+risk: low
+tweak_module: []
+---
+
 # 笔电相关
 
 笔记本电池、充电模式与厂商控制中心排障的知识分类。
