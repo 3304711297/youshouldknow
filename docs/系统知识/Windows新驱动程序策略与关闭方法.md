@@ -1,3 +1,11 @@
+---
+applies_to:
+  - Windows 10
+  - Windows 11
+risk: medium
+tweak_module: []
+---
+
 # Windows 新驱动程序策略与关闭方法（2026 年 4 月起）
 
 > **分类**：系统知识 · 驱动与安全

@@ -1,3 +1,11 @@
+---
+applies_to:
+  - Windows 10
+  - Windows 11
+risk: low
+tweak_module: []
+---
+
 # 禁用 Windows 通知中心与操作中心
 
 > **分类**：系统知识 · 系统设置

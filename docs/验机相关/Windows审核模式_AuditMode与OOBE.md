@@ -1,3 +1,11 @@
+---
+applies_to:
+  - Windows 10
+  - Windows 11
+risk: medium
+tweak_module: []
+---
+
 # Windows 审核模式（Audit Mode）与 OOBE
 
 > **分类**：验机相关 · Windows 安装与初始化

@@ -1,3 +1,11 @@
+---
+applies_to:
+  - Windows 11
+  - 机械革命/同方模具笔电
+risk: high
+tweak_module: []
+---
+
 # 机械革命笔记本 BIOS 选项与超频降压风险说明
 
 > **分类**：BIOS 与固件 · 笔记本平台调校

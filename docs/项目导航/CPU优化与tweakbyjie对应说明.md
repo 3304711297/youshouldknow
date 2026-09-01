@@ -1,3 +1,11 @@
+---
+applies_to:
+  - Windows 10
+  - Windows 11
+risk: medium
+tweak_module: [1]
+---
+
 # CPU 优化与 tweakbyjie 对应说明
 
 ## 对应范围

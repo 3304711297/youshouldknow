@@ -1,3 +1,11 @@
+---
+applies_to:
+  - Windows 10
+  - Windows 11
+risk: low
+tweak_module: []
+---
+
 # 验机相关
 
 Windows 安装、OOBE / Audit Mode、激活与装机检查的知识分类。

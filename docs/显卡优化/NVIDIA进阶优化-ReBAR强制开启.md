@@ -1,3 +1,12 @@
+---
+applies_to:
+  - Windows 11
+  - NVIDIA RTX 显卡
+  - 支持 Resizable BAR 的主板
+risk: medium
+tweak_module: []
+---
+
 # NVIDIA 进阶优化（一）：用 Profile Inspector 强制开启 ReBAR
 
 > **分类**：显卡优化 · NVIDIA

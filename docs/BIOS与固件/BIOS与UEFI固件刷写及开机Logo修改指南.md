@@ -1,3 +1,11 @@
+---
+applies_to:
+  - Windows 11
+  - UEFI 固件台式机/笔电
+risk: high
+tweak_module: []
+---
+
 # BIOS 与 UEFI 固件刷写及开机 Logo 修改指南
 
 > **分类**：BIOS 与固件 · 高风险硬件维护

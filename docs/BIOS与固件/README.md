@@ -1,3 +1,11 @@
+---
+applies_to:
+  - Windows 10
+  - Windows 11
+risk: low
+tweak_module: []
+---
+
 # BIOS 与固件
 
 这是 BIOS、UEFI、固件镜像和主板恢复相关的高风险知识分类。

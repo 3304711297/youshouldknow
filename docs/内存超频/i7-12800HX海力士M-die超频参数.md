@@ -1,3 +1,11 @@
+---
+applies_to:
+  - Windows 11
+  - i7-12800HX + 海力士 M-die DDR5
+risk: high
+tweak_module: []
+---
+
 # i7-12800HX 海力士 M-die 超频参数
 
 > **定位**：i7-12800HX（Alder Lake HX 移动端）+ 海力士**新 M-die** 2×12GB 双条平台的内存超频实机作业记录。

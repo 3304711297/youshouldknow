@@ -1,3 +1,12 @@
+---
+applies_to:
+  - Windows 10
+  - Windows 11
+  - NVIDIA 显卡
+risk: low
+tweak_module: []
+---
+
 # NVIDIA 进阶优化（三）：控制面板设置清单
 
 > **分类**：显卡优化 · NVIDIA

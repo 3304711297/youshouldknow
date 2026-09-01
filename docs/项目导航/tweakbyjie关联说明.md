@@ -1,3 +1,11 @@
+---
+applies_to:
+  - Windows 10
+  - Windows 11
+risk: low
+tweak_module: []
+---
+
 # tweakbyjie 关联说明
 
 `tweakbyjie` 是执行层项目，负责将经过验证的 Windows 优化方案自动化执行。

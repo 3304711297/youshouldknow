@@ -1,3 +1,11 @@
+---
+applies_to:
+  - Windows 10
+  - Windows 11
+risk: high
+tweak_module: [9, 10]
+---
+
 # VBS 与系统安全缓解
 
 ## VBS 是什么

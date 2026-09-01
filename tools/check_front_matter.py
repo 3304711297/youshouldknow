@@ -11,9 +11,12 @@ from typing import Any
 import yaml
 
 
-ALLOWED_FIELDS = {"status", "risk", "applies_to", "verified_on"}
+ALLOWED_FIELDS = {"status", "risk", "applies_to", "verified_on", "tweak_module"}
+REQUIRED_FIELDS = {"applies_to", "risk", "tweak_module"}
 ALLOWED_STATUS = {"stable", "reference", "experimental"}
 ALLOWED_RISK = {"low", "medium", "high"}
+# tweakbyjie 主菜单模块编号（菜单 0 是退出，不是模块）
+ALLOWED_TWEAK_MODULES = {str(n) for n in range(1, 12)}
 
 
 @dataclass
@@ -44,12 +47,12 @@ def _validate_value(data: dict[str, Any], path: str, start_line: int) -> list[st
     for field in sorted(set(data) - ALLOWED_FIELDS):
         errors.append(_error(path, start_line, f"unknown field '{field}'"))
 
-    missing = sorted(ALLOWED_FIELDS - set(data))
+    missing = sorted(REQUIRED_FIELDS - set(data))
     for field in missing:
         errors.append(_error(path, start_line, f"missing required field '{field}'"))
 
     status = data.get("status")
-    if status not in ALLOWED_STATUS:
+    if status is not None and status not in ALLOWED_STATUS:
         errors.append(
             _error(path, start_line, "status must be one of: experimental, reference, stable")
         )
@@ -66,19 +69,34 @@ def _validate_value(data: dict[str, Any], path: str, start_line: int) -> list[st
     ):
         errors.append(_error(path, start_line, "applies_to must be a non-empty list of strings"))
 
-    verified_on = data.get("verified_on")
-    if isinstance(verified_on, dt.date) and not isinstance(verified_on, dt.datetime):
-        verified_text = verified_on.isoformat()
-    elif isinstance(verified_on, str):
-        verified_text = verified_on
+    # tweak_module：数组，允许一对多；允许空数组（无对应 tweakbyjie 模块的纯知识页），
+    # 但字段本身必须存在；条目必须是 1-11 的菜单模块编号
+    tweak_module = data.get("tweak_module")
+    if not isinstance(tweak_module, list):
+        errors.append(_error(path, start_line, "tweak_module must be a list of module numbers (1-11)"))
     else:
-        verified_text = ""
-    try:
-        parsed = dt.date.fromisoformat(verified_text)
-    except ValueError:
-        parsed = None
-    if parsed is None or verified_text != parsed.isoformat():
-        errors.append(_error(path, start_line, "verified_on must be a valid YYYY-MM-DD date"))
+        for item in tweak_module:
+            if not isinstance(item, str) or item.strip() not in ALLOWED_TWEAK_MODULES:
+                errors.append(
+                    _error(path, start_line, f"tweak_module entries must be module numbers 1-11, got '{item}'")
+                )
+                break
+
+    verified_on = data.get("verified_on")
+    if verified_on is not None:
+        # 可选字段：仅在提供时校验格式（YYYY-MM-DD）
+        if isinstance(verified_on, dt.date) and not isinstance(verified_on, dt.datetime):
+            verified_text = verified_on.isoformat()
+        elif isinstance(verified_on, str):
+            verified_text = verified_on
+        else:
+            verified_text = ""
+        try:
+            parsed = dt.date.fromisoformat(verified_text)
+        except ValueError:
+            parsed = None
+        if parsed is None or verified_text != parsed.isoformat():
+            errors.append(_error(path, start_line, "verified_on must be a valid YYYY-MM-DD date"))
 
     return errors
 
@@ -99,7 +117,11 @@ def validate_text(text: str, path: str = "<text>") -> list[str]:
 
 
 def check_tree(root: Path) -> CheckResult:
-    """Validate all Markdown source files below ``root/docs``."""
+    """Validate all Markdown source files below ``root/docs``.
+
+    P2-13 契约：全部 docs/*.md 必须携带 Front Matter，且包含
+    applies_to / risk / tweak_module 三个必填字段。
+    """
     docs_dir = root / "docs"
     errors: list[str] = []
     files_checked = 0
@@ -109,6 +131,11 @@ def check_tree(root: Path) -> CheckResult:
         text = path.read_text(encoding="utf-8-sig")
         if text.startswith("---"):
             files_with_front_matter += 1
+        else:
+            errors.append(
+                _error(path.relative_to(root).as_posix(), 1,
+                       "missing Front Matter (applies_to / risk / tweak_module are required on every docs/*.md)")
+            )
         relative = path.relative_to(root).as_posix()
         errors.extend(validate_text(text, relative))
     return CheckResult(files_checked, files_with_front_matter, errors)

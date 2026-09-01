@@ -1,3 +1,11 @@
+---
+applies_to:
+  - Windows 11
+  - DDR5 平台（Intel 12 代+ / AMD AM5）
+risk: high
+tweak_module: []
+---
+
 # DDR5 内存超频速查：时序公式 · AM5 设置 · TM5 报错排查
 
 > **分类**：内存超频 · 时序调优

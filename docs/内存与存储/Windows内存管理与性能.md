@@ -1,3 +1,11 @@
+---
+applies_to:
+  - Windows 10
+  - Windows 11
+risk: medium
+tweak_module: [1]
+---
+
 # Windows 内存管理与性能
 
 > **定位**：内存主题主入口，负责给出“该不该动”的判断框架。

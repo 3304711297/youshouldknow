@@ -6,6 +6,7 @@ applies_to:
   - Windows 系统目录和用户路径定位
 verified_on: 2026-08-29
 # 2026-08-29 通读复核：未发现过时项，verified_on 更新为本次核验日期
+tweak_module: []
 ---
 
 # Windows 常用环境变量列表

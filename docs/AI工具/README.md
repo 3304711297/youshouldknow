@@ -1,3 +1,11 @@
+---
+applies_to:
+  - Windows 10
+  - Windows 11
+risk: low
+tweak_module: []
+---
+
 # AI 工具
 
 AI 编程助手、浏览器自动化、MCP（Model Context Protocol）工具链的使用与排错分类。

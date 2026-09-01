@@ -1,3 +1,11 @@
+---
+applies_to:
+  - Windows 10
+  - Windows 11
+risk: medium
+tweak_module: [1, 11]
+---
+
 # GPU 调度与显示管线
 
 ## 对应范围

@@ -1,3 +1,12 @@
+---
+applies_to:
+  - Windows 10
+  - Windows 11
+  - NVMe SSD
+risk: low
+tweak_module: [8]
+---
+
 # 存储与 NVMe 原理
 
 ## 一、NVMe 与传统存储接口

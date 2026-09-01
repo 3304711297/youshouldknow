@@ -1,3 +1,11 @@
+---
+applies_to:
+  - Windows 10
+  - Windows 11
+risk: medium
+tweak_module: [1]
+---
+
 # CPU 调度与游戏线程
 
 > **定位**：CPU 调度与系统延迟主题主文。

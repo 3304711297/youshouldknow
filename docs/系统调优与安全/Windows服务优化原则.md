@@ -1,3 +1,11 @@
+---
+applies_to:
+  - Windows 10
+  - Windows 11
+risk: medium
+tweak_module: [6]
+---
+
 # Windows 服务优化原则
 
 ## 基本原则

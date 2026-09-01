@@ -1,3 +1,11 @@
+---
+applies_to:
+  - Windows 10
+  - Windows 11
+risk: low
+tweak_module: []
+---
+
 # Windows 网络栈优化原则
 
 > **定位**：网络主题主文，负责分层判断“该动哪一层”。

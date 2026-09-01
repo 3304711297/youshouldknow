@@ -6,6 +6,7 @@ applies_to:
   - 系统管理工具和诊断命令速查
 verified_on: 2026-08-29
 # 2026-08-29 通读复核：未发现过时项，verified_on 更新为本次核验日期
+tweak_module: []
 ---
 
 # Windows 常用命令列表（Win + R 运行速查）

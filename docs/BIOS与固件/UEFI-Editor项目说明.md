@@ -1,3 +1,11 @@
+---
+applies_to:
+  - Windows 11
+  - AMI UEFI 固件机型
+risk: high
+tweak_module: []
+---
+
 # UEFI Editor 项目说明
 
 > **分类**：BIOS 与固件 · 外部工具参考

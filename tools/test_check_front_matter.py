@@ -22,6 +22,7 @@ risk: low
 applies_to:
   - Windows 10/11
 verified_on: 2026-08-21
+tweak_module: [3, 7]
 ---
 # Article
 """,
@@ -29,7 +30,22 @@ verified_on: 2026-08-21
         )
         self.assertEqual(errors, [])
 
-    def test_allows_legacy_document_without_front_matter(self):
+    def test_status_and_verified_on_are_optional(self):
+        # P2-13 契约:必填三字段为 applies_to/risk/tweak_module;status/verified_on 提供时才校验
+        errors = MODULE.validate_text(
+            """---
+risk: medium
+applies_to: [Windows 11]
+tweak_module: []
+---
+# Article
+""",
+            "docs/minimal.md",
+        )
+        self.assertEqual(errors, [])
+
+    def test_validate_text_tolerates_legacy_document_without_front_matter(self):
+        # validate_text 层兼容无 front matter 旧文;强制入口在 check_tree(全站必填)
         errors = MODULE.validate_text(
             "# Article\n\n---\n\n## Section\n",
             "docs/legacy.md",
@@ -38,7 +54,7 @@ verified_on: 2026-08-21
 
     def test_accepts_utf8_bom(self):
         errors = MODULE.validate_text(
-            "\ufeff---\nstatus: stable\nrisk: low\napplies_to: [Windows 11]\nverified_on: 2026-08-21\n---\n# Article\n",
+            "\ufeff---\nstatus: stable\nrisk: low\napplies_to: [Windows 11]\nverified_on: 2026-08-21\ntweak_module: [1]\n---\n# Article\n",
             "docs/bom.md",
         )
         self.assertEqual(errors, [])
@@ -55,7 +71,28 @@ applies_to:
 """,
             "docs/missing.md",
         )
-        self.assertTrue(any("verified_on" in error for error in errors))
+        self.assertTrue(any("tweak_module" in error for error in errors))
+
+    def test_rejects_invalid_tweak_module(self):
+        errors = MODULE.validate_text(
+            """---
+risk: low
+applies_to: [Windows 11]
+tweak_module: [0, 12, x]
+---
+# Article
+""",
+            "docs/bad-module.md",
+        )
+        self.assertTrue(any("tweak_module" in error and "1-11" in error for error in errors))
+
+    def test_tweak_module_allows_empty_and_non_empty_lists(self):
+        for mods in ("[]", "[1]", "[2, 3, 4]", "[10, 11]"):
+            errors = MODULE.validate_text(
+                f"---\nrisk: low\napplies_to: [Windows 11]\ntweak_module: {mods}\n---\n# Article\n",
+                "docs/mods.md",
+            )
+            self.assertEqual(errors, [], f"tweak_module: {mods} 应合法")
 
     def test_rejects_unknown_field(self):
         errors = MODULE.validate_text(
@@ -138,7 +175,7 @@ verified_on: 2026-08-21
             docs = root / "docs"
             docs.mkdir()
             (docs / "valid.md").write_text(
-                "---\nstatus: stable\nrisk: low\napplies_to: [Windows 11]\nverified_on: 2026-08-21\n---\n# Valid\n",
+                "---\nstatus: stable\nrisk: low\napplies_to: [Windows 11]\nverified_on: 2026-08-21\ntweak_module: []\n---\n# Valid\n",
                 encoding="utf-8",
             )
             (docs / "ignored.txt").write_text("not markdown", encoding="utf-8")
@@ -146,6 +183,23 @@ verified_on: 2026-08-21
             self.assertEqual(result.files_checked, 1)
             self.assertEqual(result.files_with_front_matter, 1)
             self.assertEqual(result.errors, [])
+
+    def test_check_tree_requires_front_matter_on_every_doc(self):
+        # P2-13 契约:全部 docs/*.md 必须携带 front matter
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            docs = root / "docs"
+            docs.mkdir()
+            (docs / "with.md").write_text(
+                "---\nrisk: low\napplies_to: [Windows 11]\ntweak_module: []\n---\n# With\n",
+                encoding="utf-8",
+            )
+            (docs / "without.md").write_text("# Without\n", encoding="utf-8")
+            result = MODULE.check_tree(root)
+            self.assertEqual(result.files_checked, 2)
+            self.assertEqual(result.files_with_front_matter, 1)
+            self.assertEqual(len(result.errors), 1)
+            self.assertIn("missing Front Matter", result.errors[0])
 
 
 class NavCoverageTests(unittest.TestCase):

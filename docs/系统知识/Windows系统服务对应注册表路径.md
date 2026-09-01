@@ -1,3 +1,11 @@
+---
+applies_to:
+  - Windows 10
+  - Windows 11
+risk: medium
+tweak_module: [6]
+---
+
 # Windows 系统服务对应注册表路径与键值说明
 
 > **分类**：系统知识 · 注册表与服务

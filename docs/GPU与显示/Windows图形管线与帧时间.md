@@ -1,3 +1,11 @@
+---
+applies_to:
+  - Windows 10
+  - Windows 11
+risk: low
+tweak_module: [1, 11]
+---
+
 # Windows 图形管线、驱动与帧时间
 
 > **定位**：GPU、显示和驱动主题主文。

@@ -1,3 +1,11 @@
+---
+applies_to:
+  - Windows 10
+  - Windows 11
+risk: low
+tweak_module: []
+---
+
 # CPU 与延迟
 
 面向游戏线程、系统调度、DPC/ISR、计时器、输入延迟和实验设置的知识分类。
