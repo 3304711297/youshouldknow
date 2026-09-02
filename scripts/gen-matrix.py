@@ -31,7 +31,9 @@ _spec.loader.exec_module(_cfm)
 def _collect() -> list[dict]:
     """读取全部内容页 front matter（跳过分类索引 README，它们只是导航）。"""
     entries = []
-    for path in sorted(DOCS.rglob("*.md")):
+    # 以 posix 相对路径排序：Windows 的 Path 比较大小写不敏感，与 CI Linux 排序可能不同，
+    # 会造成本地渲染与 CI 校验不一致（如 Above4G… 与 AMD-PBO… 的次序）
+    for path in sorted(DOCS.rglob("*.md"), key=lambda p: p.relative_to(DOCS).as_posix()):
         rel = path.relative_to(DOCS).as_posix()
         if rel.endswith("/README.md") or rel == "README.md" or rel == "项目导航/覆盖矩阵.md":
             continue
