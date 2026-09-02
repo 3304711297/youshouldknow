@@ -82,6 +82,26 @@ nav:
     - 装机法: 验机相关/装机法.md
   - BIOS与固件:
     - BIOS与固件/README.md
+    - BIOS 选项科普系列总览: BIOS与固件/BIOS选项科普系列总览.md
+    - BIOS 入门：进入、退出与模式切换: BIOS与固件/BIOS入门进入退出与模式切换.md
+    - BIOS 恢复默认设置的三种方法: BIOS与固件/BIOS恢复默认设置的三种方法.md
+    - 启动顺序与 Boot Override: BIOS与固件/启动顺序与BootOverride.md
+    - UEFI、Legacy 与 CSM 兼容支持模块: BIOS与固件/UEFI-Legacy-CSM与分区表.md
+    - Secure Boot 安全启动与密钥管理: BIOS与固件/SecureBoot安全启动与密钥管理.md
+    - TPM/PTT/fTPM 与清除风险: BIOS与固件/TPM-PTT-fTPM与清除风险.md
+    - 快速启动 Fast Boot: BIOS与固件/FastBoot快速启动.md
+    - Above 4G 解码与 Resizable BAR: BIOS与固件/Above4G解码与ResizableBAR.md
+    - 风扇调速 PWM/DC 与风扇曲线: BIOS与固件/风扇调速PWM-DC与风扇曲线.md
+    - 显示输出优先级与核显调用: BIOS与固件/显示输出优先级与核显调用.md
+    - SATA 模式与 Intel VMD: BIOS与固件/SATA模式与Intel-VMD.md
+    - M.2 通道分配与显卡 PCIe 降速: BIOS与固件/M2通道分配与显卡PCIe降速.md
+    - 厂商软件自动安装开关: BIOS与固件/厂商软件自动安装开关.md
+    - DDR5 内存训练与 MCR/PD: BIOS与固件/DDR5内存训练与MCR-PD.md
+    - CPU 调频与电源管理机制: BIOS与固件/CPU调频与电源管理机制.md
+    - AMD PBO 与 Curve Optimizer: BIOS与固件/AMD-PBO与CurveOptimizer.md
+    - 功耗墙、电流墙与 CEP 电流保护: BIOS与固件/功耗墙电流墙与CEP电流保护.md
+    - CPU 倍频与外频超频基础: BIOS与固件/CPU倍频与外频超频基础.md
+    - CPU 电压与 LLC 防掉压: BIOS与固件/CPU电压与LLC防掉压.md
     - BIOS 与 UEFI 固件刷写及开机 Logo 修改指南: BIOS与固件/BIOS与UEFI固件刷写及开机Logo修改指南.md
     - UEFI Editor 项目说明: BIOS与固件/UEFI-Editor项目说明.md
     - 机械革命笔记本 BIOS 选项与超频降压风险说明: BIOS与固件/机械革命笔记本BIOS选项与超频降压风险说明.md
@@ -115,6 +135,7 @@ nav:
     - 存储与 NVMe 原理: 内存与存储/存储与NVMe原理.md
   - 内存超频:
     - 内存超频/README.md
+    - XMP/EXPO 内存认证档科普: 内存超频/XMP-EXPO内存认证档科普.md
     - DDR5 内存超频时序参数公式速查: 内存超频/DDR5-内存超频时序参数公式速查.md
     - i7-12800HX 海力士 M-die 超频参数: 内存超频/i7-12800HX海力士M-die超频参数.md
     - i7-12800HX 英睿达（C8D/M8D1）超频参数: 内存超频/i7-12800HX英睿达C8D-M8D1超频参数.md
