@@ -148,6 +148,7 @@ nav:
   - AI工具:
     - AI工具/README.md
     - 让 AI 控制 Edge 浏览器：CDP 远程调试与 chrome-devtools-mcp 配置指南: AI工具/Edge浏览器CDP远程调试与AI接管指南.md
+    - ZCode 接入 Gemini 生图 Skill 与 Antigravity 桥接指南: AI工具/ZCode接入Gemini生图Skill与Antigravity桥接指南.md
   - 项目导航:
     - 项目导航/README.md
     - tweakbyjie 关联说明: 项目导航/tweakbyjie关联说明.md

@@ -13,6 +13,7 @@ AI 编程助手、浏览器自动化、MCP（Model Context Protocol）工具链�
 ## 文章
 
 - [让 AI 控制 Edge 浏览器：CDP 远程调试与 chrome-devtools-mcp 配置指南](./Edge浏览器CDP远程调试与AI接管指南.md) — edge://inspect 远程调试开关、autoConnect 配置、授权弹窗机制、中文扩展 locale 安装坑与解压版规避方案
+- [ZCode 接入 Gemini 生图 Skill 与 Antigravity 桥接指南](./ZCode接入Gemini生图Skill与Antigravity桥接指南.md) — 基于 gemini-3.1-flash-image (Nano Banana 2) 的原生生图 Skill 制作、Antigravity 桥接解耦与排错实战
 
 ## 与其他分类的边界
 
