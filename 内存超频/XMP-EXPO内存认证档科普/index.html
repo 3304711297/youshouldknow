@@ -2728,7 +2728,46 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#xmpexpo_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        从一键认证档（XMP/EXPO）进阶到手动细调时序
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="从一键认证档（XMP/EXPO）进阶到手动细调时序">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心换算公式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        进阶调参指引
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
     <span class="md-ellipsis">
       
         实测收益（视频口径）
@@ -2739,7 +2778,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
+  <a href="#_8" class="md-nav__link">
     <span class="md-ellipsis">
       
         什么情况必须开
@@ -2761,7 +2800,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
+  <a href="#_9" class="md-nav__link">
     <span class="md-ellipsis">
       
         三个常见误区
@@ -2772,7 +2811,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_8" class="md-nav__link">
+  <a href="#_10" class="md-nav__link">
     <span class="md-ellipsis">
       
         出处与核查说明
@@ -4397,7 +4436,46 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#xmpexpo_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        从一键认证档（XMP/EXPO）进阶到手动细调时序
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="从一键认证档（XMP/EXPO）进阶到手动细调时序">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心换算公式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        进阶调参指引
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
     <span class="md-ellipsis">
       
         实测收益（视频口径）
@@ -4408,7 +4486,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
+  <a href="#_8" class="md-nav__link">
     <span class="md-ellipsis">
       
         什么情况必须开
@@ -4430,7 +4508,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
+  <a href="#_9" class="md-nav__link">
     <span class="md-ellipsis">
       
         三个常见误区
@@ -4441,7 +4519,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_8" class="md-nav__link">
+  <a href="#_10" class="md-nav__link">
     <span class="md-ellipsis">
       
         出处与核查说明
@@ -4580,13 +4658,31 @@
 <li>Intel：Gear1 = 控制器与内存同频（延迟最低），Gear2 = 1:2 分频（高频好上、延迟上升）；</li>
 <li>AMD：UCLK=MCLK 同频（1:1）是甜点；高频 DDR5 常见 1:2——<strong>跨分频点那一刻最容易翻车</strong>：标称 6000 刚好压在临界点上的条子，降到 5800 往往秒亮，不是条坏了。</li>
 </ul>
-<h2 id="_5">实测收益（视频口径）<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<h2 id="xmpexpo_1">从一键认证档（XMP/EXPO）进阶到手动细调时序<a class="headerlink" href="#xmpexpo_1" title="Permanent link">&para;</a></h2>
+<p>XMP/EXPO 是一键开启的最佳方案，但它<strong>主要只锁定了第一时序（CL/tRCD/tRP/tRAS）和主工作电压</strong>，其余数十个次要副时序（tRFC、tREFI、tRRD、tFAW、tWTR、tCWL 等）大多交由主板 BIOS 自动训练并以极其保守的规则放宽（这也是华硕提供 XMP I 与 XMP II 区别的根源）。</p>
+<p>如果你开启 XMP/EXPO 稳定后，想要进一步榨干内存性能（如将 DDR5 延迟从 70ns 级压进 55ns 级、大幅提升 1% Low 帧率与竞技游戏防掉帧），核心就是<strong>将时序参数从时钟周期换算为绝对物理延迟（纳秒 ns）并手动收紧</strong>：</p>
+<h3 id="_5">核心换算公式<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p>$$\text{单时钟周期 } tCK (\text{ns}) = \frac{2000}{\text{等效频率 } (\text{MT/s})}$$</p>
+<p>$$\text{绝对延迟 } (\text{ns}) = \text{时序周期数 } \times tCK = \text{时序周期数 } \times \frac{2000}{\text{等效频率 } (\text{MT/s})}$$</p>
+<ul>
+<li><strong>举例</strong>：在 DDR5-6000（等效 6000 MT/s）下，$tCK = \frac{2000}{6000} = 0.333\text{ ns}$；</li>
+<li>$CL 30 = 30 \times 0.333\text{ ns} = 10.0\text{ ns}$；</li>
+<li>$tRFC 480 = 480 \times 0.333\text{ ns} = 160.0\text{ ns}$（海力士 A-die 颗粒公认黄金甜点）；</li>
+<li>主板默认放宽的 $tRFC$ 往往给到 600~800 周期（折合 200~266ns），这就是手动调参仍有 10%~15% 延迟收益的原因。</li>
+</ul>
+<h3 id="_6">进阶调参指引<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>海力士 A-die 颗粒通用公式速查与 AM5 设置</strong> → 见本站 <a href="../DDR5-%E5%86%85%E5%AD%98%E8%B6%85%E9%A2%91%E6%97%B6%E5%BA%8F%E5%8F%82%E6%95%B0%E5%85%AC%E5%BC%8F%E9%80%9F%E6%9F%A5/">DDR5 内存超频时序参数公式速查</a>；</li>
+<li><strong>移动端 / 笔记本海力士新 M-die 实机参数</strong> → 见 <a href="../i7-12800HX%E6%B5%B7%E5%8A%9B%E5%A3%ABM-die%E8%B6%85%E9%A2%91%E5%8F%82%E6%95%B0/">i7-12800HX 海力士 M-die 超频参数</a>；</li>
+<li><strong>英睿达美光 C8D/M8D1 实机参数</strong> → 见 <a href="../i7-12800HX%E8%8B%B1%E7%9D%BF%E8%BE%BEC8D-M8D1%E8%B6%85%E9%A2%91%E5%8F%82%E6%95%B0/">i7-12800HX 英睿达 C8D-M8D1 超频参数</a>。</li>
+</ul>
+<h2 id="_7">实测收益（视频口径）<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <ul>
 <li>AIDA64：DDR4 开 XMP 后读取带宽 30.6→48.4 GB/s；DDR5 带宽升到约 95 GB/s（涨幅约 27%）；DDR4 延迟 57.5ns→44.6ns（约 -23%）；</li>
 <li>游戏：平均帧提升约 5%~8%，1% Low 提升更明显（DDR5 平台可达约 8% 以上），卡顿感明显减少；</li>
 <li>生产力（视频剪辑、3D 渲染）直接受益于带宽与延迟。</li>
 </ul>
-<h2 id="_6">什么情况必须开<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<h2 id="_8">什么情况必须开<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <p>买了 DDR5-6000 及以上高频条（不开等于白买）；玩高帧率竞技游戏；做视频剪辑/渲染等生产力。入门平台 + 普条开不开差别不大。</p>
 <h2 id="ep08">失败排查五步（详见重制版 EP08）<a class="headerlink" href="#ep08" title="Permanent link">&para;</a></h2>
 <ol>
@@ -4596,14 +4692,14 @@
 <li><strong>验证</strong>：能进系统≠稳，用内存测试工具跑无错才算门槛，日常用一周不崩才算真稳；</li>
 <li><strong>回默认或降档</strong>：文件不丢，CMOS 只改参数。</li>
 </ol>
-<h2 id="_7">三个常见误区<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<h2 id="_9">三个常见误区<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
 <ol>
 <li><strong>开 XMP 会烧内存/不保修？</strong> 不会——厂商写进 SPD 的参数在保修范围内；Intel 与 AMD 官方态度：使用 XMP/EXPO 配置不影响保修。只有手动突破范围加压才可能涉及判定；</li>
 <li><strong>XMP 和手动超频一样危险？</strong> 完全不是一个级别——XMP 是厂商预设的保守方案，手动调时序加压才是激进超频；</li>
 <li><strong>开机变慢了？</strong> DDR5 正常现象：内存训练 30~60 秒；可用 MCR+PD 组合提速（见 <a href="../../BIOS%E4%B8%8E%E5%9B%BA%E4%BB%B6/DDR5%E5%86%85%E5%AD%98%E8%AE%AD%E7%BB%83%E4%B8%8EMCR-PD/">DDR5 内存训练与 MCR/PD</a>）。</li>
 </ol>
 <p><strong>装机前提醒</strong>：先确认内存插对插槽组成双通道（通常 2/4 槽，以说明书为准）——插错位置，频率再高也白搭。</p>
-<h2 id="_8">出处与核查说明<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<h2 id="_10">出处与核查说明<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
 <p>本文整理自 B 站 UP 主「所盼皆欣然」对应集，经本地语音转录校对整理；测试数据与具体时序数字为口播数据，以原视频画面为准：</p>
 <ul>
 <li><a href="https://www.bilibili.com/video/BV1o1Vg6bEe2/">电脑BIOS选项全科普EP01/XMP【暮里学姐】（旧版）</a></li>
@@ -4632,7 +4728,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年9月2日 16:34:38 UTC">2026年9月2日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年9月3日 02:50:00 UTC">2026年9月3日</span>
   </span>
 
     
