@@ -27,6 +27,7 @@ Windows 系统机制、电源管理、排障工具与常用命令的知识分类
 
 ### 启动与驱动
 - [Windows 启动配置与 tweakbyjie 对应说明](./Windows启动配置与tweakbyjie对应说明.md) — BCD / 测试模式 / Device Guard 启动项与脚本边界
+- [UEFI WPBT 固件自动注入机制与 Windows 防御](./UEFI-WPBT固件自动注入与Windows防御.md) — ACPI WPBT 表、厂商后台静默下发原理与 DisableWpbtExecution 注册表防御
 - [Windows 新驱动程序策略与关闭方法](./Windows新驱动程序策略与关闭方法.md) — 驱动更新策略与适用场景
 - [安装系统时跳过硬件和 TPM 检测](./安装系统时跳过硬件和TPM检测.md) — 安装阶段的硬件检查与兼容处理
 
