@@ -29,6 +29,7 @@ tweak_module: []
 - [显示输出优先级与核显调用](./显示输出优先级与核显调用.md)
 - [SATA 模式与 Intel VMD](./SATA模式与Intel-VMD.md)
 - [M.2 通道分配与显卡 PCIe 降速](./M2通道分配与显卡PCIe降速.md)
+- [NVMe 识别全链路与故障排查](./NVMe识别全链路与故障排查.md)
 - [厂商软件自动安装开关](./厂商软件自动安装开关.md)
 - [DDR5 内存训练与 MCR/PD](./DDR5内存训练与MCR-PD.md)
 - [CPU 调频与电源管理机制](./CPU调频与电源管理机制.md)
