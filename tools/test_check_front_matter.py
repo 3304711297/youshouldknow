@@ -78,16 +78,16 @@ applies_to:
             """---
 risk: low
 applies_to: [Windows 11]
-tweak_module: [0, 12, x]
+tweak_module: [0, 13, x]
 ---
 # Article
 """,
             "docs/bad-module.md",
         )
-        self.assertTrue(any("tweak_module" in error and "1-11" in error for error in errors))
+        self.assertTrue(any("tweak_module" in error and "1-12" in error for error in errors))
 
     def test_tweak_module_allows_empty_and_non_empty_lists(self):
-        for mods in ("[]", "[1]", "[2, 3, 4]", "[10, 11]"):
+        for mods in ("[]", "[1]", "[2, 3, 4]", "[10, 11]", "[12]"):
             errors = MODULE.validate_text(
                 f"---\nrisk: low\napplies_to: [Windows 11]\ntweak_module: {mods}\n---\n# Article\n",
                 "docs/mods.md",
