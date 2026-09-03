@@ -160,10 +160,11 @@ nav:
     - VBS 与系统安全缓解: 系统调优与安全/VBS与系统安全缓解.md
     - 设备管理器禁用类优化辨析: 系统调优与安全/设备管理器禁用类优化辨析.md
   - 网络通信:
-    - 网络通信/README.md
-    - Windows 网络栈优化原则: 网络通信/Windows网络栈优化原则.md
-    - Karing Windows TUN 与 Windows 网络转发设置: 网络通信/Karing-Windows-TUN与Windows网络转发设置.md
-    - 四大运营商频段速率与 APN 设置速查: 网络通信/四大运营商频段速率与APN设置速查.md
+      - 网络通信/README.md
+      - Windows 网络栈优化原则: 网络通信/Windows网络栈优化原则.md
+      - Windows 游戏网络 QoS 策略与 DSCP 原理: 网络通信/Windows游戏网络QoS策略与DSCP原理.md
+      - Karing Windows TUN 与 Windows 网络转发设置: 网络通信/Karing-Windows-TUN与Windows网络转发设置.md
+      - 四大运营商频段速率与 APN 设置速查: 网络通信/四大运营商频段速率与APN设置速查.md
   - 软件技巧:
     - 软件技巧/README.md
     - Steam 设置优化指南: 软件技巧/Steam设置优化指南.md
