@@ -111,6 +111,7 @@ nav:
     - 电源计划创建与优化指南: 系统知识/电源计划创建与优化指南.md
     - Windows 睡眠、休眠与混合睡眠详解: 系统知识/Windows-睡眠-休眠与混合睡眠详解.md
     - Windows 启动配置与 tweakbyjie 对应说明: 系统知识/Windows启动配置与tweakbyjie对应说明.md
+    - UEFI WPBT 固件自动注入与 Windows 防御: 系统知识/UEFI-WPBT固件自动注入与Windows防御.md
     - Windows 内存压缩功能与 MMAgent 设置: 系统知识/Windows内存压缩功能与MMAgent设置.md
     - Windows 虚拟内存设置指南: 系统知识/Windows虚拟内存设置指南.md
     - Windows 新驱动程序策略与关闭方法: 系统知识/Windows新驱动程序策略与关闭方法.md
