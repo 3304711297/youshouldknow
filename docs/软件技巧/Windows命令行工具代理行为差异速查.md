@@ -107,6 +107,6 @@ reg add "HKCU\SOFTWARE\Policies\Microsoft\Edge" //v SomeValue //t REG_DWORD //d 
 ## 七、参考链接
 
 - [Git 文档：git-config 的 http.proxy](https://git-scm.com/docs/git-config#Documentation/git-config.txt-httpproxy)
-- [curl 文档：环境变量代理](https://everything.curl.dev/usingcurl/proxies/env)
-- [undici ProxyAgent](https://github.com/nodejs/undici/blob/main/docs/api/ProxyAgent.md)
+- [curl 官方手册：--proxy 与环境变量支持](https://curl.se/docs/manpage.html)
+- [undici 官方文档：ProxyAgent 支持](https://undici.nodejs.org/#/docs/api/ProxyAgent)
 - [Microsoft Learn：about_Invoke-WebRequest（PowerShell 7）](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/invoke-webrequest)
