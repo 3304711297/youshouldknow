@@ -16,7 +16,7 @@ REQUIRED_FIELDS = {"applies_to", "risk", "tweak_module"}
 ALLOWED_STATUS = {"stable", "reference", "experimental"}
 ALLOWED_RISK = {"low", "medium", "high"}
 # tweakbyjie 主菜单模块编号（菜单 0 是退出，不是模块）
-ALLOWED_TWEAK_MODULES = {str(n) for n in range(1, 12)}
+ALLOWED_TWEAK_MODULES = {str(n) for n in range(1, 13)}
 
 
 @dataclass
@@ -73,12 +73,12 @@ def _validate_value(data: dict[str, Any], path: str, start_line: int) -> list[st
     # 但字段本身必须存在；条目必须是 1-11 的菜单模块编号
     tweak_module = data.get("tweak_module")
     if not isinstance(tweak_module, list):
-        errors.append(_error(path, start_line, "tweak_module must be a list of module numbers (1-11)"))
+        errors.append(_error(path, start_line, "tweak_module must be a list of module numbers (1-12)"))
     else:
         for item in tweak_module:
             if not isinstance(item, str) or item.strip() not in ALLOWED_TWEAK_MODULES:
                 errors.append(
-                    _error(path, start_line, f"tweak_module entries must be module numbers 1-11, got '{item}'")
+                    _error(path, start_line, f"tweak_module entries must be module numbers 1-12, got '{item}'")
                 )
                 break
 

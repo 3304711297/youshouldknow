@@ -20,7 +20,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 DOCS = ROOT / "docs"
 OUT = DOCS / "项目导航" / "覆盖矩阵.md"
-MODULE_RANGE = range(1, 12)
+MODULE_RANGE = range(1, 13)
 
 _spec = importlib.util.spec_from_file_location("cfm", ROOT / "tools" / "check_front_matter.py")
 _cfm = importlib.util.module_from_spec(_spec)

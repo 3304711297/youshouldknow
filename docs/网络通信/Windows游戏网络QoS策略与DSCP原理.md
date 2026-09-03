@@ -6,7 +6,7 @@ applies_to:
   - Windows 11 (22H2/23H2/24H2)
 verified_on: "2026-09-03"
 tweak_module:
-  - "Part 12"
+  - "12"
 ---
 
 # Windows 游戏网络 QoS 策略与 DSCP 标记原理
