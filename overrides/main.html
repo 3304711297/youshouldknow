@@ -7,11 +7,11 @@
     <aside class="doc-meta" aria-label="文档元数据">
       <div class="doc-meta__item">
         <span class="doc-meta__label">状态</span>
-        <span class="doc-meta__value">{{ status_labels[page.meta.status] }}</span>
+        <span class="doc-meta__badge doc-meta__badge--status-{{ page.meta.status }}">{{ status_labels[page.meta.status] }}</span>
       </div>
-      <div class="doc-meta__item doc-meta__item--risk-{{ page.meta.risk }}">
+      <div class="doc-meta__item">
         <span class="doc-meta__label">风险</span>
-        <span class="doc-meta__value">{{ risk_labels[page.meta.risk] }}</span>
+        <span class="doc-meta__badge doc-meta__badge--risk-{{ page.meta.risk }}">{{ risk_labels[page.meta.risk] }}</span>
       </div>
       <div class="doc-meta__item">
         <span class="doc-meta__label">适用范围</span>
