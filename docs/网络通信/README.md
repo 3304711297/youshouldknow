@@ -18,6 +18,7 @@ Windows 网络栈、代理/TUN 转发与运营商速查的知识分类。
 - [Windows 网络栈优化原则](./Windows网络栈优化原则.md) — 低延迟 vs 高吞吐的分层判断、参数与测试方法
 
 ### 专题
+- [Windows 游戏网络 QoS 策略与 DSCP 原理](./Windows游戏网络QoS策略与DSCP原理.md) — 竞技游戏网络数据包 DSCP 46 加速标记与 TCP CUBIC 原理
 - [Karing Windows TUN 与 Windows 网络转发设置](./Karing-Windows-TUN与Windows网络转发设置.md) — TUN/系统代理/Forwarding 的区别与热点场景排障
 
 ### 速查
