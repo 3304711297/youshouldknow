@@ -21,14 +21,15 @@ RISK_META = {
     "medium": ("🟡", "medium"),
     "high": ("🔴", "high"),
 }
-MATRIX_URL = "项目导航/覆盖矩阵/"
+MATRIX_URL = "项目导航/覆盖矩阵.md"
 
 
 def _matrix_link(page) -> str | None:
     """覆盖矩阵页相对当前页的站内相对链接；解析失败返回 None（徽章退化为纯文本）。"""
     try:
-        page_dir = posixpath.dirname(page.url.rstrip("/"))
-        return posixpath.relpath(MATRIX_URL.rstrip("/"), start=page_dir or ".")
+        page_dir = posixpath.dirname(page.file.src_uri) if hasattr(page, "file") and hasattr(page.file, "src_uri") else posixpath.dirname(page.url.rstrip("/"))
+        rel = posixpath.relpath(MATRIX_URL, start=page_dir or ".")
+        return rel
     except Exception:
         return None
 
@@ -53,7 +54,7 @@ def on_page_markdown(markdown: str, page, config, files):
         mod_text = "、".join(f"`{m}`" for m in modules)
         link = _matrix_link(page)
         if link:
-            items.append(f"- **联动 tweakbyjie 模块**：{mod_text}（详见[覆盖矩阵]({link}/)）")
+            items.append(f"- **联动 tweakbyjie 模块**：{mod_text}（详见[覆盖矩阵]({link})）")
         else:
             items.append(f"- **联动 tweakbyjie 模块**：{mod_text}")
 
