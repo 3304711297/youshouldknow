@@ -1,0 +1,43 @@
+name: bilibili-watch
+
+on:
+  schedule:
+    # 每 6 小时轮询一次（UTC 02:00, 08:00, 14:00, 20:00 -> 北京时间 10:00, 16:00, 22:00, 04:00）
+    - cron: "0 2,8,14,20 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: bilibili-watch
+  cancel-in-progress: false
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
+        with:
+          python-version: "3.11"
+
+      - name: Run unit tests
+        run: python -m unittest tools/test_watch_bilibili.py
+
+      - name: Check Bilibili upstream updates and open issues
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python tools/watch_bilibili.py \
+            --config tools/watch_sources.json \
+            --docs-dir docs \
+            --repo "${{ github.repository }}"
