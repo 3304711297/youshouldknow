@@ -166,10 +166,13 @@ nav:
   - 软件技巧:
     - 软件技巧/README.md
     - Steam 设置优化指南: 软件技巧/Steam设置优化指南.md
+    - Windows 命令行工具的代理行为差异速查: 软件技巧/Windows命令行工具代理行为差异速查.md
   - AI工具:
     - AI工具/README.md
     - 让 AI 控制 Edge 浏览器：CDP 远程调试与 chrome-devtools-mcp 配置指南: AI工具/Edge浏览器CDP远程调试与AI接管指南.md
     - ZCode 接入 Gemini 生图 Skill 与 Antigravity 桥接指南: AI工具/ZCode接入Gemini生图Skill与Antigravity桥接指南.md
+    - AI 浏览器自动化的扩展禁用陷阱与数据恢复: AI工具/AI浏览器自动化扩展禁用陷阱与数据恢复.md
+    - hermes-agent Windows 部署与本地模型桥接实战: AI工具/hermes-agent-Windows部署与本地模型桥接实战.md
   - 项目导航:
     - 项目导航/README.md
     - tweakbyjie 关联说明: 项目导航/tweakbyjie关联说明.md
