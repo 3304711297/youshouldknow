@@ -53,8 +53,8 @@ jobs:
           cache-dependency-path: requirements-docs.lock.txt
       - name: Install documentation dependencies
         run: python -m pip install --require-hashes -r requirements-docs.lock.txt
-      - name: Test Front Matter checker
-        run: python -m unittest tools/test_check_front_matter.py
+      - name: Test tools (Front Matter checker & Bilibili watch)
+        run: python -m unittest discover tools
       - name: Check Front Matter
         run: python tools/check_front_matter.py
       - name: Check coverage matrix

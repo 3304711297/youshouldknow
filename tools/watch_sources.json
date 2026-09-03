@@ -1,0 +1,13 @@
+{
+  "channels": [
+    {
+      "mid": 589200735,
+      "name": "所盼皆欣然",
+      "target_category": "BIOS与固件",
+      "enabled": true,
+      "description": "主板BIOS与UEFI选项全科普合集（旧版与重制版）",
+      "watch_all_seasons": false,
+      "season_ids": [8897657, 8222417]
+    }
+  ]
+}
