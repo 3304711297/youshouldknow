@@ -10,14 +10,14 @@ tweak_module: []
 
 > **分类**：BIOS 与固件 · 系列导航
 >
-> **来源说明**：本系列文章整理自 B 站 UP 主 [所盼皆欣然](https://space.bilibili.com/589200735) 的两个视频合集——旧版《[主板BIOS选项科普](https://space.bilibili.com/589200735/channel/collectiondetail?sid=8222417)》（27 集）与重制版《[电脑BIOS/UEFI选项内容全科普](https://space.bilibili.com/589200735/channel/collectiondetail?sid=8897657)》（14 集），全部经本地语音转录后按硬件领域知识校对术语整理而成。每篇文章底部均附对应视频出处链接。
+> **来源说明**：本系列文章整理自 B 站 UP 主 [所盼皆欣然](https://space.bilibili.com/589200735) 的两个视频合集——旧版《[主板BIOS选项科普](https://space.bilibili.com/589200735/channel/collectiondetail?sid=8222417)》（27 集）与重制版《[电脑BIOS/UEFI选项内容全科普](https://space.bilibili.com/589200735/channel/collectiondetail?sid=8897657)》（15 集），全部经本地语音转录后按硬件领域知识校对术语整理而成。每篇文章底部均附对应视频出处链接。
 
 ## 系列覆盖的两个合集
 
 | 合集 | 集数 | 特点 |
 |---|---|---|
 | [主板BIOS选项科普（旧版）](https://space.bilibili.com/589200735/channel/collectiondetail?sid=8222417) | 27 集 | 覆盖面最全：从 BIOS 入门一路讲到 CPU 倍频、外频、核心电压与防掉压 |
-| [电脑BIOS/UEFI选项内容全科普（重制版）](https://space.bilibili.com/589200735/channel/collectiondetail?sid=8897657) | 14 集 | 对旧版部分主题重制更新：补充 UEFI 时代细节（Boot Override、Secure Boot 密钥管理、VMD 等） |
+| [电脑BIOS/UEFI选项内容全科普（重制版）](https://space.bilibili.com/589200735/channel/collectiondetail?sid=8897657) | 15 集 | 对旧版部分主题重制更新：补充 UEFI 时代细节（Boot Override、Secure Boot 密钥管理、VMD、NVMe 识别全链路等） |
 
 两个合集主题有重叠，本文整理时**以重制版为主线、旧版补全重制版未覆盖的主题**（如快速启动、Above 4G、ReBAR、PBO、电压与防掉压等），出处均逐篇标注。
 
@@ -45,15 +45,16 @@ tweak_module: []
 12. [显示输出优先级与核显调用](./显示输出优先级与核显调用.md)；
 13. [SATA 模式与 Intel VMD](./SATA模式与Intel-VMD.md)；
 14. [M.2 通道分配与显卡 PCIe 降速](./M2通道分配与显卡PCIe降速.md)；
-15. [厂商软件自动安装开关](./厂商软件自动安装开关.md)。
+15. [NVMe 识别全链路与故障排查](./NVMe识别全链路与故障排查.md)——五层排查法、VMD 与 0x7B 蓝屏无损恢复；
+16. [厂商软件自动安装开关](./厂商软件自动安装开关.md)。
 
 ### 第四步：CPU 自动优化与超频进阶
 
-16. [CPU 调频与电源管理机制](./CPU调频与电源管理机制.md)——SpeedStep/Speed Shift/CPPC、睿频与 C-States；
-17. [AMD PBO 与 Curve Optimizer](./AMD-PBO与CurveOptimizer.md)；
-18. [功耗墙、电流墙与 CEP 电流保护](./功耗墙电流墙与CEP电流保护.md)；
-19. [CPU 倍频与外频超频基础](./CPU倍频与外频超频基础.md)；
-20. [CPU 电压与 LLC 防掉压](./CPU电压与LLC防掉压.md)。
+17. [CPU 调频与电源管理机制](./CPU调频与电源管理机制.md)——SpeedStep/Speed Shift/CPPC、睿频与 C-States；
+18. [AMD PBO 与 Curve Optimizer](./AMD-PBO与CurveOptimizer.md)；
+19. [功耗墙、电流墙与 CEP 电流保护](./功耗墙电流墙与CEP电流保护.md)；
+20. [CPU 倍频与外频超频基础](./CPU倍频与外频超频基础.md)；
+21. [CPU 电压与 LLC 防掉压](./CPU电压与LLC防掉压.md)。
 
 ## 系列理念：超频的三条路线
 
