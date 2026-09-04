@@ -3761,8 +3761,6 @@
       
         
       
-        
-      
     
     
     
@@ -3835,34 +3833,6 @@
     
   
     让 AI 控制 Edge 浏览器：CDP 远程调试与 chrome-devtools-mcp 配置指南
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../ZCode%E6%8E%A5%E5%85%A5Gemini%E7%94%9F%E5%9B%BESkill%E4%B8%8EAntigravity%E6%A1%A5%E6%8E%A5%E6%8C%87%E5%8D%97/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    ZCode 接入 Gemini 生图 Skill 与 Antigravity 桥接指南
   
 
     
@@ -4205,10 +4175,99 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#zcode-gemini-skill-gemini-31-flash-image-nano-banana-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、 多模态扩展：ZCode 接入 Gemini 原生生图 Skill (gemini-3.1-flash-image / Nano Banana 2)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="五、 多模态扩展：ZCode 接入 Gemini 原生生图 Skill (gemini-3.1-flash-image / Nano Banana 2)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 主控模型与生图后端解耦
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-v1chatcompletions-v1imagesgenerations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 为什么走 /v1/chat/completions 而不是 /v1/images/generations？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-gemini-image-gen-skill" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 创建 gemini-image-gen Skill
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 创建 gemini-image-gen Skill">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-skillmd-agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        (1) SKILL.md（向 Agent 注册调用规范）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#when-executing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When Executing
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        五、 全流程避坑与常见故障速查表（血泪经验汇编）
+        六、 全流程避坑与常见故障速查表（血泪经验汇编）
       
     </span>
   </a>
@@ -4729,10 +4788,99 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#zcode-gemini-skill-gemini-31-flash-image-nano-banana-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、 多模态扩展：ZCode 接入 Gemini 原生生图 Skill (gemini-3.1-flash-image / Nano Banana 2)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="五、 多模态扩展：ZCode 接入 Gemini 原生生图 Skill (gemini-3.1-flash-image / Nano Banana 2)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 主控模型与生图后端解耦
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-v1chatcompletions-v1imagesgenerations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 为什么走 /v1/chat/completions 而不是 /v1/images/generations？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-gemini-image-gen-skill" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 创建 gemini-image-gen Skill
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 创建 gemini-image-gen Skill">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-skillmd-agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        (1) SKILL.md（向 Agent 注册调用规范）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#when-executing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When Executing
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        五、 全流程避坑与常见故障速查表（血泪经验汇编）
+        六、 全流程避坑与常见故障速查表（血泪经验汇编）
       
     </span>
   </a>
@@ -4783,6 +4931,13 @@
       
       
       
+        <span class="md-tag">Google Gemini (gemini-3.8-flash / gemini-3.7-flash / gemini-3.1-flash-image / Nano Banana 2)</span>
+      
+    
+      
+      
+      
+      
         <span class="md-tag">风险：low</span>
       
     
@@ -4796,13 +4951,13 @@
 <div class="admonition abstract">
 <p class="admonition-title">适用范围 · 风险等级 · 联动模块</p>
 <ul>
-<li><strong>适用范围</strong>：Windows 10/11、EasyCLIProxyAPI 使用者、Hermes Agent / ZCode / Claude Code / Codex 多智能体用户</li>
+<li><strong>适用范围</strong>：Windows 10/11、EasyCLIProxyAPI 使用者、Hermes Agent / ZCode / Claude Code / Codex 多智能体用户、Google Gemini (gemini-3.8-flash / gemini-3.7-flash / gemini-3.1-flash-image / Nano Banana 2)</li>
 <li><strong>风险等级</strong>：🟢 <code>low</code></li>
 </ul>
 </div>
 <h1 id="easycliproxyapi">EasyCLIProxyAPI 本地网关架构与多智能体客户端适配<a class="headerlink" href="#easycliproxyapi" title="Permanent link">&para;</a></h1>
 <blockquote>
-<p>本文目标：全面梳理本地大模型网关从非官方分叉（ZCode-Antigravity）向官方稳定核心（EasyCLIProxyAPI 7.2.149+）迁移的演进历程；详解 <strong>Hermes Agent</strong> 与 <strong>ZCode</strong> 双端接入使用 Gemini 3.8/3.7 Flash 的完整配置步骤、关键配置文件、避坑指南与常见故障速查表。</p>
+<p>本文目标：全面梳理本地大模型网关从非官方分叉（ZCode-Antigravity）向官方稳定核心（EasyCLIProxyAPI 7.2.149+）迁移的演进历程；详解 <strong>Hermes Agent</strong> 与 <strong>ZCode</strong> 双端接入使用 Gemini 3.8/3.7 Flash 对话推理、多模态文生图 Skill（<code>gemini-3.1-flash-image</code> / Nano Banana 2）的完整配置步骤、关键配置文件、避坑指南与全流程故障速查表。</p>
 <p>实测环境：Windows 11 / EasyCLIProxyAPI 0.2.71 (Core 7.2.149) / Hermes Agent / ZCode 客户端 / Google AI Pro 个人订阅。</p>
 </blockquote>
 <h2 id="_1">一、 本地模型网关的架构演进<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
@@ -4972,7 +5127,7 @@
 <a id="__codelineno-4-65" name="__codelineno-4-65" href="#__codelineno-4-65"></a><span class="p">}</span>
 </code></pre></div>
 <h3 id="3_1">3. 模型列表置顶展示<a class="headerlink" href="#3_1" title="Permanent link">&para;</a></h3>
-<p>在 <code>~/.zcode/v2/model-provider-display-order.json</code> 中，将 <code>"zcode-antigravity-local"</code> 放置在 <code>providerIds</code> 数组的<strong>首位</strong>：</p>
+<p>在 <code>~/.zcode/v2/model-provider-display-order.json</code> 中，将 <code>\"zcode-antigravity-local\"</code> 放置在 <code>providerIds</code> 数组的<strong>首位</strong>：</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="p">{</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="nt">"providerIds"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="s2">"zcode-antigravity-local"</span><span class="p">,</span>
@@ -4982,7 +5137,172 @@
 <a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="p">}</span>
 </code></pre></div>
 <p>这样启动 ZCode 后，顶部模型下拉框首项即为 Google 官方 Gemini 全系模型。</p>
-<h2 id="_2">五、 全流程避坑与常见故障速查表（血泪经验汇编）<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h2 id="zcode-gemini-skill-gemini-31-flash-image-nano-banana-2">五、 多模态扩展：ZCode 接入 Gemini 原生生图 Skill (<code>gemini-3.1-flash-image</code> / Nano Banana 2)<a class="headerlink" href="#zcode-gemini-skill-gemini-31-flash-image-nano-banana-2" title="Permanent link">&para;</a></h2>
+<p>很多用户在配置了 Gemini 模型后，让智能体画图却发现智能体只输出文字描述，甚至产生幻觉。这是由于 Tool-Calling 机制与模型多模态能力脱节导致的。</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>[用户发出画图指令]
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>        │
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>        ▼
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>[ZCode Agent] ──(自动触发)──&gt; [Skill: gemini-image-gen]
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>                                     │
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>                                     ▼ (执行 Python 脚本)
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>                      [generate_image.py]
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>                                     │
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>                                     ▼ (POST /v1/chat/completions)
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>                   [EasyCLIProxyAPI 网关] (http://127.0.0.1:18080)
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>                                     │
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>                                     ▼ (调用 Google 远端接口)
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>                         [gemini-3.1-flash-image]
+<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>                                     │
+<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a>                                     ▼ (返回包含 data:image/jpeg;base64 的 JSON)
+<a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a>                      [Python 脚本解码并保存]
+<a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a>                                     │
+<a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a>                                     ▼
+<a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a>                   [本地文件: ./generated_images/xxx.jpg]
+<a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a>                                     │
+<a id="__codelineno-6-21" name="__codelineno-6-21" href="#__codelineno-6-21"></a>                                     ▼
+<a id="__codelineno-6-22" name="__codelineno-6-22" href="#__codelineno-6-22"></a>                      [ZCode 渲染展示 Markdown 预览]
+</code></pre></div>
+<h3 id="1_4">1. 主控模型与生图后端解耦<a class="headerlink" href="#1_4" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>主控对话模型 (Chat Controller)</strong>：负责理解自然语言、优化扩展 Prompt，触发工具调用（如 <code>gemini-3.8-flash</code> / <code>gemini-3.7-flash</code>）；</li>
+<li><strong>生图后端 (Image Generation Backend)</strong>：负责计算并生成图片 Base64 数据（<code>gemini-3.1-flash-image</code>，即 Nano Banana 2）。</li>
+<li>无论主控模型使用的是哪个模型，只要挂载了生图 Skill，都能自由调用生图后端。</li>
+</ul>
+<h3 id="2-v1chatcompletions-v1imagesgenerations">2. 为什么走 <code>/v1/chat/completions</code> 而不是 <code>/v1/images/generations</code>？<a class="headerlink" href="#2-v1chatcompletions-v1imagesgenerations" title="Permanent link">&para;</a></h3>
+<p>Google 的 <code>gemini-3.1-flash-image</code> 在 Antigravity 中是作为多模态补全模型注册的。它不支持标准 OpenAI 的 <code>/v1/images/generations</code> 端点（调用会报 <code>400: Model is not supported on /v1/images/generations</code>），必须向 <code>/v1/chat/completions</code> 发起对话补全请求，并从返回结果的 <code>choices[0].message.images</code> 数组中提取 <code>data:image/jpeg;base64</code> 编码。</p>
+<h3 id="3-gemini-image-gen-skill">3. 创建 <code>gemini-image-gen</code> Skill<a class="headerlink" href="#3-gemini-image-gen-skill" title="Permanent link">&para;</a></h3>
+<p>在 ZCode 用户全局技能目录 <code>~/.zcode/skills/gemini-image-gen/</code>（或项目级目录）下创建两份文件：</p>
+<h4 id="1-skillmd-agent">(1) <code>SKILL.md</code>（向 Agent 注册调用规范）<a class="headerlink" href="#1-skillmd-agent" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>---
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>name: gemini-image-gen
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="gu">description: Use this skill whenever the user asks to generate, draw, paint, or render an image, illustration, anime art, or photo using Google Gemini / Imagen 3 backend.</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="gu">---</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="gh"># Gemini Image Generation Skill</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>Use this skill to generate high quality images using Google's Imagen 3 / Gemini Image API and save them directly to the local workspace.
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="gu">## How to execute</span>
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>Run the generation script via Bash tool:
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>
+<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>```bash
+<a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a>python "C:/Users/&lt;用户名&gt;/.zcode/skills/gemini-image-gen/generate_image.py" --prompt "YOUR_DETAILED_PROMPT" --output-dir "generated_images" --output-name "custom_name"
+</code></pre></div>
+<h3 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>--prompt</code> (必填): 详细的英文提示词，包含主体、画风、材质、光影及构图。</li>
+<li><code>--output-dir</code>: 保存目标文件夹（默认 <code>./generated_images</code>）。</li>
+<li><code>--output-name</code>: 自定义保存文件名（不含扩展名）。</li>
+<li><code>--model</code>: 默认为 <code>gemini-3.1-flash-image</code>。</li>
+</ul>
+<h3 id="when-executing">When Executing<a class="headerlink" href="#when-executing" title="Permanent link">&para;</a></h3>
+<ol>
+<li>调用系统命令执行上述脚本。</li>
+<li>读取脚本输出的 JSON 结果。</li>
+<li>成功后以 Markdown 图片/链接格式返回给用户展示：<code>![image](path/to/image.jpg)</code>。
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>#### (2) `generate_image.py`（请求网关并保存图片）
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>```python
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>#!/usr/bin/env python3
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a># -*- coding: utf-8 -*-
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>"""
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>Gemini / Nano Banana 2 Image Generation Script for EasyCLIProxyAPI Bridge
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>"""
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>import os
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>import sys
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>import json
+<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>import base64
+<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>import argparse
+<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a>from datetime import datetime
+<a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a>import requests
+<a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a>
+<a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a>LOCAL_BRIDGE_URL = "http://127.0.0.1:18080"
+<a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a>LOCAL_BRIDGE_KEY = "wY5Xr4HVPT3BZivioFX2L_3XhXdFfU8QBjT_Ff4xGJ0"
+<a id="__codelineno-8-19" name="__codelineno-8-19" href="#__codelineno-8-19"></a>
+<a id="__codelineno-8-20" name="__codelineno-8-20" href="#__codelineno-8-20"></a>def generate_via_antigravity(prompt, base_url, api_key, model="gemini-3.1-flash-image", timeout=60):
+<a id="__codelineno-8-21" name="__codelineno-8-21" href="#__codelineno-8-21"></a>    url = f"{base_url}/v1/chat/completions"
+<a id="__codelineno-8-22" name="__codelineno-8-22" href="#__codelineno-8-22"></a>    headers = {
+<a id="__codelineno-8-23" name="__codelineno-8-23" href="#__codelineno-8-23"></a>        "Authorization": f"Bearer {api_key}",
+<a id="__codelineno-8-24" name="__codelineno-8-24" href="#__codelineno-8-24"></a>        "Content-Type": "application/json"
+<a id="__codelineno-8-25" name="__codelineno-8-25" href="#__codelineno-8-25"></a>    }
+<a id="__codelineno-8-26" name="__codelineno-8-26" href="#__codelineno-8-26"></a>    payload = {
+<a id="__codelineno-8-27" name="__codelineno-8-27" href="#__codelineno-8-27"></a>        "model": model,
+<a id="__codelineno-8-28" name="__codelineno-8-28" href="#__codelineno-8-28"></a>        "messages": [{"role": "user", "content": prompt}]
+<a id="__codelineno-8-29" name="__codelineno-8-29" href="#__codelineno-8-29"></a>    }
+<a id="__codelineno-8-30" name="__codelineno-8-30" href="#__codelineno-8-30"></a>    response = requests.post(url, json=payload, headers=headers, timeout=timeout)
+<a id="__codelineno-8-31" name="__codelineno-8-31" href="#__codelineno-8-31"></a>    if response.status_code != 200:
+<a id="__codelineno-8-32" name="__codelineno-8-32" href="#__codelineno-8-32"></a>        raise Exception(f"Antigravity Bridge Error ({response.status_code}): {response.text}")
+<a id="__codelineno-8-33" name="__codelineno-8-33" href="#__codelineno-8-33"></a>
+<a id="__codelineno-8-34" name="__codelineno-8-34" href="#__codelineno-8-34"></a>    data = response.json()
+<a id="__codelineno-8-35" name="__codelineno-8-35" href="#__codelineno-8-35"></a>    choices = data.get("choices", [])
+<a id="__codelineno-8-36" name="__codelineno-8-36" href="#__codelineno-8-36"></a>    if not choices:
+<a id="__codelineno-8-37" name="__codelineno-8-37" href="#__codelineno-8-37"></a>        raise Exception("No choices returned by Antigravity Bridge")
+<a id="__codelineno-8-38" name="__codelineno-8-38" href="#__codelineno-8-38"></a>
+<a id="__codelineno-8-39" name="__codelineno-8-39" href="#__codelineno-8-39"></a>    msg = choices[0].get("message", {})
+<a id="__codelineno-8-40" name="__codelineno-8-40" href="#__codelineno-8-40"></a>    images = []
+<a id="__codelineno-8-41" name="__codelineno-8-41" href="#__codelineno-8-41"></a>
+<a id="__codelineno-8-42" name="__codelineno-8-42" href="#__codelineno-8-42"></a>    # 提取 choices[0].message.images 中的 Base64
+<a id="__codelineno-8-43" name="__codelineno-8-43" href="#__codelineno-8-43"></a>    if "images" in msg and msg["images"]:
+<a id="__codelineno-8-44" name="__codelineno-8-44" href="#__codelineno-8-44"></a>        for img_obj in msg["images"]:
+<a id="__codelineno-8-45" name="__codelineno-8-45" href="#__codelineno-8-45"></a>            url_val = img_obj.get("image_url", {}).get("url", "")
+<a id="__codelineno-8-46" name="__codelineno-8-46" href="#__codelineno-8-46"></a>            if url_val.startswith("data:image"):
+<a id="__codelineno-8-47" name="__codelineno-8-47" href="#__codelineno-8-47"></a>                header, b64_data = url_val.split(",", 1)
+<a id="__codelineno-8-48" name="__codelineno-8-48" href="#__codelineno-8-48"></a>                mime = "image/jpeg" if "jpeg" in header or "jpg" in header else "image/png"
+<a id="__codelineno-8-49" name="__codelineno-8-49" href="#__codelineno-8-49"></a>                images.append((base64.b64decode(b64_data), mime))
+<a id="__codelineno-8-50" name="__codelineno-8-50" href="#__codelineno-8-50"></a>            elif url_val.startswith("http"):
+<a id="__codelineno-8-51" name="__codelineno-8-51" href="#__codelineno-8-51"></a>                r = requests.get(url_val, timeout=30)
+<a id="__codelineno-8-52" name="__codelineno-8-52" href="#__codelineno-8-52"></a>                images.append((r.content, "image/jpeg"))
+<a id="__codelineno-8-53" name="__codelineno-8-53" href="#__codelineno-8-53"></a>
+<a id="__codelineno-8-54" name="__codelineno-8-54" href="#__codelineno-8-54"></a>    if not images:
+<a id="__codelineno-8-55" name="__codelineno-8-55" href="#__codelineno-8-55"></a>        raise Exception(f"No image was generated. Model reply: {msg.get('content')}")
+<a id="__codelineno-8-56" name="__codelineno-8-56" href="#__codelineno-8-56"></a>
+<a id="__codelineno-8-57" name="__codelineno-8-57" href="#__codelineno-8-57"></a>    return images
+<a id="__codelineno-8-58" name="__codelineno-8-58" href="#__codelineno-8-58"></a>
+<a id="__codelineno-8-59" name="__codelineno-8-59" href="#__codelineno-8-59"></a>def main():
+<a id="__codelineno-8-60" name="__codelineno-8-60" href="#__codelineno-8-60"></a>    parser = argparse.ArgumentParser(description="Generate images via Gemini / Antigravity Bridge")
+<a id="__codelineno-8-61" name="__codelineno-8-61" href="#__codelineno-8-61"></a>    parser.add_argument("--prompt", "-p", required=True, help="Image generation prompt")
+<a id="__codelineno-8-62" name="__codelineno-8-62" href="#__codelineno-8-62"></a>    parser.add_argument("--model", "-m", default="gemini-3.1-flash-image", help="Model name")
+<a id="__codelineno-8-63" name="__codelineno-8-63" href="#__codelineno-8-63"></a>    parser.add_argument("--output-dir", "-o", default="generated_images", help="Output directory")
+<a id="__codelineno-8-64" name="__codelineno-8-64" href="#__codelineno-8-64"></a>    parser.add_argument("--output-name", "-n", default=None, help="Output file name")
+<a id="__codelineno-8-65" name="__codelineno-8-65" href="#__codelineno-8-65"></a>    parser.add_argument("--base-url", default=LOCAL_BRIDGE_URL, help="Antigravity bridge base URL")
+<a id="__codelineno-8-66" name="__codelineno-8-66" href="#__codelineno-8-66"></a>    parser.add_argument("--api-key", "-k", default=LOCAL_BRIDGE_KEY, help="Antigravity bridge API key")
+<a id="__codelineno-8-67" name="__codelineno-8-67" href="#__codelineno-8-67"></a>
+<a id="__codelineno-8-68" name="__codelineno-8-68" href="#__codelineno-8-68"></a>    args = parser.parse_args()
+<a id="__codelineno-8-69" name="__codelineno-8-69" href="#__codelineno-8-69"></a>    os.makedirs(args.output_dir, exist_ok=True)
+<a id="__codelineno-8-70" name="__codelineno-8-70" href="#__codelineno-8-70"></a>
+<a id="__codelineno-8-71" name="__codelineno-8-71" href="#__codelineno-8-71"></a>    try:
+<a id="__codelineno-8-72" name="__codelineno-8-72" href="#__codelineno-8-72"></a>        images = generate_via_antigravity(args.prompt, args.base_url, args.api_key, model=args.model)
+<a id="__codelineno-8-73" name="__codelineno-8-73" href="#__codelineno-8-73"></a>        saved_paths = []
+<a id="__codelineno-8-74" name="__codelineno-8-74" href="#__codelineno-8-74"></a>        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+<a id="__codelineno-8-75" name="__codelineno-8-75" href="#__codelineno-8-75"></a>        for i, (img_bytes, mime) in enumerate(images):
+<a id="__codelineno-8-76" name="__codelineno-8-76" href="#__codelineno-8-76"></a>            ext = "png" if "png" in mime else "jpg"
+<a id="__codelineno-8-77" name="__codelineno-8-77" href="#__codelineno-8-77"></a>            filename = f"{args.output_name}.{ext}" if args.output_name else f"gemini_image_{timestamp}_{i+1}.{ext}"
+<a id="__codelineno-8-78" name="__codelineno-8-78" href="#__codelineno-8-78"></a>            filepath = os.path.abspath(os.path.join(args.output_dir, filename))
+<a id="__codelineno-8-79" name="__codelineno-8-79" href="#__codelineno-8-79"></a>            with open(filepath, "wb") as f:
+<a id="__codelineno-8-80" name="__codelineno-8-80" href="#__codelineno-8-80"></a>                f.write(img_bytes)
+<a id="__codelineno-8-81" name="__codelineno-8-81" href="#__codelineno-8-81"></a>            saved_paths.append(filepath)
+<a id="__codelineno-8-82" name="__codelineno-8-82" href="#__codelineno-8-82"></a>
+<a id="__codelineno-8-83" name="__codelineno-8-83" href="#__codelineno-8-83"></a>        print(json.dumps({
+<a id="__codelineno-8-84" name="__codelineno-8-84" href="#__codelineno-8-84"></a>            "status": "success",
+<a id="__codelineno-8-85" name="__codelineno-8-85" href="#__codelineno-8-85"></a>            "model": args.model,
+<a id="__codelineno-8-86" name="__codelineno-8-86" href="#__codelineno-8-86"></a>            "prompt": args.prompt,
+<a id="__codelineno-8-87" name="__codelineno-8-87" href="#__codelineno-8-87"></a>            "images": saved_paths
+<a id="__codelineno-8-88" name="__codelineno-8-88" href="#__codelineno-8-88"></a>        }, ensure_ascii=False, indent=2))
+<a id="__codelineno-8-89" name="__codelineno-8-89" href="#__codelineno-8-89"></a>
+<a id="__codelineno-8-90" name="__codelineno-8-90" href="#__codelineno-8-90"></a>    except Exception as e:
+<a id="__codelineno-8-91" name="__codelineno-8-91" href="#__codelineno-8-91"></a>        print(json.dumps({
+<a id="__codelineno-8-92" name="__codelineno-8-92" href="#__codelineno-8-92"></a>            "status": "error",
+<a id="__codelineno-8-93" name="__codelineno-8-93" href="#__codelineno-8-93"></a>            "error_type": "GENERATION_FAILED",
+<a id="__codelineno-8-94" name="__codelineno-8-94" href="#__codelineno-8-94"></a>            "message": str(e)
+<a id="__codelineno-8-95" name="__codelineno-8-95" href="#__codelineno-8-95"></a>        }, ensure_ascii=False, indent=2))
+<a id="__codelineno-8-96" name="__codelineno-8-96" href="#__codelineno-8-96"></a>        sys.exit(1)
+<a id="__codelineno-8-97" name="__codelineno-8-97" href="#__codelineno-8-97"></a>
+<a id="__codelineno-8-98" name="__codelineno-8-98" href="#__codelineno-8-98"></a>if __name__ == "__main__":
+<a id="__codelineno-8-99" name="__codelineno-8-99" href="#__codelineno-8-99"></a>    main()
+</code></pre></div></li>
+</ol>
+<h2 id="_2">六、 全流程避坑与常见故障速查表（血泪经验汇编）<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -5027,6 +5347,21 @@
 <td style="text-align: left;">内存防抖缓存瞬间命中，且界面缺乏加载动画与完成时间戳。</td>
 <td style="text-align: left;">后端增加 <code>?force=1</code> 穿透参数；前端配套 SVG 旋转 Spinner、<code>✓ 已刷新</code> 徽章变形与 Toast 弹窗反馈。</td>
 </tr>
+<tr>
+<td style="text-align: left;"><strong><code>400: Model is not supported on /v1/images/generations</code></strong></td>
+<td style="text-align: left;">Antigravity 桥接中的 <code>gemini-3.1-flash-image</code> 是对话多模态格式，不支持标准 OpenAI 生图端点。</td>
+<td style="text-align: left;">将请求端点由 <code>/v1/images/generations</code> 改为 <code>/v1/chat/completions</code>，并在返回的 <code>choices[0].message.images</code> 中提取 Base64。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>400: User location is not supported for the API use</code></strong></td>
+<td style="text-align: left;">直连 Google AI Studio 时，国内出口代理 IP 处于未获支持的地区。</td>
+<td style="text-align: left;">通过本地 EasyCLIProxyAPI 网关桥接服务中转，自动规避原生地域检测。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>401: Invalid API key</code></strong></td>
+<td style="text-align: left;">生图脚本中的 API Key 与网关 <code>config.toml</code> 或 <code>config.yaml</code> 的 <code>api-keys</code> 不匹配。</td>
+<td style="text-align: left;">统一提取网关中配置的明文密钥（如 <code>wY5Xr4HVPT3BZivioFX2L_3XhXdFfU8QBjT_Ff4xGJ0</code>）。</td>
+</tr>
 </tbody>
 </table>
 
@@ -5051,7 +5386,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年9月4日 06:55:20 UTC">2026年9月4日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年9月4日 07:11:10 UTC">2026年9月4日</span>
   </span>
 
     
