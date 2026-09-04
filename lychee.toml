@@ -47,5 +47,7 @@ exclude = [
   'https://cn\.game-console\.org/',
   # 2026-08-29 起对 CI runner 返回 412(反爬前置校验,本地可达),见台账
   'https://www\.bilibili\.com/',
-  'https://b23\.tv/',
+  'https://b23\\.tv/',
+  # 2026-09-04 起 Cloudflare 防护对 CI runner 返回 503/限流
+  'https://www\\.bleepingcomputer\\.com/',
 ]

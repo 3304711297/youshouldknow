@@ -41,5 +41,6 @@
 | www.digitalfoundry.net | 2026-08-29 访问 403（DLSS 4.5 Preset L 实测文，2026-08-28 核查时可达；封锁呈间歇性） | 2026-08-29 建档（内容 2026-08-28 核查属实） |
 | cn.game-console.org | 2026-08-29 CI runner 访问 403（电源计划社区资料站） | 2026-08-29 建档（内容此前核查属实） |
 | www.bilibili.com / b23.tv | 2026-08-29 起对 CI runner 返回 412（反爬前置校验，本地经代理可达），涉及视频引用多处 | 2026-08-29 建档（B 站为视频源主域，人工复核时直接浏览器打开即可） |
+| www.bleepingcomputer.com | 2026-09-04 起 Cloudflare 防护对 CI runner 返回 503 与 1h 速率惩罚（本地浏览器可达） | 2026-09-04 建档（Windows 11 绕过 MSA 报道核查属实） |
 
 **2026-08-29 备注**：当日出现跨站点批量封锁潮（tomshardware → techcommunity → asus → digitalfoundry → game-console 依次暴露），均为 403 拦爬虫性质，已按上表逐个建档；如后续 CI 仍零星暴露新域名，继续按本台账机制处理即可。
