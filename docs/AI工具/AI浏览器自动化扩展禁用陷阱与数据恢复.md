@@ -94,6 +94,19 @@ chrome-devtools-mcp 官方提供了忽略单个默认参数的选项：
 
 建议所有会把 `--user-data-dir` 指向真实配置目录的自动化配置都加这一参数。另有一个整体开关 `--ignore-default-chrome-args`（复数）可忽略全部默认参数，粒度更粗、需自行补齐必要参数，一般用单项形式即可。
 
+### 补充：Hermes Agent 原生浏览器工具防护
+
+在使用 Hermes Agent 内置的浏览器自动化工具（`browser_tool.py` / `browser_exec`）时，若在 `config.yaml` 中配置了 `browser.use_real_profile: true`，控制器会自动快照用户的真实 Edge/Chrome 配置文件并拉起临时 Chromium 实例。该实例携带 `--disable-background-networking`、`--disable-default-apps` 等参数，在退出时极易将无扩展运行的内存配置写回，导致日常浏览器的 `extensions.settings` 再次清空。
+
+**防灾设置**：在 Hermes 的 `config.yaml` 中明确设置：
+
+```yaml
+browser:
+  use_real_profile: false
+```
+
+确保 Agent 的浏览器自动化任务完全运行在隔离沙箱中，彻底阻断对日常浏览器配置目录与扩展注册表的触碰风险。
+
 ## 五、关联故障：浏览器点开没反应（lockfile 占用）
 
 自动化测试中断（进程被强杀、会话异常退出）常留下两类残留，二者都会导致浏览器**点击图标后无窗口**：
