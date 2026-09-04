@@ -9,9 +9,9 @@ tweak_module: []
 
 # EasyCLIProxyAPI 本地网关架构与多智能体客户端适配
 
-> 本文目标：梳理本地大模型网关从非官方分叉（如 ZCode-Antigravity）向官方稳定核心（EasyCLIProxyAPI 7.2.149+）迁移的演进历程；解析 Windows 环境下智能体客户端探查机制、NTFS 目录联接（Junction）适配技巧，以及管理接口防爆破封禁安全原则。
+> 本文目标：全面梳理本地大模型网关从非官方分叉（ZCode-Antigravity）向官方稳定核心（EasyCLIProxyAPI 7.2.149+）迁移的演进历程；详解 **Hermes Agent** 与 **ZCode** 双端接入使用 Gemini 3.8/3.7 Flash 的完整配置步骤、关键配置文件、避坑指南与常见故障速查表。
 >
-> 实测环境：Windows 11 / EasyCLIProxyAPI 0.2.71 (Core 7.2.149) / Hermes Agent / ZCode 客户端。
+> 实测环境：Windows 11 / EasyCLIProxyAPI 0.2.71 (Core 7.2.149) / Hermes Agent / ZCode 客户端 / Google AI Pro 个人订阅。
 
 ## 一、 本地模型网关的架构演进
 
@@ -19,7 +19,7 @@ tweak_module: []
 
 ```text
                ┌───────────────────────┐
-               │     Hermes Agent      │ (OpenAI 协议 / 18080)
+               │     Hermes Agent      │ (OpenAI 兼容协议 / 18080)
                └───────────┬───────────┘
                            │
                            ▼
@@ -77,16 +77,158 @@ mklink /J "%ProgramFiles%\ZCode" "D:\zcode"
 - `mklink /J` 是 Windows 文件系统底层的硬链接变种（Junction Point），不占额外磁盘空间，对所有应用程序 100% 透明；
 - 建立联接后，控制台在标准路径即可瞬间探测到 `ZCode.exe`，版本信息立刻正常显示，“无法启动”按钮随之恢复为正常启动控制。
 
-## 三、 管理接口（Management API）防爆破安全机制
+## 三、 Hermes Agent 接入使用 Gemini 配置实战
 
-在将外部状态微件接入本地网关时，极易踩入的一个大坑是**触发服务端的自动 IP 封禁**。
+Hermes Agent 底层采用标准 OpenAI 兼容格式对接本地网关，主要通过配置文件 `~/.hermes/config.yaml` 管理。
 
-### 1. 封禁机制剖析
-EasyCLIProxyAPI 核心的 `/v0/management/` 路由是高权限管理接口，其安全策略如下：
-1. **密钥隔离**：管理接口必须使用 `remote-management.secret-key` 鉴权，且该密钥在启动时会被 bcrypt 哈希化存盘；
-2. **防爆破计时器**：如果外部客户端使用错误密钥（例如误用普通的 API Key，或使用旧版网关密码）连续发起管理请求，服务端会立刻判定为恶意暴力破解；
-3. **本地 IP 熔断**：一旦触发阈值，服务端会对调用源 IP（通常是 `127.0.0.1`）施加**长达 30 分钟的全面拉黑（HTTP 403: IP banned due to too many failed attempts）**。在此期间，任何合法的管理请求也会被一并拒绝。
+### 1. 主模型与辅助模型配置
+在 `config.yaml` 中配置默认主力模型与提供商：
 
-### 2. 安全使用原则
-- **数据面与管理面分离**：获取配额等公开状态信息时，优先使用直接读取凭据并请求官方 API 的独立微服务方式，严禁让无权限的前端插件高频轮询管理接口；
-- **配置与凭据解耦**：管理端口的 `secret-key` 切勿暴露给不可信的渲染层或前端脚本。
+```yaml
+model:
+  default: gemini-3.8-flash
+  provider: cpa-gui
+  base_url: http://127.0.0.1:18080/v1
+
+auxiliary:
+  vision:
+    provider: cpa-gui
+    model: gemini-3.8-flash
+
+agent:
+  reasoning_effort: ultra # 开启 Gemini 3.8 Flash Ultra 思考链
+```
+
+### 2. 自定义提供商注册 (`custom_providers`)
+确保在 `custom_providers` 列表内注册统一且唯一的 `cpa-gui` 项：
+
+```yaml
+custom_providers:
+  - name: cpa-gui
+    base_url: http://127.0.0.1:18080/v1
+    api_key: wY5Xr4HVPT3BZivioFX2L_3XhXdFfU8QBjT_Ff4xGJ0 # 取自 EasyCLIProxyAPI 的 api-keys
+    api_mode: chat_completions
+    model: gemini-3.8-flash
+    models_discovered: true
+    models:
+      gemini-3.8-flash: {}
+      gemini-3.7-flash: {}
+      gemini-3.6-flash: {}
+      gemini-3.1-pro-low: {}
+      gemini-web-search: {}
+      claude-sonnet-4-6: {}
+      claude-opus-4-6-thinking: {}
+      gpt-oss-120b-medium: {}
+```
+
+### 3. 注意点与防坑准则
+- **严禁重复定义提供商**：旧版配置常遗留 `Local (127.0.0.1:18080)`。若与 `cpa-gui` 同时存在，二者打向同一端口，会导致桌面 GUI 的模型下拉框内出现两套完全重合的模型列表。必须清理掉冗余项；
+- **凭据池同步清理**：编辑 `config.yaml` 去除重复项后，需同步检查 `~/.hermes/auth.json` 中的 `credential_pool`，删除废弃条目；
+- **浏览器沙箱强制隔离**：配置 `browser.use_real_profile: false`，避免 Agent 浏览器操作污染甚至清空日常 Edge/Chrome 的扩展注册表。
+
+## 四、 ZCode 客户端接入使用 Gemini 配置实战
+
+ZCode 客户端与 OpenAI 格式不同，其底层采用的是 **Anthropic Messages 协议（`/v1/messages`）**。EasyCLIProxyAPI 官方核心原生支持此格式转换。
+
+### 1. 配置文件双层定位
+ZCode 的配置分为两层，建议同步配置：
+1. **全局默认配置**：`C:\Users\<用户名>\.zcode\v2\config.json`
+2. **工作区定制配置**：`<项目根目录>\.zcode\v2\config.json`（若存在）
+
+### 2. 提供商注入 (`zcode-antigravity-local`)
+在 `config.json` 的 `provider` 字典中注入 Google 本地网关节点：
+
+```json
+{
+  "provider": {
+    "zcode-antigravity-local": {
+      "name": "Google",
+      "kind": "anthropic",
+      "options": {
+        "apiKey": "wY5Xr4HVPT3BZivioFX2L_3XhXdFfU8QBjT_Ff4xGJ0",
+        "baseURL": "http://127.0.0.1:18080",
+        "apiKeyRequired": true
+      },
+      "enabled": true,
+      "source": "custom",
+      "x-zcode-antigravity-managed": 1,
+      "models": {
+        "gemini-3.8-flash": {
+          "name": "Gemini 3.8 Flash",
+          "limit": { "context": 1048576 },
+          "modalities": {
+            "input": ["text", "image", "audio", "video"],
+            "output": ["text"]
+          },
+          "reasoning": {
+            "enabled": true,
+            "variants": ["low", "medium", "high"],
+            "defaultVariant": "high"
+          },
+          "zcode": { "priority": 200 }
+        },
+        "gemini-3.7-flash": {
+          "name": "Gemini 3.7 Flash",
+          "limit": { "context": 1048576 },
+          "modalities": {
+            "input": ["text", "image", "audio", "video"],
+            "output": ["text"]
+          },
+          "reasoning": {
+            "enabled": true,
+            "variants": ["low", "medium", "high"],
+            "defaultVariant": "high"
+          },
+          "zcode": { "priority": 201 }
+        },
+        "gemini-3.1-pro-low": {
+          "name": "Gemini 3.1 Pro (Low)",
+          "limit": { "context": 1048576 },
+          "modalities": {
+            "input": ["text", "image", "audio", "video"],
+            "output": ["text"]
+          },
+          "reasoning": { "enabled": true, "variants": ["low", "medium", "high"], "defaultVariant": "low" },
+          "zcode": { "priority": 203 }
+        },
+        "gemini-web-search": {
+          "name": "Gemini Web Search (Google)",
+          "limit": { "context": 1048576 },
+          "modalities": {
+            "input": ["text", "image", "audio", "video"],
+            "output": ["text"]
+          },
+          "zcode": { "priority": 204 }
+        }
+      }
+    }
+  }
+}
+```
+
+### 3. 模型列表置顶展示
+在 `~/.zcode/v2/model-provider-display-order.json` 中，将 `"zcode-antigravity-local"` 放置在 `providerIds` 数组的**首位**：
+
+```json
+{
+  "providerIds": [
+    "zcode-antigravity-local",
+    "builtin:bigmodel",
+    "builtin:zai"
+  ]
+}
+```
+
+这样启动 ZCode 后，顶部模型下拉框首项即为 Google 官方 Gemini 全系模型。
+
+## 五、 全流程避坑与常见故障速查表（血泪经验汇编）
+
+| 故障现象 | 触发时机 / 原因 | 避坑方案与解决对策 |
+| :--- | :--- | :--- |
+| **HTTP 500 后变 503 `auth_unavailable`** | 本地直接裸 `go build` 编译 CLIProxyAPI 二进制，丢失了官方发布期通过 `-X ldflags` 注入的 OAuth Client 凭据。 | **严禁用本地裸构建覆盖官方核心**。直接使用 EasyCLIProxyAPI 官方预编译的 `cpa-core\cli-proxy-api.exe`（7.2.149+）。 |
+| **“只检测到配置文件，未检测到客户端”** | EasyCLIProxyAPI 控制台硬编码探查系统盘规范路径，而 ZCode 安装在 `D:\zcode`。 | 在 `%LOCALAPPDATA%\Programs\ZCode` 与 `%ProgramFiles%\ZCode` 建立 NTFS 目录联接（`mklink /J`）。 |
+| **Hermes 模型下拉列表重复翻倍** | `config.yaml` 中同时保留了旧网关名称（`Local (127.0.0.1:18080)`）与新网关名称（`cpa-gui`）。 | 清理 `config.yaml` 与 `auth.json`，统一规范化为单实例 `cpa-gui`。 |
+| **日常浏览器扩展和脚本全清空** | Hermes 开启了 `browser.use_real_profile: true`，自动化实例退出时把无扩展加载的内存状态写回了日常配置。 | 在 `config.yaml` 中明确设置 `browser.use_real_profile: false`，彻底沙箱化。 |
+| **两端查看的 Google 配额完全不一致** | 通用 Google 生产端点 `cloudcode-pa` 与 Antigravity 专有端点 `daily-cloudcode-pa` 属于云端解耦配额池。 | 查询 Antigravity 实际调用消耗时，**必须指定 `daily-cloudcode-pa.googleapis.com` 端点**。 |
+| **HTTP 403: IP banned due to too many failed attempts** | 前端微件使用普通 API Key 频繁轮询 `/v0/management/` 高权限管理接口，触发了防爆破 30 分钟 IP 熔断。 | 数据面与管理面隔离；获取配额改走本地轻量 Python 微服务，绝不高频撞击管理接口。 |
+| **刷新配额点击无反应 / 误以为卡死** | 内存防抖缓存瞬间命中，且界面缺乏加载动画与完成时间戳。 | 后端增加 `?force=1` 穿透参数；前端配套 SVG 旋转 Spinner、`✓ 已刷新` 徽章变形与 Toast 弹窗反馈。 |
