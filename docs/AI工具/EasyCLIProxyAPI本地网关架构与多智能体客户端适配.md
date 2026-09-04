@@ -3,13 +3,14 @@ applies_to:
   - Windows 10/11
   - EasyCLIProxyAPI 使用者
   - Hermes Agent / ZCode / Claude Code / Codex 多智能体用户
+  - Google Gemini (gemini-3.8-flash / gemini-3.7-flash / gemini-3.1-flash-image / Nano Banana 2)
 risk: low
 tweak_module: []
 ---
 
 # EasyCLIProxyAPI 本地网关架构与多智能体客户端适配
 
-> 本文目标：全面梳理本地大模型网关从非官方分叉（ZCode-Antigravity）向官方稳定核心（EasyCLIProxyAPI 7.2.149+）迁移的演进历程；详解 **Hermes Agent** 与 **ZCode** 双端接入使用 Gemini 3.8/3.7 Flash 的完整配置步骤、关键配置文件、避坑指南与常见故障速查表。
+> 本文目标：全面梳理本地大模型网关从非官方分叉（ZCode-Antigravity）向官方稳定核心（EasyCLIProxyAPI 7.2.149+）迁移的演进历程；详解 **Hermes Agent** 与 **ZCode** 双端接入使用 Gemini 3.8/3.7 Flash 对话推理、多模态文生图 Skill（`gemini-3.1-flash-image` / Nano Banana 2）的完整配置步骤、关键配置文件、避坑指南与全流程故障速查表。
 >
 > 实测环境：Windows 11 / EasyCLIProxyAPI 0.2.71 (Core 7.2.149) / Hermes Agent / ZCode 客户端 / Google AI Pro 个人订阅。
 
@@ -207,7 +208,7 @@ ZCode 的配置分为两层，建议同步配置：
 ```
 
 ### 3. 模型列表置顶展示
-在 `~/.zcode/v2/model-provider-display-order.json` 中，将 `"zcode-antigravity-local"` 放置在 `providerIds` 数组的**首位**：
+在 `~/.zcode/v2/model-provider-display-order.json` 中，将 `\"zcode-antigravity-local\"` 放置在 `providerIds` 数组的**首位**：
 
 ```json
 {
@@ -221,7 +222,179 @@ ZCode 的配置分为两层，建议同步配置：
 
 这样启动 ZCode 后，顶部模型下拉框首项即为 Google 官方 Gemini 全系模型。
 
-## 五、 全流程避坑与常见故障速查表（血泪经验汇编）
+## 五、 多模态扩展：ZCode 接入 Gemini 原生生图 Skill (`gemini-3.1-flash-image` / Nano Banana 2)
+
+很多用户在配置了 Gemini 模型后，让智能体画图却发现智能体只输出文字描述，甚至产生幻觉。这是由于 Tool-Calling 机制与模型多模态能力脱节导致的。
+
+```text
+[用户发出画图指令]
+        │
+        ▼
+[ZCode Agent] ──(自动触发)──> [Skill: gemini-image-gen]
+                                     │
+                                     ▼ (执行 Python 脚本)
+                      [generate_image.py]
+                                     │
+                                     ▼ (POST /v1/chat/completions)
+                   [EasyCLIProxyAPI 网关] (http://127.0.0.1:18080)
+                                     │
+                                     ▼ (调用 Google 远端接口)
+                         [gemini-3.1-flash-image]
+                                     │
+                                     ▼ (返回包含 data:image/jpeg;base64 的 JSON)
+                      [Python 脚本解码并保存]
+                                     │
+                                     ▼
+                   [本地文件: ./generated_images/xxx.jpg]
+                                     │
+                                     ▼
+                      [ZCode 渲染展示 Markdown 预览]
+```
+
+### 1. 主控模型与生图后端解耦
+- **主控对话模型 (Chat Controller)**：负责理解自然语言、优化扩展 Prompt，触发工具调用（如 `gemini-3.8-flash` / `gemini-3.7-flash`）；
+- **生图后端 (Image Generation Backend)**：负责计算并生成图片 Base64 数据（`gemini-3.1-flash-image`，即 Nano Banana 2）。
+- 无论主控模型使用的是哪个模型，只要挂载了生图 Skill，都能自由调用生图后端。
+
+### 2. 为什么走 `/v1/chat/completions` 而不是 `/v1/images/generations`？
+Google 的 `gemini-3.1-flash-image` 在 Antigravity 中是作为多模态补全模型注册的。它不支持标准 OpenAI 的 `/v1/images/generations` 端点（调用会报 `400: Model is not supported on /v1/images/generations`），必须向 `/v1/chat/completions` 发起对话补全请求，并从返回结果的 `choices[0].message.images` 数组中提取 `data:image/jpeg;base64` 编码。
+
+### 3. 创建 `gemini-image-gen` Skill
+在 ZCode 用户全局技能目录 `~/.zcode/skills/gemini-image-gen/`（或项目级目录）下创建两份文件：
+
+#### (1) `SKILL.md`（向 Agent 注册调用规范）
+```markdown
+---
+name: gemini-image-gen
+description: Use this skill whenever the user asks to generate, draw, paint, or render an image, illustration, anime art, or photo using Google Gemini / Imagen 3 backend.
+---
+
+# Gemini Image Generation Skill
+
+Use this skill to generate high quality images using Google's Imagen 3 / Gemini Image API and save them directly to the local workspace.
+
+## How to execute
+
+Run the generation script via Bash tool:
+
+```bash
+python "C:/Users/<用户名>/.zcode/skills/gemini-image-gen/generate_image.py" --prompt "YOUR_DETAILED_PROMPT" --output-dir "generated_images" --output-name "custom_name"
+```
+
+### Parameters
+- `--prompt` (必填): 详细的英文提示词，包含主体、画风、材质、光影及构图。
+- `--output-dir`: 保存目标文件夹（默认 `./generated_images`）。
+- `--output-name`: 自定义保存文件名（不含扩展名）。
+- `--model`: 默认为 `gemini-3.1-flash-image`。
+
+### When Executing
+1. 调用系统命令执行上述脚本。
+2. 读取脚本输出的 JSON 结果。
+3. 成功后以 Markdown 图片/链接格式返回给用户展示：`![image](path/to/image.jpg)`。
+```
+
+#### (2) `generate_image.py`（请求网关并保存图片）
+```python
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Gemini / Nano Banana 2 Image Generation Script for EasyCLIProxyAPI Bridge
+"""
+
+import os
+import sys
+import json
+import base64
+import argparse
+from datetime import datetime
+import requests
+
+LOCAL_BRIDGE_URL = "http://127.0.0.1:18080"
+LOCAL_BRIDGE_KEY = "wY5Xr4HVPT3BZivioFX2L_3XhXdFfU8QBjT_Ff4xGJ0"
+
+def generate_via_antigravity(prompt, base_url, api_key, model="gemini-3.1-flash-image", timeout=60):
+    url = f"{base_url}/v1/chat/completions"
+    headers = {
+        "Authorization": f"Bearer {api_key}",
+        "Content-Type": "application/json"
+    }
+    payload = {
+        "model": model,
+        "messages": [{"role": "user", "content": prompt}]
+    }
+    response = requests.post(url, json=payload, headers=headers, timeout=timeout)
+    if response.status_code != 200:
+        raise Exception(f"Antigravity Bridge Error ({response.status_code}): {response.text}")
+        
+    data = response.json()
+    choices = data.get("choices", [])
+    if not choices:
+        raise Exception("No choices returned by Antigravity Bridge")
+        
+    msg = choices[0].get("message", {})
+    images = []
+    
+    # 提取 choices[0].message.images 中的 Base64
+    if "images" in msg and msg["images"]:
+        for img_obj in msg["images"]:
+            url_val = img_obj.get("image_url", {}).get("url", "")
+            if url_val.startswith("data:image"):
+                header, b64_data = url_val.split(",", 1)
+                mime = "image/jpeg" if "jpeg" in header or "jpg" in header else "image/png"
+                images.append((base64.b64decode(b64_data), mime))
+            elif url_val.startswith("http"):
+                r = requests.get(url_val, timeout=30)
+                images.append((r.content, "image/jpeg"))
+                
+    if not images:
+        raise Exception(f"No image was generated. Model reply: {msg.get('content')}")
+        
+    return images
+
+def main():
+    parser = argparse.ArgumentParser(description="Generate images via Gemini / Antigravity Bridge")
+    parser.add_argument("--prompt", "-p", required=True, help="Image generation prompt")
+    parser.add_argument("--model", "-m", default="gemini-3.1-flash-image", help="Model name")
+    parser.add_argument("--output-dir", "-o", default="generated_images", help="Output directory")
+    parser.add_argument("--output-name", "-n", default=None, help="Output file name")
+    parser.add_argument("--base-url", default=LOCAL_BRIDGE_URL, help="Antigravity bridge base URL")
+    parser.add_argument("--api-key", "-k", default=LOCAL_BRIDGE_KEY, help="Antigravity bridge API key")
+    
+    args = parser.parse_args()
+    os.makedirs(args.output_dir, exist_ok=True)
+    
+    try:
+        images = generate_via_antigravity(args.prompt, args.base_url, args.api_key, model=args.model)
+        saved_paths = []
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        for i, (img_bytes, mime) in enumerate(images):
+            ext = "png" if "png" in mime else "jpg"
+            filename = f"{args.output_name}.{ext}" if args.output_name else f"gemini_image_{timestamp}_{i+1}.{ext}"
+            filepath = os.path.abspath(os.path.join(args.output_dir, filename))
+            with open(filepath, "wb") as f:
+                f.write(img_bytes)
+            saved_paths.append(filepath)
+            
+        print(json.dumps({
+            "status": "success",
+            "model": args.model,
+            "prompt": args.prompt,
+            "images": saved_paths
+        }, ensure_ascii=False, indent=2))
+        
+    except Exception as e:
+        print(json.dumps({
+            "status": "error",
+            "error_type": "GENERATION_FAILED",
+            "message": str(e)
+        }, ensure_ascii=False, indent=2))
+        sys.exit(1)
+
+if __name__ == "__main__":
+    main()
+```
+
+## 六、 全流程避坑与常见故障速查表（血泪经验汇编）
 
 | 故障现象 | 触发时机 / 原因 | 避坑方案与解决对策 |
 | :--- | :--- | :--- |
@@ -232,3 +405,6 @@ ZCode 的配置分为两层，建议同步配置：
 | **两端查看的 Google 配额完全不一致** | 通用 Google 生产端点 `cloudcode-pa` 与 Antigravity 专有端点 `daily-cloudcode-pa` 属于云端解耦配额池。 | 查询 Antigravity 实际调用消耗时，**必须指定 `daily-cloudcode-pa.googleapis.com` 端点**。 |
 | **HTTP 403: IP banned due to too many failed attempts** | 前端微件使用普通 API Key 频繁轮询 `/v0/management/` 高权限管理接口，触发了防爆破 30 分钟 IP 熔断。 | 数据面与管理面隔离；获取配额改走本地轻量 Python 微服务，绝不高频撞击管理接口。 |
 | **刷新配额点击无反应 / 误以为卡死** | 内存防抖缓存瞬间命中，且界面缺乏加载动画与完成时间戳。 | 后端增加 `?force=1` 穿透参数；前端配套 SVG 旋转 Spinner、`✓ 已刷新` 徽章变形与 Toast 弹窗反馈。 |
+| **`400: Model is not supported on /v1/images/generations`** | Antigravity 桥接中的 `gemini-3.1-flash-image` 是对话多模态格式，不支持标准 OpenAI 生图端点。 | 将请求端点由 `/v1/images/generations` 改为 `/v1/chat/completions`，并在返回的 `choices[0].message.images` 中提取 Base64。 |
+| **`400: User location is not supported for the API use`** | 直连 Google AI Studio 时，国内出口代理 IP 处于未获支持的地区。 | 通过本地 EasyCLIProxyAPI 网关桥接服务中转，自动规避原生地域检测。 |
+| **`401: Invalid API key`** | 生图脚本中的 API Key 与网关 `config.toml` 或 `config.yaml` 的 `api-keys` 不匹配。 | 统一提取网关中配置的明文密钥（如 `wY5Xr4HVPT3BZivioFX2L_3XhXdFfU8QBjT_Ff4xGJ0`）。 |

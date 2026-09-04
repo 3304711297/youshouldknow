@@ -72,6 +72,7 @@ plugins:
         '系统调优与安全/优化等级说明.md': '系统调优与安全/Windows优化原则与风险.md'
         '系统调优与安全/注册表优化原则.md': '系统调优与安全/Windows优化原则与风险.md'
         '系统调优与安全/Windows电源计划与性能调度.md': '系统知识/电源计划创建与优化指南.md'
+        'AI工具/ZCode接入Gemini生图Skill与Antigravity桥接指南.md': 'AI工具/EasyCLIProxyAPI本地网关架构与多智能体客户端适配.md'
 nav:
   - 首页: README.md
   - 验机相关:
@@ -173,7 +174,6 @@ nav:
   - AI工具:
     - AI工具/README.md
     - 让 AI 控制 Edge 浏览器：CDP 远程调试与 chrome-devtools-mcp 配置指南: AI工具/Edge浏览器CDP远程调试与AI接管指南.md
-    - ZCode 接入 Gemini 生图 Skill 与 Antigravity 桥接指南: AI工具/ZCode接入Gemini生图Skill与Antigravity桥接指南.md
     - AI 浏览器自动化的扩展禁用陷阱与数据恢复: AI工具/AI浏览器自动化扩展禁用陷阱与数据恢复.md
     - hermes-agent Windows 部署与本地模型桥接实战: AI工具/hermes-agent-Windows部署与本地模型桥接实战.md
     - Google Antigravity 与 CloudCode PA 双配额池隔离陷阱与实时监控: AI工具/Google-Antigravity双配额池隔离陷阱与实时监控.md
