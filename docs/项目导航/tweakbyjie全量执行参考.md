@@ -34,7 +34,7 @@ tweak_module: []
 
 | 分类 | 编号范围 | 当前执行闭环 |
 |---|---|---|
-| CPU/核心系统 | CPU-001 至 CPU-005、CORE-001 至 CORE-016 | 多数写入；仅少数回读；普通项通常无原值快照 |
+| CPU/核心系统 | CPU-001 至 CPU-005、CORE-001 至 CORE-019 | 多数写入；仅少数回读；普通项通常无原值快照 |
 | GPU/显示 | GPU-001 至 GPU-002 | HAGS 有回读无快照；MPO 有四值快照和恢复 |
 | Memory/Storage | MEMORY-001/002、STORAGE-001 至 004 | Prefetch/压缩/TRIM 回读但无完整原值恢复；NVMe 有专用快照 |
 | Security | SECURITY-001 至 003 | CPU 缓解有快照；VBS/EFI 非精确回滚 |
@@ -125,6 +125,9 @@ tweak_module: []
 | CORE-014 | MMAgent | `Disable-MMAgent -mc` | `:825-828` | `Get-MMAgent` 验证 `MemoryCompression=False`（`:859`）；无原状态快照，手动 `Enable-MMAgent -mc` 恢复 |
 | CORE-015 | NTFS | `fsutil behavior set DisableDeleteNotify 0` | `:829-835` | 全局 `DisableDeleteNotify=0`（`:860`）；不等于逐卷验证，无原策略恢复 |
 | CORE-016 | HKCU 视觉效果 | `VisualFXSetting`、FontSmoothing、UserPreferencesMask、Transparency、Animation 等 15 项 | `:839-853` | 无逐项回读/快照；可能影响用户体验和辅助功能 |
+| CORE-017 | `Session Manager\DisableWpbtExecution` | DWORD `1`（阻止 WPBT 固件每次启动注入执行） | `Modules/Registry.ps1`（`Invoke-RegistryModule`） | 无回读；已纳入 `registry-backup.json` 快照，主菜单 1→4 恢复 |
+| CORE-018 | `TaskbarDeveloperSettings\TaskbarEndTask` | DWORD `1`（任务栏右键直接结束任务） | `Modules/Registry.ps1`（`Invoke-RegistryModule`） | 无回读；已纳入 `registry-backup.json` 快照，主菜单 1→4 恢复 |
+| CORE-019 | `PowerShellCore\EnableTelemetry` | DWORD `0`（关闭 PowerShell Core 遥测） | `Modules/Registry.ps1`（`Invoke-RegistryModule`） | 无回读；已纳入 `registry-backup.json` 快照，主菜单 1→4 恢复 |
 
 ## 四、SECURITY-001：CPU 安全缓解
 
@@ -230,10 +233,16 @@ tweak_module: []
 - Part 5 的 Defender/SmartScreen/Security Center 约 95 个策略值已有快照与恢复入口（`5 → 2`）但无逐项回读，并与服务、任务和 Appx 删除相互影响。
 - `defender-removal.ps1` 删除大量 Defender 注册、组件和文件，没有完整备份，脚本本身不可逆；不应归类为普通优化。
 
+## 十一、GAMEQOS
+
+| 编号 | 对象 | 目标 | 源码 | 验证/恢复 |
+|---|---|---|---|---|
+| GAMEQOS-001 | `HKLM\SOFTWARE\Policies\Microsoft\Windows\QoS\<游戏名>` 组策略键 | 为竞技网游进程标记 DSCP `46`（EF 加速转发）并设 Throttle Rate `-1` 解除软件层节流 | `Modules/GameQos.ps1`（`Set-SingleGameQosPolicy`/`Invoke-GameQosModule`） | 写入后无独立逐值回读；`Modules/Backup.GameQos.ps1`（`Ensure-GameQosBackup`/`Restore-GameQosBackup`）提供策略级快照与还原（`gameqos-backup.json`） |
+
 ## 文档状态
 
 - 本参考按当前 `tweakbyjie.ps1` 源码核对；源码行号变化后必须重新校对。
 - “脚本执行”不等于“可恢复”；“配置层回读”不等于“运行时有效”；“知识说明”不等于“脚本支持”。
 ## 事实核查记录
 
-核验机制：由 tweakbyjie 仓库 Coverage 自动审计持续校验，映射、执行参考、覆盖检查三份资料每一份都必须与 manifest 全部 44 项完全一致（缺少清单内编号与出现清单外编号均判失败）；正文 `Modules/文件.ps1` 引用由审计器校验文件存在与函数定义。2026-08-25 对照 tweakbyjie main（commit `cd95802`）校准：页首定位说明改为“Menu 仅调度、执行在各业务模块”，CPU-002 源码定位修正为 `Modules/Registry.ps1`。⚠️ 已知边界：正文表格中的 `:NNN` 为模块化前单文件源码的基线行号快照，仅作历史对照，不对应现行 Modules/ 结构；现行定位以 `Modules/函数名` 为准。
+核验机制：由 tweakbyjie 仓库 Coverage 自动审计持续校验，映射、执行参考、覆盖检查三份资料每一份都必须与 manifest 全部 48 项完全一致（缺少清单内编号与出现清单外编号均判失败）；正文 `Modules/文件.ps1` 引用由审计器校验文件存在与函数定义。2026-08-25 对照 tweakbyjie main（commit `cd95802`）校准；2026-09-05 同步 CORE-017/018/019 与 GAMEQOS-001（合计 48 项）：页首定位说明改为“Menu 仅调度、执行在各业务模块”，CPU-002 源码定位修正为 `Modules/Registry.ps1`。⚠️ 已知边界：正文表格中的 `:NNN` 为模块化前单文件源码的基线行号快照，仅作历史对照，不对应现行 Modules/ 结构；现行定位以 `Modules/函数名` 为准。

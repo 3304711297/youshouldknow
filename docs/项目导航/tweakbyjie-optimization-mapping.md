@@ -47,8 +47,17 @@ CORE-* 对应主菜单 `1` 的核心游戏优化与系统行为子项，是 Cove
 | CORE-014 | Memory Compression | 同 MEMORY-002；`Disable-MMAgent -mc` | `Get-MMAgent` 验证 | 手动 `Enable-MMAgent -mc` 后重启 |
 | CORE-015 | TRIM | 同 STORAGE-002；`fsutil behavior set DisableDeleteNotify 0` | 全局查询验证 | 无原策略快照 |
 | CORE-016 | 视觉效果 | HKCU 视觉效果约 15 项（`VisualFXSetting`、FontSmoothing、UserPreferencesMask 等） | 无逐项回读 | 已纳入 Part 1 统一快照（`registry-backup.json` 系统行为组）；子项 4 按快照恢复；影响体验与辅助功能 |
+| CORE-017 | WPBT 注入防御 | `Modules/Registry.ps1`（`Invoke-RegistryModule`）`HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\DisableWpbtExecution` → DWORD `1` | 无回读 | 已纳入 Part 1 统一快照（`registry-backup.json` 系统行为组）；子项 4 按快照恢复；吸收自 Atom-Tool-Box |
+| CORE-018 | 任务栏直接结束任务 | `Modules/Registry.ps1`（`Invoke-RegistryModule`）`HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\TaskbarDeveloperSettings\TaskbarEndTask` → DWORD `1` | 无回读 | 已纳入 Part 1 统一快照；子项 4 按快照恢复；吸收自 Atom-Tool-Box |
+| CORE-019 | PowerShell Core 遥测关闭 | `Modules/Registry.ps1`（`Invoke-RegistryModule`）`HKLM\Software\Policies\Microsoft\PowerShellCore\EnableTelemetry` → DWORD `0` | 无回读 | 已纳入 Part 1 统一快照；子项 4 按快照恢复；吸收自 Atom-Tool-Box |
 
 重叠关系：CORE-007=CPU-001、CORE-008=GPU-001、CORE-009=CPU-005、CORE-005=CPU-004、CORE-006=CPU-003、CORE-012=MEMORY-001、CORE-013=STORAGE-001、CORE-014=MEMORY-002、CORE-015=STORAGE-002。
+
+## GameQos 逐项映射
+
+| 编号 | tweakbyjie 实际项目 | 执行位置与目标 | 当前验证范围 | 恢复方式与状态 |
+| --- | --- | --- | --- | --- |
+| GAMEQOS-001 | 竞技游戏网络 QoS 策略 | `Modules/GameQos.ps1`（`Set-SingleGameQosPolicy`）`HKLM\SOFTWARE\Policies\Microsoft\Windows\QoS\<游戏名>` 组策略键：DSCP `46`（EF 加速转发）+ Throttle Rate `-1` | 写入后无独立逐值回读（备份枚举见 `Modules/Backup.GameQos.ps1`） | `Modules/Backup.GameQos.ps1`（`Ensure-GameQosBackup`/`Restore-GameQosBackup`）策略级快照与还原（`gameqos-backup.json`）；吸收自 Kiwi-Tweaks |
 
 ## CPU 逐项映射
 
@@ -178,7 +187,7 @@ CORE-* 对应主菜单 `1` 的核心游戏优化与系统行为子项，是 Cove
 6. 可复核的验证方法
 ## 事实核查记录
 
-核验机制：本映射与《全量执行参考》由 tweakbyjie 仓库的 Coverage 自动审计（tools/Test-CrossRepoCoverage.ps1）持续校验——映射、执行参考、覆盖检查三份资料每一份都必须与 manifest 全部 44 项完全一致，缺少清单内编号与出现清单外编号均判失败；源码引用（`Modules/文件.ps1` 及 `/函数名` 后缀）由审计器校验文件存在与函数定义。最近一次人工逐项校准：2026-08-25 对照 tweakbyjie main（commit `cd95802`）完成——修正映射表中 10 处 `Modules/Menu.ps1`（Part N）为实际业务模块（Registry/Bcd/Service/Power/Mpo），清理 CPU/GPU/MEMORY 行的裸 `:NNN` 旧行号；此前 2026-08-21 完成模块化迁移同步与 44 项 ID 校准。2026-08-29 重核：对照 tweak `b905950` 源码逐项复核本文声明——44 项清单编号、模块与函数引用、菜单编号 0–11、服务分组（A 组 21 + B 组 9 + Manual 7，含 BITS）、Defender 约 95 个策略值、mpo/nvme/defender/service/power 备份文件名等均属实；但 `cd95802` 之后源码新增了多项备份/恢复能力（见下方勘误），本文相应表述已同步更新。
+核验机制：本映射与《全量执行参考》由 tweakbyjie 仓库的 Coverage 自动审计（tools/Test-CrossRepoCoverage.ps1）持续校验——映射、执行参考、覆盖检查三份资料每一份都必须与 manifest 全部 48 项完全一致，缺少清单内编号与出现清单外编号均判失败；源码引用（`Modules/文件.ps1` 及 `/函数名` 后缀）由审计器校验文件存在与函数定义。最近一次人工逐项校准：2026-08-25 对照 tweakbyjie main（commit `cd95802`）完成——修正映射表中 10 处 `Modules/Menu.ps1`（Part N）为实际业务模块（Registry/Bcd/Service/Power/Mpo），清理 CPU/GPU/MEMORY 行的裸 `:NNN` 旧行号；此前 2026-08-21 完成模块化迁移同步与 44 项 ID 校准；2026-09-05 对照 tweakbyjie main（commit `0ed52b8`）同步新增 CORE-017/018/019（WPBT/任务栏结束任务/PS Core 遥测，吸收自 Atom-Tool-Box）与 GAMEQOS-001（菜单 12 QoS，吸收自 Kiwi-Tweaks），总数 48 项。2026-08-29 重核：对照 tweak `b905950` 源码逐项复核本文声明——44 项清单编号、模块与函数引用、菜单编号 0–11、服务分组（A 组 21 + B 组 9 + Manual 7，含 BITS）、Defender 约 95 个策略值、mpo/nvme/defender/service/power 备份文件名等均属实；但 `cd95802` 之后源码新增了多项备份/恢复能力（见下方勘误），本文相应表述已同步更新。
 
 2026-08-29 勘误（对照 tweak `b905950`，`cd95802` 后新增能力）：
 

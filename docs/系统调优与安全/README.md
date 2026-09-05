@@ -20,6 +20,7 @@ tweak_module: []
 
 - [Windows 服务优化原则](./Windows服务优化原则.md)：服务分组、37 项脚本映射和 Defender 边界
 - [VBS 与系统安全缓解](./VBS与系统安全缓解.md)：VBS/HVCI、Spectre/Meltdown、InSpectre 和安全恢复
+- [WPBT 固件注入机制与禁用](./WPBT固件注入机制与禁用.md)：WPBT/`wpbbin.exe` 原理、`DisableWpbtExecution` 禁用与影响边界
 - [设备管理器禁用类优化辨析](./设备管理器禁用类优化辨析.md)：两份社区设备禁用清单逐条辨析、证据等级与替代做法
 - [电源计划创建与优化指南](../系统知识/电源计划创建与优化指南.md)：详细电源计划、AC/DC、导入和睡眠排障
 - [Defender 删除脚本风险与恢复边界](../系统知识/Defender删除脚本风险与恢复边界.md)：不可逆高风险专题
