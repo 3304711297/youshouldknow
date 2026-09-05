@@ -18,6 +18,7 @@ Windows 系统机制、电源管理、排障工具与常用命令的知识分类
 - [Windows 常用命令列表](./Windows常用命令列表.md) — Win+R / 命令行 / MSC / CPL 速查与事实核查
 - [Windows 常用环境变量列表](./Windows常用环境变量列表.md) — `%APPDATA%` / `%SystemRoot%` 等变量与 `set` / `setx` 区别
 - [Windows 系统服务对应注册表路径](./Windows系统服务对应注册表路径.md) — 服务与注册表 `Services\` 的对应关系
+- [Windows 目录联接 Junction 与符号链接辨析](./Windows目录联接Junction与符号链接辨析.md) — 三种链接对照、删除语义实测与多应用共享数据目录实战
 
 ### 电源与睡眠管理
 - [电源计划创建与优化指南](./电源计划创建与优化指南.md) — `powercfg`、Power Settings Explorer 与组策略锁定（主文）
