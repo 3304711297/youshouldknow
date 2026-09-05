@@ -183,6 +183,10 @@ nav:
     - Google Antigravity 与 CloudCode PA 双配额池隔离陷阱与实时监控: AI工具/Google-Antigravity双配额池隔离陷阱与实时监控.md
     - EasyCLIProxyAPI 本地网关架构与多智能体客户端适配: AI工具/EasyCLIProxyAPI本地网关架构与多智能体客户端适配.md
     - Hermes-Agent 高阶指令全景与官方生态指南: AI工具/Hermes-Agent高阶指令全景与生态路线指南.md
+    - Hermes×ZCode 双 Agent 跨端协同机制实战: AI工具/Hermes-ZCode双Agent跨端协同机制实战.md
+    - WorkBuddy 积分端到端打通实录: AI工具/WorkBuddy积分端到端打通实录.md
+    - Hermes 子代理模型路由机制: AI工具/Hermes子代理模型路由机制.md
+    - ZCode headless CLI 与 GUI 会话体系辨析: AI工具/ZCode-headless-CLI与GUI会话体系辨析.md
   - 项目导航:
     - 项目导航/README.md
     - tweakbyjie 关联说明: 项目导航/tweakbyjie关联说明.md
