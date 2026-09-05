@@ -216,8 +216,11 @@ def create_github_issue(
         res = subprocess.run(cmd, capture_output=True, text=True, check=True)
         print(f"[SUCCESS] Created issue via gh CLI: {res.stdout.strip()}")
         return True
-    except Exception:
-        pass
+    except Exception as gh_err:
+        print(f"[WARN] Failed to create issue via gh CLI: {gh_err}", file=sys.stderr)
+        gh_stderr = (getattr(gh_err, "stderr", "") or "").strip()
+        if gh_stderr:
+            print(f"[WARN] gh CLI stderr: {gh_stderr}", file=sys.stderr)
 
     # 2. 尝试 REST API
     if token:
@@ -279,6 +282,7 @@ def main() -> int:
 
     client = BilibiliClient()
     new_video_count = 0
+    failed_count = 0
 
     for ch in channels:
         if not ch.get("enabled", True):
@@ -342,6 +346,14 @@ def main() -> int:
                 if success:
                     tracked_bvids.add(bvid)
                     new_video_count += 1
+                else:
+                    failed_count += 1
+
+    if failed_count:
+        # 有新视频但 Issue 创建失败：看门失效，必须让 workflow 变红（区别于"无新视频"的正常 0）
+        print(f"\n[ERROR] Failed to create {failed_count} new video issue(s).", file=sys.stderr)
+        print(f"\n[SUMMARY] Inspection completed. Newly tracked videos: {new_video_count}")
+        return 1
 
     print(f"\n[SUMMARY] Inspection completed. Newly tracked videos: {new_video_count}")
     return 0
