@@ -50,4 +50,7 @@ exclude = [
   'https://b23\\.tv/',
   # 2026-09-04 起 Cloudflare 防护对 CI runner 返回 503/限流
   'https://www\\.bleepingcomputer\\.com/',
+
+  # 2026-09-05 起 WAF 阻断对 CI runner 与 lychee 返回 403
+  'https://www\.nccgroup\.com/',
 ]
