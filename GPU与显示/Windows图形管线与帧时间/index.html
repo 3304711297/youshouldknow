@@ -3379,6 +3379,8 @@
       
         
       
+        
+      
     
     
     
@@ -3506,6 +3508,34 @@
     
   
     VBS 与系统安全缓解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%B3%BB%E7%BB%9F%E8%B0%83%E4%BC%98%E4%B8%8E%E5%AE%89%E5%85%A8/WPBT%E5%9B%BA%E4%BB%B6%E6%B3%A8%E5%85%A5%E6%9C%BA%E5%88%B6%E4%B8%8E%E7%A6%81%E7%94%A8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    WPBT 固件注入机制与禁用
   
 
     
@@ -4656,6 +4686,12 @@
 <li>禁用 MPO 可能影响窗口化游戏 VRR、视频、HDR、覆盖层和 DWM 负载；</li>
 <li>项目导航中的执行参考包含备份、恢复、dxdiag 和实际应用测试，不应把这些设置写成普适性能提升。</li>
 </ul>
+<p>社区方案（如 <a href="https://github.com/RedDot-3ND7355/MPO-GPU-FIX">MPO-GPU-FIX</a>）对 <code>OverlayTestMode=5</code> 的有效性存在争论，采用时注意证据边界：</p>
+<ul>
+<li>该仓库维护者明确反驳了"OverlayTestMode=5 在 24H2/25H2 与新显卡上已失效"的说法——其用户反馈表明禁用叠加（Disable Overlays）在部分排障场景仍是最后手段；</li>
+<li>同一反馈链也指出：完全禁用叠加可能在个别 DX12 游戏中引发新问题，且关闭驱动级 FreeSync 对某些叠加导致的卡顿同样有效——即"无效/有效"都与驱动版本、游戏引擎和显示链路相关；</li>
+<li>结论：这类经验的证据等级是"社区用户反馈"，不是微软或显卡厂商的稳定性承诺，采用前后必须按本文第五节做逐机 A/B 测试。</li>
+</ul>
 <h2 id="_2">五、测试原则<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p>修改前后应固定：</p>
 <ul>
@@ -4722,7 +4758,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年9月1日 14:51:20 UTC">2026年9月1日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年9月5日 05:55:19 UTC">2026年9月5日</span>
   </span>
 
     
