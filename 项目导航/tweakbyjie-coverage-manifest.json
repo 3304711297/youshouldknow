@@ -8,49 +8,245 @@
   "coverageBranch": "main",
   "coverageCheck": "docs/coverage/YOUSEHOULDKNOW-COVERAGE-CHECK.md",
   "items": [
-    {"id":"CORE-001","category":"Core","name":"GameDVR AppCaptureEnabled"},
-    {"id":"CORE-002","category":"Core","name":"GameDVR_Enabled"},
-    {"id":"CORE-003","category":"Core","name":"GameBar Presence ActivationType"},
-    {"id":"CORE-004","category":"Core","name":"UseNexusForGameBarEnabled"},
-    {"id":"CORE-005","category":"Core","name":"NetworkThrottlingIndex"},
-    {"id":"CORE-006","category":"Core","name":"SystemResponsiveness"},
-    {"id":"CORE-007","category":"Core","name":"Win32PrioritySeparation"},
-    {"id":"CORE-008","category":"Core","name":"HwSchMode / HAGS"},
-    {"id":"CORE-009","category":"Core","name":"Tasks\\Games"},
-    {"id":"CORE-010","category":"Core","name":"Game Mode"},
-    {"id":"CORE-011","category":"Core","name":"Search / Bing / Cortana"},
-    {"id":"CORE-012","category":"Core","name":"EnablePrefetcher"},
-    {"id":"CORE-013","category":"Core","name":"NtfsDisable8dot3NameCreation"},
-    {"id":"CORE-014","category":"Core","name":"Memory Compression"},
-    {"id":"CORE-015","category":"Core","name":"TRIM"},
-    {"id":"CORE-016","category":"Core","name":"Visual Effects"},
-    {"id":"CPU-001","category":"CPU","name":"Win32PrioritySeparation"},
-    {"id":"CPU-002","category":"CPU","name":"Multimedia SystemProfile"},
-    {"id":"CPU-003","category":"CPU","name":"SystemResponsiveness"},
-    {"id":"CPU-004","category":"CPU","name":"NetworkThrottlingIndex"},
-    {"id":"CPU-005","category":"CPU","name":"Tasks\\Games"},
-    {"id":"GPU-001","category":"GPU","name":"HAGS / HwSchMode"},
-    {"id":"GPU-002","category":"GPU","name":"MPO / Overlay"},
-    {"id":"MEMORY-001","category":"Memory","name":"EnablePrefetcher"},
-    {"id":"MEMORY-002","category":"Memory","name":"Memory Compression"},
-    {"id":"MEMORY-003","category":"Memory","name":"Virtual Memory / Pagefile"},
-    {"id":"STORAGE-001","category":"Storage","name":"NTFS 8.3"},
-    {"id":"STORAGE-002","category":"Storage","name":"TRIM"},
-    {"id":"STORAGE-003","category":"Storage","name":"BITS startup type"},
-    {"id":"STORAGE-004","category":"Storage","name":"Native NVMe Driver"},
-    {"id":"STORAGE-005","category":"Storage","name":"Write cache policy"},
-    {"id":"SECURITY-001","category":"Security","name":"CPU security mitigations"},
-    {"id":"SECURITY-002","category":"Security","name":"VBS / HVCI / Credential Guard / Hyper-V"},
-    {"id":"SECURITY-003","category":"Security","name":"Device Guard EFI lock cleanup"},
-    {"id":"SERVICE-001","category":"Service","name":"Part 6 service startup groups"},
-    {"id":"SERVICE-002","category":"Service","name":"Part 5 Defender / Security Center"},
-    {"id":"BOOT-001","category":"Boot","name":"Advanced BCD timer configuration"},
-    {"id":"BOOT-002","category":"Boot","name":"Boot security BCD"},
-    {"id":"BOOT-003","category":"Boot","name":"Enable test mode"},
-    {"id":"BOOT-004","category":"Boot","name":"Disable test mode"},
-    {"id":"BOOT-005","category":"Boot","name":"Device Guard EFI cleanup"},
-    {"id":"BOOT-006","category":"Boot","name":"VBS / Hyper-V boot items"},
-    {"id":"POWER-001","category":"Power","name":"Ultimate performance power plan"},
-    {"id":"REGISTRY-001","category":"Registry","name":"Defender / security registry deletion"}
+    {
+      "id": "CORE-001",
+      "category": "Core",
+      "name": "GameDVR AppCaptureEnabled"
+    },
+    {
+      "id": "CORE-002",
+      "category": "Core",
+      "name": "GameDVR_Enabled"
+    },
+    {
+      "id": "CORE-003",
+      "category": "Core",
+      "name": "GameBar Presence ActivationType"
+    },
+    {
+      "id": "CORE-004",
+      "category": "Core",
+      "name": "UseNexusForGameBarEnabled"
+    },
+    {
+      "id": "CORE-005",
+      "category": "Core",
+      "name": "NetworkThrottlingIndex"
+    },
+    {
+      "id": "CORE-006",
+      "category": "Core",
+      "name": "SystemResponsiveness"
+    },
+    {
+      "id": "CORE-007",
+      "category": "Core",
+      "name": "Win32PrioritySeparation"
+    },
+    {
+      "id": "CORE-008",
+      "category": "Core",
+      "name": "HwSchMode / HAGS"
+    },
+    {
+      "id": "CORE-009",
+      "category": "Core",
+      "name": "Tasks\\Games"
+    },
+    {
+      "id": "CORE-010",
+      "category": "Core",
+      "name": "Game Mode"
+    },
+    {
+      "id": "CORE-011",
+      "category": "Core",
+      "name": "Search / Bing / Cortana"
+    },
+    {
+      "id": "CORE-012",
+      "category": "Core",
+      "name": "EnablePrefetcher"
+    },
+    {
+      "id": "CORE-013",
+      "category": "Core",
+      "name": "NtfsDisable8dot3NameCreation"
+    },
+    {
+      "id": "CORE-014",
+      "category": "Core",
+      "name": "Memory Compression"
+    },
+    {
+      "id": "CORE-015",
+      "category": "Core",
+      "name": "TRIM"
+    },
+    {
+      "id": "CORE-016",
+      "category": "Core",
+      "name": "Visual Effects"
+    },
+    {
+      "id": "CPU-001",
+      "category": "CPU",
+      "name": "Win32PrioritySeparation"
+    },
+    {
+      "id": "CPU-002",
+      "category": "CPU",
+      "name": "Multimedia SystemProfile"
+    },
+    {
+      "id": "CPU-003",
+      "category": "CPU",
+      "name": "SystemResponsiveness"
+    },
+    {
+      "id": "CPU-004",
+      "category": "CPU",
+      "name": "NetworkThrottlingIndex"
+    },
+    {
+      "id": "CPU-005",
+      "category": "CPU",
+      "name": "Tasks\\Games"
+    },
+    {
+      "id": "GPU-001",
+      "category": "GPU",
+      "name": "HAGS / HwSchMode"
+    },
+    {
+      "id": "GPU-002",
+      "category": "GPU",
+      "name": "MPO / Overlay"
+    },
+    {
+      "id": "MEMORY-001",
+      "category": "Memory",
+      "name": "EnablePrefetcher"
+    },
+    {
+      "id": "MEMORY-002",
+      "category": "Memory",
+      "name": "Memory Compression"
+    },
+    {
+      "id": "MEMORY-003",
+      "category": "Memory",
+      "name": "Virtual Memory / Pagefile"
+    },
+    {
+      "id": "STORAGE-001",
+      "category": "Storage",
+      "name": "NTFS 8.3"
+    },
+    {
+      "id": "STORAGE-002",
+      "category": "Storage",
+      "name": "TRIM"
+    },
+    {
+      "id": "STORAGE-003",
+      "category": "Storage",
+      "name": "BITS startup type"
+    },
+    {
+      "id": "STORAGE-004",
+      "category": "Storage",
+      "name": "Native NVMe Driver"
+    },
+    {
+      "id": "STORAGE-005",
+      "category": "Storage",
+      "name": "Write cache policy"
+    },
+    {
+      "id": "SECURITY-001",
+      "category": "Security",
+      "name": "CPU security mitigations"
+    },
+    {
+      "id": "SECURITY-002",
+      "category": "Security",
+      "name": "VBS / HVCI / Credential Guard / Hyper-V"
+    },
+    {
+      "id": "SECURITY-003",
+      "category": "Security",
+      "name": "Device Guard EFI lock cleanup"
+    },
+    {
+      "id": "SERVICE-001",
+      "category": "Service",
+      "name": "Part 6 service startup groups"
+    },
+    {
+      "id": "SERVICE-002",
+      "category": "Service",
+      "name": "Part 5 Defender / Security Center"
+    },
+    {
+      "id": "BOOT-001",
+      "category": "Boot",
+      "name": "Advanced BCD timer configuration"
+    },
+    {
+      "id": "BOOT-002",
+      "category": "Boot",
+      "name": "Boot security BCD"
+    },
+    {
+      "id": "BOOT-003",
+      "category": "Boot",
+      "name": "Enable test mode"
+    },
+    {
+      "id": "BOOT-004",
+      "category": "Boot",
+      "name": "Disable test mode"
+    },
+    {
+      "id": "BOOT-005",
+      "category": "Boot",
+      "name": "Device Guard EFI cleanup"
+    },
+    {
+      "id": "BOOT-006",
+      "category": "Boot",
+      "name": "VBS / Hyper-V boot items"
+    },
+    {
+      "id": "POWER-001",
+      "category": "Power",
+      "name": "Ultimate performance power plan"
+    },
+    {
+      "id": "REGISTRY-001",
+      "category": "Registry",
+      "name": "Defender / security registry deletion"
+    },
+    {
+      "id": "CORE-017",
+      "category": "Core",
+      "name": "DisableWpbtExecution (WPBT)"
+    },
+    {
+      "id": "CORE-018",
+      "category": "Core",
+      "name": "TaskbarEndTask"
+    },
+    {
+      "id": "CORE-019",
+      "category": "Core",
+      "name": "PowerShellCore EnableTelemetry"
+    },
+    {
+      "id": "GAMEQOS-001",
+      "category": "GameQos",
+      "name": "Game QoS policy / DSCP 46"
+    }
   ]
 }

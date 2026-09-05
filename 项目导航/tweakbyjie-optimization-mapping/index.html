@@ -3252,6 +3252,8 @@
       
         
       
+        
+      
     
     
     
@@ -3379,6 +3381,34 @@
     
   
     VBS 与系统安全缓解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%B3%BB%E7%BB%9F%E8%B0%83%E4%BC%98%E4%B8%8E%E5%AE%89%E5%85%A8/WPBT%E5%9B%BA%E4%BB%B6%E6%B3%A8%E5%85%A5%E6%9C%BA%E5%88%B6%E4%B8%8E%E7%A6%81%E7%94%A8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    WPBT 固件注入机制与禁用
   
 
     
@@ -4225,6 +4255,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#gameqos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GameQos 逐项映射
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#cpu" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4608,6 +4649,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#gameqos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GameQos 逐项映射
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#cpu" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4969,9 +5021,51 @@
 <td>无逐项回读</td>
 <td>已纳入 Part 1 统一快照（<code>registry-backup.json</code> 系统行为组）；子项 4 按快照恢复；影响体验与辅助功能</td>
 </tr>
+<tr>
+<td>CORE-017</td>
+<td>WPBT 注入防御</td>
+<td><code>Modules/Registry.ps1</code>（<code>Invoke-RegistryModule</code>）<code>HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\DisableWpbtExecution</code> → DWORD <code>1</code></td>
+<td>无回读</td>
+<td>已纳入 Part 1 统一快照（<code>registry-backup.json</code> 系统行为组）；子项 4 按快照恢复；吸收自 Atom-Tool-Box</td>
+</tr>
+<tr>
+<td>CORE-018</td>
+<td>任务栏直接结束任务</td>
+<td><code>Modules/Registry.ps1</code>（<code>Invoke-RegistryModule</code>）<code>HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\TaskbarDeveloperSettings\TaskbarEndTask</code> → DWORD <code>1</code></td>
+<td>无回读</td>
+<td>已纳入 Part 1 统一快照；子项 4 按快照恢复；吸收自 Atom-Tool-Box</td>
+</tr>
+<tr>
+<td>CORE-019</td>
+<td>PowerShell Core 遥测关闭</td>
+<td><code>Modules/Registry.ps1</code>（<code>Invoke-RegistryModule</code>）<code>HKLM\Software\Policies\Microsoft\PowerShellCore\EnableTelemetry</code> → DWORD <code>0</code></td>
+<td>无回读</td>
+<td>已纳入 Part 1 统一快照；子项 4 按快照恢复；吸收自 Atom-Tool-Box</td>
+</tr>
 </tbody>
 </table>
 <p>重叠关系：CORE-007=CPU-001、CORE-008=GPU-001、CORE-009=CPU-005、CORE-005=CPU-004、CORE-006=CPU-003、CORE-012=MEMORY-001、CORE-013=STORAGE-001、CORE-014=MEMORY-002、CORE-015=STORAGE-002。</p>
+<h2 id="gameqos">GameQos 逐项映射<a class="headerlink" href="#gameqos" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>编号</th>
+<th>tweakbyjie 实际项目</th>
+<th>执行位置与目标</th>
+<th>当前验证范围</th>
+<th>恢复方式与状态</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GAMEQOS-001</td>
+<td>竞技游戏网络 QoS 策略</td>
+<td><code>Modules/GameQos.ps1</code>（<code>Set-SingleGameQosPolicy</code>）<code>HKLM\SOFTWARE\Policies\Microsoft\Windows\QoS\&lt;游戏名&gt;</code> 组策略键：DSCP <code>46</code>（EF 加速转发）+ Throttle Rate <code>-1</code></td>
+<td>写入后无独立逐值回读（备份枚举见 <code>Modules/Backup.GameQos.ps1</code>）</td>
+<td><code>Modules/Backup.GameQos.ps1</code>（<code>Ensure-GameQosBackup</code>/<code>Restore-GameQosBackup</code>）策略级快照与还原（<code>gameqos-backup.json</code>）；吸收自 Kiwi-Tweaks</td>
+</tr>
+</tbody>
+</table>
 <h2 id="cpu">CPU 逐项映射<a class="headerlink" href="#cpu" title="Permanent link">&para;</a></h2>
 <p>共同执行入口：<code>tweakbyjie.ps1</code> 主菜单 <code>1</code> → <code>Part 1</code> 核心游戏优化 → 子项 <code>1</code>。对应知识文档：<a href="../CPU%E4%BC%98%E5%8C%96%E4%B8%8Etweakbyjie%E5%AF%B9%E5%BA%94%E8%AF%B4%E6%98%8E/"><code>CPU 优化与 tweakbyjie 对应说明</code></a>。</p>
 <table>
@@ -5335,7 +5429,7 @@
 <li>可复核的验证方法</li>
 </ol>
 <h2 id="_3">事实核查记录<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<p>核验机制：本映射与《全量执行参考》由 tweakbyjie 仓库的 Coverage 自动审计（tools/Test-CrossRepoCoverage.ps1）持续校验——映射、执行参考、覆盖检查三份资料每一份都必须与 manifest 全部 44 项完全一致，缺少清单内编号与出现清单外编号均判失败；源码引用（<code>Modules/文件.ps1</code> 及 <code>/函数名</code> 后缀）由审计器校验文件存在与函数定义。最近一次人工逐项校准：2026-08-25 对照 tweakbyjie main（commit <code>cd95802</code>）完成——修正映射表中 10 处 <code>Modules/Menu.ps1</code>（Part N）为实际业务模块（Registry/Bcd/Service/Power/Mpo），清理 CPU/GPU/MEMORY 行的裸 <code>:NNN</code> 旧行号；此前 2026-08-21 完成模块化迁移同步与 44 项 ID 校准。2026-08-29 重核：对照 tweak <code>b905950</code> 源码逐项复核本文声明——44 项清单编号、模块与函数引用、菜单编号 0–11、服务分组（A 组 21 + B 组 9 + Manual 7，含 BITS）、Defender 约 95 个策略值、mpo/nvme/defender/service/power 备份文件名等均属实；但 <code>cd95802</code> 之后源码新增了多项备份/恢复能力（见下方勘误），本文相应表述已同步更新。</p>
+<p>核验机制：本映射与《全量执行参考》由 tweakbyjie 仓库的 Coverage 自动审计（tools/Test-CrossRepoCoverage.ps1）持续校验——映射、执行参考、覆盖检查三份资料每一份都必须与 manifest 全部 48 项完全一致，缺少清单内编号与出现清单外编号均判失败；源码引用（<code>Modules/文件.ps1</code> 及 <code>/函数名</code> 后缀）由审计器校验文件存在与函数定义。最近一次人工逐项校准：2026-08-25 对照 tweakbyjie main（commit <code>cd95802</code>）完成——修正映射表中 10 处 <code>Modules/Menu.ps1</code>（Part N）为实际业务模块（Registry/Bcd/Service/Power/Mpo），清理 CPU/GPU/MEMORY 行的裸 <code>:NNN</code> 旧行号；此前 2026-08-21 完成模块化迁移同步与 44 项 ID 校准；2026-09-05 对照 tweakbyjie main（commit <code>0ed52b8</code>）同步新增 CORE-017/018/019（WPBT/任务栏结束任务/PS Core 遥测，吸收自 Atom-Tool-Box）与 GAMEQOS-001（菜单 12 QoS，吸收自 Kiwi-Tweaks），总数 48 项。2026-08-29 重核：对照 tweak <code>b905950</code> 源码逐项复核本文声明——44 项清单编号、模块与函数引用、菜单编号 0–11、服务分组（A 组 21 + B 组 9 + Manual 7，含 BITS）、Defender 约 95 个策略值、mpo/nvme/defender/service/power 备份文件名等均属实；但 <code>cd95802</code> 之后源码新增了多项备份/恢复能力（见下方勘误），本文相应表述已同步更新。</p>
 <p>2026-08-29 勘误（对照 tweak <code>b905950</code>，<code>cd95802</code> 后新增能力）：</p>
 <ul>
 <li>核心/系统行为注册表值（CORE-001~004、CORE-007~013、CORE-016、CPU-001~005、GPU-001、MEMORY-001、STORAGE-001）现于子项 1/2 写入前统一快照到 <code>registry-backup.json</code>（机器绑定，备份失败阻止修改），子项 4 可按快照恢复（原不存在的值自动删除）；Memory Compression（Disable-MMAgent）与 TRIM（fsutil）不在快照范围内。原“无原值快照/未提供自动备份恢复”表述已修正。</li>
@@ -5365,7 +5459,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年9月1日 14:51:20 UTC">2026年9月1日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年9月5日 05:55:19 UTC">2026年9月5日</span>
   </span>
 
     
