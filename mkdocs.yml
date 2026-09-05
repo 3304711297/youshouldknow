@@ -125,6 +125,7 @@ nav:
     - 删除此电脑中多余软件快捷方式图标: 系统知识/删除此电脑中多余软件快捷方式图标.md
     - 禁用 Windows 通知中心与操作中心: 系统知识/禁用Windows通知中心与操作中心.md
     - 调整 Windows 滚动条宽度与高度: 系统知识/调整Windows滚动条宽度与高度.md
+    - Windows 目录联接 Junction 与符号链接辨析: 系统知识/Windows目录联接Junction与符号链接辨析.md
   - CPU与延迟:
     - CPU与延迟/README.md
     - CPU 调度与游戏线程: CPU与延迟/CPU调度与游戏线程.md

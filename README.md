@@ -38,7 +38,7 @@
 | **🔌 BIOS 与固件** | BIOS 选项科普系列（XMP/EXPO、Secure Boot、TPM、PBO、功耗墙等 20 篇，含出处）、UEFI 开机 Logo 修改、固件刷写、移动端笔记本 BIOS 选项与超频降压安全边界 |
 | **💻 笔电相关** | 机械革命/同方模具控制中心与 Uniwill 驱动冲突排查、电池充电管理与跳电机制 |
 | **🛡️ 系统调优与安全** | Windows 调优核心原则、系统服务精简原则、VBS 与安全缓解、设备管理器禁用类优化辨析 |
-| **🧩 系统知识** | Defender 恢复边界、Windows 启动配置 BCD 深度解析、电源计划创建与定制指南 |
+| **🧩 系统知识** | Defender 恢复边界、Windows 启动配置 BCD 深度解析、电源计划创建与定制指南、目录联接 Junction 与符号链接辨析 |
 | **🌐 网络通信** | Windows 网络栈调优、Karing TUN 转发配置、四大运营商频段与 APN 设置速查 |
 | **📦 软件技巧** | Steam 客户端性能设置与下载优化、日常高效软件配置手册 |
 | **🤖 AI 工具** | CDP 远程调试接管日常 Edge 浏览器、ZCode 接入 Gemini 生图 Skill 与 Antigravity 桥接指南 |
