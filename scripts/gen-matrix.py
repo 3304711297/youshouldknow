@@ -38,7 +38,7 @@ def _collect() -> list[dict]:
         if rel.endswith("/README.md") or rel == "README.md" or rel == "项目导航/覆盖矩阵.md":
             continue
         text = path.read_text(encoding="utf-8-sig")
-        parsed = _parse(text)
+        parsed = _parse(text, rel)
         if parsed is None:
             continue
         entries.append({
@@ -51,7 +51,7 @@ def _collect() -> list[dict]:
     return entries
 
 
-def _parse(text: str) -> dict | None:
+def _parse(text: str, source: str = "<unknown>") -> dict | None:
     lines = text.splitlines()
     if not lines or lines[0].strip() != "---":
         return None
@@ -60,7 +60,9 @@ def _parse(text: str) -> dict | None:
             try:
                 import yaml
                 data = yaml.safe_load("\n".join(lines[1:i]))
-            except Exception:
+            except Exception as exc:
+                # 降级跳过该文档，但绝不静默：必须留下警告，否则覆盖矩阵会悄悄缺页
+                print(f"[警告] front matter YAML 解析失败，该文档已被排除出覆盖矩阵：{source}：{exc}", file=sys.stderr)
                 return None
             return data if isinstance(data, dict) else None
     return None
