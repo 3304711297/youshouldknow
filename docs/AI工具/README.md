@@ -23,6 +23,7 @@ AI 编程助手、浏览器自动化、MCP（Model Context Protocol）工具链�
 - [Hermes 子代理模型路由机制](./Hermes子代理模型路由机制.md) — delegation 默认继承实证、官方文档优先级、Kanban per-task override 与"不固定模型，用户口头裁决"实践范式、思考型模型 max_tokens 假阳性
 - [ZCode headless CLI 与 GUI 会话体系辨析](./ZCode-headless-CLI与GUI会话体系辨析.md) — project_id 落点差异实测、两套模型体系分离、18080 网关/Gemini 429 故障链与"GUI 手动建会话"实践规范
 - [Hermes 本地模型工作台与 OpenViking 智能记忆检索实战](./Hermes本地模型工作台与OpenViking智能记忆实战.md) — llama.cpp CUDA 本地推理引擎、RTX 4070 显存适配黄金法则、NTFS Junction C 盘空间彻底释放、OpenViking 语义分层检索与 Serverless 按需唤醒2分钟空闲休眠静默网关
+- [Hermes 模型配置与容灾编排避坑指南](./Hermes模型配置与容灾编排避坑指南.md) — MoA 多参考模型粉碎工具调用协议与显式禁用、上下文窗口 0 自适应与阈值压缩、Fallback 容灾梯度黄金编排（严禁思考模型做静默降级）与版本指纹防漂移
 
 
 ## 与其他分类的边界

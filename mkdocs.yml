@@ -188,6 +188,7 @@ nav:
     - Hermes 子代理模型路由机制: AI工具/Hermes子代理模型路由机制.md
     - ZCode headless CLI 与 GUI 会话体系辨析: AI工具/ZCode-headless-CLI与GUI会话体系辨析.md
     - Hermes 本地模型工作台与 OpenViking 智能记忆实战: AI工具/Hermes本地模型工作台与OpenViking智能记忆实战.md
+    - Hermes 模型配置与容灾编排避坑指南: AI工具/Hermes模型配置与容灾编排避坑指南.md
   - 项目导航:
     - 项目导航/README.md
     - tweakbyjie 关联说明: 项目导航/tweakbyjie关联说明.md
