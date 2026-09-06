@@ -25,6 +25,7 @@ AI 编程助手、浏览器自动化、MCP（Model Context Protocol）工具链�
 - [Hermes 本地模型工作台与 OpenViking 智能记忆检索实战](./Hermes本地模型工作台与OpenViking智能记忆实战.md) — llama.cpp CUDA 本地推理引擎、RTX 4070 显存适配黄金法则、NTFS Junction C 盘空间彻底释放、OpenViking 语义分层检索与 Serverless 按需唤醒2分钟空闲休眠静默网关
 - [Hermes 模型配置与容灾编排避坑指南](./Hermes模型配置与容灾编排避坑指南.md) — MoA 多参考模型粉碎工具调用协议与显式禁用、上下文窗口 0 自适应与阈值压缩、Fallback 容灾梯度黄金编排（严禁思考模型做静默降级）与版本指纹防漂移
 - [本地多智能体记忆库提炼模型动态路由与配额防漏实践](./本地多智能体记忆库提炼模型动态路由与配额防漏实践.md) — 商业配额慢漏溯源（会话全量发包 vs 提炼调用指纹）、OpenViking 内存单例限制与 Serverless 懒网关生命周期突破、token-stats 内嵌无常驻进程动态跟随及端到端避坑验证
+- [Hermes Agent Android 客户端选型与双端通信机制](./Hermes-Agent-Android客户端选型与双端通信机制.md) — 剖析 hermes-android 与 hermes-mobile 两款开源移动端客户端协议差异、本地化支持与多进程运行时会话拓扑
 
 
 ## 与其他分类的边界
