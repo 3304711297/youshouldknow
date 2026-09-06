@@ -144,7 +144,7 @@ llama-server.exe -m D:\HermesModels\bge-m3-Q8_0.gguf --embedding --port 18082 --
 
 ### 2. 警惕客户端「本地运行时」常驻吃爆内存陷阱
 在 Hermes 客户端「提供方 → 本地模型」界面中，若开启「已安装 llama.cpp 运行时」，Hermes 会在后台常驻拉起 `llama-server.exe` 并加载完整的 7B/9B 聊天模型，**常驻吃掉近 3GB（2,911 MB）系统内存**！
-- **避坑准则**：主力对话建议全权交由云端旗舰（Gemini 3.8 Flash）承担，零本地内存消耗；
+- **避坑准则**：对话模型由用户按需随时自由切换，切勿为了本地聊天而长期开启常驻引擎；
 - 该客户端常驻开关**必须显式关闭**（点击「■ 关闭」按钮，或设置 `local_runtime.enabled: false`）；
 - 记忆向量化仅由上述 2 分钟 Serverless 懒人网关管理，绝不让本地聊天大模型在后台长期吞噬内存。
 
