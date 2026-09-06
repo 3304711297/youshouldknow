@@ -22,6 +22,8 @@ AI 编程助手、浏览器自动化、MCP（Model Context Protocol）工具链�
 - [WorkBuddy 积分端到端打通实录](./WorkBuddy积分端到端打通实录.md) — 哑管道问题定位、/api/usage_summary 端点契约（ZCode 施工）、token-stats 插件卡片升级与双端数据一致性验证方法论
 - [Hermes 子代理模型路由机制](./Hermes子代理模型路由机制.md) — delegation 默认继承实证、官方文档优先级、Kanban per-task override 与"不固定模型，用户口头裁决"实践范式、思考型模型 max_tokens 假阳性
 - [ZCode headless CLI 与 GUI 会话体系辨析](./ZCode-headless-CLI与GUI会话体系辨析.md) — project_id 落点差异实测、两套模型体系分离、18080 网关/Gemini 429 故障链与"GUI 手动建会话"实践规范
+- [Hermes 本地模型工作台与 OpenViking 智能记忆检索实战](./Hermes本地模型工作台与OpenViking智能记忆实战.md) — llama.cpp CUDA 本地推理引擎、RTX 4070 显存适配黄金法则、NTFS Junction C 盘空间彻底释放、OpenViking 语义分层检索与 Serverless 按需唤醒休眠静默网关
+
 
 ## 与其他分类的边界
 
