@@ -5123,7 +5123,7 @@
 <a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>                         ↓
 <a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>       Serverless 懒加载网关 (HTTP 127.0.0.1:1933)
 <a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>       - 提问时按需自动唤醒 18082 与 1934
-<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>       - 15 分钟空闲自动杀进程、100% 释放 GPU 显存
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>       - 2 分钟空闲自动杀进程、100% 释放 GPU 显存
 <a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>                         │
 <a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>                         ↓
 <a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>       Hermes 原生 Memory Provider (openviking 插件, 保守召回策略)
@@ -5227,7 +5227,7 @@
 <h3 id="1">1. 运行机制<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
 <ol>
 <li><strong>冷启动唤醒</strong>：Hermes 向 <code>127.0.0.1:1933</code> 发送检索请求时，网关检测到底层 18082 与 1934 处于离线状态，立即在后台以 <code>CREATE_NO_WINDOW</code> 静默拉起服务，并在 5~6 秒内就绪并转发响应；</li>
-<li><strong>空闲倒计时回收</strong>：网关内置心跳检测，若连续 <strong>15 分钟</strong>没有新的记忆库交互，自动执行终止指令杀掉底层进程，<strong>100% 释放 800MB 显存</strong>；</li>
+<li><strong>空闲倒计时回收</strong>：网关内置心跳检测，若连续 <strong>2 分钟</strong>没有新的记忆库交互，自动执行终止指令杀掉底层进程，<strong>100% 释放 800MB 显存</strong>；</li>
 <li><strong>开机自启</strong>：在 <code>Startup</code> 目录放置 <code>.vbs</code> 脚本静默拉起网关，由于网关本身仅占约 15MB 内存且 CPU 占用为 0%，用户日常完全无感。</li>
 </ol>
 <hr />
@@ -5303,7 +5303,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年9月6日 03:29:26 UTC">2026年9月6日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年9月6日 03:34:13 UTC">2026年9月6日</span>
   </span>
 
     
