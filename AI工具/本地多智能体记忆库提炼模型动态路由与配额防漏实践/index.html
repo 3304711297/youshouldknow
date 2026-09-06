@@ -10,25 +10,31 @@
       
       
       
+        <link rel="canonical" href="https://3304711297.github.io/youshouldknow/AI%E5%B7%A5%E5%85%B7/%E6%9C%AC%E5%9C%B0%E5%A4%9A%E6%99%BA%E8%83%BD%E4%BD%93%E8%AE%B0%E5%BF%86%E5%BA%93%E6%8F%90%E7%82%BC%E6%A8%A1%E5%9E%8B%E5%8A%A8%E6%80%81%E8%B7%AF%E7%94%B1%E4%B8%8E%E9%85%8D%E9%A2%9D%E9%98%B2%E6%BC%8F%E5%AE%9E%E8%B7%B5/">
       
+      
+        <link rel="prev" href="../Hermes%E6%A8%A1%E5%9E%8B%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%AE%B9%E7%81%BE%E7%BC%96%E6%8E%92%E9%81%BF%E5%9D%91%E6%8C%87%E5%8D%97/">
+      
+      
+        <link rel="next" href="../../%E9%A1%B9%E7%9B%AE%E5%AF%BC%E8%88%AA/">
       
       
         
       
       
-      <link rel="icon" href="/youshouldknow/assets/images/favicon.png">
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
-        <title>YouShouldKnow</title>
+        <title>本地多智能体记忆库提炼模型动态路由与配额防漏实践 - YouShouldKnow</title>
       
     
     
-      <link rel="stylesheet" href="/youshouldknow/assets/stylesheets/main.ec1eaa64.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
-        <link rel="stylesheet" href="/youshouldknow/assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -47,9 +53,9 @@
       
     
     
-      <link rel="stylesheet" href="/youshouldknow/stylesheets/extra.css">
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-    <script>__md_scope=new URL("/youshouldknow/",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -73,6 +79,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -83,7 +94,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="页眉">
-    <a href="/youshouldknow/." title="YouShouldKnow" class="md-header__button md-logo" aria-label="YouShouldKnow" data-md-component="logo">
+    <a href="../.." title="YouShouldKnow" class="md-header__button md-logo" aria-label="YouShouldKnow" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -103,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              
+              本地多智能体记忆库提炼模型动态路由与配额防漏实践
             
           </span>
         </div>
@@ -216,7 +227,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="/youshouldknow/." class="md-tabs__link">
+      <a href="../.." class="md-tabs__link">
         
   
   
@@ -237,7 +248,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="/youshouldknow/%E9%AA%8C%E6%9C%BA%E7%9B%B8%E5%85%B3/" class="md-tabs__link">
+        <a href="../../%E9%AA%8C%E6%9C%BA%E7%9B%B8%E5%85%B3/" class="md-tabs__link">
           
   
   
@@ -259,7 +270,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="/youshouldknow/BIOS%E4%B8%8E%E5%9B%BA%E4%BB%B6/" class="md-tabs__link">
+        <a href="../../BIOS%E4%B8%8E%E5%9B%BA%E4%BB%B6/" class="md-tabs__link">
           
   
   
@@ -281,7 +292,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="/youshouldknow/%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86/" class="md-tabs__link">
+        <a href="../../%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86/" class="md-tabs__link">
           
   
   
@@ -303,7 +314,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="/youshouldknow/CPU%E4%B8%8E%E5%BB%B6%E8%BF%9F/" class="md-tabs__link">
+        <a href="../../CPU%E4%B8%8E%E5%BB%B6%E8%BF%9F/" class="md-tabs__link">
           
   
   
@@ -325,7 +336,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="/youshouldknow/GPU%E4%B8%8E%E6%98%BE%E7%A4%BA/" class="md-tabs__link">
+        <a href="../../GPU%E4%B8%8E%E6%98%BE%E7%A4%BA/" class="md-tabs__link">
           
   
   
@@ -347,7 +358,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="/youshouldknow/%E5%86%85%E5%AD%98%E4%B8%8E%E5%AD%98%E5%82%A8/" class="md-tabs__link">
+        <a href="../../%E5%86%85%E5%AD%98%E4%B8%8E%E5%AD%98%E5%82%A8/" class="md-tabs__link">
           
   
   
@@ -369,7 +380,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="/youshouldknow/%E5%86%85%E5%AD%98%E8%B6%85%E9%A2%91/" class="md-tabs__link">
+        <a href="../../%E5%86%85%E5%AD%98%E8%B6%85%E9%A2%91/" class="md-tabs__link">
           
   
   
@@ -391,7 +402,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="/youshouldknow/%E6%98%BE%E5%8D%A1%E4%BC%98%E5%8C%96/" class="md-tabs__link">
+        <a href="../../%E6%98%BE%E5%8D%A1%E4%BC%98%E5%8C%96/" class="md-tabs__link">
           
   
   
@@ -413,7 +424,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="/youshouldknow/%E7%AC%94%E7%94%B5%E7%9B%B8%E5%85%B3/" class="md-tabs__link">
+        <a href="../../%E7%AC%94%E7%94%B5%E7%9B%B8%E5%85%B3/" class="md-tabs__link">
           
   
   
@@ -435,7 +446,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="/youshouldknow/%E7%B3%BB%E7%BB%9F%E8%B0%83%E4%BC%98%E4%B8%8E%E5%AE%89%E5%85%A8/" class="md-tabs__link">
+        <a href="../../%E7%B3%BB%E7%BB%9F%E8%B0%83%E4%BC%98%E4%B8%8E%E5%AE%89%E5%85%A8/" class="md-tabs__link">
           
   
   
@@ -457,7 +468,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="/youshouldknow/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/" class="md-tabs__link">
+        <a href="../../%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/" class="md-tabs__link">
           
   
   
@@ -479,7 +490,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="/youshouldknow/%E8%BD%AF%E4%BB%B6%E6%8A%80%E5%B7%A7/" class="md-tabs__link">
+        <a href="../../%E8%BD%AF%E4%BB%B6%E6%8A%80%E5%B7%A7/" class="md-tabs__link">
           
   
   
@@ -497,11 +508,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="/youshouldknow/AI%E5%B7%A5%E5%85%B7/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
           
   
   
@@ -523,7 +536,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="/youshouldknow/%E9%A1%B9%E7%9B%AE%E5%AF%BC%E8%88%AA/" class="md-tabs__link">
+        <a href="../../%E9%A1%B9%E7%9B%AE%E5%AF%BC%E8%88%AA/" class="md-tabs__link">
           
   
   
@@ -559,7 +572,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="/youshouldknow/." title="YouShouldKnow" class="md-nav__button md-logo" aria-label="YouShouldKnow" data-md-component="logo">
+    <a href="../.." title="YouShouldKnow" class="md-nav__button md-logo" aria-label="YouShouldKnow" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -589,7 +602,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   
@@ -649,7 +662,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="/youshouldknow/%E9%AA%8C%E6%9C%BA%E7%9B%B8%E5%85%B3/" class="md-nav__link ">
+            <a href="../../%E9%AA%8C%E6%9C%BA%E7%9B%B8%E5%85%B3/" class="md-nav__link ">
               
   
   
@@ -693,7 +706,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/%E9%AA%8C%E6%9C%BA%E7%9B%B8%E5%85%B3/Windows%E5%AE%A1%E6%A0%B8%E6%A8%A1%E5%BC%8F_AuditMode%E4%B8%8EOOBE/" class="md-nav__link">
+      <a href="../../%E9%AA%8C%E6%9C%BA%E7%9B%B8%E5%85%B3/Windows%E5%AE%A1%E6%A0%B8%E6%A8%A1%E5%BC%8F_AuditMode%E4%B8%8EOOBE/" class="md-nav__link">
         
   
   
@@ -721,7 +734,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/%E9%AA%8C%E6%9C%BA%E7%9B%B8%E5%85%B3/Windows-11-%E8%B7%B3%E8%BF%87%E8%81%94%E7%BD%91%E6%BF%80%E6%B4%BB%E5%B9%B6%E5%88%9B%E5%BB%BA%E6%9C%AC%E5%9C%B0%E8%B4%A6%E6%88%B7/" class="md-nav__link">
+      <a href="../../%E9%AA%8C%E6%9C%BA%E7%9B%B8%E5%85%B3/Windows-11-%E8%B7%B3%E8%BF%87%E8%81%94%E7%BD%91%E6%BF%80%E6%B4%BB%E5%B9%B6%E5%88%9B%E5%BB%BA%E6%9C%AC%E5%9C%B0%E8%B4%A6%E6%88%B7/" class="md-nav__link">
         
   
   
@@ -749,7 +762,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/%E9%AA%8C%E6%9C%BA%E7%9B%B8%E5%85%B3/Windows%E6%BF%80%E6%B4%BB%E4%B8%8E%E6%95%B0%E5%AD%97%E8%AE%B8%E5%8F%AF%E8%AF%81%E9%AA%8C%E6%9C%BA%E6%8C%87%E5%8D%97/" class="md-nav__link">
+      <a href="../../%E9%AA%8C%E6%9C%BA%E7%9B%B8%E5%85%B3/Windows%E6%BF%80%E6%B4%BB%E4%B8%8E%E6%95%B0%E5%AD%97%E8%AE%B8%E5%8F%AF%E8%AF%81%E9%AA%8C%E6%9C%BA%E6%8C%87%E5%8D%97/" class="md-nav__link">
         
   
   
@@ -777,7 +790,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/%E9%AA%8C%E6%9C%BA%E7%9B%B8%E5%85%B3/%E8%A3%85%E6%9C%BA%E6%B3%95/" class="md-nav__link">
+      <a href="../../%E9%AA%8C%E6%9C%BA%E7%9B%B8%E5%85%B3/%E8%A3%85%E6%9C%BA%E6%B3%95/" class="md-nav__link">
         
   
   
@@ -885,7 +898,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="/youshouldknow/BIOS%E4%B8%8E%E5%9B%BA%E4%BB%B6/" class="md-nav__link ">
+            <a href="../../BIOS%E4%B8%8E%E5%9B%BA%E4%BB%B6/" class="md-nav__link ">
               
   
   
@@ -929,7 +942,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/BIOS%E4%B8%8E%E5%9B%BA%E4%BB%B6/BIOS%E9%80%89%E9%A1%B9%E7%A7%91%E6%99%AE%E7%B3%BB%E5%88%97%E6%80%BB%E8%A7%88/" class="md-nav__link">
+      <a href="../../BIOS%E4%B8%8E%E5%9B%BA%E4%BB%B6/BIOS%E9%80%89%E9%A1%B9%E7%A7%91%E6%99%AE%E7%B3%BB%E5%88%97%E6%80%BB%E8%A7%88/" class="md-nav__link">
         
   
   
@@ -957,7 +970,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/BIOS%E4%B8%8E%E5%9B%BA%E4%BB%B6/BIOS%E5%85%A5%E9%97%A8%E8%BF%9B%E5%85%A5%E9%80%80%E5%87%BA%E4%B8%8E%E6%A8%A1%E5%BC%8F%E5%88%87%E6%8D%A2/" class="md-nav__link">
+      <a href="../../BIOS%E4%B8%8E%E5%9B%BA%E4%BB%B6/BIOS%E5%85%A5%E9%97%A8%E8%BF%9B%E5%85%A5%E9%80%80%E5%87%BA%E4%B8%8E%E6%A8%A1%E5%BC%8F%E5%88%87%E6%8D%A2/" class="md-nav__link">
         
   
   
@@ -985,7 +998,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/BIOS%E4%B8%8E%E5%9B%BA%E4%BB%B6/BIOS%E6%81%A2%E5%A4%8D%E9%BB%98%E8%AE%A4%E8%AE%BE%E7%BD%AE%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E6%B3%95/" class="md-nav__link">
+      <a href="../../BIOS%E4%B8%8E%E5%9B%BA%E4%BB%B6/BIOS%E6%81%A2%E5%A4%8D%E9%BB%98%E8%AE%A4%E8%AE%BE%E7%BD%AE%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E6%B3%95/" class="md-nav__link">
         
   
   
@@ -1013,7 +1026,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/BIOS%E4%B8%8E%E5%9B%BA%E4%BB%B6/%E5%90%AF%E5%8A%A8%E9%A1%BA%E5%BA%8F%E4%B8%8EBootOverride/" class="md-nav__link">
+      <a href="../../BIOS%E4%B8%8E%E5%9B%BA%E4%BB%B6/%E5%90%AF%E5%8A%A8%E9%A1%BA%E5%BA%8F%E4%B8%8EBootOverride/" class="md-nav__link">
         
   
   
@@ -1041,7 +1054,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/BIOS%E4%B8%8E%E5%9B%BA%E4%BB%B6/UEFI-Legacy-CSM%E4%B8%8E%E5%88%86%E5%8C%BA%E8%A1%A8/" class="md-nav__link">
+      <a href="../../BIOS%E4%B8%8E%E5%9B%BA%E4%BB%B6/UEFI-Legacy-CSM%E4%B8%8E%E5%88%86%E5%8C%BA%E8%A1%A8/" class="md-nav__link">
         
   
   
@@ -1069,7 +1082,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/BIOS%E4%B8%8E%E5%9B%BA%E4%BB%B6/SecureBoot%E5%AE%89%E5%85%A8%E5%90%AF%E5%8A%A8%E4%B8%8E%E5%AF%86%E9%92%A5%E7%AE%A1%E7%90%86/" class="md-nav__link">
+      <a href="../../BIOS%E4%B8%8E%E5%9B%BA%E4%BB%B6/SecureBoot%E5%AE%89%E5%85%A8%E5%90%AF%E5%8A%A8%E4%B8%8E%E5%AF%86%E9%92%A5%E7%AE%A1%E7%90%86/" class="md-nav__link">
         
   
   
@@ -1097,7 +1110,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/BIOS%E4%B8%8E%E5%9B%BA%E4%BB%B6/TPM-PTT-fTPM%E4%B8%8E%E6%B8%85%E9%99%A4%E9%A3%8E%E9%99%A9/" class="md-nav__link">
+      <a href="../../BIOS%E4%B8%8E%E5%9B%BA%E4%BB%B6/TPM-PTT-fTPM%E4%B8%8E%E6%B8%85%E9%99%A4%E9%A3%8E%E9%99%A9/" class="md-nav__link">
         
   
   
@@ -1125,7 +1138,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/BIOS%E4%B8%8E%E5%9B%BA%E4%BB%B6/FastBoot%E5%BF%AB%E9%80%9F%E5%90%AF%E5%8A%A8/" class="md-nav__link">
+      <a href="../../BIOS%E4%B8%8E%E5%9B%BA%E4%BB%B6/FastBoot%E5%BF%AB%E9%80%9F%E5%90%AF%E5%8A%A8/" class="md-nav__link">
         
   
   
@@ -1153,7 +1166,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/BIOS%E4%B8%8E%E5%9B%BA%E4%BB%B6/Above4G%E8%A7%A3%E7%A0%81%E4%B8%8EResizableBAR/" class="md-nav__link">
+      <a href="../../BIOS%E4%B8%8E%E5%9B%BA%E4%BB%B6/Above4G%E8%A7%A3%E7%A0%81%E4%B8%8EResizableBAR/" class="md-nav__link">
         
   
   
@@ -1181,7 +1194,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/BIOS%E4%B8%8E%E5%9B%BA%E4%BB%B6/%E9%A3%8E%E6%89%87%E8%B0%83%E9%80%9FPWM-DC%E4%B8%8E%E9%A3%8E%E6%89%87%E6%9B%B2%E7%BA%BF/" class="md-nav__link">
+      <a href="../../BIOS%E4%B8%8E%E5%9B%BA%E4%BB%B6/%E9%A3%8E%E6%89%87%E8%B0%83%E9%80%9FPWM-DC%E4%B8%8E%E9%A3%8E%E6%89%87%E6%9B%B2%E7%BA%BF/" class="md-nav__link">
         
   
   
@@ -1209,7 +1222,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/BIOS%E4%B8%8E%E5%9B%BA%E4%BB%B6/%E6%98%BE%E7%A4%BA%E8%BE%93%E5%87%BA%E4%BC%98%E5%85%88%E7%BA%A7%E4%B8%8E%E6%A0%B8%E6%98%BE%E8%B0%83%E7%94%A8/" class="md-nav__link">
+      <a href="../../BIOS%E4%B8%8E%E5%9B%BA%E4%BB%B6/%E6%98%BE%E7%A4%BA%E8%BE%93%E5%87%BA%E4%BC%98%E5%85%88%E7%BA%A7%E4%B8%8E%E6%A0%B8%E6%98%BE%E8%B0%83%E7%94%A8/" class="md-nav__link">
         
   
   
@@ -1237,7 +1250,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/BIOS%E4%B8%8E%E5%9B%BA%E4%BB%B6/SATA%E6%A8%A1%E5%BC%8F%E4%B8%8EIntel-VMD/" class="md-nav__link">
+      <a href="../../BIOS%E4%B8%8E%E5%9B%BA%E4%BB%B6/SATA%E6%A8%A1%E5%BC%8F%E4%B8%8EIntel-VMD/" class="md-nav__link">
         
   
   
@@ -1265,7 +1278,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/BIOS%E4%B8%8E%E5%9B%BA%E4%BB%B6/M2%E9%80%9A%E9%81%93%E5%88%86%E9%85%8D%E4%B8%8E%E6%98%BE%E5%8D%A1PCIe%E9%99%8D%E9%80%9F/" class="md-nav__link">
+      <a href="../../BIOS%E4%B8%8E%E5%9B%BA%E4%BB%B6/M2%E9%80%9A%E9%81%93%E5%88%86%E9%85%8D%E4%B8%8E%E6%98%BE%E5%8D%A1PCIe%E9%99%8D%E9%80%9F/" class="md-nav__link">
         
   
   
@@ -1293,7 +1306,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/BIOS%E4%B8%8E%E5%9B%BA%E4%BB%B6/NVMe%E8%AF%86%E5%88%AB%E5%85%A8%E9%93%BE%E8%B7%AF%E4%B8%8E%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5/" class="md-nav__link">
+      <a href="../../BIOS%E4%B8%8E%E5%9B%BA%E4%BB%B6/NVMe%E8%AF%86%E5%88%AB%E5%85%A8%E9%93%BE%E8%B7%AF%E4%B8%8E%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5/" class="md-nav__link">
         
   
   
@@ -1321,7 +1334,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/BIOS%E4%B8%8E%E5%9B%BA%E4%BB%B6/%E5%8E%82%E5%95%86%E8%BD%AF%E4%BB%B6%E8%87%AA%E5%8A%A8%E5%AE%89%E8%A3%85%E5%BC%80%E5%85%B3/" class="md-nav__link">
+      <a href="../../BIOS%E4%B8%8E%E5%9B%BA%E4%BB%B6/%E5%8E%82%E5%95%86%E8%BD%AF%E4%BB%B6%E8%87%AA%E5%8A%A8%E5%AE%89%E8%A3%85%E5%BC%80%E5%85%B3/" class="md-nav__link">
         
   
   
@@ -1349,7 +1362,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/BIOS%E4%B8%8E%E5%9B%BA%E4%BB%B6/DDR5%E5%86%85%E5%AD%98%E8%AE%AD%E7%BB%83%E4%B8%8EMCR-PD/" class="md-nav__link">
+      <a href="../../BIOS%E4%B8%8E%E5%9B%BA%E4%BB%B6/DDR5%E5%86%85%E5%AD%98%E8%AE%AD%E7%BB%83%E4%B8%8EMCR-PD/" class="md-nav__link">
         
   
   
@@ -1377,7 +1390,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/BIOS%E4%B8%8E%E5%9B%BA%E4%BB%B6/CPU%E8%B0%83%E9%A2%91%E4%B8%8E%E7%94%B5%E6%BA%90%E7%AE%A1%E7%90%86%E6%9C%BA%E5%88%B6/" class="md-nav__link">
+      <a href="../../BIOS%E4%B8%8E%E5%9B%BA%E4%BB%B6/CPU%E8%B0%83%E9%A2%91%E4%B8%8E%E7%94%B5%E6%BA%90%E7%AE%A1%E7%90%86%E6%9C%BA%E5%88%B6/" class="md-nav__link">
         
   
   
@@ -1405,7 +1418,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/BIOS%E4%B8%8E%E5%9B%BA%E4%BB%B6/AMD-PBO%E4%B8%8ECurveOptimizer/" class="md-nav__link">
+      <a href="../../BIOS%E4%B8%8E%E5%9B%BA%E4%BB%B6/AMD-PBO%E4%B8%8ECurveOptimizer/" class="md-nav__link">
         
   
   
@@ -1433,7 +1446,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/BIOS%E4%B8%8E%E5%9B%BA%E4%BB%B6/%E5%8A%9F%E8%80%97%E5%A2%99%E7%94%B5%E6%B5%81%E5%A2%99%E4%B8%8ECEP%E7%94%B5%E6%B5%81%E4%BF%9D%E6%8A%A4/" class="md-nav__link">
+      <a href="../../BIOS%E4%B8%8E%E5%9B%BA%E4%BB%B6/%E5%8A%9F%E8%80%97%E5%A2%99%E7%94%B5%E6%B5%81%E5%A2%99%E4%B8%8ECEP%E7%94%B5%E6%B5%81%E4%BF%9D%E6%8A%A4/" class="md-nav__link">
         
   
   
@@ -1461,7 +1474,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/BIOS%E4%B8%8E%E5%9B%BA%E4%BB%B6/CPU%E5%80%8D%E9%A2%91%E4%B8%8E%E5%A4%96%E9%A2%91%E8%B6%85%E9%A2%91%E5%9F%BA%E7%A1%80/" class="md-nav__link">
+      <a href="../../BIOS%E4%B8%8E%E5%9B%BA%E4%BB%B6/CPU%E5%80%8D%E9%A2%91%E4%B8%8E%E5%A4%96%E9%A2%91%E8%B6%85%E9%A2%91%E5%9F%BA%E7%A1%80/" class="md-nav__link">
         
   
   
@@ -1489,7 +1502,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/BIOS%E4%B8%8E%E5%9B%BA%E4%BB%B6/CPU%E7%94%B5%E5%8E%8B%E4%B8%8ELLC%E9%98%B2%E6%8E%89%E5%8E%8B/" class="md-nav__link">
+      <a href="../../BIOS%E4%B8%8E%E5%9B%BA%E4%BB%B6/CPU%E7%94%B5%E5%8E%8B%E4%B8%8ELLC%E9%98%B2%E6%8E%89%E5%8E%8B/" class="md-nav__link">
         
   
   
@@ -1517,7 +1530,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/BIOS%E4%B8%8E%E5%9B%BA%E4%BB%B6/BIOS%E4%B8%8EUEFI%E5%9B%BA%E4%BB%B6%E5%88%B7%E5%86%99%E5%8F%8A%E5%BC%80%E6%9C%BALogo%E4%BF%AE%E6%94%B9%E6%8C%87%E5%8D%97/" class="md-nav__link">
+      <a href="../../BIOS%E4%B8%8E%E5%9B%BA%E4%BB%B6/BIOS%E4%B8%8EUEFI%E5%9B%BA%E4%BB%B6%E5%88%B7%E5%86%99%E5%8F%8A%E5%BC%80%E6%9C%BALogo%E4%BF%AE%E6%94%B9%E6%8C%87%E5%8D%97/" class="md-nav__link">
         
   
   
@@ -1545,7 +1558,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/BIOS%E4%B8%8E%E5%9B%BA%E4%BB%B6/UEFI-Editor%E9%A1%B9%E7%9B%AE%E8%AF%B4%E6%98%8E/" class="md-nav__link">
+      <a href="../../BIOS%E4%B8%8E%E5%9B%BA%E4%BB%B6/UEFI-Editor%E9%A1%B9%E7%9B%AE%E8%AF%B4%E6%98%8E/" class="md-nav__link">
         
   
   
@@ -1573,7 +1586,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/BIOS%E4%B8%8E%E5%9B%BA%E4%BB%B6/%E6%9C%BA%E6%A2%B0%E9%9D%A9%E5%91%BD%E7%AC%94%E8%AE%B0%E6%9C%ACBIOS%E9%80%89%E9%A1%B9%E4%B8%8E%E8%B6%85%E9%A2%91%E9%99%8D%E5%8E%8B%E9%A3%8E%E9%99%A9%E8%AF%B4%E6%98%8E/" class="md-nav__link">
+      <a href="../../BIOS%E4%B8%8E%E5%9B%BA%E4%BB%B6/%E6%9C%BA%E6%A2%B0%E9%9D%A9%E5%91%BD%E7%AC%94%E8%AE%B0%E6%9C%ACBIOS%E9%80%89%E9%A1%B9%E4%B8%8E%E8%B6%85%E9%A2%91%E9%99%8D%E5%8E%8B%E9%A3%8E%E9%99%A9%E8%AF%B4%E6%98%8E/" class="md-nav__link">
         
   
   
@@ -1667,7 +1680,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="/youshouldknow/%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86/" class="md-nav__link ">
+            <a href="../../%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86/" class="md-nav__link ">
               
   
   
@@ -1711,7 +1724,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86/%E7%94%B5%E6%BA%90%E8%AE%A1%E5%88%92%E5%88%9B%E5%BB%BA%E4%B8%8E%E4%BC%98%E5%8C%96%E6%8C%87%E5%8D%97/" class="md-nav__link">
+      <a href="../../%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86/%E7%94%B5%E6%BA%90%E8%AE%A1%E5%88%92%E5%88%9B%E5%BB%BA%E4%B8%8E%E4%BC%98%E5%8C%96%E6%8C%87%E5%8D%97/" class="md-nav__link">
         
   
   
@@ -1739,7 +1752,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86/Windows-%E7%9D%A1%E7%9C%A0-%E4%BC%91%E7%9C%A0%E4%B8%8E%E6%B7%B7%E5%90%88%E7%9D%A1%E7%9C%A0%E8%AF%A6%E8%A7%A3/" class="md-nav__link">
+      <a href="../../%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86/Windows-%E7%9D%A1%E7%9C%A0-%E4%BC%91%E7%9C%A0%E4%B8%8E%E6%B7%B7%E5%90%88%E7%9D%A1%E7%9C%A0%E8%AF%A6%E8%A7%A3/" class="md-nav__link">
         
   
   
@@ -1767,7 +1780,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86/Windows%E5%90%AF%E5%8A%A8%E9%85%8D%E7%BD%AE%E4%B8%8Etweakbyjie%E5%AF%B9%E5%BA%94%E8%AF%B4%E6%98%8E/" class="md-nav__link">
+      <a href="../../%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86/Windows%E5%90%AF%E5%8A%A8%E9%85%8D%E7%BD%AE%E4%B8%8Etweakbyjie%E5%AF%B9%E5%BA%94%E8%AF%B4%E6%98%8E/" class="md-nav__link">
         
   
   
@@ -1795,7 +1808,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86/UEFI-WPBT%E5%9B%BA%E4%BB%B6%E8%87%AA%E5%8A%A8%E6%B3%A8%E5%85%A5%E4%B8%8EWindows%E9%98%B2%E5%BE%A1/" class="md-nav__link">
+      <a href="../../%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86/UEFI-WPBT%E5%9B%BA%E4%BB%B6%E8%87%AA%E5%8A%A8%E6%B3%A8%E5%85%A5%E4%B8%8EWindows%E9%98%B2%E5%BE%A1/" class="md-nav__link">
         
   
   
@@ -1830,7 +1843,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86/Windows%E5%86%85%E5%AD%98%E5%8E%8B%E7%BC%A9%E5%8A%9F%E8%83%BD%E4%B8%8EMMAgent%E8%AE%BE%E7%BD%AE/" class="md-nav__link">
+      <a href="../../%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86/Windows%E5%86%85%E5%AD%98%E5%8E%8B%E7%BC%A9%E5%8A%9F%E8%83%BD%E4%B8%8EMMAgent%E8%AE%BE%E7%BD%AE/" class="md-nav__link">
         
   
   
@@ -1858,7 +1871,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86/Windows%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E8%AE%BE%E7%BD%AE%E6%8C%87%E5%8D%97/" class="md-nav__link">
+      <a href="../../%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86/Windows%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E8%AE%BE%E7%BD%AE%E6%8C%87%E5%8D%97/" class="md-nav__link">
         
   
   
@@ -1886,7 +1899,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86/Windows%E6%96%B0%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F%E7%AD%96%E7%95%A5%E4%B8%8E%E5%85%B3%E9%97%AD%E6%96%B9%E6%B3%95/" class="md-nav__link">
+      <a href="../../%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86/Windows%E6%96%B0%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F%E7%AD%96%E7%95%A5%E4%B8%8E%E5%85%B3%E9%97%AD%E6%96%B9%E6%B3%95/" class="md-nav__link">
         
   
   
@@ -1914,7 +1927,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86/Windows%E7%B3%BB%E7%BB%9F%E6%9C%8D%E5%8A%A1%E5%AF%B9%E5%BA%94%E6%B3%A8%E5%86%8C%E8%A1%A8%E8%B7%AF%E5%BE%84/" class="md-nav__link">
+      <a href="../../%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86/Windows%E7%B3%BB%E7%BB%9F%E6%9C%8D%E5%8A%A1%E5%AF%B9%E5%BA%94%E6%B3%A8%E5%86%8C%E8%A1%A8%E8%B7%AF%E5%BE%84/" class="md-nav__link">
         
   
   
@@ -1942,7 +1955,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86/Windows%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%88%97%E8%A1%A8/" class="md-nav__link">
+      <a href="../../%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86/Windows%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%88%97%E8%A1%A8/" class="md-nav__link">
         
   
   
@@ -1977,7 +1990,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86/Windows%E5%B8%B8%E7%94%A8%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%88%97%E8%A1%A8/" class="md-nav__link">
+      <a href="../../%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86/Windows%E5%B8%B8%E7%94%A8%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%88%97%E8%A1%A8/" class="md-nav__link">
         
   
   
@@ -2012,7 +2025,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86/%E5%AE%89%E8%A3%85%E7%B3%BB%E7%BB%9F%E6%97%B6%E8%B7%B3%E8%BF%87%E7%A1%AC%E4%BB%B6%E5%92%8CTPM%E6%A3%80%E6%B5%8B/" class="md-nav__link">
+      <a href="../../%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86/%E5%AE%89%E8%A3%85%E7%B3%BB%E7%BB%9F%E6%97%B6%E8%B7%B3%E8%BF%87%E7%A1%AC%E4%BB%B6%E5%92%8CTPM%E6%A3%80%E6%B5%8B/" class="md-nav__link">
         
   
   
@@ -2040,7 +2053,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86/%E7%94%A8%E4%BA%8B%E4%BB%B6%E6%9F%A5%E7%9C%8B%E5%99%A8%E6%8E%92%E6%9F%A5%E9%BB%91%E5%B1%8F%E8%93%9D%E5%B1%8F%E7%BB%BF%E5%B1%8F%E5%B4%A9%E6%BA%83/" class="md-nav__link">
+      <a href="../../%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86/%E7%94%A8%E4%BA%8B%E4%BB%B6%E6%9F%A5%E7%9C%8B%E5%99%A8%E6%8E%92%E6%9F%A5%E9%BB%91%E5%B1%8F%E8%93%9D%E5%B1%8F%E7%BB%BF%E5%B1%8F%E5%B4%A9%E6%BA%83/" class="md-nav__link">
         
   
   
@@ -2075,7 +2088,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86/Defender%E5%88%A0%E9%99%A4%E8%84%9A%E6%9C%AC%E9%A3%8E%E9%99%A9%E4%B8%8E%E6%81%A2%E5%A4%8D%E8%BE%B9%E7%95%8C/" class="md-nav__link">
+      <a href="../../%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86/Defender%E5%88%A0%E9%99%A4%E8%84%9A%E6%9C%AC%E9%A3%8E%E9%99%A9%E4%B8%8E%E6%81%A2%E5%A4%8D%E8%BE%B9%E7%95%8C/" class="md-nav__link">
         
   
   
@@ -2103,7 +2116,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86/%E5%88%A0%E9%99%A4%E6%AD%A4%E7%94%B5%E8%84%91%E4%B8%AD%E5%A4%9A%E4%BD%99%E8%BD%AF%E4%BB%B6%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F%E5%9B%BE%E6%A0%87/" class="md-nav__link">
+      <a href="../../%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86/%E5%88%A0%E9%99%A4%E6%AD%A4%E7%94%B5%E8%84%91%E4%B8%AD%E5%A4%9A%E4%BD%99%E8%BD%AF%E4%BB%B6%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F%E5%9B%BE%E6%A0%87/" class="md-nav__link">
         
   
   
@@ -2131,7 +2144,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86/%E7%A6%81%E7%94%A8Windows%E9%80%9A%E7%9F%A5%E4%B8%AD%E5%BF%83%E4%B8%8E%E6%93%8D%E4%BD%9C%E4%B8%AD%E5%BF%83/" class="md-nav__link">
+      <a href="../../%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86/%E7%A6%81%E7%94%A8Windows%E9%80%9A%E7%9F%A5%E4%B8%AD%E5%BF%83%E4%B8%8E%E6%93%8D%E4%BD%9C%E4%B8%AD%E5%BF%83/" class="md-nav__link">
         
   
   
@@ -2159,7 +2172,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86/%E8%B0%83%E6%95%B4Windows%E6%BB%9A%E5%8A%A8%E6%9D%A1%E5%AE%BD%E5%BA%A6%E4%B8%8E%E9%AB%98%E5%BA%A6/" class="md-nav__link">
+      <a href="../../%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86/%E8%B0%83%E6%95%B4Windows%E6%BB%9A%E5%8A%A8%E6%9D%A1%E5%AE%BD%E5%BA%A6%E4%B8%8E%E9%AB%98%E5%BA%A6/" class="md-nav__link">
         
   
   
@@ -2187,7 +2200,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86/Windows%E7%9B%AE%E5%BD%95%E8%81%94%E6%8E%A5Junction%E4%B8%8E%E7%AC%A6%E5%8F%B7%E9%93%BE%E6%8E%A5%E8%BE%A8%E6%9E%90/" class="md-nav__link">
+      <a href="../../%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86/Windows%E7%9B%AE%E5%BD%95%E8%81%94%E6%8E%A5Junction%E4%B8%8E%E7%AC%A6%E5%8F%B7%E9%93%BE%E6%8E%A5%E8%BE%A8%E6%9E%90/" class="md-nav__link">
         
   
   
@@ -2251,7 +2264,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="/youshouldknow/CPU%E4%B8%8E%E5%BB%B6%E8%BF%9F/" class="md-nav__link ">
+            <a href="../../CPU%E4%B8%8E%E5%BB%B6%E8%BF%9F/" class="md-nav__link ">
               
   
   
@@ -2295,7 +2308,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/CPU%E4%B8%8E%E5%BB%B6%E8%BF%9F/CPU%E8%B0%83%E5%BA%A6%E4%B8%8E%E6%B8%B8%E6%88%8F%E7%BA%BF%E7%A8%8B/" class="md-nav__link">
+      <a href="../../CPU%E4%B8%8E%E5%BB%B6%E8%BF%9F/CPU%E8%B0%83%E5%BA%A6%E4%B8%8E%E6%B8%B8%E6%88%8F%E7%BA%BF%E7%A8%8B/" class="md-nav__link">
         
   
   
@@ -2323,7 +2336,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/CPU%E4%B8%8E%E5%BB%B6%E8%BF%9F/Windows%E9%94%AE%E9%BC%A0%E4%B8%8ETCP%E4%BD%8E%E5%BB%B6%E8%BF%9F%E5%8F%AF%E9%80%89%E5%AE%9E%E9%AA%8C%E8%AE%BE%E7%BD%AE/" class="md-nav__link">
+      <a href="../../CPU%E4%B8%8E%E5%BB%B6%E8%BF%9F/Windows%E9%94%AE%E9%BC%A0%E4%B8%8ETCP%E4%BD%8E%E5%BB%B6%E8%BF%9F%E5%8F%AF%E9%80%89%E5%AE%9E%E9%AA%8C%E8%AE%BE%E7%BD%AE/" class="md-nav__link">
         
   
   
@@ -2385,7 +2398,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="/youshouldknow/GPU%E4%B8%8E%E6%98%BE%E7%A4%BA/" class="md-nav__link ">
+            <a href="../../GPU%E4%B8%8E%E6%98%BE%E7%A4%BA/" class="md-nav__link ">
               
   
   
@@ -2429,7 +2442,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/GPU%E4%B8%8E%E6%98%BE%E7%A4%BA/Windows%E5%9B%BE%E5%BD%A2%E7%AE%A1%E7%BA%BF%E4%B8%8E%E5%B8%A7%E6%97%B6%E9%97%B4/" class="md-nav__link">
+      <a href="../../GPU%E4%B8%8E%E6%98%BE%E7%A4%BA/Windows%E5%9B%BE%E5%BD%A2%E7%AE%A1%E7%BA%BF%E4%B8%8E%E5%B8%A7%E6%97%B6%E9%97%B4/" class="md-nav__link">
         
   
   
@@ -2493,7 +2506,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="/youshouldknow/%E5%86%85%E5%AD%98%E4%B8%8E%E5%AD%98%E5%82%A8/" class="md-nav__link ">
+            <a href="../../%E5%86%85%E5%AD%98%E4%B8%8E%E5%AD%98%E5%82%A8/" class="md-nav__link ">
               
   
   
@@ -2537,7 +2550,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/%E5%86%85%E5%AD%98%E4%B8%8E%E5%AD%98%E5%82%A8/Windows%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E4%B8%8E%E6%80%A7%E8%83%BD/" class="md-nav__link">
+      <a href="../../%E5%86%85%E5%AD%98%E4%B8%8E%E5%AD%98%E5%82%A8/Windows%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E4%B8%8E%E6%80%A7%E8%83%BD/" class="md-nav__link">
         
   
   
@@ -2565,7 +2578,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/%E5%86%85%E5%AD%98%E4%B8%8E%E5%AD%98%E5%82%A8/%E5%AD%98%E5%82%A8%E4%B8%8ENVMe%E5%8E%9F%E7%90%86/" class="md-nav__link">
+      <a href="../../%E5%86%85%E5%AD%98%E4%B8%8E%E5%AD%98%E5%82%A8/%E5%AD%98%E5%82%A8%E4%B8%8ENVMe%E5%8E%9F%E7%90%86/" class="md-nav__link">
         
   
   
@@ -2633,7 +2646,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="/youshouldknow/%E5%86%85%E5%AD%98%E8%B6%85%E9%A2%91/" class="md-nav__link ">
+            <a href="../../%E5%86%85%E5%AD%98%E8%B6%85%E9%A2%91/" class="md-nav__link ">
               
   
   
@@ -2677,7 +2690,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/%E5%86%85%E5%AD%98%E8%B6%85%E9%A2%91/XMP-EXPO%E5%86%85%E5%AD%98%E8%AE%A4%E8%AF%81%E6%A1%A3%E7%A7%91%E6%99%AE/" class="md-nav__link">
+      <a href="../../%E5%86%85%E5%AD%98%E8%B6%85%E9%A2%91/XMP-EXPO%E5%86%85%E5%AD%98%E8%AE%A4%E8%AF%81%E6%A1%A3%E7%A7%91%E6%99%AE/" class="md-nav__link">
         
   
   
@@ -2705,7 +2718,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/%E5%86%85%E5%AD%98%E8%B6%85%E9%A2%91/DDR5-%E5%86%85%E5%AD%98%E8%B6%85%E9%A2%91%E6%97%B6%E5%BA%8F%E5%8F%82%E6%95%B0%E5%85%AC%E5%BC%8F%E9%80%9F%E6%9F%A5/" class="md-nav__link">
+      <a href="../../%E5%86%85%E5%AD%98%E8%B6%85%E9%A2%91/DDR5-%E5%86%85%E5%AD%98%E8%B6%85%E9%A2%91%E6%97%B6%E5%BA%8F%E5%8F%82%E6%95%B0%E5%85%AC%E5%BC%8F%E9%80%9F%E6%9F%A5/" class="md-nav__link">
         
   
   
@@ -2733,7 +2746,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/%E5%86%85%E5%AD%98%E8%B6%85%E9%A2%91/i7-12800HX%E6%B5%B7%E5%8A%9B%E5%A3%ABM-die%E8%B6%85%E9%A2%91%E5%8F%82%E6%95%B0/" class="md-nav__link">
+      <a href="../../%E5%86%85%E5%AD%98%E8%B6%85%E9%A2%91/i7-12800HX%E6%B5%B7%E5%8A%9B%E5%A3%ABM-die%E8%B6%85%E9%A2%91%E5%8F%82%E6%95%B0/" class="md-nav__link">
         
   
   
@@ -2761,7 +2774,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/%E5%86%85%E5%AD%98%E8%B6%85%E9%A2%91/i7-12800HX%E8%8B%B1%E7%9D%BF%E8%BE%BEC8D-M8D1%E8%B6%85%E9%A2%91%E5%8F%82%E6%95%B0/" class="md-nav__link">
+      <a href="../../%E5%86%85%E5%AD%98%E8%B6%85%E9%A2%91/i7-12800HX%E8%8B%B1%E7%9D%BF%E8%BE%BEC8D-M8D1%E8%B6%85%E9%A2%91%E5%8F%82%E6%95%B0/" class="md-nav__link">
         
   
   
@@ -2835,7 +2848,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="/youshouldknow/%E6%98%BE%E5%8D%A1%E4%BC%98%E5%8C%96/" class="md-nav__link ">
+            <a href="../../%E6%98%BE%E5%8D%A1%E4%BC%98%E5%8C%96/" class="md-nav__link ">
               
   
   
@@ -2879,7 +2892,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/%E6%98%BE%E5%8D%A1%E4%BC%98%E5%8C%96/NVCleanstall%E7%B2%BE%E7%AE%80%E5%AE%89%E8%A3%85NVIDIA%E6%98%BE%E5%8D%A1%E9%A9%B1%E5%8A%A8/" class="md-nav__link">
+      <a href="../../%E6%98%BE%E5%8D%A1%E4%BC%98%E5%8C%96/NVCleanstall%E7%B2%BE%E7%AE%80%E5%AE%89%E8%A3%85NVIDIA%E6%98%BE%E5%8D%A1%E9%A9%B1%E5%8A%A8/" class="md-nav__link">
         
   
   
@@ -2907,7 +2920,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/%E6%98%BE%E5%8D%A1%E4%BC%98%E5%8C%96/NVIDIA%E8%BF%9B%E9%98%B6%E4%BC%98%E5%8C%96-%E6%8E%A7%E5%88%B6%E9%9D%A2%E6%9D%BF%E8%AE%BE%E7%BD%AE/" class="md-nav__link">
+      <a href="../../%E6%98%BE%E5%8D%A1%E4%BC%98%E5%8C%96/NVIDIA%E8%BF%9B%E9%98%B6%E4%BC%98%E5%8C%96-%E6%8E%A7%E5%88%B6%E9%9D%A2%E6%9D%BF%E8%AE%BE%E7%BD%AE/" class="md-nav__link">
         
   
   
@@ -2935,7 +2948,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/%E6%98%BE%E5%8D%A1%E4%BC%98%E5%8C%96/NVIDIA%E8%BF%9B%E9%98%B6%E4%BC%98%E5%8C%96-App%E8%AE%BE%E7%BD%AE%E4%B8%8E%E8%B6%85%E9%A2%91/" class="md-nav__link">
+      <a href="../../%E6%98%BE%E5%8D%A1%E4%BC%98%E5%8C%96/NVIDIA%E8%BF%9B%E9%98%B6%E4%BC%98%E5%8C%96-App%E8%AE%BE%E7%BD%AE%E4%B8%8E%E8%B6%85%E9%A2%91/" class="md-nav__link">
         
   
   
@@ -2963,7 +2976,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/%E6%98%BE%E5%8D%A1%E4%BC%98%E5%8C%96/DLSS%E5%B8%A7%E7%94%9F%E6%88%90%E4%BD%8E%E5%BB%B6%E6%97%B6%E6%A8%A1%E5%BC%8F%E4%B8%8E%E5%BB%B6%E8%BF%9F%E7%9A%84%E5%85%B3%E7%B3%BB/" class="md-nav__link">
+      <a href="../../%E6%98%BE%E5%8D%A1%E4%BC%98%E5%8C%96/DLSS%E5%B8%A7%E7%94%9F%E6%88%90%E4%BD%8E%E5%BB%B6%E6%97%B6%E6%A8%A1%E5%BC%8F%E4%B8%8E%E5%BB%B6%E8%BF%9F%E7%9A%84%E5%85%B3%E7%B3%BB/" class="md-nav__link">
         
   
   
@@ -2991,7 +3004,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/%E6%98%BE%E5%8D%A1%E4%BC%98%E5%8C%96/NVIDIA%E8%BF%9B%E9%98%B6%E4%BC%98%E5%8C%96-DLSS%E8%B6%85%E5%88%86%E9%A2%84%E8%AE%BE%E6%A8%A1%E5%9E%8B/" class="md-nav__link">
+      <a href="../../%E6%98%BE%E5%8D%A1%E4%BC%98%E5%8C%96/NVIDIA%E8%BF%9B%E9%98%B6%E4%BC%98%E5%8C%96-DLSS%E8%B6%85%E5%88%86%E9%A2%84%E8%AE%BE%E6%A8%A1%E5%9E%8B/" class="md-nav__link">
         
   
   
@@ -3019,7 +3032,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/%E6%98%BE%E5%8D%A1%E4%BC%98%E5%8C%96/NVIDIA%E8%BF%9B%E9%98%B6%E4%BC%98%E5%8C%96-ReBAR%E5%BC%BA%E5%88%B6%E5%BC%80%E5%90%AF/" class="md-nav__link">
+      <a href="../../%E6%98%BE%E5%8D%A1%E4%BC%98%E5%8C%96/NVIDIA%E8%BF%9B%E9%98%B6%E4%BC%98%E5%8C%96-ReBAR%E5%BC%BA%E5%88%B6%E5%BC%80%E5%90%AF/" class="md-nav__link">
         
   
   
@@ -3047,7 +3060,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/%E6%98%BE%E5%8D%A1%E4%BC%98%E5%8C%96/DP-HDMI%E5%8D%8F%E8%AE%AE%E4%B8%8E%E9%80%9F%E7%8E%87%E5%85%B3%E7%B3%BB%E8%A1%A8/" class="md-nav__link">
+      <a href="../../%E6%98%BE%E5%8D%A1%E4%BC%98%E5%8C%96/DP-HDMI%E5%8D%8F%E8%AE%AE%E4%B8%8E%E9%80%9F%E7%8E%87%E5%85%B3%E7%B3%BB%E8%A1%A8/" class="md-nav__link">
         
   
   
@@ -3118,7 +3131,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="/youshouldknow/%E7%AC%94%E7%94%B5%E7%9B%B8%E5%85%B3/" class="md-nav__link ">
+            <a href="../../%E7%AC%94%E7%94%B5%E7%9B%B8%E5%85%B3/" class="md-nav__link ">
               
   
   
@@ -3162,7 +3175,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/%E7%AC%94%E7%94%B5%E7%9B%B8%E5%85%B3/%E6%8E%A7%E5%88%B6%E4%B8%AD%E5%BF%83%E4%B8%8EUniwill%E9%A9%B1%E5%8A%A8%E5%86%B2%E7%AA%81%E6%8E%92%E6%9F%A5/" class="md-nav__link">
+      <a href="../../%E7%AC%94%E7%94%B5%E7%9B%B8%E5%85%B3/%E6%8E%A7%E5%88%B6%E4%B8%AD%E5%BF%83%E4%B8%8EUniwill%E9%A9%B1%E5%8A%A8%E5%86%B2%E7%AA%81%E6%8E%92%E6%9F%A5/" class="md-nav__link">
         
   
   
@@ -3190,7 +3203,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/%E7%AC%94%E7%94%B5%E7%9B%B8%E5%85%B3/%E5%90%8C%E6%96%B9%E6%A8%A1%E5%85%B7%E7%94%B5%E6%B1%A0%E5%85%85%E7%94%B5%E6%A8%A1%E5%BC%8F%E4%B8%8E%E8%B7%B3%E5%8D%87%E8%87%B3%E6%BB%A1%E7%94%B5%E7%8E%B0%E8%B1%A1%E8%A7%A3%E6%9E%90/" class="md-nav__link">
+      <a href="../../%E7%AC%94%E7%94%B5%E7%9B%B8%E5%85%B3/%E5%90%8C%E6%96%B9%E6%A8%A1%E5%85%B7%E7%94%B5%E6%B1%A0%E5%85%85%E7%94%B5%E6%A8%A1%E5%BC%8F%E4%B8%8E%E8%B7%B3%E5%8D%87%E8%87%B3%E6%BB%A1%E7%94%B5%E7%8E%B0%E8%B1%A1%E8%A7%A3%E6%9E%90/" class="md-nav__link">
         
   
   
@@ -3262,7 +3275,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="/youshouldknow/%E7%B3%BB%E7%BB%9F%E8%B0%83%E4%BC%98%E4%B8%8E%E5%AE%89%E5%85%A8/" class="md-nav__link ">
+            <a href="../../%E7%B3%BB%E7%BB%9F%E8%B0%83%E4%BC%98%E4%B8%8E%E5%AE%89%E5%85%A8/" class="md-nav__link ">
               
   
   
@@ -3306,7 +3319,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/%E7%B3%BB%E7%BB%9F%E8%B0%83%E4%BC%98%E4%B8%8E%E5%AE%89%E5%85%A8/Windows%E4%BC%98%E5%8C%96%E5%8E%9F%E5%88%99%E4%B8%8E%E9%A3%8E%E9%99%A9/" class="md-nav__link">
+      <a href="../../%E7%B3%BB%E7%BB%9F%E8%B0%83%E4%BC%98%E4%B8%8E%E5%AE%89%E5%85%A8/Windows%E4%BC%98%E5%8C%96%E5%8E%9F%E5%88%99%E4%B8%8E%E9%A3%8E%E9%99%A9/" class="md-nav__link">
         
   
   
@@ -3334,7 +3347,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/%E7%B3%BB%E7%BB%9F%E8%B0%83%E4%BC%98%E4%B8%8E%E5%AE%89%E5%85%A8/Windows%E6%9C%8D%E5%8A%A1%E4%BC%98%E5%8C%96%E5%8E%9F%E5%88%99/" class="md-nav__link">
+      <a href="../../%E7%B3%BB%E7%BB%9F%E8%B0%83%E4%BC%98%E4%B8%8E%E5%AE%89%E5%85%A8/Windows%E6%9C%8D%E5%8A%A1%E4%BC%98%E5%8C%96%E5%8E%9F%E5%88%99/" class="md-nav__link">
         
   
   
@@ -3362,7 +3375,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/%E7%B3%BB%E7%BB%9F%E8%B0%83%E4%BC%98%E4%B8%8E%E5%AE%89%E5%85%A8/VBS%E4%B8%8E%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E7%BC%93%E8%A7%A3/" class="md-nav__link">
+      <a href="../../%E7%B3%BB%E7%BB%9F%E8%B0%83%E4%BC%98%E4%B8%8E%E5%AE%89%E5%85%A8/VBS%E4%B8%8E%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E7%BC%93%E8%A7%A3/" class="md-nav__link">
         
   
   
@@ -3390,7 +3403,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/%E7%B3%BB%E7%BB%9F%E8%B0%83%E4%BC%98%E4%B8%8E%E5%AE%89%E5%85%A8/WPBT%E5%9B%BA%E4%BB%B6%E6%B3%A8%E5%85%A5%E6%9C%BA%E5%88%B6%E4%B8%8E%E7%A6%81%E7%94%A8/" class="md-nav__link">
+      <a href="../../%E7%B3%BB%E7%BB%9F%E8%B0%83%E4%BC%98%E4%B8%8E%E5%AE%89%E5%85%A8/WPBT%E5%9B%BA%E4%BB%B6%E6%B3%A8%E5%85%A5%E6%9C%BA%E5%88%B6%E4%B8%8E%E7%A6%81%E7%94%A8/" class="md-nav__link">
         
   
   
@@ -3418,7 +3431,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/%E7%B3%BB%E7%BB%9F%E8%B0%83%E4%BC%98%E4%B8%8E%E5%AE%89%E5%85%A8/%E6%9C%AC%E5%9C%B0%E5%9B%9E%E7%8E%AF%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%9A%B4%E9%9C%B2%E9%9D%A2%E4%B8%8E%E9%98%B2%E6%8A%A4/" class="md-nav__link">
+      <a href="../../%E7%B3%BB%E7%BB%9F%E8%B0%83%E4%BC%98%E4%B8%8E%E5%AE%89%E5%85%A8/%E6%9C%AC%E5%9C%B0%E5%9B%9E%E7%8E%AF%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%9A%B4%E9%9C%B2%E9%9D%A2%E4%B8%8E%E9%98%B2%E6%8A%A4/" class="md-nav__link">
         
   
   
@@ -3446,7 +3459,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/%E7%B3%BB%E7%BB%9F%E8%B0%83%E4%BC%98%E4%B8%8E%E5%AE%89%E5%85%A8/%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86%E5%99%A8%E7%A6%81%E7%94%A8%E7%B1%BB%E4%BC%98%E5%8C%96%E8%BE%A8%E6%9E%90/" class="md-nav__link">
+      <a href="../../%E7%B3%BB%E7%BB%9F%E8%B0%83%E4%BC%98%E4%B8%8E%E5%AE%89%E5%85%A8/%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86%E5%99%A8%E7%A6%81%E7%94%A8%E7%B1%BB%E4%BC%98%E5%8C%96%E8%BE%A8%E6%9E%90/" class="md-nav__link">
         
   
   
@@ -3514,7 +3527,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="/youshouldknow/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/" class="md-nav__link ">
+            <a href="../../%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/" class="md-nav__link ">
               
   
   
@@ -3558,7 +3571,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/Windows%E7%BD%91%E7%BB%9C%E6%A0%88%E4%BC%98%E5%8C%96%E5%8E%9F%E5%88%99/" class="md-nav__link">
+      <a href="../../%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/Windows%E7%BD%91%E7%BB%9C%E6%A0%88%E4%BC%98%E5%8C%96%E5%8E%9F%E5%88%99/" class="md-nav__link">
         
   
   
@@ -3586,7 +3599,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/Windows%E6%B8%B8%E6%88%8F%E7%BD%91%E7%BB%9CQoS%E7%AD%96%E7%95%A5%E4%B8%8EDSCP%E5%8E%9F%E7%90%86/" class="md-nav__link">
+      <a href="../../%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/Windows%E6%B8%B8%E6%88%8F%E7%BD%91%E7%BB%9CQoS%E7%AD%96%E7%95%A5%E4%B8%8EDSCP%E5%8E%9F%E7%90%86/" class="md-nav__link">
         
   
   
@@ -3621,7 +3634,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/Karing-Windows-TUN%E4%B8%8EWindows%E7%BD%91%E7%BB%9C%E8%BD%AC%E5%8F%91%E8%AE%BE%E7%BD%AE/" class="md-nav__link">
+      <a href="../../%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/Karing-Windows-TUN%E4%B8%8EWindows%E7%BD%91%E7%BB%9C%E8%BD%AC%E5%8F%91%E8%AE%BE%E7%BD%AE/" class="md-nav__link">
         
   
   
@@ -3649,7 +3662,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/%E5%9B%9B%E5%A4%A7%E8%BF%90%E8%90%A5%E5%95%86%E9%A2%91%E6%AE%B5%E9%80%9F%E7%8E%87%E4%B8%8EAPN%E8%AE%BE%E7%BD%AE%E9%80%9F%E6%9F%A5/" class="md-nav__link">
+      <a href="../../%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/%E5%9B%9B%E5%A4%A7%E8%BF%90%E8%90%A5%E5%95%86%E9%A2%91%E6%AE%B5%E9%80%9F%E7%8E%87%E4%B8%8EAPN%E8%AE%BE%E7%BD%AE%E9%80%9F%E6%9F%A5/" class="md-nav__link">
         
   
   
@@ -3715,7 +3728,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="/youshouldknow/%E8%BD%AF%E4%BB%B6%E6%8A%80%E5%B7%A7/" class="md-nav__link ">
+            <a href="../../%E8%BD%AF%E4%BB%B6%E6%8A%80%E5%B7%A7/" class="md-nav__link ">
               
   
   
@@ -3759,7 +3772,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/%E8%BD%AF%E4%BB%B6%E6%8A%80%E5%B7%A7/Steam%E8%AE%BE%E7%BD%AE%E4%BC%98%E5%8C%96%E6%8C%87%E5%8D%97/" class="md-nav__link">
+      <a href="../../%E8%BD%AF%E4%BB%B6%E6%8A%80%E5%B7%A7/Steam%E8%AE%BE%E7%BD%AE%E4%BC%98%E5%8C%96%E6%8C%87%E5%8D%97/" class="md-nav__link">
         
   
   
@@ -3787,7 +3800,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/%E8%BD%AF%E4%BB%B6%E6%8A%80%E5%B7%A7/Windows%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7%E4%BB%A3%E7%90%86%E8%A1%8C%E4%B8%BA%E5%B7%AE%E5%BC%82%E9%80%9F%E6%9F%A5/" class="md-nav__link">
+      <a href="../../%E8%BD%AF%E4%BB%B6%E6%8A%80%E5%B7%A7/Windows%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7%E4%BB%A3%E7%90%86%E8%A1%8C%E4%B8%BA%E5%B7%AE%E5%BC%82%E9%80%9F%E6%9F%A5/" class="md-nav__link">
         
   
   
@@ -3815,7 +3828,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/%E8%BD%AF%E4%BB%B6%E6%8A%80%E5%B7%A7/Git%E8%B5%B0%E4%BB%A3%E7%90%86%E9%81%AD%E9%81%87GitHub-429%E9%99%90%E6%B5%81%E7%9A%84%E6%A0%B9%E5%9B%A0%E4%B8%8E%E5%BD%BB%E5%BA%95%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" class="md-nav__link">
+      <a href="../../%E8%BD%AF%E4%BB%B6%E6%8A%80%E5%B7%A7/Git%E8%B5%B0%E4%BB%A3%E7%90%86%E9%81%AD%E9%81%87GitHub-429%E9%99%90%E6%B5%81%E7%9A%84%E6%A0%B9%E5%9B%A0%E4%B8%8E%E5%BD%BB%E5%BA%95%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" class="md-nav__link">
         
   
   
@@ -3847,6 +3860,8 @@
       
   
   
+    
+  
   
   
     
@@ -3886,22 +3901,23 @@
     
     
       
+        
+        
+      
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_14" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_14" checked>
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="/youshouldknow/AI%E5%B7%A5%E5%85%B7/" class="md-nav__link ">
+            <a href="../" class="md-nav__link ">
               
   
   
@@ -3919,13 +3935,13 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_14" id="__nav_14_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_14" id="__nav_14_label" tabindex="">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_14_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_14_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_14">
             <span class="md-nav__icon md-icon"></span>
             
@@ -3945,7 +3961,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/AI%E5%B7%A5%E5%85%B7/Edge%E6%B5%8F%E8%A7%88%E5%99%A8CDP%E8%BF%9C%E7%A8%8B%E8%B0%83%E8%AF%95%E4%B8%8EAI%E6%8E%A5%E7%AE%A1%E6%8C%87%E5%8D%97/" class="md-nav__link">
+      <a href="../Edge%E6%B5%8F%E8%A7%88%E5%99%A8CDP%E8%BF%9C%E7%A8%8B%E8%B0%83%E8%AF%95%E4%B8%8EAI%E6%8E%A5%E7%AE%A1%E6%8C%87%E5%8D%97/" class="md-nav__link">
         
   
   
@@ -3973,7 +3989,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/AI%E5%B7%A5%E5%85%B7/AI%E6%B5%8F%E8%A7%88%E5%99%A8%E8%87%AA%E5%8A%A8%E5%8C%96%E6%89%A9%E5%B1%95%E7%A6%81%E7%94%A8%E9%99%B7%E9%98%B1%E4%B8%8E%E6%95%B0%E6%8D%AE%E6%81%A2%E5%A4%8D/" class="md-nav__link">
+      <a href="../AI%E6%B5%8F%E8%A7%88%E5%99%A8%E8%87%AA%E5%8A%A8%E5%8C%96%E6%89%A9%E5%B1%95%E7%A6%81%E7%94%A8%E9%99%B7%E9%98%B1%E4%B8%8E%E6%95%B0%E6%8D%AE%E6%81%A2%E5%A4%8D/" class="md-nav__link">
         
   
   
@@ -4001,7 +4017,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/AI%E5%B7%A5%E5%85%B7/hermes-agent-Windows%E9%83%A8%E7%BD%B2%E4%B8%8E%E6%9C%AC%E5%9C%B0%E6%A8%A1%E5%9E%8B%E6%A1%A5%E6%8E%A5%E5%AE%9E%E6%88%98/" class="md-nav__link">
+      <a href="../hermes-agent-Windows%E9%83%A8%E7%BD%B2%E4%B8%8E%E6%9C%AC%E5%9C%B0%E6%A8%A1%E5%9E%8B%E6%A1%A5%E6%8E%A5%E5%AE%9E%E6%88%98/" class="md-nav__link">
         
   
   
@@ -4029,7 +4045,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/AI%E5%B7%A5%E5%85%B7/Google-Antigravity%E5%8F%8C%E9%85%8D%E9%A2%9D%E6%B1%A0%E9%9A%94%E7%A6%BB%E9%99%B7%E9%98%B1%E4%B8%8E%E5%AE%9E%E6%97%B6%E7%9B%91%E6%8E%A7/" class="md-nav__link">
+      <a href="../Google-Antigravity%E5%8F%8C%E9%85%8D%E9%A2%9D%E6%B1%A0%E9%9A%94%E7%A6%BB%E9%99%B7%E9%98%B1%E4%B8%8E%E5%AE%9E%E6%97%B6%E7%9B%91%E6%8E%A7/" class="md-nav__link">
         
   
   
@@ -4057,7 +4073,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/AI%E5%B7%A5%E5%85%B7/EasyCLIProxyAPI%E6%9C%AC%E5%9C%B0%E7%BD%91%E5%85%B3%E6%9E%B6%E6%9E%84%E4%B8%8E%E5%A4%9A%E6%99%BA%E8%83%BD%E4%BD%93%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%80%82%E9%85%8D/" class="md-nav__link">
+      <a href="../EasyCLIProxyAPI%E6%9C%AC%E5%9C%B0%E7%BD%91%E5%85%B3%E6%9E%B6%E6%9E%84%E4%B8%8E%E5%A4%9A%E6%99%BA%E8%83%BD%E4%BD%93%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%80%82%E9%85%8D/" class="md-nav__link">
         
   
   
@@ -4085,7 +4101,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/AI%E5%B7%A5%E5%85%B7/Hermes-Agent%E9%AB%98%E9%98%B6%E6%8C%87%E4%BB%A4%E5%85%A8%E6%99%AF%E4%B8%8E%E7%94%9F%E6%80%81%E8%B7%AF%E7%BA%BF%E6%8C%87%E5%8D%97/" class="md-nav__link">
+      <a href="../Hermes-Agent%E9%AB%98%E9%98%B6%E6%8C%87%E4%BB%A4%E5%85%A8%E6%99%AF%E4%B8%8E%E7%94%9F%E6%80%81%E8%B7%AF%E7%BA%BF%E6%8C%87%E5%8D%97/" class="md-nav__link">
         
   
   
@@ -4113,7 +4129,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/AI%E5%B7%A5%E5%85%B7/Hermes-ZCode%E5%8F%8CAgent%E8%B7%A8%E7%AB%AF%E5%8D%8F%E5%90%8C%E6%9C%BA%E5%88%B6%E5%AE%9E%E6%88%98/" class="md-nav__link">
+      <a href="../Hermes-ZCode%E5%8F%8CAgent%E8%B7%A8%E7%AB%AF%E5%8D%8F%E5%90%8C%E6%9C%BA%E5%88%B6%E5%AE%9E%E6%88%98/" class="md-nav__link">
         
   
   
@@ -4148,7 +4164,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/AI%E5%B7%A5%E5%85%B7/WorkBuddy%E7%A7%AF%E5%88%86%E7%AB%AF%E5%88%B0%E7%AB%AF%E6%89%93%E9%80%9A%E5%AE%9E%E5%BD%95/" class="md-nav__link">
+      <a href="../WorkBuddy%E7%A7%AF%E5%88%86%E7%AB%AF%E5%88%B0%E7%AB%AF%E6%89%93%E9%80%9A%E5%AE%9E%E5%BD%95/" class="md-nav__link">
         
   
   
@@ -4183,7 +4199,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/AI%E5%B7%A5%E5%85%B7/Hermes%E5%AD%90%E4%BB%A3%E7%90%86%E6%A8%A1%E5%9E%8B%E8%B7%AF%E7%94%B1%E6%9C%BA%E5%88%B6/" class="md-nav__link">
+      <a href="../Hermes%E5%AD%90%E4%BB%A3%E7%90%86%E6%A8%A1%E5%9E%8B%E8%B7%AF%E7%94%B1%E6%9C%BA%E5%88%B6/" class="md-nav__link">
         
   
   
@@ -4218,7 +4234,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/AI%E5%B7%A5%E5%85%B7/ZCode-headless-CLI%E4%B8%8EGUI%E4%BC%9A%E8%AF%9D%E4%BD%93%E7%B3%BB%E8%BE%A8%E6%9E%90/" class="md-nav__link">
+      <a href="../ZCode-headless-CLI%E4%B8%8EGUI%E4%BC%9A%E8%AF%9D%E4%BD%93%E7%B3%BB%E8%BE%A8%E6%9E%90/" class="md-nav__link">
         
   
   
@@ -4253,7 +4269,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/AI%E5%B7%A5%E5%85%B7/Hermes%E6%9C%AC%E5%9C%B0%E6%A8%A1%E5%9E%8B%E5%B7%A5%E4%BD%9C%E5%8F%B0%E4%B8%8EOpenViking%E6%99%BA%E8%83%BD%E8%AE%B0%E5%BF%86%E5%AE%9E%E6%88%98/" class="md-nav__link">
+      <a href="../Hermes%E6%9C%AC%E5%9C%B0%E6%A8%A1%E5%9E%8B%E5%B7%A5%E4%BD%9C%E5%8F%B0%E4%B8%8EOpenViking%E6%99%BA%E8%83%BD%E8%AE%B0%E5%BF%86%E5%AE%9E%E6%88%98/" class="md-nav__link">
         
   
   
@@ -4288,7 +4304,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/AI%E5%B7%A5%E5%85%B7/Hermes%E6%A8%A1%E5%9E%8B%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%AE%B9%E7%81%BE%E7%BC%96%E6%8E%92%E9%81%BF%E5%9D%91%E6%8C%87%E5%8D%97/" class="md-nav__link">
+      <a href="../Hermes%E6%A8%A1%E5%9E%8B%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%AE%B9%E7%81%BE%E7%BC%96%E6%8E%92%E9%81%BF%E5%9D%91%E6%8C%87%E5%8D%97/" class="md-nav__link">
         
   
   
@@ -4320,10 +4336,44 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="/youshouldknow/AI%E5%B7%A5%E5%85%B7/%E6%9C%AC%E5%9C%B0%E5%A4%9A%E6%99%BA%E8%83%BD%E4%BD%93%E8%AE%B0%E5%BF%86%E5%BA%93%E6%8F%90%E7%82%BC%E6%A8%A1%E5%9E%8B%E5%8A%A8%E6%80%81%E8%B7%AF%E7%94%B1%E4%B8%8E%E9%85%8D%E9%A2%9D%E9%98%B2%E6%BC%8F%E5%AE%9E%E8%B7%B5/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    本地多智能体记忆库提炼模型动态路由与配额防漏实践
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--reference"></span>
+  
+
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -4346,6 +4396,215 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 现象与根因：商业配额为何“没用也在掉”？
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. 现象与根因：商业配额为何“没用也在掉”？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 账本核对与两类流量指纹辨析
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-openviking-vlm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 OpenViking 的静态 VLM 配置陷阱
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 动态路由的生命周期突破口
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 动态路由的生命周期突破口">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 源码级单例缓存限制
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-serverless" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 借助 Serverless 懒网关实现“零侵入”动态生效
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 工程落地：内嵌化路由与配额看板联动
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 工程落地：内嵌化路由与配额看板联动">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-state-db" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 提取聊天模型真实真源（State DB）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-api-plugin_apipy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 插件后端 API 扩展（plugin_api.py）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-ovlmcard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 前端全景看板卡片（OvlmCard）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 实战排障与端到端验证避坑指南
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. 实战排障与端到端验证避坑指南">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-vs-502" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 异步写入 vs 网关超时假 502
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-webdav-put" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 WebDAV PUT 与语义提炼的机制差异
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 统计日志中的时间戳解析盲区
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4 端到端验收基准
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -4404,7 +4663,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="/youshouldknow/%E9%A1%B9%E7%9B%AE%E5%AF%BC%E8%88%AA/" class="md-nav__link ">
+            <a href="../../%E9%A1%B9%E7%9B%AE%E5%AF%BC%E8%88%AA/" class="md-nav__link ">
               
   
   
@@ -4448,7 +4707,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/%E9%A1%B9%E7%9B%AE%E5%AF%BC%E8%88%AA/tweakbyjie%E5%85%B3%E8%81%94%E8%AF%B4%E6%98%8E/" class="md-nav__link">
+      <a href="../../%E9%A1%B9%E7%9B%AE%E5%AF%BC%E8%88%AA/tweakbyjie%E5%85%B3%E8%81%94%E8%AF%B4%E6%98%8E/" class="md-nav__link">
         
   
   
@@ -4476,7 +4735,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/%E9%A1%B9%E7%9B%AE%E5%AF%BC%E8%88%AA/tweakbyjie-optimization-mapping/" class="md-nav__link">
+      <a href="../../%E9%A1%B9%E7%9B%AE%E5%AF%BC%E8%88%AA/tweakbyjie-optimization-mapping/" class="md-nav__link">
         
   
   
@@ -4504,7 +4763,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/%E9%A1%B9%E7%9B%AE%E5%AF%BC%E8%88%AA/tweakbyjie%E5%85%A8%E9%87%8F%E6%89%A7%E8%A1%8C%E5%8F%82%E8%80%83/" class="md-nav__link">
+      <a href="../../%E9%A1%B9%E7%9B%AE%E5%AF%BC%E8%88%AA/tweakbyjie%E5%85%A8%E9%87%8F%E6%89%A7%E8%A1%8C%E5%8F%82%E8%80%83/" class="md-nav__link">
         
   
   
@@ -4532,7 +4791,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/%E9%A1%B9%E7%9B%AE%E5%AF%BC%E8%88%AA/%E8%A6%86%E7%9B%96%E7%9F%A9%E9%98%B5/" class="md-nav__link">
+      <a href="../../%E9%A1%B9%E7%9B%AE%E5%AF%BC%E8%88%AA/%E8%A6%86%E7%9B%96%E7%9F%A9%E9%98%B5/" class="md-nav__link">
         
   
   
@@ -4560,7 +4819,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/%E9%A1%B9%E7%9B%AE%E5%AF%BC%E8%88%AA/CPU%E4%BC%98%E5%8C%96%E4%B8%8Etweakbyjie%E5%AF%B9%E5%BA%94%E8%AF%B4%E6%98%8E/" class="md-nav__link">
+      <a href="../../%E9%A1%B9%E7%9B%AE%E5%AF%BC%E8%88%AA/CPU%E4%BC%98%E5%8C%96%E4%B8%8Etweakbyjie%E5%AF%B9%E5%BA%94%E8%AF%B4%E6%98%8E/" class="md-nav__link">
         
   
   
@@ -4588,7 +4847,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/%E9%A1%B9%E7%9B%AE%E5%AF%BC%E8%88%AA/GPU%E8%B0%83%E5%BA%A6%E4%B8%8E%E6%98%BE%E7%A4%BA%E7%AE%A1%E7%BA%BF/" class="md-nav__link">
+      <a href="../../%E9%A1%B9%E7%9B%AE%E5%AF%BC%E8%88%AA/GPU%E8%B0%83%E5%BA%A6%E4%B8%8E%E6%98%BE%E7%A4%BA%E7%AE%A1%E7%BA%BF/" class="md-nav__link">
         
   
   
@@ -4616,7 +4875,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/youshouldknow/%E9%A1%B9%E7%9B%AE%E5%AF%BC%E8%88%AA/%E6%B8%B8%E6%88%8F%E6%80%A7%E8%83%BD%E9%AA%8C%E8%AF%81%E6%B5%81%E7%A8%8B/" class="md-nav__link">
+      <a href="../../%E9%A1%B9%E7%9B%AE%E5%AF%BC%E8%88%AA/%E6%B8%B8%E6%88%8F%E6%80%A7%E8%83%BD%E9%AA%8C%E8%AF%81%E6%B5%81%E7%A8%8B/" class="md-nav__link">
         
   
   
@@ -4668,6 +4927,205 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 现象与根因：商业配额为何“没用也在掉”？
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. 现象与根因：商业配额为何“没用也在掉”？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 账本核对与两类流量指纹辨析
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-openviking-vlm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 OpenViking 的静态 VLM 配置陷阱
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 动态路由的生命周期突破口
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 动态路由的生命周期突破口">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 源码级单例缓存限制
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-serverless" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 借助 Serverless 懒网关实现“零侵入”动态生效
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 工程落地：内嵌化路由与配额看板联动
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 工程落地：内嵌化路由与配额看板联动">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-state-db" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 提取聊天模型真实真源（State DB）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-api-plugin_apipy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 插件后端 API 扩展（plugin_api.py）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-ovlmcard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 前端全景看板卡片（OvlmCard）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 实战排障与端到端验证避坑指南
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. 实战排障与端到端验证避坑指南">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-vs-502" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 异步写入 vs 网关超时假 502
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-webdav-put" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 WebDAV PUT 与语义提炼的机制差异
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 统计日志中的时间戳解析盲区
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4 端到端验收基准
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -4680,7 +5138,221 @@
               
               <article class="md-content__inner md-typeset">
                 
-  <h1>404 - Not found</h1>
+  
+  
+                  
+
+  <nav class="md-tags" >
+    
+      
+      
+      
+      
+        <span class="md-tag">Windows 10/11</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">hermes-agent（NousResearch）</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">OpenViking</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">EasyCLIProxyAPI</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">WorkBuddy</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">风险：low</span>
+      
+    
+  </nav>
+
+
+  
+  
+
+
+<div class="admonition abstract">
+<p class="admonition-title">适用范围 · 风险等级 · 联动模块</p>
+<ul>
+<li><strong>适用范围</strong>：Windows 10/11、hermes-agent（NousResearch）、OpenViking、EasyCLIProxyAPI、WorkBuddy</li>
+<li><strong>风险等级</strong>：🟢 <code>low</code></li>
+</ul>
+</div>
+<h1 id="_1">本地多智能体记忆库提炼模型动态路由与配额防漏实践<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p>在多智能体（如 Hermes Agent 与 ZCode）与本地知识库（如 OpenViking）协同的日常开发中，开发者通常会在多个大模型（如 Google Gemini、WorkBuddy/GLM、Claude、DeepSeek 等）之间灵活切换。然而，若底层记忆库的语义提炼（VLM/LLM）采用静态硬编码配置，极易导致<strong>用户明明已切换至轻量/免费模型聊天，而后台记忆系统却仍在源源不断地偷跑高阶商业模型额度</strong>。</p>
+<p>本文以实际排查与工程改造为例，解构本地记忆提炼链路的生命周期瓶颈，并记录一种<strong>零常驻额外进程、跟随当前聊天模型动态切换提炼端点</strong>的轻量化工程实践。</p>
+<hr />
+<h2 id="1">1. 现象与根因：商业配额为何“没用也在掉”？<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
+<h3 id="11">1.1 账本核对与两类流量指纹辨析<a class="headerlink" href="#11" title="Permanent link">&para;</a></h3>
+<p>当发现 Google Antigravity / Gemini 订阅额度异常缩减时，切忌凭主观感觉猜测，应直接调取网关中立账本（如 EasyCLIProxyAPI 的 <code>usage.db</code>）按客户端与时间段聚合统计：</p>
+<ol>
+<li><strong>累积上下文型流量（主会话聊天）</strong>：</li>
+<li><strong>指纹</strong>：请求间隔与人工交互频次相近（几秒至几分钟），单次 <code>output_tokens</code> 正常，而 <code>input_tokens</code> 呈阶梯式单调暴增（如从 1.8 万迅速滚至 12 万+）。</li>
+<li><strong>成因</strong>：由于 Agent 每轮对话均全量回传历史 Context，一个数小时的长会话即便仅有几十次交互，累积发送的输入 Token 即可轻松破亿（单日 1 亿~2 亿属于典型高阶会话特征）。</li>
+<li><strong>后台自动化型流量（记忆抽取与提炼）</strong>：</li>
+<li><strong>指纹</strong>：特定 User-Agent（如 OpenViking 的 <code>AsyncOpenAI/Python</code>）、多并发秒级连发、单次输入极小（数百至数千 Token）、输出主要为结构化摘要。</li>
+<li><strong>成因</strong>：记忆库在会话结束或产生新知识时，自动调用底层 VLM 生成 L0 摘要与 L1 大纲。若该链路独立绑定了商业网关，便会在后台持续“慢漏”。</li>
+</ol>
+<h3 id="12-openviking-vlm">1.2 OpenViking 的静态 VLM 配置陷阱<a class="headerlink" href="#12-openviking-vlm" title="Permanent link">&para;</a></h3>
+<p>OpenViking 的核心配置文件 <code>ov.conf</code> 采用静态字段定义：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">{</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">"embedding"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="nt">"dense"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">      </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"openai"</span><span class="p">,</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">      </span><span class="nt">"api_base"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://127.0.0.1:18082/v1"</span><span class="p">,</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">      </span><span class="nt">"model"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bge-m3"</span><span class="p">,</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">      </span><span class="nt">"dimension"</span><span class="p">:</span><span class="w"> </span><span class="mi">1024</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">  </span><span class="p">},</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">  </span><span class="nt">"vlm"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">    </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"openai"</span><span class="p">,</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">    </span><span class="nt">"api_base"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://127.0.0.1:18080/v1"</span><span class="p">,</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">    </span><span class="nt">"api_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"your-api-key"</span><span class="p">,</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">    </span><span class="nt">"model"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gemini-3.8-flash"</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="p">}</span>
+</code></pre></div>
+<ul>
+<li><strong>向量化检索（Embedding）</strong>：通常已接入本地 CUDA BGE-M3，完全属于本地硬件驱动，不消耗网络配额；</li>
+<li><strong>摘要提炼（VLM）</strong>：被直接钉死在 <code>18080</code> 端口的 <code>gemini-3.8-flash</code> 上。即便客户端 UI 将聊天模型切为本地 WorkBuddy 或其他渠道，提炼动作依然单向轰炸 Gemini。</li>
+</ul>
+<hr />
+<h2 id="2">2. 动态路由的生命周期突破口<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
+<h3 id="21">2.1 源码级单例缓存限制<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
+<p>查阅 OpenViking 核心配置模块（<code>vlm_config.py</code>）可见：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">get_vlm_instance</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="sd">"""Get VLM instance with multi-credential failover support."""</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_vlm_instance</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>        <span class="c1"># 读取 self.credentials 或配置字典</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_vlm_instance</span> <span class="o">=</span> <span class="n">VLMFactory</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">config_dict</span><span class="p">)</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_vlm_instance</span>
+</code></pre></div>
+<p><code>_vlm_instance</code> 首次创建后即常驻于内存单例。这意味着<strong>直接修改运行中 OpenViking 进程的配置无法实现热生效</strong>。</p>
+<h3 id="22-serverless">2.2 借助 Serverless 懒网关实现“零侵入”动态生效<a class="headerlink" href="#22-serverless" title="Permanent link">&para;</a></h3>
+<p>在成熟的本地多智能体架构中，OpenViking 通常挂载在按需唤醒的懒网关（如 <code>openviking_lazy_gateway.py</code>，端口 1933）之后：
+- 真实 OpenViking 核心（端口 1934）与本地 llama-server（端口 18082）在无请求 <strong>2 分钟后自动终止进程释放显存与内存</strong>；
+- 当新请求穿透 1933 时，网关重新执行 <code>openviking-server.exe</code>。</p>
+<p><strong>关键结论</strong>：</p>
+<blockquote>
+<p>只要在 OpenViking 休眠期间（或改写后主动终止当前 1934 实例），配置文件 <code>ov.conf</code> 的改动将在下一次自动唤醒时被全量重新载入。
+<strong>因此，改写配置文件 + 终止 1934 即可完成 100% 干净的热切换，完全无需常驻监控进程，也无需对 upstream 开源包打侵入式补丁。</strong></p>
+</blockquote>
+<hr />
+<h2 id="3">3. 工程落地：内嵌化路由与配额看板联动<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
+<p>为了践行“无黑框终端、无常驻冗余守护进程”的极客桌面原则，将该动态跟随逻辑直接整合入 Hermes Agent 自带的 <code>token-stats</code> 用户插件中。</p>
+<h3 id="31-state-db">3.1 提取聊天模型真实真源（State DB）<a class="headerlink" href="#31-state-db" title="Permanent link">&para;</a></h3>
+<p>切忌将 <code>config.yaml</code> 中的静态 <code>model.default</code> 视为当前模型。在图形客户端中，用户切模型只记录于本地状态库：
+- <strong>真源位置</strong>：<code>~/.hermes/state.db</code> 中的 <code>sessions</code> 表；
+- <strong>定位逻辑</strong>：按 <code>last_activity_at DESC</code> 提取最新活跃行的 <code>model</code> 与 <code>billing_provider</code>；
+- <strong>名称映射</strong>：<code>billing_provider</code> 通常格式为 <code>custom:&lt;slug&gt;</code>（如 <code>custom:workbuddy-(127.0.0.1:8787)</code>），通过正则匹配 <code>config.yaml</code> 内 <code>custom_providers</code> 列表，精准反查对应的 <code>base_url</code> 与 <code>api_key</code>。</p>
+<h3 id="32-api-plugin_apipy">3.2 插件后端 API 扩展（<code>plugin_api.py</code>）<a class="headerlink" href="#32-api-plugin_apipy" title="Permanent link">&para;</a></h3>
+<p>在 <code>/api/plugins/token-stats/</code> 下扩展 <code>/ovlm</code> 路由，并与原生 <code>/quota</code> 刷新机制合流：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nd">@router</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"/quota"</span><span class="p">)</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">quota</span><span class="p">(</span><span class="n">force</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Query</span><span class="p">(</span><span class="s2">""</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">"force=1 bypasses the 30s cache"</span><span class="p">)):</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    <span class="c1"># 顺路执行提炼模型自动跟随（模型无变动时为零开销幂等判断）</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    <span class="n">_auto_ovlm_follow</span><span class="p">()</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    <span class="n">data</span> <span class="o">=</span> <span class="n">fetch_google_quota</span><span class="p">(</span><span class="n">force</span><span class="o">=</span><span class="n">force</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">"1"</span><span class="p">,</span> <span class="s2">"true"</span><span class="p">,</span> <span class="s2">"yes"</span><span class="p">))</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    <span class="k">return</span> <span class="n">data</span>
+</code></pre></div>
+<p><strong>自动跟随安全机制（<code>_auto_ovlm_follow</code>）</strong>：
+1. <strong>非阻塞线程锁与 30s 冷却</strong>：避免桌面多组件（状态栏 Chip、看板页面、导航徽标）并发轮询导致频繁写盘；
+2. <strong>会话静默窗口保护</strong>：当聊天会话已停止超过 90 秒时，不再主动切换，避免旧上下文干扰；
+3. <strong>安全回退保护</strong>：当模型非 <code>custom</code> 本地凭据或缺少可用密钥时，拒绝写入，保持上一版安全配置。</p>
+<h3 id="33-ovlmcard">3.3 前端全景看板卡片（<code>OvlmCard</code>）<a class="headerlink" href="#33-ovlmcard" title="Permanent link">&para;</a></h3>
+<p>在桌面端全景配额页面中嵌入状态卡片：
+- <strong>当前提炼端点</strong>：展示当前加载的模型名称、端点端口与密钥指纹，并用动态圆点指示 1934 后端是“运行中”还是“休眠中”；
+- <strong>目标模型展示</strong>：实时映射当前聊天会话使用的模型与网关地址；
+- <strong>微交互操作</strong>：支持一键翻转“跟随开关”、提供“仅写入配置”与“立即同步并生效（踢掉 1934）”按钮，操作即时触发系统 Haptic 振动反馈与 Toast 通知。</p>
+<hr />
+<h2 id="4">4. 实战排障与端到端验证避坑指南<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
+<h3 id="41-vs-502">4.1 异步写入 vs 网关超时假 502<a class="headerlink" href="#41-vs-502" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>踩坑</strong>：调用 <code>POST /api/v1/content/write</code> 时，若设置 <code>wait: true</code>，由于文档提炼需要 LLM 处理时间，耗时极易超过懒网关内置的 60 秒转发超时（<code>ProxyHandler timeout=60.0</code>），导致客户端收到 502，误判写入失败；</li>
+<li><strong>规避</strong>：自动化写入或大文档提炼，务必显式指定 <code>wait: false</code>（异步提炼），由 OpenViking 后台事件队列静默完成。</li>
+</ul>
+<h3 id="42-webdav-put">4.2 WebDAV PUT 与语义提炼的机制差异<a class="headerlink" href="#42-webdav-put" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>踩坑</strong>：使用 WebDAV 协议（<code>PUT /webdav/resources/...</code>）可直接以二进制流保存文档且性能极高（HTTP 204），但该接口属于纯粹的文件系统写入，<strong>不会触发任何后置的 VLM 提炼与摘要计算</strong>；</li>
+<li><strong>规避</strong>：若要验证提炼链路，必须走标准 REST API 规范（<code>POST /api/v1/content/write</code>）。</li>
+</ul>
+<h3 id="43">4.3 统计日志中的时间戳解析盲区<a class="headerlink" href="#43" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>踩坑</strong>：反代服务（如 codebuddy2openai）输出的 <code>usage.jsonl</code> 中，时间字段通常采用 Epoch 毫秒整数（如 <code>{"ts": 1788683809637}</code>），若用 <code>grep "16:35"</code> 等字符串时间比对，会呈现“全量无调用”的假阴性统计；</li>
+<li><strong>规避</strong>：日志解析一律将当前 <code>time.time() * 1000</code> 换算后进行绝对时间窗口过滤。</li>
+</ul>
+<h3 id="44">4.4 端到端验收基准<a class="headerlink" href="#44" title="Permanent link">&para;</a></h3>
+<p>经过上述治理后，执行端到端写入测试：
+1. 切至 <code>WorkBuddy (glm-5.3-flash)</code> 聊天并写入临时测试文档；
+2. 查看 <code>usage.jsonl</code>：16:36~16:37 出现输入 1041 / 输出 2707 的提炼日志，模型为 <code>glm-5.3-flash</code>；
+3. 查看 EasyCLIProxyAPI <code>usage.db</code>：近 20 分钟内 Gemini 商业接口保持 <strong>0 调用</strong>；
+4. 验证完成后立即调用 <code>DELETE</code> 彻底抹除临时数据，确保知识库一尘不染。</p>
+
+
+
+
+
+
+
+  
+    
+  
+  
+    
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="最后更新">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年9月6日 08:56:07 UTC">2026年9月6日</span>
+  </span>
+
+    
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="创建日期">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年9月6日 08:55:12 UTC">2026年9月6日</span>
+  </span>
+
+    
+    
+    
+  </aside>
+
+
+
+
+
+                
 
               </article>
             </div>
@@ -4699,6 +5371,44 @@
       
         <footer class="md-footer">
   
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="页脚" >
+        
+          
+          <a href="../Hermes%E6%A8%A1%E5%9E%8B%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%AE%B9%E7%81%BE%E7%BC%96%E6%8E%92%E9%81%BF%E5%9D%91%E6%8C%87%E5%8D%97/" class="md-footer__link md-footer__link--prev" aria-label="上一页: Hermes 模型配置与容灾编排避坑指南">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              <div class="md-ellipsis">
+                Hermes 模型配置与容灾编排避坑指南
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../%E9%A1%B9%E7%9B%AE%E5%AF%BC%E8%88%AA/" class="md-footer__link md-footer__link--next" aria-label="下一页: 项目导航">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              <div class="md-ellipsis">
+                项目导航
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
     
   
   <div class="md-footer-meta md-typeset">
@@ -4726,10 +5436,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "/youshouldknow/", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.expand", "navigation.top", "navigation.footer", "navigation.tracking", "search.suggest", "search.highlight", "content.code.copy"], "search": "/youshouldknow/assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.expand", "navigation.top", "navigation.footer", "navigation.tracking", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
     
     
-      <script src="/youshouldknow/assets/javascripts/bundle.d7400e89.min.js"></script>
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
     
   </body>
