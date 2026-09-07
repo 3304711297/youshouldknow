@@ -129,6 +129,7 @@ nav:
   - CPU与延迟:
     - CPU与延迟/README.md
     - CPU 调度与游戏线程: CPU与延迟/CPU调度与游戏线程.md
+    - Intel 12 代移动标压 (HX) 降压黑屏排障与 Core/Cache 单轨联动机制实测: CPU与延迟/Intel-12代移动标压HX降压黑屏排障与单轨联动机制实测.md
     - Windows 键鼠与 TCP 低延迟可选实验设置: CPU与延迟/Windows键鼠与TCP低延迟可选实验设置.md
   - GPU与显示:
     - GPU与显示/README.md
@@ -197,6 +198,7 @@ nav:
     - EasyCLIProxyAPI 便携版更新与单实例锁排障指南: AI工具/EasyCLIProxyAPI便携版更新与单实例锁排障指南.md
     - AI Agent Skills 深度精简与全网立体看门雷达构建: AI工具/AIAgent-Skills深度精简与全网立体看门雷达构建.md
     - 本地浏览器书签与个人 Agent 智能检索集成方案: AI工具/本地浏览器书签与个人Agent智能检索集成方案.md
+    - LLM API 流式工具调用 (tool_calls) 分片损坏防御与透明转码实践: AI工具/LLM流式工具调用分片损坏防御与透明转码实践.md
   - 项目导航:
     - 项目导航/README.md
     - tweakbyjie 关联说明: 项目导航/tweakbyjie关联说明.md
