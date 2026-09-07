@@ -80,7 +80,9 @@ tweak_module: []
 
 ## 七、与 tweakbyjie 的关系
 
-当前 `tweakbyjie` **没有网络栈的自动注册表/驱动修改项**；本主题属于知识与测试方法，不计为脚本执行覆盖。不要把知识教程误记为自动化功能，也不要把网络问题归因到脚本未覆盖的层。
+在传输层参数上，`tweakbyjie` 坚持克制原则，**不包含盲改 TCP/IP 协议栈（如 TcpAckFrequency/TCPNoDelay 等易产生负优化的脆弱参数）的项**；此类网络栈调优属于知识与实测方法，不计为自动化执行覆盖。
+
+但在系统行为与网络安全防御层，`tweakbyjie` 在 **Part 1 核心优化（子项 2 系统行为优化）** 中收录了 `EnableActiveProbing` 优化项（关闭 NCSI 主动网络探测），以防御运营商 DNS 劫持触发的流氓自动弹窗并减少后台网络探针遥测，同时支持快照完整恢复。
 
 涉及代理/TUN/Forwarding 的排障，按 [Karing 专题](./Karing-Windows-TUN与Windows网络转发设置.md) 的“入站方式 vs 出站规则”与 Forwarding 检查步骤执行。
 
@@ -91,12 +93,54 @@ tweak_module: []
 - 恢复：逐项写回原值，原本不存在的值应删除；不要用另一台机器的值当通用恢复值。
 - 任何影响系统更新、后台同步或安全的功能性服务，关闭前确认依赖与可恢复路径。
 
+## 九、运营商 DNS 劫持与 Windows NCSI 探测机制防御
+
+### 1. 典型案例与异常表象（2026-07-21 中国移动事件）
+
+在 2026 年 7 月 21 日，我国部分地区（如西南节点）的中国移动网络用户遭遇大面积异常：**设备开机或连网瞬间，系统自动拉起浏览器并强制跳转到网络赌博、博彩等非法网页**。
+
+多数用户误以为电脑感染了木马病毒或流氓软件，但实际根因是：**非法组织对运营商递归 Local DNS 实施投毒劫持，将微软官方网络检测域名解析定向篡改，进而巧妙利用了 Windows 自身的连网认证机制**。
+
+### 2. 底层机理：NCSI 主动探针与 Captive Portal 的“武器化”
+
+Windows 系统的网络位置感知服务（`NlaSvc`）内置了 **NCSI（Network Connectivity Status Indicator，网络连接状态指示器）**。每当网卡连接网络或 IP 发生变动时，系统会发起主动探测（Active Probing）：
+
+1. **域名解析**：系统向本地配置的 DNS 请求解析 `www.msftconnecttest.com`；
+2. **HTTP 探针**：向 `http://www.msftconnecttest.com/connecttest.txt` 发起轻量 GET 请求，预期收到内容为 `Microsoft Connect Test` 且状态码为 `200 OK` 的应答；
+3. **状态判定与 Captive Portal 唤醒**：
+   - 若收到预期应答，系统判定网络具备完整 Internet 访问权限；
+   - 若收到 **HTTP 302/307 重定向** 或返回非预期网页，Windows 会判定当前处于机场、酒店、咖啡馆等**公共 Wi-Fi 的 Web 强制门户认证（Captive Portal）**环境；
+   - 此时，Windows 底层会自动唤起系统默认浏览器访问该重定向地址，方便用户输入账号密码完成连网认证。
+
+**黑产利用链路**：黑客篡改了运营商 Local DNS 中 `msftconnecttest.com` 等域名的解析，返回恶意站点的 IP 并附带 302 重定向。Windows 的 NCSI 探针请求被劫持后，误以为是认证热点，遂**忠实地执行了“帮用户拉起浏览器打开网页”的系统行为**，形成了无毒却全屏弹非法页面的破坏效果。
+
+### 3. 三层防御体系（从标到本）
+
+针对该机制漏洞，可从系统触发层、域名解析层和传输虚拟化层建立三道防线：
+
+| 防御层级 | 实施方案 | 防护效果 | 代价与副作用 |
+| :--- | :--- | :--- | :--- |
+| **第一层：系统级阻断（治标）** | 修改注册表将 `EnableActiveProbing` 设为 `0` | 彻底切断 Windows 发起主动探针与自动调起浏览器的触发链路，连网零骚扰 | 在需要 Web 认证的公共 Wi-Fi 下不会自动弹登录窗（需手动打开浏览器输入 `1.1.1.1`）；任务栏网络图标小概率偶发感叹号/地球标（实际网络通畅） |
+| **第二层：网络层换源（局部缓解）** | 路由器/本机更换为公共 DNS（如 `114.114.114.114`、`223.5.5.5`） | 绕开运营商被污染的递归节点，恢复正常域名解析 | 若运营商部署了基于 UDP 53 端口的**旁路镜像或透明劫持**，明文 DNS 请求依然会被强行篡改 |
+| **第三层：加密与分流（治本）** | 启用 **DoH / DoT 加密 DNS**，或配置 **TUN 模式 Fake-IP 分流** | DNS 请求经 TLS 加密传输或在本地虚构 IP，彻底消除运营商明文劫持的土壤 | 依赖本地代理客户端（如 Karing、sing-box）的持续运行 |
+
+#### 系统级注册表操作指南
+
+- **注册表路径**：`HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NlaSvc\Parameters\Internet`
+- **目标值名**：`EnableActiveProbing`
+- **类型**：`REG_DWORD`
+- **取值说明**：
+  - `1`：开启主动探测（Windows 默认值）；
+  - `0`：禁用主动探测（阻断自动弹窗与探针遥测，`tweakbyjie` Part 1 已内置）。
+
 ## 事实核查记录
 
-核验基准：tweakbyjie 仓库 main 分支源码（上次 2026-08-21；2026-08-29 重核，HEAD b905950）。
+核验基准：tweakbyjie 仓库 main 分支源码（2026-08-29 重核 HEAD b905950；2026-09-07 补充 NCSI 防御机制核实）。
 
 | 声明 | 核查结果 |
 | --- | --- |
-| tweakbyjie 没有网络栈的自动注册表/驱动修改项 | ✅ 属实（2026-08-29 重核：对 HEAD b905950 全源码关键字检索，仍无 TcpAckFrequency/TCPNoDelay/TcpDelAckTicks/DefaultTTL/Tcp1323Opts/netsh/CongestionProvider/Set-NetIPInterface 等写入；唯一命中的 NetworkThrottlingIndex 属 MMCSS 多媒体调度，不是 TCP/IP 栈参数） |
-| Nagle/Delayed ACK/ECN/RWIN/拥塞控制的机制描述 | ✅ 属实（2026-08-29 复核：通读确认与 TCP/IP 通行技术资料一致，机制类内容无时效变化，正文已声明阈值需实测） |
-| 低延迟与高吞吐的取舍关系 | ✅ 属实（2026-08-29 复核：通读确认，缓冲/窗口参数的两难为通行结论） |
+| tweakbyjie 没有脆弱 TCP/IP 协议栈的自动注册表/驱动修改项 | ✅ 属实（对全源码检索确认无 TcpAckFrequency/TCPNoDelay 等写入；Part 1 收录的 EnableActiveProbing 属于 NlaSvc 系统行为优化项，不属于传输层 TCP/IP 栈参数） |
+| Nagle/Delayed ACK/ECN/RWIN/拥塞控制的机制描述 | ✅ 属实（通读确认与 TCP/IP 通行技术资料一致，机制类内容无时效变化，正文已声明阈值需实测） |
+| 低延迟与高吞吐的取舍关系 | ✅ 属实（通读确认，缓冲/窗口参数的两难为通行结论） |
+| Windows NCSI EnableActiveProbing 与 Captive Portal 弹窗触发机制 | ✅ 属实（经微软官方文档及 2026-07-21 运营商 DNS 劫持事件交叉验证，NCSI 收到重定向后拉起系统浏览器的逻辑确为系统原生设计） |
+
