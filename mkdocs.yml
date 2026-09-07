@@ -174,6 +174,7 @@ nav:
     - 软件技巧/README.md
     - Steam 设置优化指南: 软件技巧/Steam设置优化指南.md
     - Windows 命令行工具的代理行为差异速查: 软件技巧/Windows命令行工具代理行为差异速查.md
+    - 本地代理环境的 NO_PROXY 白名单与程序库代理行为: 软件技巧/本地代理环境的NO_PROXY白名单与程序库代理行为.md
     - Git 走代理遭遇 GitHub 429 限流根因与解决方案: 软件技巧/Git走代理遭遇GitHub-429限流的根因与彻底解决方案.md
   - AI工具:
     - AI工具/README.md
