@@ -4228,10 +4228,32 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#ai" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        十、实战延伸：AI 自动化操作日常浏览器的安全铁律
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#xtwitter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        十一、登录态与高反爬站点对抗实战（以 X/Twitter 为例）
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
-        十、参考链接
+        十二、参考链接
       
     </span>
   </a>
@@ -5338,10 +5360,32 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#ai" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        十、实战延伸：AI 自动化操作日常浏览器的安全铁律
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#xtwitter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        十一、登录态与高反爬站点对抗实战（以 X/Twitter 为例）
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
-        十、参考链接
+        十二、参考链接
       
     </span>
   </a>
@@ -5495,6 +5539,16 @@
 </thead>
 <tbody>
 <tr>
+<td>MCP 报 Could not connect to Chrome</td>
+<td>本机未运行 Chrome，默认寻找的是 Chrome 路径</td>
+<td>必须指定 <code>--autoConnect</code> 并传入 Edge 的 <code>--user-data-dir</code></td>
+</tr>
+<tr>
+<td>命令行挂 <code>--remote-debugging-port</code> 启动后端口仍未监听</td>
+<td>Chromium 对默认 Profile 实施安全限制，忽略命令行端口注入</td>
+<td>严禁命令行硬起，必须通过第三节 <code>edge://inspect</code> 勾选原生开关</td>
+</tr>
+<tr>
 <td>MCP 报 ECONNREFUSED 127.0.0.1:9222</td>
 <td>Edge 没在运行</td>
 <td>启动 Edge 即可</td>
@@ -5564,7 +5618,35 @@
 </tbody>
 </table>
 <p>如果核心诉求就是「AI 接管原封不动的日常 Edge」，本文方案是当前摩擦最小的形态。</p>
-<h2 id="_6">十、参考链接<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<h2 id="ai">十、实战延伸：AI 自动化操作日常浏览器的安全铁律<a class="headerlink" href="#ai" title="Permanent link">&para;</a></h2>
+<p>当 AI Agent（或编写脚本）需要协助重启、接管或探测日常 Edge 时，极易因粗暴的进程操作导致用户会话丢失、扩展被注销或误杀进程。必须遵循以下实证安全准则：</p>
+<ol>
+<li><strong>绝对禁止暴力 <code>Stop-Process -Force</code></strong>：</li>
+<li>强杀主进程会导致当前打开的数十个标签页无法被写入会话持久化账本（<code>Sessions\Session_*</code>），甚至导致会话恢复提示弹窗。</li>
+<li>正确关闭方式是调用系统级窗口消息进行优雅关闭：
+     <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nb">Get-Process</span> <span class="n">msedge</span> <span class="n">-ErrorAction</span> <span class="n">SilentlyContinue</span> <span class="p">|</span> <span class="k">ForEach</span><span class="n">-Object</span> <span class="p">{</span> <span class="nv">$_</span><span class="p">.</span><span class="n">CloseMainWindow</span><span class="p">()</span> <span class="p">|</span> <span class="nb">Out-Null</span> <span class="p">}</span>
+</code></pre></div></li>
+<li><strong>扩展完整性基线监控门禁</strong>：</li>
+<li>Chromium 内核在路径变动、权限不匹配或启动异常时可能触发重置机制。</li>
+<li>在任何涉及用户 User Data 目录的自动化操作前后，必须以 <code>Default\Extensions</code> 下子目录数量作为基线进行严格校验比对，发现数值变小立即阻断告警。</li>
+<li><strong>临时自动化实例必须精确匹配清理</strong>：</li>
+<li>自动化或临时排查若使用了独立的临时 Profile（如 <code>%TEMP%\edge-cdp-*</code>），清理时严禁使用 <code>taskkill /IM msedge.exe /F</code> 或不带过滤的杀进程命令，这会把用户的日常工作界面一并干掉。</li>
+<li>Windows 下 <code>wmic</code> 查询由于提权或安全限制经常返回空 <code>CommandLine</code>，必须使用 PowerShell 原生 CIM 查询并严格正则匹配命令行路径：
+     <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nb">Get-CimInstance</span> <span class="n">Win32_Process</span> <span class="n">-Filter</span> <span class="s2">"name='msedge.exe'"</span> <span class="p">|</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>  <span class="nb">Where-Object</span> <span class="p">{</span> <span class="nv">$_</span><span class="p">.</span><span class="n">CommandLine</span> <span class="o">-match</span> <span class="s1">'edge-cdp'</span> <span class="p">}</span> <span class="p">|</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>  <span class="k">ForEach</span><span class="n">-Object</span> <span class="p">{</span> <span class="nb">Stop-Process</span> <span class="n">-Id</span> <span class="nv">$_</span><span class="p">.</span><span class="n">ProcessId</span> <span class="n">-Force</span> <span class="p">}</span>
+</code></pre></div></li>
+</ol>
+<h2 id="xtwitter">十一、登录态与高反爬站点对抗实战（以 X/Twitter 为例）<a class="headerlink" href="#xtwitter" title="Permanent link">&para;</a></h2>
+<p>为什么许多场景「必须接管已有登录态」，纯无头临时浏览器无法胜任？</p>
+<ol>
+<li><strong>反爬机制与虚拟点击穿透失效</strong>：</li>
+<li>以 X/Twitter 为例，未登录访客访问推文详情仅下发并渲染前 3 条回复，下方的「See all the replies」在 DOM 中为 <code>&lt;h2&gt;</code> 结构。</li>
+<li>现代高反爬前端深度校验指针事件真伪：合成的 JavaScript <code>MouseEvent</code>（pointerdown / click）以及无登录态下的 CDP <code>Input.dispatchMouseEvent</code> 均会被框架静默抛弃，必须依靠具有真实账号凭证的会话渲染完整上下文。</li>
+<li><strong>免登录镜像通道的脆性</strong>：</li>
+<li>诸如 Nitter 镜像群常态化遭遇 IP 封锁与维护下线，第三方代理端点（如 <code>xcancel</code>）频繁触发 Cloudflare 验证码；仅基础元数据（点赞、转发数）可通过只读开放端点获取，一旦涉及深度互动、评论流与登录受限资源，日常主力浏览器的直连接管是唯一稳健路径。</li>
+</ol>
+<h2 id="_6">十二、参考链接<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="https://learn.microsoft.com/en-us/microsoft-edge/web-platform/devtools-mcp-server">微软官方文档：Let agents inspect your site with Chrome DevTools MCP</a></li>
 <li><a href="https://developer.chrome.com/blog/chrome-devtools-mcp-debug-your-browser-session">Chrome 官方博客：Debug your browser session</a></li>
@@ -5593,7 +5675,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年9月1日 14:51:20 UTC">2026年9月1日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年9月8日 06:33:07 UTC">2026年9月8日</span>
   </span>
 
     
