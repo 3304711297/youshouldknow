@@ -3779,6 +3779,8 @@
       
         
       
+        
+      
     
     
     
@@ -4019,6 +4021,34 @@
     
   
     CI 注解清零：绿灯≠无警告的核验方法
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Tauri-v2%E7%94%9F%E4%BA%A7%E6%9E%84%E5%BB%BAcustom-protocol%E7%BC%BA%E5%A4%B1%E8%87%B4WebView2%E5%9B%9E%E7%8E%AF%E6%8B%92%E7%BB%9D%E8%BF%9E%E6%8E%A5%E6%8E%92%E5%9D%91/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tauri v2 生产构建 custom-protocol 缺失致 WebView2 回环拒绝连接排坑
   
 
     
@@ -5226,6 +5256,7 @@
 <li><a href="GitHub-Actions%E7%9C%8B%E9%97%A8%E5%B7%A5%E4%BD%9C%E6%B5%81%E9%98%B2%E8%AF%AF%E6%8A%A5%E8%AE%BE%E8%AE%A1%E8%A6%81%E7%82%B9/">GitHub Actions 看门工作流防误报设计要点</a> — 实测提炼三类误报根因与修法：关单不回写基线致反复开单、日期刷新被当更新信号（无 contents:write 永远回写不了）、实时计数器天然漂移追不上，附优雅降级与标题刷新配套卫生</li>
 <li><a href="%E6%B2%B9%E7%8C%B4%E8%84%9A%E6%9C%AC%E5%8F%8C%E9%80%9A%E9%81%93%E5%8F%91%E5%B8%83%E4%B8%8E%E8%87%AA%E5%8A%A8%E5%8C%96%E6%9B%B4%E6%96%B0%E6%9C%BA%E5%88%B6%E8%AE%BE%E8%AE%A1/">油猴脚本双通道发布与自动化更新机制设计</a> — 剖析 Tampermonkey/Violentmonkey 更新协议、Rolling 与 Stable 通道产物解耦，以及基于 GitHub Actions Tag 驱动的自动化发布闭环实践</li>
 <li><a href="CI%E6%B3%A8%E8%A7%A3%E6%B8%85%E9%9B%B6%E7%BB%BF%E7%81%AF%E2%89%A0%E6%97%A0%E8%AD%A6%E5%91%8A%E7%9A%84%E6%A0%B8%E9%AA%8C%E6%96%B9%E6%B3%95/">CI 注解清零：绿灯≠无警告的核验方法</a> — 破除两个让 CI 噪声长期存活的错觉：conclusion 为 success 的 run 仍可携带 warning 注解（须查 check-runs 的 annotations_url 核验），以及界面注解显示上限约 10 条（界面显示 1 条时本地实为 60 条）；附 Node20 弃用警告的 SHA→tag→运行时定位法，以及「清零不是压制」的可复核标准</li>
+<li><a href="Tauri-v2%E7%94%9F%E4%BA%A7%E6%9E%84%E5%BB%BAcustom-protocol%E7%BC%BA%E5%A4%B1%E8%87%B4WebView2%E5%9B%9E%E7%8E%AF%E6%8B%92%E7%BB%9D%E8%BF%9E%E6%8E%A5%E6%8E%92%E5%9D%91/">Tauri v2 生产构建 custom-protocol 缺失致 WebView2 回环拒绝连接排坑</a> — 深入剖析 Tauri v2 内核模式判定机制：为什么裸跑 cargo build --release 依然是开发版，以及 custom-protocol 特性缺失导致 WebView2 启动访问 localhost:5173 报 ERR_CONNECTION_REFUSED 的源码级根因与标准构建流水线</li>
 </ul>
 <h2 id="_3">与其他分类的边界<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <ul>
@@ -5254,7 +5285,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年9月8日 14:51:16 UTC">2026年9月8日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年9月8日 16:29:57 UTC">2026年9月8日</span>
   </span>
 
     

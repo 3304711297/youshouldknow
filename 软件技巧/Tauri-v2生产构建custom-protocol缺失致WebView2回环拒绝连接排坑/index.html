@@ -10,13 +10,13 @@
       
       
       
-        <link rel="canonical" href="https://3304711297.github.io/youshouldknow/%E8%BD%AF%E4%BB%B6%E6%8A%80%E5%B7%A7/Windows%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7%E4%BB%A3%E7%90%86%E8%A1%8C%E4%B8%BA%E5%B7%AE%E5%BC%82%E9%80%9F%E6%9F%A5/">
+        <link rel="canonical" href="https://3304711297.github.io/youshouldknow/%E8%BD%AF%E4%BB%B6%E6%8A%80%E5%B7%A7/Tauri-v2%E7%94%9F%E4%BA%A7%E6%9E%84%E5%BB%BAcustom-protocol%E7%BC%BA%E5%A4%B1%E8%87%B4WebView2%E5%9B%9E%E7%8E%AF%E6%8B%92%E7%BB%9D%E8%BF%9E%E6%8E%A5%E6%8E%92%E5%9D%91/">
       
       
-        <link rel="prev" href="../Steam%E8%AE%BE%E7%BD%AE%E4%BC%98%E5%8C%96%E6%8C%87%E5%8D%97/">
+        <link rel="prev" href="../CI%E6%B3%A8%E8%A7%A3%E6%B8%85%E9%9B%B6%E7%BB%BF%E7%81%AF%E2%89%A0%E6%97%A0%E8%AD%A6%E5%91%8A%E7%9A%84%E6%A0%B8%E9%AA%8C%E6%96%B9%E6%B3%95/">
       
       
-        <link rel="next" href="../%E6%9C%AC%E5%9C%B0%E4%BB%A3%E7%90%86%E7%8E%AF%E5%A2%83%E7%9A%84NO_PROXY%E7%99%BD%E5%90%8D%E5%8D%95%E4%B8%8E%E7%A8%8B%E5%BA%8F%E5%BA%93%E4%BB%A3%E7%90%86%E8%A1%8C%E4%B8%BA/">
+        <link rel="next" href="../../AI%E5%B7%A5%E5%85%B7/">
       
       
         
@@ -27,7 +27,7 @@
     
     
       
-        <title>Windows 命令行工具的代理行为差异速查 - YouShouldKnow</title>
+        <title>Tauri v2 生产构建 custom-protocol 缺失致 WebView2 回环拒绝连接排坑 - YouShouldKnow</title>
       
     
     
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#windows" class="md-skip">
+        <a href="#tauri-v2-custom-protocol-webview2" class="md-skip">
           跳转至
         </a>
       
@@ -114,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Windows 命令行工具的代理行为差异速查
+              Tauri v2 生产构建 custom-protocol 缺失致 WebView2 回环拒绝连接排坑
             
           </span>
         </div>
@@ -3870,37 +3870,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Windows 命令行工具的代理行为差异速查
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../Windows%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7%E4%BB%A3%E7%90%86%E8%A1%8C%E4%B8%BA%E5%B7%AE%E5%BC%82%E9%80%9F%E6%9F%A5/" class="md-nav__link">
         
   
   
@@ -3916,148 +3889,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="目录">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      目录
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#windows_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        一、核心认知：Windows 上有"两套代理"
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        二、主流工具代理行为速查表
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="二、主流工具代理行为速查表">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        补充：同一规则反过来也成立——让指定目标"不走"代理
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        三、典型误导性故障：安装器的"半成功"
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#git-bashmsys2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        四、Git Bash（MSYS2）的两个额外坑
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="四、Git Bash（MSYS2）的两个额外坑">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        坑一：斜杠参数被路径改写吞掉
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#powershell-bash" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        坑二：内联 PowerShell 的 $ 变量被 bash 展开
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        五、一分钟判定流程
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        六、事实核查与实测记录
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        七、参考链接
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -4207,10 +4038,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../Tauri-v2%E7%94%9F%E4%BA%A7%E6%9E%84%E5%BB%BAcustom-protocol%E7%BC%BA%E5%A4%B1%E8%87%B4WebView2%E5%9B%9E%E7%8E%AF%E6%8B%92%E7%BB%9D%E8%BF%9E%E6%8E%A5%E6%8E%92%E5%9D%91/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tauri v2 生产构建 custom-protocol 缺失致 WebView2 回环拒绝连接排坑
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -4226,6 +4084,176 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        现象与问题复现
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tauri-v2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        根因深剖：Tauri v2 的模式判定机制
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="根因深剖：Tauri v2 的模式判定机制">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-dev" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. dev 模式的源码判定逻辑
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 代码生成阶段的分支分发
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-cargo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 为什么“裸跑” cargo 会中招？
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        彻底解决方案
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="彻底解决方案">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#src-tauricargotoml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        第一步：在 src-tauri/Cargo.toml 补齐特性声明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        第二步：规范化构建流水线
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        检验与实证方法
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="检验与实证方法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 二进制特征串检索（静态检测）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 脱机冷启动实测（动态检测）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        事实核查记录
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -5371,10 +5399,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#windows_1" class="md-nav__link">
+  <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        一、核心认知：Windows 上有"两套代理"
+        现象与问题复现
       
     </span>
   </a>
@@ -5382,22 +5410,44 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
+  <a href="#tauri-v2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        二、主流工具代理行为速查表
+        根因深剖：Tauri v2 的模式判定机制
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="二、主流工具代理行为速查表">
+    <nav class="md-nav" aria-label="根因深剖：Tauri v2 的模式判定机制">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#1-dev" class="md-nav__link">
     <span class="md-ellipsis">
       
-        补充：同一规则反过来也成立——让指定目标"不走"代理
+        1. dev 模式的源码判定逻辑
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 代码生成阶段的分支分发
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-cargo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 为什么“裸跑” cargo 会中招？
       
     </span>
   </a>
@@ -5410,33 +5460,61 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        三、典型误导性故障：安装器的"半成功"
+        彻底解决方案
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="彻底解决方案">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#src-tauricargotoml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        第一步：在 src-tauri/Cargo.toml 补齐特性声明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        第二步：规范化构建流水线
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#git-bashmsys2" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        四、Git Bash（MSYS2）的两个额外坑
+        检验与实证方法
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="四、Git Bash（MSYS2）的两个额外坑">
+    <nav class="md-nav" aria-label="检验与实证方法">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        坑一：斜杠参数被路径改写吞掉
+        1. 二进制特征串检索（静态检测）
       
     </span>
   </a>
@@ -5444,10 +5522,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#powershell-bash" class="md-nav__link">
+  <a href="#2_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        坑二：内联 PowerShell 的 $ 变量被 bash 展开
+        2. 脱机冷启动实测（动态检测）
       
     </span>
   </a>
@@ -5463,29 +5541,7 @@
   <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        五、一分钟判定流程
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        六、事实核查与实测记录
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        七、参考链接
+        事实核查记录
       
     </span>
   </a>
@@ -5515,28 +5571,21 @@
       
       
       
-        <span class="md-tag">Windows 10/11</span>
+        <span class="md-tag">Tauri v2 桌面应用开发与构建</span>
       
     
       
       
       
       
-        <span class="md-tag">PowerShell 5.1 / 7</span>
+        <span class="md-tag">使用 WebView2 的 Windows 桌面客户端</span>
       
     
       
       
       
       
-        <span class="md-tag">Git Bash（MSYS2）</span>
-      
-    
-      
-      
-      
-      
-        <span class="md-tag">git / curl / npm / pip / uv / Node.js 使用者</span>
+        <span class="md-tag">依赖 Vite / 前端打包器的混合架构桌面应用</span>
       
     
       
@@ -5556,177 +5605,162 @@
 <div class="admonition abstract">
 <p class="admonition-title">适用范围 · 风险等级 · 联动模块</p>
 <ul>
-<li><strong>适用范围</strong>：Windows 10/11、PowerShell 5.1 / 7、Git Bash（MSYS2）、git / curl / npm / pip / uv / Node.js 使用者</li>
+<li><strong>适用范围</strong>：Tauri v2 桌面应用开发与构建、使用 WebView2 的 Windows 桌面客户端、依赖 Vite / 前端打包器的混合架构桌面应用</li>
 <li><strong>风险等级</strong>：🟢 <code>low</code></li>
 </ul>
 </div>
-<h1 id="windows">Windows 命令行工具的代理行为差异速查<a class="headerlink" href="#windows" title="Permanent link">&para;</a></h1>
+<h1 id="tauri-v2-custom-protocol-webview2">Tauri v2 生产构建中 custom-protocol 缺失致 WebView2 回环拒绝连接排坑<a class="headerlink" href="#tauri-v2-custom-protocol-webview2" title="Permanent link">&para;</a></h1>
 <blockquote>
-<p>本文目标：解释"浏览器能上网、命令行却下载失败"这类故障的真正根因——<strong>Windows 系统代理只对一部分命令行工具生效</strong>——并给出各主流工具的代理判定表、典型误导性故障案例（尤其是"半成功"假象）与一分钟的判定流程。</p>
-<p>实测环境：Windows 11 / 本地 HTTP 代理（127.0.0.1 回环端口）/ git 2.55 / Node 24 / Python 3.14 + uv / PowerShell 5.1 与 7 并存。表中每一行都经实机验证或对照官方文档核实。</p>
+<p>深入剖析 Tauri v2 内核模式判定机制：为什么裸跑 <code>cargo build --release</code> 产出的二进制依然是开发版？为什么双击应用会弹出 Edge <code>ERR_CONNECTION_REFUSED</code> 报错？本文给出源码级机理与标准构建流水线。</p>
 </blockquote>
-<h2 id="windows_1">一、核心认知：Windows 上有"两套代理"<a class="headerlink" href="#windows_1" title="Permanent link">&para;</a></h2>
+<hr />
+<h2 id="_1">现象与问题复现<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>在开发或维护基于 <strong>Tauri v2</strong> + <strong>Vite</strong> 的桌面应用程序（如各种本地反代控制台、系统工具）时，开发者常遇到以下典型故障：</p>
 <ol>
-<li><strong>系统代理（WinINET/WinHTTP）</strong>：设置 → 网络与 Internet → 代理里配置的那套，浏览器和部分微软系工具读它。</li>
-<li><strong>环境变量代理</strong>：<code>HTTP_PROXY</code> / <code>HTTPS_PROXY</code>（及小写形式），Unix 传统，绝大多数跨平台命令行工具<strong>只认这一套</strong>。</li>
+<li>本地运行 <code>cargo build --release</code> 编译成功，在 <code>target/release/</code> 下顺利生成 <code>.exe</code> 可执行文件；</li>
+<li>双击运行该可执行文件，桌面弹出的应用窗口未加载任何前端页面，而是呈现 Windows WebView2（Microsoft Edge 内核）的标准网络错误页：</li>
+<li><strong>标题</strong>：<code>嗯... 无法访问此页面</code></li>
+<li><strong>正文</strong>：<code>localhost 拒绝连接。</code></li>
+<li><strong>错误码</strong>：<code>ERR_CONNECTION_REFUSED</code></li>
+<li>底部带有深色 Microsoft Edge 标识与「刷新」按钮。</li>
 </ol>
-<p>两边不互通。设置了系统代理的工具族不会惠及第二族，反之亦然——这就是"同一个终端里，一条命令成功、下一条命令连接重置"的根源。</p>
-<h2 id="_1">二、主流工具代理行为速查表<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>此时若在终端手动启动前端开发服务（如 <code>npm run dev</code>，监听 <code>http://localhost:5173</code>），再次点击「刷新」，窗口瞬间正常展示。</p>
+<p><strong>核心矛盾</strong>：明明指定了 <code>--release</code> 优化编译，为什么生成的生产二进制文件依然固执地去访问本地开发端口 <code>localhost:5173</code>，而不是加载内嵌的静态资源？</p>
+<hr />
+<h2 id="tauri-v2">根因深剖：Tauri v2 的模式判定机制<a class="headerlink" href="#tauri-v2" title="Permanent link">&para;</a></h2>
+<p>很多人误以为 Rust 的 <code>--release</code> 编译开关会自动让 Tauri 将前端 <code>frontendDist</code> 打包内嵌。<strong>这是错误的理解</strong>。</p>
+<h3 id="1-dev">1. <code>dev</code> 模式的源码判定逻辑<a class="headerlink" href="#1-dev" title="Permanent link">&para;</a></h3>
+<p>在 Tauri 核心代码库的宏与代码生成模块（<code>tauri-macros</code> 与 <code>tauri-codegen</code>）中，判定当前编译到底是“开发模式（Dev）”还是“生产模式（Production）”，其依据并非 <code>cfg!(debug_assertions)</code>，而是 <strong><code>custom-protocol</code> 特性（Feature）是否激活</strong>：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">// 摘自 tauri-macros / context.rs</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">ContextItems</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="n">dev</span><span class="p">:</span><span class="w"> </span><span class="nc">cfg</span><span class="o">!</span><span class="p">(</span><span class="n">not</span><span class="p">(</span><span class="n">feature</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"custom-protocol"</span><span class="p">)),</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="c1">// ...</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="p">}</span>
+</code></pre></div>
+<ul>
+<li>当当前 Crate 激活了 <code>custom-protocol</code> 特性时：<code>cfg!(not(...))</code> 为 <code>false</code>，即 <code>dev = false</code>（生产模式）；</li>
+<li>当当前 Crate <strong>未激活</strong> <code>custom-protocol</code> 时：<code>cfg!(not(...))</code> 为 <code>true</code>，即 <code>dev = true</code>（<strong>强制判定为开发模式</strong>）！</li>
+</ul>
+<h3 id="2">2. 代码生成阶段的分支分发<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
+<p>在 <code>tauri-codegen</code> 读取 <code>tauri.conf.json</code> 生成运行时上下文（<code>generate_context!()</code>）时，资源加载逻辑如下：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1">// 摘自 tauri-codegen / context.rs</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kd">let</span><span class="w"> </span><span class="n">assets</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="n">assets</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">assets</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="n">quote</span><span class="o">!</span><span class="p">(#</span><span class="n">assets</span><span class="p">)</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">dev</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">config</span><span class="p">.</span><span class="n">build</span><span class="p">.</span><span class="n">dev_url</span><span class="p">.</span><span class="n">is_some</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="c1">// 命中开发模式：丢弃静态资源打包，仅保留空资源映射</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">assets</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EmbeddedAssets</span><span class="p">::</span><span class="n">default</span><span class="p">();</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="n">quote</span><span class="o">!</span><span class="p">(#</span><span class="n">assets</span><span class="p">)</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">    </span><span class="c1">// 生产模式：扫描 frontendDist 目录并将其全部静态文件嵌入二进制</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">    </span><span class="k">match</span><span class="w"> </span><span class="o">&amp;</span><span class="n">config</span><span class="p">.</span><span class="n">build</span><span class="p">.</span><span class="n">frontend_dist</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">        </span><span class="nb">Some</span><span class="p">(</span><span class="n">FrontendDist</span><span class="p">::</span><span class="n">Directory</span><span class="p">(</span><span class="n">path</span><span class="p">))</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">            </span><span class="n">EmbeddedAssets</span><span class="p">::</span><span class="n">new</span><span class="p">(</span><span class="n">assets_path</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">options</span><span class="p">,</span><span class="w"> </span><span class="o">..</span><span class="p">.)</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">        </span><span class="c1">// ...</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="p">};</span>
+</code></pre></div>
+<ul>
+<li><strong>如果 <code>dev == true</code></strong>：Tauri 将窗口的起始加载地址（<code>WebviewUrl</code>）直接烧录为配置文件中的 <code>build.devUrl</code>（例如 <code>http://localhost:5173</code>），并且<strong>不把前端产物嵌入可执行文件</strong>；</li>
+<li><strong>如果 <code>dev == false</code></strong>：Tauri 才会递归读取 <code>build.frontendDist</code>（例如 <code>../dist</code>）中的全部 HTML/JS/CSS，通过虚拟自定义协议（如 <code>tauri://localhost</code> 或 <code>http://tauri.localhost</code>）从内存中解压并服务。</li>
+</ul>
+<h3 id="3-cargo">3. 为什么“裸跑” cargo 会中招？<a class="headerlink" href="#3-cargo" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Tauri CLI 的隐式行为</strong>：当你执行 <code>npm run tauri build</code> 或 <code>cargo tauri build</code> 时，Tauri CLI 会在后台为 <code>cargo</code> 自动追加 <code>--features custom-protocol</code>；</li>
+<li><strong>裸 cargo 的缺失</strong>：如果你直接在 <code>src-tauri</code> 目录执行 <code>cargo build --release</code>，或者在 CI / 外部脚本中调用原始 cargo，cargo <strong>完全不知道</strong>需要开启此 feature；</li>
+<li><strong>致命陷阱</strong>：若 <code>src-tauri/Cargo.toml</code> 本身<strong>未在 <code>[features]</code> 段中显式声明 <code>custom-protocol</code></strong>，那么即便开发者尝试手动传入 <code>cargo build --release --features custom-protocol</code>，cargo 也会直接报错：
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>error: the package 'xxx' does not contain this feature: custom-protocol
+</code></pre></div></li>
+</ul>
+<hr />
+<h2 id="_2">彻底解决方案<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>要彻底消除此问题并确保发布流水线绝对健壮，需要完成以下两步加固：</p>
+<h3 id="src-tauricargotoml">第一步：在 <code>src-tauri/Cargo.toml</code> 补齐特性声明<a class="headerlink" href="#src-tauricargotoml" title="Permanent link">&para;</a></h3>
+<p>在 <code>src-tauri/Cargo.toml</code> 中显式添加标准特性映射：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">[dependencies]</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">tauri</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w"> </span><span class="n">features</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="s2">"tray-icon"</span><span class="p">]</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="c1"># ... 其余依赖保持不变</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="k">[features]</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="c1"># 生产构建与静态资源内嵌必备特性（严禁删除）</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="n">custom-protocol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">"tauri/custom-protocol"</span><span class="p">]</span>
+</code></pre></div>
+<blockquote>
+<p><strong>注意</strong>：不要将 <code>custom-protocol</code> 加入 <code>default = ["custom-protocol"]</code>。如果将其设为默认特性，会导致日常开发运行 <code>cargo tauri dev</code> 时无法享受 Vite 的热重载（HMR），而会强行去读 dist 生产包。</p>
+</blockquote>
+<h3 id="_3">第二步：规范化构建流水线<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p>在发布或打包独立 Release 产物时，必须严格执行<strong>两阶段构建</strong>：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># 阶段一：编译前端静态资源（生成 dist/ 目录）</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>npm<span class="w"> </span>run<span class="w"> </span>build
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="c1"># 阶段二：使用 Tauri CLI 完成内嵌式生产编译（推荐）</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>npm<span class="w"> </span>run<span class="w"> </span>tauri<span class="w"> </span>build<span class="w"> </span>--<span class="w"> </span>--no-bundle
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="c1"># 或者若脱离 Tauri CLI 使用原生 Cargo：</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>cargo<span class="w"> </span>build<span class="w"> </span>--release<span class="w"> </span>--features<span class="w"> </span>custom-protocol
+</code></pre></div>
+<ul>
+<li>使用 <code>--no-bundle</code> 参数可以跳过耗时的安装包打包（如 NSIS / MSI 安装向导生成），直接在 <code>src-tauri/target/release/</code> 下输出即开即用的单文件绿色免安装可执行文件。</li>
+</ul>
+<hr />
+<h2 id="_4">检验与实证方法<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<p>构建完成后，在将产物交付给用户或打包分发之前，可采用以下两种无环境依赖的检验手段确认资源已正确内嵌：</p>
+<h3 id="1">1. 二进制特征串检索（静态检测）<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
+<p>使用简短脚本或搜索工具检查编译后的 <code>.exe</code> 二进制文件内容：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"target/release/yourapp.exe"</span><span class="p">,</span> <span class="s2">"rb"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    <span class="n">data</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="c1"># 检查是否依然残留 devUrl 端口绑定</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="n">has_dev_port</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">":5173"</span> <span class="ow">in</span> <span class="n">data</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="c1"># 检查是否包含自定义协议端点</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="n">has_custom_proto</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">"tauri.localhost"</span> <span class="ow">in</span> <span class="n">data</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="nb">print</span><span class="p">(</span><span class="s2">"开发端口残留:"</span><span class="p">,</span> <span class="n">has_dev_port</span><span class="p">)</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="nb">print</span><span class="p">(</span><span class="s2">"自定义协议嵌入:"</span><span class="p">,</span> <span class="n">has_custom_proto</span><span class="p">)</span>
+</code></pre></div>
+<ul>
+<li>若依然显示包含开发端口且未嵌入协议，说明二进制仍处于开发模式。</li>
+</ul>
+<h3 id="2_1">2. 脱机冷启动实测（动态检测）<a class="headerlink" href="#2_1" title="Permanent link">&para;</a></h3>
+<ol>
+<li>完全关闭本地所有 Node / Vite / Webpack 开发服务进程（确认 <code>netstat -ano</code> 中无 5173 监听）；</li>
+<li>双击打开生成的 <code>.exe</code> 文件；</li>
+<li><strong>预期成功结果</strong>：界面瞬间秒开并完整渲染深色/浅色 UI、图标与交互卡片；</li>
+<li><strong>失败结果</strong>：界面白屏或弹出 Edge <code>ERR_CONNECTION_REFUSED</code> 报错页面。</li>
+</ol>
+<hr />
+<h2 id="_5">事实核查记录<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>工具</th>
-<th>默认读系统代理？</th>
-<th>读环境变量？</th>
-<th>补充说明</th>
+<th style="text-align: left;">核查项</th>
+<th style="text-align: left;">源码/文档证据</th>
+<th style="text-align: left;">验证结论</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>PowerShell 5.1 / 7 的 <code>Invoke-WebRequest</code> / <code>Invoke-RestMethod</code></td>
-<td>✅ 是</td>
-<td>❌</td>
-<td>需要 <code>-Proxy</code> 参数或系统代理；PS7 基于 HttpClient，同走系统代理</td>
+<td style="text-align: left;">Tauri v2 模式判定依据</td>
+<td style="text-align: left;"><code>tauri-macros/src/context.rs</code> L35：<code>dev: cfg!(not(feature = "custom-protocol"))</code></td>
+<td style="text-align: left;">属实。确实不依赖 release 编译配置，只依赖 feature</td>
 </tr>
 <tr>
-<td>浏览器 / Edge</td>
-<td>✅ 是</td>
-<td>❌</td>
-<td>—</td>
+<td style="text-align: left;">资源嵌入分支判定</td>
+<td style="text-align: left;"><code>tauri-codegen/src/context.rs</code> L178：<code>else if dev &amp;&amp; config.build.dev_url.is_some()</code></td>
+<td style="text-align: left;">属实。dev 模式下 EmbeddedAssets 为空，仅指向 devUrl</td>
 </tr>
 <tr>
-<td><code>git</code></td>
-<td>❌</td>
-<td>✅ <code>http_proxy</code>/<code>https_proxy</code></td>
-<td>或 <code>git config --global http.proxy &lt;地址&gt;</code>（可按域名限定作用范围）</td>
+<td style="text-align: left;">WebView2 拒绝连接错误码</td>
+<td style="text-align: left;">Windows WebView2 捕获窗口实测（<code>ERR_CONNECTION_REFUSED</code>）</td>
+<td style="text-align: left;">属实。端口未监听时 Chromium 内核默认抛出此错误</td>
 </tr>
 <tr>
-<td><code>curl</code>（含 Windows 内置版）</td>
-<td>❌</td>
-<td>✅ <code>http_proxy</code>/<code>https_proxy</code>/<code>all_proxy</code></td>
-<td>临时指定用 <code>-x &lt;代理地址&gt;</code></td>
-</tr>
-<tr>
-<td><code>npm</code></td>
-<td>❌</td>
-<td>✅</td>
-<td>另有 <code>.npmrc</code> 的 <code>proxy</code>/<code>https-proxy</code> 配置项</td>
-</tr>
-<tr>
-<td><code>pip</code></td>
-<td>❌</td>
-<td>✅</td>
-<td>亦有 <code>pip.ini</code> 配置</td>
-</tr>
-<tr>
-<td><code>uv</code></td>
-<td>❌</td>
-<td>✅ <code>HTTP_PROXY</code>/<code>HTTPS_PROXY</code></td>
-<td>与 pip 同风格</td>
-</tr>
-<tr>
-<td><code>gh</code>（GitHub CLI）</td>
-<td>❌</td>
-<td>✅ <code>HTTPS_PROXY</code></td>
-<td>—</td>
-</tr>
-<tr>
-<td>Node.js 自带 <code>fetch</code>（undici）</td>
-<td>❌</td>
-<td>❌ <strong>两者都不读</strong></td>
-<td>必须显式用 undici 的 <code>ProxyAgent</code>，或改用子进程 curl</td>
-</tr>
-<tr>
-<td><code>winget</code></td>
-<td>⚠️ 有代理设置项</td>
-<td>—</td>
-<td>新版支持 <code>settings</code> 中配置代理，行为随版本变化，用前单独核实</td>
+<td style="text-align: left;">Cargo.toml 特性声明规范</td>
+<td style="text-align: left;">Tauri 官方模板与 CLI 合约：<code>custom-protocol = ["tauri/custom-protocol"]</code></td>
+<td style="text-align: left;">属实。CLI 隐式传递该特性，Crate 必须具备对应 feature</td>
 </tr>
 </tbody>
 </table>
-<p><strong>判定口诀：PowerShell 系走系统代理，跨平台工具族走环境变量，Node fetch 谁都不走。</strong></p>
-<h3 id="_2">补充：同一规则反过来也成立——让指定目标"不走"代理<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
-<p>上表解决的是"怎么让工具走代理"，反向需求同样高频：<strong>某些目标必须绕过代理</strong>。这靠 <code>NO_PROXY</code> 白名单实现，详见
-<a href="../%E6%9C%AC%E5%9C%B0%E4%BB%A3%E7%90%86%E7%8E%AF%E5%A2%83%E7%9A%84NO_PROXY%E7%99%BD%E5%90%8D%E5%8D%95%E4%B8%8E%E7%A8%8B%E5%BA%8F%E5%BA%93%E4%BB%A3%E7%90%86%E8%A1%8C%E4%B8%BA/">《本地代理环境的 NO_PROXY 白名单与程序库代理行为》</a>。</p>
-<p>这里只记三条最容易踩的：</p>
-<table>
-<thead>
-<tr>
-<th>陷阱</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>本机环回也会被代理</td>
-<td>只设 <code>ALL_PROXY</code> 而不设 <code>NO_PROXY</code>，<code>127.0.0.1</code> 的请求照样被送进代理；代理软件"开着却没连节点"时，本机服务互调会全部超时</td>
-</tr>
-<tr>
-<td><code>pip</code> 要填<strong>两个</strong>域名</td>
-<td><code>pypi.org</code>（索引）+ <code>files.pythonhosted.org</code>（CDN 下载）。只填前者会出现"能查到包、下载全部失败"的半通假象</td>
-</tr>
-<tr>
-<td>端口在监听 ≠ 代理可用</td>
-<td>代理客户端未连节点时，本地端口<strong>仍然 LISTENING</strong>，<code>curl -x</code> 会挂满超时周期才失败，无法区分"代理没起"与"节点不通"</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p>⚠️ 另需注意：上表覆盖的是<strong>命令行命令</strong>，而程序<strong>内部使用的 HTTP 库</strong>（Rust <code>reqwest</code>、Python <code>httpx</code>、Node <code>undici</code> 等）行为与之并不一致，同环境下可能完全相反。这层差异见上文链接的专文。</p>
-</blockquote>
-<h2 id="_3">三、典型误导性故障：安装器的"半成功"<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<p>混合型安装器（同一脚本内既用 PowerShell 下载、又调用 git/uv）在只配了系统代理的机器上会出现这样的日志序列：</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>[OK] xxx.zip 下载成功                    ← PowerShell 通道，走了系统代理
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>fatal: unable to access 'https://github.com/...': Connection was reset   ← git 克隆失败
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>[!] 下载中断残留 xxx.incomplete-&lt;时间戳&gt;  ← uv 下载 Python 失败
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>[!] 回退到 ZIP 安装……
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>[X] 安装失败：托管 Python 不可用
-</code></pre></div>
-<p>ZIP 成功会造成"网络没问题"的错觉，真正的故障被推到后半段。<strong>看到 <code>Connection was reset</code> + <code>incomplete</code> 残留的组合，先怀疑环境变量代理未设置</strong>，而不是反复重试或换安装源。</p>
-<p>修复：在启动安装器的同一 shell 会话里导出环境变量（子进程才会继承）：</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nv">$env:HTTP_PROXY</span> <span class="p">=</span> <span class="s2">"http://127.0.0.1:&lt;本地代理端口&gt;"</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nv">$env:HTTPS_PROXY</span> <span class="p">=</span> <span class="s2">"http://127.0.0.1:&lt;本地代理端口&gt;"</span>
-</code></pre></div>
-<p>Git Bash 下则是 <code>export HTTPS_PROXY=...</code>。注意<strong>每次新开 shell 都要重设</strong>，或写入 profile。</p>
-<h2 id="git-bashmsys2">四、Git Bash（MSYS2）的两个额外坑<a class="headerlink" href="#git-bashmsys2" title="Permanent link">&para;</a></h2>
-<h3 id="_4">坑一：斜杠参数被路径改写吞掉<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
-<p>MSYS2 会对以 <code>/</code> 开头的参数做 POSIX→Windows 路径转换，导致部分 Windows 原生命令的开关被吞或被改写。实测案例：</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>reg<span class="w"> </span>add<span class="w"> </span><span class="s2">"HKCU\SOFTWARE\Policies\Microsoft\Edge"</span><span class="w"> </span>/v<span class="w"> </span>SomeValue<span class="w"> </span>/t<span class="w"> </span>REG_DWORD<span class="w"> </span>/d<span class="w"> </span><span class="m">1</span><span class="w"> </span>/f
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="c1"># 报错：无效语法 —— /v /t /d /f 被 MSYS 改写</span>
-</code></pre></div>
-<p>解法（任选其一）：</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># 方案 A：改用 PowerShell 执行注册表操作（推荐，完全绕开转换）</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>powershell<span class="w"> </span>-NoProfile<span class="w"> </span>-Command<span class="w"> </span><span class="s2">"Set-ItemProperty -Path 'HKCU:\SOFTWARE\Policies\Microsoft\Edge' -Name SomeValue -Value 1 -Type DWord"</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="c1"># 方案 B：双斜杠阻止转换</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>reg<span class="w"> </span>add<span class="w"> </span><span class="s2">"HKCU\SOFTWARE\Policies\Microsoft\Edge"</span><span class="w"> </span>//v<span class="w"> </span>SomeValue<span class="w"> </span>//t<span class="w"> </span>REG_DWORD<span class="w"> </span>//d<span class="w"> </span><span class="m">1</span><span class="w"> </span>//f
-</code></pre></div>
-<h3 id="powershell-bash">坑二：内联 PowerShell 的 <code>$</code> 变量被 bash 展开<a class="headerlink" href="#powershell-bash" title="Permanent link">&para;</a></h3>
-<p>在 Git Bash 里写 <code>powershell -Command "... $ws ..."</code>，<code>$ws</code> 会先被 bash 展开成空串。复杂 PowerShell 逻辑应写成临时 <code>.ps1</code> 文件再 <code>-File</code> 执行；临时脚本若含中文，必须是<strong>带 BOM 的 UTF-8</strong>（PS 5.1 会把无 BOM 的 UTF-8 按 ANSI 读，中文乱码甚至破坏语法），字符串内不要使用中文弯引号（PS 会把 <code>“ ”</code> 当字符串定界符，导致提前截断）。</p>
-<h2 id="_5">五、一分钟判定流程<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
-<p>遇到"命令行下载/克隆失败"时按序执行：</p>
-<ol>
-<li><strong>确认代理本身活着</strong>：<code>curl -sI -x http://127.0.0.1:&lt;端口&gt; https://目标站</code> 返回 200 说明代理可用，问题在工具配置；</li>
-<li><strong>分清工具属于哪一族</strong>（对照第二节表格）；</li>
-<li><strong>环境变量族</strong>：当前 shell 里 <code>echo $HTTPS_PROXY</code>（PowerShell：<code>$env:HTTPS_PROXY</code>）为空即补上；</li>
-<li><strong>设置后必须验证子进程真的继承了</strong>：在同一会话内重跑失败命令，不要新开终端；</li>
-<li><strong>仍失败</strong>：区分"代理端口拒绝"（代理没起）与"Connection reset"（代理节点故障，先重试再换节点），不要在工具层面反复折腾。</li>
-</ol>
-<h2 id="_6">六、事实核查与实测记录<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
-<ul>
-<li>"git/uv/npm/curl 不读 Windows 系统代理、PowerShell IWR 读"：✅ 实测（本机系统代理 + 环境变量对照实验，安装器日志与手工命令双重验证）。</li>
-<li>"Node 内置 fetch（undici）不读代理环境变量"：✅ 实测（Node 24，外网请求直连失败、经 curl 子进程成功）。</li>
-<li>"MSYS2 路径转换吞掉 <code>reg add</code> 斜杠参数"：✅ 实测（报错"无效语法"，改 PowerShell 后成功）。</li>
-<li>"PS 5.1 无 BOM UTF-8 中文乱码、弯引号当定界符"：✅ 实测（同一带 BOM 文件在 5.1 与 7.6.5 对照解析，5.1 报错而 7 正常；弯引号截断行为两版本一致成立）。</li>
-<li>工具版本迭代可能改变默认行为，使用时以 <code>--version</code> 对应的最新文档为准。</li>
-</ul>
-<h2 id="_7">七、参考链接<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
-<ul>
-<li><a href="https://git-scm.com/docs/git-config#Documentation/git-config.txt-httpproxy">Git 文档：git-config 的 http.proxy</a></li>
-<li><a href="https://curl.se/docs/manpage.html">curl 官方手册：--proxy 与环境变量支持</a></li>
-<li><a href="https://undici.nodejs.org/#/docs/api/ProxyAgent">undici 官方文档：ProxyAgent 支持</a></li>
-<li><a href="https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/invoke-webrequest">Microsoft Learn：about_Invoke-WebRequest（PowerShell 7）</a></li>
-</ul>
 
 
 
@@ -5749,7 +5783,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年9月7日 06:45:52 UTC">2026年9月7日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年9月8日 16:29:57 UTC">2026年9月8日</span>
   </span>
 
     
@@ -5759,7 +5793,7 @@
     <span class="md-icon" title="创建日期">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年9月3日 01:57:38 UTC">2026年9月3日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年9月8日 16:29:57 UTC">2026年9月8日</span>
   </span>
 
     
@@ -5795,7 +5829,7 @@
       <nav class="md-footer__inner md-grid" aria-label="页脚" >
         
           
-          <a href="../Steam%E8%AE%BE%E7%BD%AE%E4%BC%98%E5%8C%96%E6%8C%87%E5%8D%97/" class="md-footer__link md-footer__link--prev" aria-label="上一页: Steam 设置优化指南">
+          <a href="../CI%E6%B3%A8%E8%A7%A3%E6%B8%85%E9%9B%B6%E7%BB%BF%E7%81%AF%E2%89%A0%E6%97%A0%E8%AD%A6%E5%91%8A%E7%9A%84%E6%A0%B8%E9%AA%8C%E6%96%B9%E6%B3%95/" class="md-footer__link md-footer__link--prev" aria-label="上一页: CI 注解清零：绿灯≠无警告的核验方法">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -5805,20 +5839,20 @@
                 上一页
               </span>
               <div class="md-ellipsis">
-                Steam 设置优化指南
+                CI 注解清零：绿灯≠无警告的核验方法
               </div>
             </div>
           </a>
         
         
           
-          <a href="../%E6%9C%AC%E5%9C%B0%E4%BB%A3%E7%90%86%E7%8E%AF%E5%A2%83%E7%9A%84NO_PROXY%E7%99%BD%E5%90%8D%E5%8D%95%E4%B8%8E%E7%A8%8B%E5%BA%8F%E5%BA%93%E4%BB%A3%E7%90%86%E8%A1%8C%E4%B8%BA/" class="md-footer__link md-footer__link--next" aria-label="下一页: 本地代理环境的 NO_PROXY 白名单与程序库代理行为">
+          <a href="../../AI%E5%B7%A5%E5%85%B7/" class="md-footer__link md-footer__link--next" aria-label="下一页: AI 工具">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 下一页
               </span>
               <div class="md-ellipsis">
-                本地代理环境的 NO_PROXY 白名单与程序库代理行为
+                AI 工具
               </div>
             </div>
             <div class="md-footer__button md-icon">
