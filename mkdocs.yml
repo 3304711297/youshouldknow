@@ -181,6 +181,7 @@ nav:
     - GitHub Actions 看门工作流防误报设计要点: 软件技巧/GitHub-Actions看门工作流防误报设计要点.md
     - 油猴脚本双通道发布与自动化更新机制设计: 软件技巧/油猴脚本双通道发布与自动化更新机制设计.md
     - CI 注解清零：绿灯≠无警告的核验方法: 软件技巧/CI注解清零绿灯≠无警告的核验方法.md
+    - Tauri v2 生产构建 custom-protocol 缺失致 WebView2 回环拒绝连接排坑: 软件技巧/Tauri-v2生产构建custom-protocol缺失致WebView2回环拒绝连接排坑.md
   - AI工具:
     - AI工具/README.md
     - 让 AI 控制 Edge 浏览器：CDP 远程调试与 chrome-devtools-mcp 配置指南: AI工具/Edge浏览器CDP远程调试与AI接管指南.md
