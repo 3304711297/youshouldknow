@@ -54,5 +54,7 @@ exclude = [
   # 2026-09-05 起 WAF 阻断对 CI runner 与 lychee 返回 403
   'https://www\.nccgroup\.com/',
   # 2026-09-06 起 FirPE 官网对海外 CI runner 连接超时/阻断
-  'https://firpe\.cn/',
+  'https://firpe\\.cn/',
+  # 2026-09-09 起 Cloudflare WAF 对 CI runner 与自动化请求返回 403
+  'https://linustechtips\\.com/',
 ]
