@@ -18,6 +18,7 @@ tweak_module: []
 - [Git 走代理遭遇 GitHub 429 限流根因与解决方案](./Git走代理遭遇GitHub-429限流的根因与彻底解决方案.md) — 剖析代理共享出口 IP 触发 GitHub 匿名限流机理，通过 Git 全局 URL 规则前置注入用户身份，彻底规避 429 阻断凭据助手的问题
 - [GitHub Actions 看门工作流防误报设计要点](./GitHub-Actions看门工作流防误报设计要点.md) — 实测提炼三类误报根因与修法：关单不回写基线致反复开单、日期刷新被当更新信号（无 contents:write 永远回写不了）、实时计数器天然漂移追不上，附优雅降级与标题刷新配套卫生
 - [油猴脚本双通道发布与自动化更新机制设计](./油猴脚本双通道发布与自动化更新机制设计.md) — 剖析 Tampermonkey/Violentmonkey 更新协议、Rolling 与 Stable 通道产物解耦，以及基于 GitHub Actions Tag 驱动的自动化发布闭环实践
+- [CI 注解清零：绿灯≠无警告的核验方法](./CI注解清零绿灯≠无警告的核验方法.md) — 破除两个让 CI 噪声长期存活的错觉：conclusion 为 success 的 run 仍可携带 warning 注解（须查 check-runs 的 annotations_url 核验），以及界面注解显示上限约 10 条（界面显示 1 条时本地实为 60 条）；附 Node20 弃用警告的 SHA→tag→运行时定位法，以及「清零不是压制」的可复核标准
 
 ## 与其他分类的边界
 
