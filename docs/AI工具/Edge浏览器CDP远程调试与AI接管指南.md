@@ -106,6 +106,8 @@ curl.exe --noproxy "*" http://127.0.0.1:9222/json/version
 
 | 症状 | 原因 | 处理 |
 | --- | --- | --- |
+| MCP 报 Could not connect to Chrome | 本机未运行 Chrome，默认寻找的是 Chrome 路径 | 必须指定 `--autoConnect` 并传入 Edge 的 `--user-data-dir` |
+| 命令行挂 `--remote-debugging-port` 启动后端口仍未监听 | Chromium 对默认 Profile 实施安全限制，忽略命令行端口注入 | 严禁命令行硬起，必须通过第三节 `edge://inspect` 勾选原生开关 |
 | MCP 报 ECONNREFUSED 127.0.0.1:9222 | Edge 没在运行 | 启动 Edge 即可 |
 | 工具调用 30 秒超时、页面无响应 | 「是否允许远程调试」弹窗在等待点击 | 到 Edge 里点「允许」，再让 AI 重试 |
 | list_pages 返回空 | 连接刚建立但未就绪 | 稍候重试同一调用 |
@@ -143,7 +145,39 @@ Edge Dev 153 会**拒绝 manifest 中下划线写法的 `default_locale`（如 `
 
 如果核心诉求就是「AI 接管原封不动的日常 Edge」，本文方案是当前摩擦最小的形态。
 
-## 十、参考链接
+## 十、实战延伸：AI 自动化操作日常浏览器的安全铁律
+
+当 AI Agent（或编写脚本）需要协助重启、接管或探测日常 Edge 时，极易因粗暴的进程操作导致用户会话丢失、扩展被注销或误杀进程。必须遵循以下实证安全准则：
+
+1. **绝对禁止暴力 `Stop-Process -Force`**：
+   - 强杀主进程会导致当前打开的数十个标签页无法被写入会话持久化账本（`Sessions\Session_*`），甚至导致会话恢复提示弹窗。
+   - 正确关闭方式是调用系统级窗口消息进行优雅关闭：
+     ```powershell
+     Get-Process msedge -ErrorAction SilentlyContinue | ForEach-Object { $_.CloseMainWindow() | Out-Null }
+     ```
+2. **扩展完整性基线监控门禁**：
+   - Chromium 内核在路径变动、权限不匹配或启动异常时可能触发重置机制。
+   - 在任何涉及用户 User Data 目录的自动化操作前后，必须以 `Default\Extensions` 下子目录数量作为基线进行严格校验比对，发现数值变小立即阻断告警。
+3. **临时自动化实例必须精确匹配清理**：
+   - 自动化或临时排查若使用了独立的临时 Profile（如 `%TEMP%\edge-cdp-*`），清理时严禁使用 `taskkill /IM msedge.exe /F` 或不带过滤的杀进程命令，这会把用户的日常工作界面一并干掉。
+   - Windows 下 `wmic` 查询由于提权或安全限制经常返回空 `CommandLine`，必须使用 PowerShell 原生 CIM 查询并严格正则匹配命令行路径：
+     ```powershell
+     Get-CimInstance Win32_Process -Filter "name='msedge.exe'" |
+       Where-Object { $_.CommandLine -match 'edge-cdp' } |
+       ForEach-Object { Stop-Process -Id $_.ProcessId -Force }
+     ```
+
+## 十一、登录态与高反爬站点对抗实战（以 X/Twitter 为例）
+
+为什么许多场景「必须接管已有登录态」，纯无头临时浏览器无法胜任？
+
+1. **反爬机制与虚拟点击穿透失效**：
+   - 以 X/Twitter 为例，未登录访客访问推文详情仅下发并渲染前 3 条回复，下方的「See all the replies」在 DOM 中为 `<h2>` 结构。
+   - 现代高反爬前端深度校验指针事件真伪：合成的 JavaScript `MouseEvent`（pointerdown / click）以及无登录态下的 CDP `Input.dispatchMouseEvent` 均会被框架静默抛弃，必须依靠具有真实账号凭证的会话渲染完整上下文。
+2. **免登录镜像通道的脆性**：
+   - 诸如 Nitter 镜像群常态化遭遇 IP 封锁与维护下线，第三方代理端点（如 `xcancel`）频繁触发 Cloudflare 验证码；仅基础元数据（点赞、转发数）可通过只读开放端点获取，一旦涉及深度互动、评论流与登录受限资源，日常主力浏览器的直连接管是唯一稳健路径。
+
+## 十二、参考链接
 
 - [微软官方文档：Let agents inspect your site with Chrome DevTools MCP](https://learn.microsoft.com/en-us/microsoft-edge/web-platform/devtools-mcp-server)
 - [Chrome 官方博客：Debug your browser session](https://developer.chrome.com/blog/chrome-devtools-mcp-debug-your-browser-session)
