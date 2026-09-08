@@ -1265,7 +1265,7 @@
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        翻车恢复与风险
+        翻车恢复与风险红线
       
     </span>
   </a>
@@ -5190,7 +5190,7 @@
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        翻车恢复与风险
+        翻车恢复与风险红线
       
     </span>
   </a>
@@ -5265,45 +5265,68 @@
 <h1 id="above-4g-resizable-bar">Above 4G 解码与 Resizable BAR<a class="headerlink" href="#above-4g-resizable-bar" title="Permanent link">&para;</a></h1>
 <blockquote>
 <p><strong>分类</strong>：BIOS 与固件 · 性能优化项</p>
-<p><strong>一句话</strong>：Above 4G Decoding 是打开 64 位地址空间的大门，Resizable BAR（ReBAR，AMD 叫 SAM）是把显卡 256MB 的小门换成与显存一样大的大门——顺序不能反：先关 CSM、再开 Above 4G、最后开 ReBAR。</p>
+<p><strong>一句话</strong>：Above 4G Decoding 是打开 64 位地址空间的大门，Resizable BAR（ReBAR，AMD 叫 SAM）是把显卡 256MB 的小门换成与显存一样大的大门——顺序不能反：先关 CSM、再开 Above 4G、最后开 ReBAR。它本身不加速，只让设备能活、让 ReBAR 有地方站。</p>
 </blockquote>
 <h2 id="above-4g-decoding4g">Above 4G Decoding（4G 以上地址解码）<a class="headerlink" href="#above-4g-decoding4g" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>原理</strong>：传统模式只支持 32 位寻址，BIOS 开机初始化默认把所有 PCIe 设备的地址窗口（BAR，基址寄存器）挤在 4G 以内，真正留给设备的不到 3G；大显存显卡的地址窗口可达 2GB 甚至更多，多卡/多设备时 4G 内根本不够分。开启后地址空间扩展到 64 位，"小仓库换大仓库"。</li>
-<li><strong>与 CSM 的联动</strong>：CSM 强制传统模式初始化，传统模式天然限制在 4G 内——CSM 开启时该选项会隐藏/锁定/不生效，必须先关 CSM 用纯 UEFI。</li>
-<li><strong>品牌路径</strong>：华硕在高级菜单 PCIe 相关设置；微星在 设置 → 高级 → PCIe 相关项；技嘉在 Settings → IO 端口；华擎在高级菜单 PCIe 配置。多数主板默认关闭，部分新板默认开启；有些主板需从 EZ 模式切到高级模式才能看到。</li>
+<li><strong>本质与核心机制</strong>：</li>
+<li><strong>不是解决内存容量识别</strong>：不是早年 32 位操作系统认不全 &gt;4GB 物理内存的古早问题；</li>
+<li><strong>解决的是 MMIO 地址窗口耗尽</strong>：主板和 CPU 需要给 PCIe 设备（显卡、声卡、RAID 卡等）分配一段物理内存地址映射（MMIO，Memory-Mapped I/O），供 CPU 发号施令。传统 32 位寻址下，所有设备的 BAR（基址寄存器）窗口被强行塞在 4GB 以下那段仅存不到 2~3GB 的“PCI 空洞”里。当插入第二块卡、计算卡、大显存显卡或开启 ReBAR 后，地址窗口根本不够分；</li>
+<li><strong>设备管理器「代码 12」的精准归因</strong>：设备出现黄叹号提示「代码 12：该设备找不到足够可用的资源」，<strong>先别急着重装显卡驱动</strong>。如果是因为多卡、专业计算卡或开启 ReBAR 导致，正是 MMIO 地址窗口挤爆的典型病症；开启 Above 4G 将设备门牌号搬迁到 4GB 以上的 64 位空间，即可瞬间解除资源冲突（若无大 BAR 设备的普通代码 12 才是传统 IRQ 或驱动残留冲突）。</li>
+<li><strong>与 CSM 的绝对互斥</strong>：</li>
+<li>CSM（兼容性支持模块）使用的是 16 位/32 位传统 Option ROM，根本不认 64 位 MMIO 寻址；</li>
+<li><strong>开启硬性先决条件</strong>：必须先彻底关闭 CSM（采用纯 UEFI 启动模式 + GPT 硬盘分区）。CSM 开启状态下强开 Above 4G 可能导致主板自检卡死或开机黑屏。</li>
+<li><strong>品牌路径</strong>：</li>
+<li>华硕（ASUS）：高级（Advanced）→ PCIe 相关设置 / 系统代理（SA）配置；</li>
+<li>微星（MSI）：Settings → 高级 → PCIe 子系统设置；</li>
+<li>技嘉（GIGABYTE）：Settings → IO 端口；</li>
+<li>华擎（ASRock）：高级 → PCIe 设备配置。</li>
+<li><em>注</em>：多数新主板出厂默认开启；部分旧主板需从 EZ 简易模式按 F7 切入高级模式方可查看。</li>
+<li><strong>判断标准</strong>：</li>
+<li>64 位系统（Win10/11/Linux）建议直接开启；</li>
+<li>显存超过 4GB、装载多张 PCIe 设备或计算卡必开；</li>
+<li>准备启用 Resizable BAR / SAM 的必须前置开启；</li>
+<li>纯 32 位系统或依赖 Legacy/CSM 引导的设备必须保持关闭。</li>
 </ul>
-<p><strong>判断四条</strong>：64 位系统（Win10/11/Linux）直接开；显卡显存超过 4G 建议开；超过 3 张 PCIe 设备建议开避免地址冲突；32 位系统就关闭。</p>
 <h2 id="resizable-barrebar-sam">Resizable BAR（ReBAR / SAM）<a class="headerlink" href="#resizable-barrebar-sam" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>原理</strong>：PCIe 规范默认每个 BAR 窗口最大 256MB（是地址窗口不是显存）。游戏时 CPU 频繁向显卡传送纹理、模型数据，超出窗口就要反复重映射，开销大；开 ReBAR 后用 64 位 BAR 把窗口拉到与显存一样大（16G 显存即 16G 窗口），CPU 可直接任意访问显存。</li>
-<li><strong>开启条件（六项全满足才生效）</strong>：</li>
-<li>64 位系统（Win10 1803+/Win11 或 Linux 5.10+）；</li>
-<li>CPU：AMD 锐龙 3000 系及以上；Intel 10 代及以上；</li>
-<li>显卡：NVIDIA RTX 30 系起（早期批次可能需刷官方 VBIOS）、AMD RX 6000 系起（需 500 系芯片组）；</li>
-<li>驱动：NVIDIA 465+、AMD 21.3.1+；</li>
-<li>CSM 关闭；</li>
-<li>先开 Above 4G Decoding（多数主板开 Above 4G 后 ReBAR 选项自动出现）。</li>
-<li><strong>验证</strong>：GPU-Z 高级面板拉到 Resizable BAR 一栏，系统支持/是否开启/CSM 关闭/UEFI+GPT/驱动支持全绿、BAR size 显示正常数值即生效。注意个别主板 CSM 开着仍显示 ReBAR 选项，点了也没用。</li>
+<li><strong>原理</strong>：PCIe 规范早期默认每个 BAR 窗口最大仅 256MB。游戏渲染时 CPU 频繁向显卡传输纹理与着色模型数据，超出 256MB 就必须分批切片、排队反复映射，CPU 调度开销大；开启 ReBAR 后依托 64 位 Above 4G 空间，把窗口拉大到与整块显存等大（例如 16GB 显存即 16GB 窗口），CPU 可以直接且并发寻址整块显存。</li>
+<li><strong>Above 4G 与 ReBAR 的上下层关系</strong>：</li>
+<li><strong>Above 4G 是底层地基</strong>：它负责把地址门牌搬上楼，本身不增加游戏帧数，但它决定设备能否正常初始化存活；</li>
+<li><strong>ReBAR 是上层应用</strong>：负责把小门拆成大门，游戏帧率提升与调度优化全部源于 ReBAR。</li>
+<li><strong>开启条件（六项缺一不可）</strong>：</li>
+<li>64 位操作系统（Windows 10 1803+ / Windows 11 或 Linux 5.10+）；</li>
+<li>CPU 支持：AMD 锐龙 3000 系及以上（不含 3000G 等 APU）；Intel 10 代酷睿及以上；</li>
+<li>主板芯片组与 BIOS：AMD 400/500/600 系；Intel 400/500/600/700 系（需更新支持 ReBAR 的 BIOS）；</li>
+<li>显卡支持：NVIDIA RTX 30 系起（早期批次需刷官方支持 ReBAR 的 VBIOS）、AMD RX 6000 系起、Intel Arc 全系列；</li>
+<li>引导模式：CSM 必须关闭，GPT 分区 + 纯 UEFI 启动；</li>
+<li>BIOS 设置顺位：先开启 Above 4G Decoding，随后将出现的 Resizable BAR 设为 Auto 或 Enabled。</li>
+<li><strong>验证机制</strong>：</li>
+<li>打开 GPU-Z，切到「Advanced」标签页选择「Resizable BAR」下拉菜单：<ul>
+<li>检查 GPU-Z 诊断清单中的 9 项参数（包括 GPU Hardware Support、Above 4G Decode Enabled、CSM Disabled 等）是否全部显示为「Yes」；</li>
+<li>若显示 Disabled，对照排查哪一项打红叉（最常见是 CSM 遗留开启或主板 BIOS 未刷最新）。</li>
+</ul>
+</li>
 </ul>
 <h2 id="_1">实测收益<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
-<li>分辨率越低收益越大：1080P 约 5~15%、1440P 约 3~10%、4K 多数小于 5%；</li>
-<li>大纹理开放世界、CPU 参与度高的游戏收益大，显卡已满载的游戏收益有限；个别游戏可能掉帧，可在驱动面板按游戏单独关闭；</li>
-<li>功耗增加不超过约 5%。</li>
+<li>分辨率越低，CPU 瓶颈越明显，收益越显著：1080P 提升约 5%~15%，1440P 约 3%~10%，4K 显卡负载打满时多在 3%~5% 以内；</li>
+<li>开放世界、超大贴图流式加载（如《赛博朋克 2077》、《地平线》等）及 CPU 调度重负荷游戏收益最明显；极少数老旧引擎游戏可能存在反向掉帧（可在显卡驱动面板中按游戏单独配置开关 Profile）；</li>
+<li>整机功耗增加通常不超过 3%~5%。</li>
 </ul>
-<h2 id="_2">翻车恢复与风险<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h2 id="_2">翻车恢复与风险红线<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <ul>
-<li>开启后黑屏：清 CMOS 恢复（拔电源线 → 长按电源键放电 → 拔 CMOS 电池或短接跳线），操作不损坏硬件；</li>
-<li>显存识别不全：查 CSM 是否没关、显卡驱动是否最新、BIOS 是否太老；</li>
-<li><strong>给不支持的显卡用第三方工具魔改开启属高风险操作</strong>，必须先备份原版 VBIOS，刷写绝不能断电。</li>
+<li><strong>开后黑屏无法进系统</strong>：通常为系统盘为 MBR 分区或显卡 VBIOS 过旧不认 UEFI GOP。执行清 CMOS 恢复（断电拔线 → 长按电源按键放电 → 短接 CLRTC 跳线或抠电池 5 分钟），即可回退默认设置开机；</li>
+<li><strong>排查代码 12 避免盲目重装</strong>：先看设备是多卡还是大 BAR；若是，进 BIOS 确认 Above 4G 是否被误关；</li>
+<li><strong>严禁盲目魔改旧卡</strong>：为未官方支持的老卡（如 GTX 10/20 系或早期 AMD 卡）使用第三方 UEFI 驱动补丁注入 ReBAR 属于高危破坏性操作，存在变砖风险。</li>
 </ul>
 <h2 id="_3">出处与核查说明<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<p>本文整理自 B 站 UP 主「所盼皆欣然」《电脑BIOS选项全科普》旧版合集第 07、08 集，经本地语音转录校对整理；实测数字（游戏帧率、功耗）为口播数据，标注待核处建议对照原视频：</p>
+<p>本文综合整理自 B 站 UP 主「所盼皆欣然」《电脑BIOS选项全科普》系列视频，经本地语音转录与专业硬件工程逻辑校对：</p>
 <ul>
-<li><a href="https://www.bilibili.com/video/BV1LFEt6QE4e/">电脑BIOS选项全科普EP07/Above 4G【暮里学姐】（旧版）</a></li>
-<li><a href="https://www.bilibili.com/video/BV11tEu6SEKX/">电脑BIOS选项全科普EP08/Resizable BAR【暮里学姐】（旧版）</a></li>
-<li>相关：<a href="../UEFI-Legacy-CSM%E4%B8%8E%E5%88%86%E5%8C%BA%E8%A1%A8/">UEFI、Legacy 与 CSM 兼容支持模块</a>、<a href="../M2%E9%80%9A%E9%81%93%E5%88%86%E9%85%8D%E4%B8%8E%E6%98%BE%E5%8D%A1PCIe%E9%99%8D%E9%80%9F/">M.2 通道分配与显卡 PCIe 降速</a></li>
+<li><a href="https://www.bilibili.com/video/BV1SqbK6VEfW/">电脑BIOS选项全科普EP16/Above 4G Decoding【暮里学姐】（重制版，BV1SqbK6VEfW）</a></li>
+<li><a href="https://www.bilibili.com/video/BV11tEu6SEKX/">电脑BIOS选项全科普EP08/Resizable BAR【暮里学姐】（旧版，BV11tEu6SEKX，待重制版EP17）</a></li>
+<li><a href="https://www.bilibili.com/video/BV1LFEt6QE4e/">电脑BIOS选项全科普EP07/Above 4G【暮里学姐】（旧版，BV1LFEt6QE4e，已由重制版EP16替代）</a></li>
+<li>联动篇目：<a href="../UEFI-Legacy-CSM%E4%B8%8E%E5%88%86%E5%8C%BA%E8%A1%A8/">UEFI、Legacy 与 CSM 兼容支持模块</a>、<a href="../NVMe%E8%AF%86%E5%88%AB%E5%85%A8%E9%93%BE%E8%B7%AF%E4%B8%8E%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5/">NVMe 识别全链路与故障排查</a>、<a href="../M2%E9%80%9A%E9%81%93%E5%88%86%E9%85%8D%E4%B8%8E%E6%98%BE%E5%8D%A1PCIe%E9%99%8D%E9%80%9F/">M.2 通道分配与显卡 PCIe 降速</a></li>
 </ul>
 
 
@@ -5327,7 +5350,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年9月2日 16:34:38 UTC">2026年9月2日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年9月8日 04:27:31 UTC">2026年9月8日</span>
   </span>
 
     
