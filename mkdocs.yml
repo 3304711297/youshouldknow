@@ -201,6 +201,7 @@ nav:
     - LLM API 流式工具调用 (tool_calls) 分片损坏防御与透明转码实践: AI工具/LLM流式工具调用分片损坏防御与透明转码实践.md
     - Hermes Desktop 插件机制与状态栏 Chip 开发实战（React 19 渲染避坑）: AI工具/Hermes-Desktop插件机制与状态栏Chip开发实战.md
     - Hermes 本地配置防漂移与无感守卫体系构建指南: AI工具/Hermes本地配置防漂移与无感守卫体系构建指南.md
+    - Gemini 代理式视频理解架构解析与降本实战: AI工具/Gemini代理式视频理解架构解析与降本实战.md
   - 项目导航:
     - 项目导航/README.md
     - tweakbyjie 关联说明: 项目导航/tweakbyjie关联说明.md
