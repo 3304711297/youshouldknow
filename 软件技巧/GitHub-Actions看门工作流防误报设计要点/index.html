@@ -4049,7 +4049,7 @@
   <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        附：配套的工作流卫生
+        坑四：本地与云端重复跑同一套检查，产物互相打架
       
     </span>
   </a>
@@ -4058,6 +4058,17 @@
       
         <li class="md-nav__item">
   <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        附：配套的工作流卫生
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
         速查表
@@ -5280,7 +5291,7 @@
   <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        附：配套的工作流卫生
+        坑四：本地与云端重复跑同一套检查，产物互相打架
       
     </span>
   </a>
@@ -5289,6 +5300,17 @@
       
         <li class="md-nav__item">
   <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        附：配套的工作流卫生
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
         速查表
@@ -5361,8 +5383,8 @@
 </div>
 <h1 id="github-actions">GitHub Actions 看门工作流防误报设计要点<a class="headerlink" href="#github-actions" title="Permanent link">&para;</a></h1>
 <blockquote>
-<p>本文目标：从一次真实治理（三轮 Issue 收口 + 根因修复）中提炼看门工作流的三类<strong>误报根因</strong>与修法。看门的价值在于「开了单就该处理」——误报一多，用户就会关闭通知，看门形同虚设。</p>
-<p>适用场景：<code>cron</code> 定时拉取上游（npm / GitHub Releases / commits / 网页计数器）→ 与本地基线比对 → 差异开 Issue 提醒。三个坑全部来自实测，可复用到任何仓库。</p>
+<p>本文目标：从真实治理（四轮 Issue 收口 + 根因修复）中提炼看门工作流的四类根因与修法。看门的价值在于「开了单就该处理」——误报一多，用户就会关闭通知，看门形同虚设。</p>
+<p>适用场景：<code>cron</code> 定时拉取上游（npm / GitHub Releases / commits / 网页计数器）→ 与本地基线比对 → 差异开 Issue 提醒。前三个坑是<strong>告警噪声</strong>（假阳性），坑四是<strong>产物漂移</strong>（本地与云端互相打架）——四个全部来自实测，可复用到任何仓库。</p>
 </blockquote>
 <h2 id="_1">坑一：没有内容级去重，同一变更反复开单<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <p><strong>现象</strong>：某插件的上游变更昨天已评估并关闭 Issue，今天（或下次 cron）watcher 又为<strong>同一批 commit</strong> 开出一张新 Issue。</p>
@@ -5394,13 +5416,56 @@
 - 基线按<strong>收口时点的实测值</strong>回写，不追中间值；
 - 容忍「下次运行小幅正向偏差」，这正是该类源的常态（也因坑二的修法，仅增长才报警，缩量不动作）；
 - 若漂移频繁到失控，把报警阈值从「any diff」放宽为「增长 ≥ N」。</p>
-<h2 id="_4">附：配套的工作流卫生<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<h2 id="_4">坑四：本地与云端重复跑同一套检查，产物互相打架<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<p><strong>现象</strong>：GitHub Issue 正文是一份完整的「全 ✅ 最新」报告，本地工作区却散落着另一份同名报告，内容全是 <code>⚠️ 查询失败：HTTP Error 403: rate limit exceeded</code>。两份产物对不上，用户不知道该信谁。</p>
+<p><strong>根因（两条叠加，缺一不可）</strong>：</p>
+<ol>
+<li>
+<p><strong>相对路径 + 任意工作目录 → 产物甩得到处都是</strong>：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># 错误：相对路径，脚本在哪个目录跑，报告就写在哪里</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">REPORT_PATH</span> <span class="o">=</span> <span class="s2">"capability-report.md"</span>
+</code></pre></div>
+<p>在工作区根目录执行 <code>python scripts/check_capability_upstream.py</code>，报告就生成在仓库外；仓库里还留着一份陈旧副本——同一份数据三个地方各说各话。</p>
+</li>
+<li>
+<p><strong>本地裸跑没有凭据 → 撞上匿名限流</strong>：CI 用 <code>secrets.GITHUB_TOKEN</code>（5000 次/小时），本地直接跑脚本没注入 token，走匿名配额（60 次/小时），一打就穿。更麻烦的是这类脚本常配有 <code>.cmd</code> 封装，封装里有 <code>gh auth token</code> 注入，但<strong>直接调脚本的人根本不走那条路</strong>。</p>
+</li>
+</ol>
+<p><strong>修法（四道，逐层收口）</strong>：</p>
+<ol>
+<li>
+<p><strong>产物路径绝对锚定</strong>：用脚本自身位置反推仓库根，杜绝甩文件：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">REPO_ROOT</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)))</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">REPORT_PATH</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">REPO_ROOT</span><span class="p">,</span> <span class="s2">"capability-report.md"</span><span class="p">)</span>
+</code></pre></div>
+</li>
+<li>
+<p><strong>端云职责解耦——本地只做云端做不了的事</strong>：云端没有你的本机环境，客户端种子清单、本地配置守卫这类<strong>本地专属项</strong>只能本地跑；18 项外部上游交给 CI 每日定时跑即可，本地重复跑纯属浪费配额还制造分歧。加个开关：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">local_only</span> <span class="o">=</span> <span class="s2">"--local-only"</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="k">if</span> <span class="n">local_only</span> <span class="ow">and</span> <span class="n">check</span><span class="p">[</span><span class="s2">"type"</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">"local-merged-marketplace"</span><span class="p">,</span> <span class="s2">"local-config-guard"</span><span class="p">):</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>    <span class="n">skipped</span> <span class="o">+=</span> <span class="mi">1</span>   <span class="c1"># 云端托管的组件，本地直接跳过</span>
+</code></pre></div>
+<p>本地模式下<strong>不改写、不收口云端 Issue</strong>——真源唯一定格在 CI 产出的 Issue 正文。</p>
+</li>
+<li>
+<p><strong>大面积失败熔断</strong>：网络波动或限流时不许写盘，否则残缺数据会覆盖掉上一份好报告：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">if</span> <span class="ow">not</span> <span class="n">on_actions</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">local_only</span> <span class="ow">and</span> <span class="n">failed_queries</span> <span class="o">&gt;=</span> <span class="mi">3</span><span class="p">:</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>    <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">"上游查询大面积失败，已中止写入，防残缺数据覆盖"</span><span class="p">)</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>    <span class="k">return</span> <span class="mi">1</span>
+</code></pre></div>
+</li>
+<li>
+<p><strong>报告不进版本库</strong>：<code>capability-report.md</code> 从 git 跟踪移除并写进 <code>.gitignore</code>。它是<strong>运行产物</strong>不是源码，跟踪它必然产生「本地改了、CI 也改了」的冲突。</p>
+</li>
+</ol>
+<p><strong>判断标准</strong>：问一句「这个检查项，云端 runner 有环境跑吗？」——有就交给 CI，本地别碰；没有才留本地。两边跑同一件事，迟早打架。</p>
+<h2 id="_5">附：配套的工作流卫生<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>编辑已有 Issue 时同步刷新标题</strong>：<code>gh issue edit "$EXISTING" --title "$TITLE" --body-file report.md</code>——否则标题残留过期的「N 项待跟进」，正文已清零也看不出来；</li>
 <li><strong>非 GitHub 源优雅降级</strong>：爬虫类检查（带浏览器 UA 的 API / 页面解析）异常时严格标记 <code>⚠️ 暂不可达</code> 并保持基线，<code>behind=False</code> 绝不计入 outdated，绝不误开 Issue，不阻塞整体检查；</li>
 <li><strong>收口靠「比对结果」而非「人工判断」</strong>：工作流里 <code>has_updates == 'false'</code> 分支自动关单，用户只需修数据，不用手动关 Issue。</li>
 </ul>
-<h2 id="_5">速查表<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<h2 id="_6">速查表<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -5435,6 +5500,11 @@
 <td>无优雅降级</td>
 <td>异常 → behind=False + 标记不可达</td>
 </tr>
+<tr>
+<td>本地与云端报告不一致</td>
+<td>相对路径甩文件 + 裸跑无 token 撞限流</td>
+<td>路径绝对锚定 + <code>--local-only</code> 解耦 + 失败熔断 + 报告不入库</td>
+</tr>
 </tbody>
 </table>
 
@@ -5459,7 +5529,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年9月7日 07:56:15 UTC">2026年9月7日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年9月8日 09:22:42 UTC">2026年9月8日</span>
   </span>
 
     
