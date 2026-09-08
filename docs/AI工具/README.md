@@ -33,6 +33,7 @@ AI 编程助手、浏览器自动化、MCP（Model Context Protocol）工具链�
 - [LLM API 流式工具调用 (tool_calls) 分片损坏防御与透明转码实践](./LLM流式工具调用分片损坏防御与透明转码实践.md) — 国产云端 API 在 stream=true 下偶发空 name 或截断 arguments 协议缺陷，构建智能旁路感知、聚合校验自动重试与标准平滑伪流式下发防御架构
 - [Hermes Desktop 插件机制与状态栏 Chip 开发实战（React 19 渲染避坑）](./Hermes-Desktop插件机制与状态栏Chip开发实战.md) — 基于 `@hermes/plugin-sdk` 的状态栏右侧 Chip 注册流程，深入剖析 React 19 生产版 JSX 运行时 `jsx(Component, null)` 抛出 `Cannot read properties of null (reading 'key')` 根因与极简微交互设计
 - [Hermes 本地配置防漂移与无感守卫体系构建指南](./Hermes本地配置防漂移与无感守卫体系构建指南.md) — 针对客户端更新中深合并新增默认值、桌面端 stash 遗留与技能管辖标记漂移三大痛点，构建 Gateway 启动钩子联动状态栏与 GitHub Actions 的全自动守卫体系
+- [Gemini 代理式视频理解架构解析与降本实战](./Gemini代理式视频理解架构解析与降本实战.md) — 剖析 Pass by Reference、字幕优先与自适应时序缩放机制，Token 骤降 88%、成本降低 66%，以及与本地 OpenAI 兼容网关解耦的多智能体落地规程
 
 
 ## 与其他分类的边界
