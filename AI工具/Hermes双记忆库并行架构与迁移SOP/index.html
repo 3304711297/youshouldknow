@@ -4125,6 +4125,8 @@
       
         
       
+        
+      
     
     
     
@@ -4435,6 +4437,56 @@
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="二、为什么不建议无脑调大限额">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-2026-09-09" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 折算率取决于语言，且各厂商分词器不同（2026-09-09 实测修正）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-token" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 由此产生的陷阱：限额按字符，账单按 token
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 收益要按真值重算
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-soulmd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 缓存前缀：别为小钱反复改 SOUL.md
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -4988,6 +5040,41 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%8F%90%E7%A4%BA%E8%AF%8D%E6%88%90%E6%9C%AC%E5%AE%9E%E6%B5%8B-%E5%AD%97%E7%AC%A6%E9%99%90%E9%A2%9D%E4%B8%8Etoken%E8%B4%A6%E5%8D%95%E7%9A%84%E9%94%99%E4%BD%8D%E9%99%B7%E9%98%B1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    提示词成本实测：字符限额与 token 账单的错位陷阱
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--reference"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -5334,6 +5421,56 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="二、为什么不建议无脑调大限额">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-2026-09-09" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 折算率取决于语言，且各厂商分词器不同（2026-09-09 实测修正）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-token" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 由此产生的陷阱：限额按字符，账单按 token
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 收益要按真值重算
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-soulmd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 缓存前缀：别为小钱反复改 SOUL.md
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -5480,7 +5617,7 @@
 <p>顶格时系统提示词里会标注如 <code>99% — 2992/3000 chars</code>，同时写入会被拒绝，逼 Agent 做「先删后加」的整理。</p>
 <h2 id="_1">二、为什么不建议无脑调大限额<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <p>内置库的每一字符都是<strong>固定常驻成本</strong>：</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>每会话成本 ≈ (MEMORY + USER 字符数) / 2.75 tokens，随每一轮请求重发
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>每会话成本 ≈ (MEMORY + USER 字符数) × 每字符 token 折算率，随每一轮请求重发
 </code></pre></div>
 <ul>
 <li>调到 6000/4000，等于给<strong>所有</strong>会话固定加上约 3600 tokens 底座——哪怕这个会话根本用不到里面 90% 的内容；</li>
@@ -5488,6 +5625,74 @@
 <li>而其中大部分内容（项目运维细节、历史排障记录）其实是「低频可检索」的，并不需要每轮都在场。</li>
 </ul>
 <p><strong>正确形态是分层</strong>：高频必带事实留内置，低频细节进检索层。</p>
+<h3 id="21-2026-09-09">2.1 折算率取决于语言，且各厂商分词器不同（2026-09-09 实测修正）<a class="headerlink" href="#21-2026-09-09" title="Permanent link">&para;</a></h3>
+<p>早期文档常用 <code>2.75 chars/token</code> 这一粗略估算，但它<strong>既没区分语言、也没区分厂商</strong>。实测结果如下：</p>
+<table>
+<thead>
+<tr>
+<th>分词器</th>
+<th>中文</th>
+<th>英文</th>
+<th>中文/英文倍率</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>G​emini</strong>（<code>gemini-3.8-flash</code>，countTokens 实测）</td>
+<td>≈ 0.59 token/字</td>
+<td>≈ 0.29 token/字符</td>
+<td><strong>1.10x</strong></td>
+</tr>
+<tr>
+<td>O​penAI <code>o200k_base</code></td>
+<td>—</td>
+<td>—</td>
+<td><strong>1.34x</strong></td>
+</tr>
+<tr>
+<td>O​penAI <code>cl100k_base</code>（旧）</td>
+<td>—</td>
+<td>—</td>
+<td>2.08x</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>厂商不可外推</strong>：G​emini 1.10x 与 O​penAI 1.34x 相差约 22%。用 tiktoken 估算 G​emini 开销会高估约 20%，务必用厂商自己的计数接口（零配额测法见《提示词成本实测：字符限额与 token 账单的错位陷阱》）。</p>
+</blockquote>
+<h3 id="22-token">2.2 由此产生的陷阱：限额按字符，账单按 token<a class="headerlink" href="#22-token" title="Permanent link">&para;</a></h3>
+<p>配置里的 <code>memory_char_limit</code> 单位是<strong>字符</strong>，而计费单位是 <strong>token</strong>。中文省字符却费 token，英文省 token 却费字符（约需 2.5 倍字符表达同等信息）。</p>
+<p><strong>直接后果</strong>：把满额中文库整体译成英文，字符数会暴涨约 45% 而<strong>直接撑爆限额</strong>，写入被拒。</p>
+<p><strong>正确顺序是「先减法、后翻译」</strong>：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>分类（高频必带 vs 低频可检索）→ 迁移低频进检索层 → 压缩约 60% → 译英 → 实测字符数校验
+</code></pre></div>
+<h3 id="23">2.3 收益要按真值重算<a class="headerlink" href="#23" title="Permanent link">&para;</a></h3>
+<p>本机 2026-09-09 落地（三文件全量译英 + 压缩）：</p>
+<table>
+<thead>
+<tr>
+<th>文件</th>
+<th>token 变化</th>
+<th>字符占用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>MEMORY.md</code></td>
+<td>1525 → 740</td>
+<td>2992 / 3000</td>
+</tr>
+<tr>
+<td><code>USER.md</code></td>
+<td>1079 → 464</td>
+<td>1996 / 2000</td>
+</tr>
+</tbody>
+</table>
+<p>若按 o200k 的 1.34x 估算会得出「省 1426 token/轮」，但按 G​emini 真值 1.10x，<strong>实际只省约 200 token/轮</strong>（相对每轮约 21.7k 底座约 0.9%）。</p>
+<p><strong>所以换语言的真正理由是腾出限额空间</strong>（同样预算可容纳更多事实），而非省下那点 token。</p>
+<h3 id="24-soulmd">2.4 缓存前缀：别为小钱反复改 SOUL.md<a class="headerlink" href="#24-soulmd" title="Permanent link">&para;</a></h3>
+<p><code>SOUL.md</code> 位于系统提示词 <strong>cache 前缀最头部</strong>，任何改动都会使其后整段前缀失效一次，属一次性重算成本。为省几十 token 反复改它是净亏的——<strong>改一次，改对，然后别动</strong>。</p>
 <h2 id="_2">三、分层准则<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -5579,7 +5784,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年9月7日 07:56:15 UTC">2026年9月7日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年9月9日 07:54:28 UTC">2026年9月9日</span>
   </span>
 
     
