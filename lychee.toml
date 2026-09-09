@@ -47,14 +47,14 @@ exclude = [
   'https://cn\.game-console\.org/',
   # 2026-08-29 起对 CI runner 返回 412(反爬前置校验,本地可达),见台账
   'https://www\.bilibili\.com/',
-  'https://b23\\.tv/',
+  'https://b23\.tv/',
   # 2026-09-04 起 Cloudflare 防护对 CI runner 返回 503/限流
-  'https://www\\.bleepingcomputer\\.com/',
+  'https://www\.bleepingcomputer\.com/',
 
   # 2026-09-05 起 WAF 阻断对 CI runner 与 lychee 返回 403
   'https://www\.nccgroup\.com/',
   # 2026-09-06 起 FirPE 官网对海外 CI runner 连接超时/阻断
-  'https://firpe\\.cn/',
+  'https://firpe\.cn/',
   # 2026-09-09 起 Cloudflare WAF 对 CI runner 与自动化请求返回 403
-  'https://linustechtips\\.com/',
+  'https://linustechtips\.com/',
 ]
