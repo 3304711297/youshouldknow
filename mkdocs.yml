@@ -206,6 +206,7 @@ nav:
     - Hermes Desktop 插件机制与状态栏 Chip 开发实战（React 19 渲染避坑）: AI工具/Hermes-Desktop插件机制与状态栏Chip开发实战.md
     - Hermes 本地配置防漂移与无感守卫体系构建指南: AI工具/Hermes本地配置防漂移与无感守卫体系构建指南.md
     - Gemini 代理式视频理解架构解析与降本实战: AI工具/Gemini代理式视频理解架构解析与降本实战.md
+    - 提示词成本实测：字符限额与 token 账单的错位陷阱: AI工具/提示词成本实测-字符限额与token账单的错位陷阱.md
   - 项目导航:
     - 项目导航/README.md
     - tweakbyjie 关联说明: 项目导航/tweakbyjie关联说明.md
