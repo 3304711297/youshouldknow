@@ -207,6 +207,9 @@ nav:
     - Hermes 本地配置防漂移与无感守卫体系构建指南: AI工具/Hermes本地配置防漂移与无感守卫体系构建指南.md
     - Gemini 代理式视频理解架构解析与降本实战: AI工具/Gemini代理式视频理解架构解析与降本实战.md
     - 提示词成本实测：字符限额与 token 账单的错位陷阱: AI工具/提示词成本实测-字符限额与token账单的错位陷阱.md
+    - Hermes 记忆体系三层架构与选型决策指南: AI工具/Hermes记忆体系三层架构与选型决策指南.md
+    - Hermes 技能系统机制原理：渐进式披露与程序性记忆: AI工具/Hermes技能系统机制原理与渐进式披露.md
+    - Hermes 多 Profile 编队实战：从单助手到隔离的多 Agent 团队: AI工具/Hermes多Profile编队实战与状态隔离.md
   - 项目导航:
     - 项目导航/README.md
     - tweakbyjie 关联说明: 项目导航/tweakbyjie关联说明.md
