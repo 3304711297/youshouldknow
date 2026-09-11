@@ -5795,67 +5795,31 @@
               <article class="md-content__inner md-typeset">
                 
   
+    <aside class="doc-meta" aria-label="文档元数据">
+      
+        <span class="doc-meta__badge doc-meta__badge--status-reference">参考资料</span>
+      
+      
+        <span class="doc-meta__badge doc-meta__badge--risk-low">🟢 低风险</span>
+      
+      
+        <span class="doc-meta__sep" aria-hidden="true"></span>
+        <span class="doc-meta__field">
+          <span class="doc-meta__label">适用</span><span class="doc-meta__value">Windows 10/11 / hermes-agent（NousResearch） / OpenViking / EasyCLIProxyAPI / WorkBuddy</span>
+        </span>
+      
+      
+      
+    </aside>
+  
   
                   
 
-  <nav class="md-tags" >
-    
-      
-      
-      
-      
-        <span class="md-tag">Windows 10/11</span>
-      
-    
-      
-      
-      
-      
-        <span class="md-tag">hermes-agent（NousResearch）</span>
-      
-    
-      
-      
-      
-      
-        <span class="md-tag">OpenViking</span>
-      
-    
-      
-      
-      
-      
-        <span class="md-tag">EasyCLIProxyAPI</span>
-      
-    
-      
-      
-      
-      
-        <span class="md-tag">WorkBuddy</span>
-      
-    
-      
-      
-      
-      
-        <span class="md-tag">风险：low</span>
-      
-    
-  </nav>
-
 
   
   
 
 
-<div class="admonition abstract">
-<p class="admonition-title">适用范围 · 风险等级 · 联动模块</p>
-<ul>
-<li><strong>适用范围</strong>：Windows 10/11、hermes-agent（NousResearch）、OpenViking、EasyCLIProxyAPI、WorkBuddy</li>
-<li><strong>风险等级</strong>：🟢 <code>low</code></li>
-</ul>
-</div>
 <h1 id="_1">本地多智能体记忆库提炼模型动态路由与配额防漏实践<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
 <p>在多智能体（如 Hermes Agent 与 ZCode）与本地知识库（如 OpenViking）协同的日常开发中，开发者通常会在多个大模型（如 Google Gemini、WorkBuddy/GLM、Claude、DeepSeek 等）之间灵活切换。然而，若底层记忆库的语义提炼（VLM/LLM）采用静态硬编码配置，极易导致<strong>用户明明已切换至轻量/免费模型聊天，而后台记忆系统却仍在源源不断地偷跑高阶商业模型额度</strong>。</p>
 <p>本文以实际排查与工程改造为例，解构本地记忆提炼链路的生命周期瓶颈，并记录一种<strong>零常驻额外进程、跟随当前聊天模型动态切换提炼端点</strong>的轻量化工程实践。</p>

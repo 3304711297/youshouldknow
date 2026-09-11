@@ -5722,22 +5722,24 @@
 <li>不要把知识文章中的示例设置理解为对所有设备都适用的默认方案。</li>
 </ul>
 <h2 id="_4">🏷️ 文档元数据规范<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
-<p>部分文章在文件开头使用 YAML Front Matter，供站点显示统一的维护信息。当前规范只允许以下四个字段：</p>
+<p>部分文章在文件开头使用 YAML Front Matter，供站点显示统一的维护信息。当前规范只允许以下字段：</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nn">---</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nt">status</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">reference</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nt">status</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">reference</span><span class="w">          </span><span class="c1"># 可选</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="nt">risk</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">low</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="nt">applies_to</span><span class="p">:</span>
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Windows 10/11</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="nt">verified_on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2026-08-21</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="c1"># 本次收尾未重新核验外部事实，verified_on 保留上次核验日期</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="nt">verified_on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2026-08-21</span><span class="w">    </span><span class="c1"># 可选</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="nt">tweak_module</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">2</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">3</span><span class="p p-Indicator">]</span><span class="w">       </span><span class="c1"># 无对应模块时填 []</span>
 <a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="nn">---</span>
 </code></pre></div>
 <ul>
-<li><code>status</code>：文章状态，只能使用 <code>stable</code>（稳定维护）、<code>reference</code>（参考资料）或 <code>experimental</code>（实验性内容）；</li>
-<li><code>risk</code>：文章涉及的操作风险，只能使用 <code>low</code>（低风险）、<code>medium</code>（中风险）或 <code>high</code>（高风险）；</li>
-<li><code>applies_to</code>：非空的适用范围列表，写明 Windows 版本、硬件/软件场景或测试环境；</li>
-<li><code>verified_on</code>：最近一次内容或事实核查日期，格式为 <code>YYYY-MM-DD</code>。它表示核查时间，不替代站点显示的 Git 最后修改日期。</li>
+<li><code>status</code>：文章状态，只能使用 <code>stable</code>（稳定维护）、<code>reference</code>（参考资料）或 <code>experimental</code>（实验性内容）；可选，缺省时卡片不显示该徽章；</li>
+<li><code>risk</code>：文章涉及的操作风险，只能使用 <code>low</code>（低风险）、<code>medium</code>（中风险）或 <code>high</code>（高风险）；必填；</li>
+<li><code>applies_to</code>：非空的适用范围列表，写明 Windows 版本、硬件/软件场景或测试环境；必填；</li>
+<li><code>verified_on</code>：最近一次内容或事实核查日期，格式为 <code>YYYY-MM-DD</code>。它表示核查时间，不替代站点显示的 Git 最后修改日期；可选；</li>
+<li><code>tweak_module</code>：联动的 tweakbyjie 主菜单模块编号列表，无对应模块时必须是空数组 <code>[]</code>；必填。</li>
 </ul>
+<p>这些字段由 <code>hooks/badges.py</code> 读取并规范化为 <code>context['meta_card']</code>，再由 <code>overrides/main.html</code> 渲染成<strong>文章标题上方的一条紧凑信息横条</strong>。每个字段只渲染一次；缺项自动省略，不会留下空位。新增字段时请同时改这两处，不要另起渲染路径——历史上同一批字段被模板卡片、admonition、tags 三处重复消费，导致顶部堆叠最多 517px 的冗余。</p>
 <p>Front Matter 不重复维护文章标题和分类：标题以正文一级标题为准，分类以目录和 <code>mkdocs.yml</code> 导航为准。元数据必须依据正文、事实核查记录和可追溯证据人工填写，不根据关键词自动推断风险或稳定性。旧文章可以暂时没有 Front Matter，并按分类逐步迁移；加入后必须通过校验器。</p>
 <p>本地检查命令：</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">python</span> <span class="n">tools</span><span class="p">/</span><span class="n">check_front_matter</span><span class="p">.</span><span class="n">py</span>
@@ -5776,7 +5778,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年9月1日 14:51:20 UTC">2026年9月1日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年9月11日 13:42:32 UTC">2026年9月11日</span>
   </span>
 
     

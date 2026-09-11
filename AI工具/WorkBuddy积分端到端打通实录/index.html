@@ -5593,53 +5593,31 @@
               <article class="md-content__inner md-typeset">
                 
   
+    <aside class="doc-meta" aria-label="文档元数据">
+      
+        <span class="doc-meta__badge doc-meta__badge--status-reference">参考资料</span>
+      
+      
+        <span class="doc-meta__badge doc-meta__badge--risk-low">🟢 低风险</span>
+      
+      
+        <span class="doc-meta__sep" aria-hidden="true"></span>
+        <span class="doc-meta__field">
+          <span class="doc-meta__label">适用</span><span class="doc-meta__value">Windows 10/11 / hermes-agent（NousResearch） / codebuddy2openai（Tauri v2）</span>
+        </span>
+      
+      
+      
+    </aside>
+  
   
                   
 
-  <nav class="md-tags" >
-    
-      
-      
-      
-      
-        <span class="md-tag">Windows 10/11</span>
-      
-    
-      
-      
-      
-      
-        <span class="md-tag">hermes-agent（NousResearch）</span>
-      
-    
-      
-      
-      
-      
-        <span class="md-tag">codebuddy2openai（Tauri v2）</span>
-      
-    
-      
-      
-      
-      
-        <span class="md-tag">风险：low</span>
-      
-    
-  </nav>
-
 
   
   
 
 
-<div class="admonition abstract">
-<p class="admonition-title">适用范围 · 风险等级 · 联动模块</p>
-<ul>
-<li><strong>适用范围</strong>：Windows 10/11、hermes-agent（NousResearch）、codebuddy2openai（Tauri v2）</li>
-<li><strong>风险等级</strong>：🟢 <code>low</code></li>
-</ul>
-</div>
 <h1 id="workbuddy">WorkBuddy 积分端到端打通实录<a class="headerlink" href="#workbuddy" title="Permanent link">&para;</a></h1>
 <blockquote>
 <p>本文目标：记录将腾讯 CodeBuddy（WorkBuddy）积分数据打通到 Hermes token-stats 配额插件的完整过程。从"卡片只会显示运行中"的问题定位出发，历经三方案比选与裁决，最终以"反向代理新增 REST 端点 + Hermes 后端拉取 + 前端双看板展示"的链路实现端到端打通，并沉淀双端一致性验证方法论与踩坑记录。全文事实均来自实际施工与验收，标 ✅ 处为实测确认。</p>
@@ -5777,7 +5755,7 @@
 <ul>
 <li>codebuddy2openai（Tauri v2）：<code>converter.py</code> / <code>GET /api/usage_summary</code>（commit <code>5b4381c</code>）</li>
 <li>Hermes token-stats 配额插件：<code>check_workbuddy_status()</code>（hermes 分支，commit <code>cd652b7</code>）</li>
-<li>本站关联文章：<a href="../Hermes-Agent%E9%AB%98%E9%98%B6%E6%8C%87%E4%BB%A4%E5%85%A8%E6%99%AF%E4%B8%8E%E7%94%9F%E6%80%81%E8%B7%AF%E7%BA%BF%E6%8C%87%E5%8D%97/">Hermes-Agent高阶指令全景与生态路线指南</a></li>
+<li>本站关联文章：<a href="../Hermes-Agent%E9%AB%98%E9%98%B6%E6%8C%87%E4%BB%A4%E5%85%A8%E6%99%AF%E4%B8%8E%E7%94%9F%E6%80%81%E8%B7%AF%E7%BA%BF%E6%8C%87%E5%8D%97/">Hermes-Agent 高阶指令全景与生态路线指南</a></li>
 </ul>
 
 
@@ -5801,7 +5779,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年9月5日 16:49:44 UTC">2026年9月5日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年9月11日 13:42:39 UTC">2026年9月11日</span>
   </span>
 
     

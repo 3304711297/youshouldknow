@@ -5620,53 +5620,29 @@
               <article class="md-content__inner md-typeset">
                 
   
+    <aside class="doc-meta" aria-label="文档元数据">
+      
+      
+        <span class="doc-meta__badge doc-meta__badge--risk-medium">🟡 中风险</span>
+      
+      
+        <span class="doc-meta__sep" aria-hidden="true"></span>
+        <span class="doc-meta__field">
+          <span class="doc-meta__label">适用</span><span class="doc-meta__value">Windows 10/11 / Chrome/Edge（Chromium 内核浏览器） / chrome-devtools-mcp 与同类浏览器自动化 MCP 使用者</span>
+        </span>
+      
+      
+      
+    </aside>
+  
   
                   
 
-  <nav class="md-tags" >
-    
-      
-      
-      
-      
-        <span class="md-tag">Windows 10/11</span>
-      
-    
-      
-      
-      
-      
-        <span class="md-tag">Chrome/Edge（Chromium 内核浏览器）</span>
-      
-    
-      
-      
-      
-      
-        <span class="md-tag">chrome-devtools-mcp 与同类浏览器自动化 MCP 使用者</span>
-      
-    
-      
-      
-      
-      
-        <span class="md-tag">风险：medium</span>
-      
-    
-  </nav>
-
 
   
   
 
 
-<div class="admonition abstract">
-<p class="admonition-title">适用范围 · 风险等级 · 联动模块</p>
-<ul>
-<li><strong>适用范围</strong>：Windows 10/11、Chrome/Edge（Chromium 内核浏览器）、chrome-devtools-mcp 与同类浏览器自动化 MCP 使用者</li>
-<li><strong>风险等级</strong>：🟡 <code>medium</code></li>
-</ul>
-</div>
 <h1 id="ai">AI 浏览器自动化的扩展禁用陷阱与数据恢复<a class="headerlink" href="#ai" title="Permanent link">&para;</a></h1>
 <blockquote>
 <p>本文目标：讲清浏览器自动化类 MCP（以 chrome-devtools-mcp 为例）一个极易踩中的默认行为——<strong>MCP 亲自启动浏览器时会带 <code>--disable-extensions</code></strong>，特定时序下会把扩展注册表"清空"，表现为扩展和脚本管理器里的东西一夜之间全部消失；以及如何防护、如何在不丢数据的前提下完整恢复。</p>

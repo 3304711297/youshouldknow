@@ -5717,74 +5717,36 @@
               <article class="md-content__inner md-typeset">
                 
   
-    
-    
     <aside class="doc-meta" aria-label="文档元数据">
-      <div class="doc-meta__item">
-        <span class="doc-meta__label">状态</span>
+      
         <span class="doc-meta__badge doc-meta__badge--status-reference">参考资料</span>
-      </div>
-      <div class="doc-meta__item">
-        <span class="doc-meta__label">风险</span>
-        <span class="doc-meta__badge doc-meta__badge--risk-low">低风险</span>
-      </div>
-      <div class="doc-meta__item">
-        <span class="doc-meta__label">适用范围</span>
-        <span class="doc-meta__value">Hermes Agent 使用者（内置记忆库 / SOUL.md 定制）；Google Antigravity / EasyCLIProxyAPI 网关使用者；Gemini 与 OpenAI 分词器混用的多模型场景</span>
-      </div>
-      <div class="doc-meta__item">
-        <span class="doc-meta__label">最近核验</span>
-        <time class="doc-meta__value" datetime="2026-09-09">2026-09-09</time>
-      </div>
+      
+      
+        <span class="doc-meta__badge doc-meta__badge--risk-low">🟢 低风险</span>
+      
+      
+        <span class="doc-meta__sep" aria-hidden="true"></span>
+        <span class="doc-meta__field">
+          <span class="doc-meta__label">适用</span><span class="doc-meta__value">Hermes Agent 使用者（内置记忆库 / SOUL.md 定制） / Google Antigravity / EasyCLIProxyAPI 网关使用者 / Gemini 与 OpenAI 分词器混用的多模型场景</span>
+        </span>
+      
+      
+      
+        <span class="doc-meta__sep" aria-hidden="true"></span>
+        <span class="doc-meta__field">
+          <span class="doc-meta__label">核验</span><time class="doc-meta__value" datetime="2026-09-09">2026-09-09</time>
+        </span>
+      
     </aside>
   
   
                   
 
-  <nav class="md-tags" >
-    
-      
-      
-      
-      
-        <span class="md-tag">Hermes Agent 使用者（内置记忆库 / SOUL.md 定制）</span>
-      
-    
-      
-      
-      
-      
-        <span class="md-tag">Google Antigravity / EasyCLIProxyAPI 网关使用者</span>
-      
-    
-      
-      
-      
-      
-        <span class="md-tag">Gemini 与 OpenAI 分词器混用的多模型场景</span>
-      
-    
-      
-      
-      
-      
-        <span class="md-tag">风险：low</span>
-      
-    
-  </nav>
-
 
   
   
 
 
-<div class="admonition abstract">
-<p class="admonition-title">适用范围 · 风险等级 · 联动模块</p>
-<ul>
-<li><strong>适用范围</strong>：Hermes Agent 使用者（内置记忆库 / SOUL.md 定制）、Google Antigravity / EasyCLIProxyAPI 网关使用者、Gemini 与 OpenAI 分词器混用的多模型场景</li>
-<li><strong>风险等级</strong>：🟢 <code>low</code></li>
-</ul>
-</div>
 <h1 id="token">提示词成本实测：字符限额与 token 账单的错位陷阱<a class="headerlink" href="#token" title="Permanent link">&para;</a></h1>
 <blockquote>
 <p>本文目标：解释一个反直觉的坑——<strong>记忆库的限额按「字符」计，而账单按「token」计</strong>，两者错位会导致「改英文省 token 却撑爆限额」的死循环；并给出一套可复现的<strong>零配额实测方法</strong>，让你在额度紧张时也能拿到真实分词数。</p>

@@ -5542,53 +5542,29 @@
               <article class="md-content__inner md-typeset">
                 
   
+    <aside class="doc-meta" aria-label="文档元数据">
+      
+      
+        <span class="doc-meta__badge doc-meta__badge--risk-low">🟢 低风险</span>
+      
+      
+        <span class="doc-meta__sep" aria-hidden="true"></span>
+        <span class="doc-meta__field">
+          <span class="doc-meta__label">适用</span><span class="doc-meta__value">GitHub Actions 定时看门工作流（upstream watch / version check 类） / 自建依赖清单 + JSON 基线比对脚本（Python/Shell） / 任何「拉上游 → 比基线 → 开 Issue」模式的自动化巡检</span>
+        </span>
+      
+      
+      
+    </aside>
+  
   
                   
 
-  <nav class="md-tags" >
-    
-      
-      
-      
-      
-        <span class="md-tag">GitHub Actions 定时看门工作流（upstream watch / version check 类）</span>
-      
-    
-      
-      
-      
-      
-        <span class="md-tag">自建依赖清单 + JSON 基线比对脚本（Python/Shell）</span>
-      
-    
-      
-      
-      
-      
-        <span class="md-tag">任何「拉上游 → 比基线 → 开 Issue」模式的自动化巡检</span>
-      
-    
-      
-      
-      
-      
-        <span class="md-tag">风险：low</span>
-      
-    
-  </nav>
-
 
   
   
 
 
-<div class="admonition abstract">
-<p class="admonition-title">适用范围 · 风险等级 · 联动模块</p>
-<ul>
-<li><strong>适用范围</strong>：GitHub Actions 定时看门工作流（upstream watch / version check 类）、自建依赖清单 + JSON 基线比对脚本（Python/Shell）、任何「拉上游 → 比基线 → 开 Issue」模式的自动化巡检</li>
-<li><strong>风险等级</strong>：🟢 <code>low</code></li>
-</ul>
-</div>
 <h1 id="github-actions">GitHub Actions 看门工作流防误报设计要点<a class="headerlink" href="#github-actions" title="Permanent link">&para;</a></h1>
 <blockquote>
 <p>本文目标：从真实治理（四轮 Issue 收口 + 根因修复）中提炼看门工作流的四类根因与修法。看门的价值在于「开了单就该处理」——误报一多，用户就会关闭通知，看门形同虚设。</p>
