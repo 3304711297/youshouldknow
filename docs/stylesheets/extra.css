@@ -3,67 +3,82 @@
    Refined UI / Typography / Micro-interactions according to frontend-design
    ========================================================================== */
 
-/* ---------- 1. Document Metadata Card (.doc-meta) ---------- */
+/* ---------- 1. Document Metadata Card (.doc-meta) ----------
+   单一顶部信息条：状态 / 风险 / 适用 / 联动模块 / 核验。
+   数据由 hooks/badges.py 注入 context['meta_card']，缺项自动省略。
+   变更背景：此前同一批字段被模板卡片 + admonition + tags 三处重复渲染，
+   顶部堆叠最高 517px；现合并为一条紧凑横条。 */
 .doc-meta {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.85rem 1.25rem;
-  margin: 0 0 1.75rem;
-  padding: 1.1rem 1.35rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem 0.7rem;
+  margin: 0 0 1.6rem;
+  padding: 0.65rem 0.95rem;
   border: 1px solid var(--md-default-fg-color--lightest);
-  border-left: 0.35rem solid var(--md-primary-fg-color);
-  border-radius: 0.75rem;
+  border-left: 0.25rem solid var(--md-primary-fg-color);
+  border-radius: 0.55rem;
   background: var(--md-code-bg-color);
-  box-shadow: 0 4px 16px -2px rgba(0, 0, 0, 0.04);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.doc-meta:hover {
-  box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.08);
-  border-color: var(--md-default-fg-color--lighter);
+  font-size: 0.78rem;
+  line-height: 1.5;
 }
 
 [data-md-color-scheme="slate"] .doc-meta {
-  background: rgba(30, 33, 42, 0.75);
+  background: rgba(30, 33, 42, 0.65);
   border-color: rgba(255, 255, 255, 0.08);
-  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.3);
+  border-left-color: var(--md-primary-fg-color);
 }
 
-.doc-meta__item {
-  display: flex;
-  gap: 0.65rem;
-  align-items: center;
+.doc-meta__field {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.35rem;
   min-width: 0;
 }
 
 .doc-meta__label {
   color: var(--md-default-fg-color--light);
-  font-size: 0.78rem;
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.02em;
   white-space: nowrap;
   flex-shrink: 0;
 }
 
 .doc-meta__value {
   color: var(--md-default-fg-color);
-  font-size: 0.88rem;
   overflow-wrap: anywhere;
+}
+
+.doc-meta__link {
+  color: var(--md-primary-fg-color);
+  text-decoration: none;
+  border-bottom: 1px dotted currentColor;
+  transition: opacity 0.2s ease;
+}
+
+.doc-meta__link:hover {
+  opacity: 0.75;
+}
+
+/* 细分隔符：不需要时（如窄屏换行）也不会显得突兀 */
+.doc-meta__sep {
+  width: 1px;
+  height: 1em;
+  background: var(--md-default-fg-color--lightest);
+  flex: 0 0 auto;
 }
 
 /* Metadata Pill Badges */
 .doc-meta__badge {
   display: inline-flex;
   align-items: center;
-  padding: 0.15rem 0.6rem;
+  padding: 0.12rem 0.55rem;
   border-radius: 999px;
-  font-size: 0.78rem;
+  font-size: 0.76rem;
   font-weight: 600;
   line-height: 1.35;
   letter-spacing: -0.01em;
+  white-space: nowrap;
 }
 
 .doc-meta__badge--status-stable {
@@ -148,6 +163,16 @@
   -webkit-box-decoration-break: clone;
 }
 
+/* 正文中的超长不可断串（注册表路径、环境变量路径等）在窄屏会撑破容器。
+   与表格同样的保护：允许在任意位置折行，避免产生横向溢出。 */
+.md-typeset p,
+.md-typeset li,
+.md-typeset blockquote,
+.md-typeset .admonition,
+.md-typeset details {
+  overflow-wrap: anywhere;
+}
+
 /* Selection Highlight */
 ::selection {
   background: rgba(99, 102, 241, 0.25);
@@ -174,6 +199,14 @@
 .md-typeset table:not([class]) td {
   padding: 0.65rem 1rem;
   transition: background-color 0.15s ease;
+}
+
+/* 长参数串（如 useplatformclock/useplatformtick/…）不得撑宽表格：
+   overflow-wrap:anywhere 会计入 min-content，因此可让不可断长串在单元格内折行，
+   避免整表超出内容区触发横向滚动。 */
+.md-typeset table:not([class]) th,
+.md-typeset table:not([class]) td {
+  overflow-wrap: anywhere;
 }
 
 .md-typeset table:not([class]) tr:hover td {
@@ -237,8 +270,12 @@
 /* ---------- 7. Responsive Mobile Overrides ---------- */
 @media screen and (max-width: 48em) {
   .doc-meta {
-    grid-template-columns: 1fr;
-    gap: 0.65rem;
-    padding: 1rem;
+    gap: 0.4rem 0.55rem;
+    padding: 0.6rem 0.8rem;
+    font-size: 0.75rem;
+  }
+  /* 窄屏下分隔符改为整行断点效果不佳，直接隐藏以省横向空间 */
+  .doc-meta__sep {
+    display: none;
   }
 }
