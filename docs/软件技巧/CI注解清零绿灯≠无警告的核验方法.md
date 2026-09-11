@@ -17,7 +17,7 @@ tweak_module: []
 
 **现象**：Actions 页面一排绿勾，PR 也能合，但仓库的 Annotations 区长期挂着一条：
 
-```
+```text
 Node.js 20 is deprecated. The following actions target Node.js 20
 but are being forced to run on Node.js 24
 ```

@@ -65,9 +65,9 @@ tweak_module: []
 
 ## 出处与核查说明
 
-本文综合整理自 B 站 UP 主「所盼皆欣然」《电脑BIOS选项全科普》系列视频，经本地语音转录与专业硬件工程逻辑校对：
+本文综合整理自 B 站 UP 主「所盼皆欣然」《电脑 BIOS 选项全科普》系列视频，经本地语音转录与专业硬件工程逻辑校对：
 
-- [电脑BIOS选项全科普EP16/Above 4G Decoding【暮里学姐】（重制版，BV1SqbK6VEfW）](https://www.bilibili.com/video/BV1SqbK6VEfW/)
-- [电脑BIOS选项全科普EP08/Resizable BAR【暮里学姐】（旧版，BV11tEu6SEKX，待重制版EP17）](https://www.bilibili.com/video/BV11tEu6SEKX/)
-- [电脑BIOS选项全科普EP07/Above 4G【暮里学姐】（旧版，BV1LFEt6QE4e，已由重制版EP16替代）](https://www.bilibili.com/video/BV1LFEt6QE4e/)
+- [电脑 BIOS 选项全科普 EP16/Above 4G Decoding【暮里学姐】（重制版，BV1SqbK6VEfW）](https://www.bilibili.com/video/BV1SqbK6VEfW/)
+- [电脑 BIOS 选项全科普 EP08/Resizable BAR【暮里学姐】（旧版，BV11tEu6SEKX，待重制版 EP17）](https://www.bilibili.com/video/BV11tEu6SEKX/)
+- [电脑 BIOS 选项全科普 EP07/Above 4G【暮里学姐】（旧版，BV1LFEt6QE4e，已由重制版 EP16 替代）](https://www.bilibili.com/video/BV1LFEt6QE4e/)
 - 联动篇目：[UEFI、Legacy 与 CSM 兼容支持模块](./UEFI-Legacy-CSM与分区表.md)、[NVMe 识别全链路与故障排查](./NVMe识别全链路与故障排查.md)、[M.2 通道分配与显卡 PCIe 降速](./M2通道分配与显卡PCIe降速.md)

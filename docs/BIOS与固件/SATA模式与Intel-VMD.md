@@ -60,7 +60,7 @@ tweak_module: []
 
 本文整理自 B 站 UP 主「所盼皆欣然」对应集，经本地语音转录校对整理；路径与百分比细节以原视频画面为准：
 
-- [电脑BIOS选项全科普EP12/SATA模式（重制版）](https://www.bilibili.com/video/BV1nHtP6QEeF/)
-- [电脑BIOS选项全科普EP13/Intel VMD（重制版）](https://www.bilibili.com/video/BV1iW4U6NEqK/)
-- [电脑BIOS选项全科普EP03/SATAmode【暮里学姐】（旧版）](https://www.bilibili.com/video/BV1H2VU6VExq/)
+- [电脑 BIOS 选项全科普 EP12/SATA 模式（重制版）](https://www.bilibili.com/video/BV1nHtP6QEeF/)
+- [电脑 BIOS 选项全科普 EP13/Intel VMD（重制版）](https://www.bilibili.com/video/BV1iW4U6NEqK/)
+- [电脑 BIOS 选项全科普 EP03/SATAmode【暮里学姐】（旧版）](https://www.bilibili.com/video/BV1H2VU6VExq/)
 - 相关：[M.2 通道分配与显卡 PCIe 降速](./M2通道分配与显卡PCIe降速.md)

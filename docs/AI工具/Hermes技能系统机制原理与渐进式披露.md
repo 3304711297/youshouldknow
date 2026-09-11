@@ -53,7 +53,7 @@ Hermes 的解法是**按需加载**：平时只随身携带一份紧凑的技能
 
 典型结构：
 
-```
+```text
 skills/<category>/<skill-name>/SKILL.md
                           ├── references/   # 深度参考文档
                           ├── templates/    # 模板

@@ -57,6 +57,6 @@ tweak_module: []
 
 ## 出处与核查说明
 
-本文整理自 B 站 UP 主「所盼皆欣然」《电脑BIOS/UEFI选项内容全科普（重制版）》第 01 集，经本地语音转录校对整理；品牌对应的模式切换快捷键在转录中失真，故未列具体品牌键位，请以屏幕提示为准：
+本文整理自 B 站 UP 主「所盼皆欣然」《电脑 BIOS/UEFI 选项内容全科普（重制版）》第 01 集，经本地语音转录校对整理；品牌对应的模式切换快捷键在转录中失真，故未列具体品牌键位，请以屏幕提示为准：
 
-- [电脑BIOS选项全科普EP01/进入BIOS](https://www.bilibili.com/video/BV1sVby6VE9J/)
+- [电脑 BIOS 选项全科普 EP01/进入 BIOS](https://www.bilibili.com/video/BV1sVby6VE9J/)

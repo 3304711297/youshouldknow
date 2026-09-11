@@ -119,7 +119,7 @@ curl.exe --noproxy "*" http://127.0.0.1:9222/json/version
 Edge Dev 153 会**拒绝 manifest 中下划线写法的 `default_locale`（如 `"zh_CN"`）**，导致一批中文扩展无法从商店安装，三种安装方式全被拦：
 
 - 商店安装：「Default locale is defined but default data couldn't be loaded」
-- Chrome Web Store 安装：「下载时出错: 包无效」
+- Chrome Web Store 安装：「下载时出错：包无效」
 - 开发者模式加载解压目录：「已使用本地化，但未在清单中指定 default_locale」
 
 受影响案例：BilibiliSponsorBlock（小电视空降助手）、青柠起始页、better-XiaoHeiHe 等。而 `default_locale` 为 `"en"` 但同样带 `zh_CN` 语言文件夹的扩展（脚本猫、KISS Translator 等）一切正常。

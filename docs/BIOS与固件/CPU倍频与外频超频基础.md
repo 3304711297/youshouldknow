@@ -67,7 +67,7 @@ BCLK 是全局时钟基准，四条线分别连着：CPU 核心频率、Ring 总
 
 ## 出处与核查说明
 
-本文整理自 B 站 UP 主「所盼皆欣然」《电脑BIOS选项全科普》旧版合集第 21、22 集，经本地语音转录校对整理；起步倍频与 BCLK 数值标注"待核"处建议对照原视频画面：
+本文整理自 B 站 UP 主「所盼皆欣然」《电脑 BIOS 选项全科普》旧版合集第 21、22 集，经本地语音转录校对整理；起步倍频与 BCLK 数值标注"待核"处建议对照原视频画面：
 
-- [EP21/CPU倍频](https://www.bilibili.com/video/BV1TQT96XECb/)
-- [EP22/CPU外频](https://www.bilibili.com/video/BV1KTK36fECS/)
+- [EP21/CPU 倍频](https://www.bilibili.com/video/BV1TQT96XECb/)
+- [EP22/CPU 外频](https://www.bilibili.com/video/BV1KTK36fECS/)

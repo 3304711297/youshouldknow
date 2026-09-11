@@ -148,7 +148,6 @@ llama-server.exe -m D:\HermesModels\bge-m3-Q8_0.gguf --embedding --port 18082 --
 - 该客户端常驻开关**必须显式关闭**（点击「■ 关闭」按钮，或设置 `local_runtime.enabled: false`）；
 - 记忆向量化仅由上述 2 分钟 Serverless 懒人网关管理，绝不让本地聊天大模型在后台长期吞噬内存。
 
-
 ---
 
 ## 六、Hermes 召回策略与双端防漂移

@@ -28,7 +28,7 @@ verified_on: 2026-09-07
 | **主通信协议** | **Desktop Gateway JSON-RPC**（端口 8642） | **Dashboard REST + TUI WebSocket**（端口 9119） |
 | **语言本地化 (i18n)** | ❌ 纯英文硬编码（暂未接入多语言框架） | ✅ **原生内置完整简体中文**（1000+词条，跟随系统或手动切换） |
 | **Agent 交互保真度** | **极高（桌面对齐）**：原生展示工具调用流（Tool Activity）、思考链（Reasoning）、高危指令审批（Approval/Sudo）、反问澄清（Clarification）与子代理状态 | **中等**：侧重流式消息收发，细粒度工具事件与深度审批流相对简化 |
-| **移动端专有特性** | **后台任务通知**（Turn Notification）与**断线恢复**（Turn Recovery），支持 Per-chat 模型与思考强度调节 | **系统级全功能控制台**：实时日志流过滤、环境变量编辑、Cron 管理、Kanban 看板、6套暗黑主题 |
+| **移动端专有特性** | **后台任务通知**（Turn Notification）与**断线恢复**（Turn Recovery），支持 Per-chat 模型与思考强度调节 | **系统级全功能控制台**：实时日志流过滤、环境变量编辑、Cron 管理、Kanban 看板、6 套暗黑主题 |
 | **选型适用场景** | 移动端替代桌面操控、重度代码/工具执行、需审批交互与推理思考展示 | 移动端运维管理、看日志查配置、对**中文原生界面**有刚性需求的用户 |
 
 ---
@@ -74,7 +74,7 @@ New-NetFirewallRule -DisplayName "Hermes Dashboard LAN" -Direction Inbound -Loca
 
 许多用户在手机端连通并发消息后，常疑惑为何 **“电脑屏幕上的当前会话没有实时同步打字”**。这是由 Hermes 的多进程运行时架构所决定的：
 
-```
+```text
 [ 用户操作 ]
     │
     ├─► PC 桌面客户端 (Hermes Desktop) ──► 专属私有进程 (127.0.0.1:4837) ──┐

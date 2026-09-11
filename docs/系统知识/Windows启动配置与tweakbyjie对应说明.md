@@ -12,7 +12,6 @@ tweak_module: [2, 3, 4]
 
 > 已与 `tweakbyjie` 模块化结构同步：`Modules/Menu.ps1` 只负责菜单调度，BCD/测试模式执行逻辑位于 `Modules/Bcd.ps1`，通用写入/验证在 `Modules/Common.ps1`，备份闭环在 `Modules/Backup.*.ps1`；此处不再使用 `tweakbyjie.ps1:行号` 定位，以 `Modules/文件.ps1` 和函数名为准。详见 `tweakbyjie/docs/design/CODE-REFACTOR-STATUS.md`。
 
-
 本页对应 `tweakbyjie/tweakbyjie.ps1` 的 BCD、测试模式和 Device Guard 启动项操作。启动配置会影响系统能否正常启动、驱动完整性和安全边界，不能与普通游戏优化混合执行。
 
 ## BOOT-001 高级 BCD 计时器配置
@@ -49,7 +48,7 @@ HPET（High Precision Event Timer，高精度事件定时器）是主板上的�
 - `disabledynamictick yes`：关闭动态 tick 频率调节，使计时稳定平滑（该机制原本是节能特性）；
 - `tscsyncpolicy Enhanced`：增强 TSC 同步策略。
 
-恢复时把 `/set xxx yes|no` 写法换成 `bcdedit /deletevalue <值名>` 后重启即可。延伸参考：B站文章[《【Win优化】Bcdedit 参数与高精度计时器 HPET》](https://b23.tv/cOH0RxB)。注意：以上均为调用策略层面的调整，HPET 设备本身不在 tweakbyjie 的执行范围内。
+恢复时把 `/set xxx yes|no` 写法换成 `bcdedit /deletevalue <值名>` 后重启即可。延伸参考：B 站文章[《【Win 优化】Bcdedit 参数与高精度计时器 HPET》](https://b23.tv/cOH0RxB)。注意：以上均为调用策略层面的调整，HPET 设备本身不在 tweakbyjie 的执行范围内。
 
 ## BOOT-002 高级启动安全 BCD 配置
 

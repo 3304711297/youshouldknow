@@ -60,7 +60,7 @@ tweak_module: []
 
 ## 出处与核查说明
 
-本文整理自 B 站 UP 主「所盼皆欣然」《电脑BIOS/UEFI选项内容全科普（重制版）》第 14 集，经本地语音转录校对整理；各平台通道数与品牌路径细节以原视频画面及主板说明书为准：
+本文整理自 B 站 UP 主「所盼皆欣然」《电脑 BIOS/UEFI 选项内容全科普（重制版）》第 14 集，经本地语音转录校对整理；各平台通道数与品牌路径细节以原视频画面及主板说明书为准：
 
-- [电脑BIOS选项全科普EP14/M.2与显卡通道共享（重制版）](https://www.bilibili.com/video/BV1jKtW6eEAd/)
+- [电脑 BIOS 选项全科普 EP14/M.2 与显卡通道共享（重制版）](https://www.bilibili.com/video/BV1jKtW6eEAd/)
 - 相关：[SATA 模式与 Intel VMD](./SATA模式与Intel-VMD.md)、[Above 4G 解码与 Resizable BAR](./Above4G解码与ResizableBAR.md)

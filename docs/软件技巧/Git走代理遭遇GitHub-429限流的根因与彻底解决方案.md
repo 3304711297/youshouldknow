@@ -38,7 +38,7 @@ remote: Reduce the frequency of your requests or try again later.
 
 这个问题的本质是 **GitHub 防爬限流策略** 与 **Git 客户端认证机制** 之间的结构性脱节：
 
-```
+```text
 [本地 Git 客户端] ---> [本地 HTTP 代理 127.0.0.1:3067] ---> [代理公共出口 IP] ---> [GitHub API/Smart-HTTP]
                                                                   │
                                             多用户共享公共出口 IP ────┘

@@ -23,7 +23,7 @@ AI 编程助手、浏览器自动化、MCP（Model Context Protocol）工具链�
 - [WorkBuddy 积分端到端打通实录](./WorkBuddy积分端到端打通实录.md) — 哑管道问题定位、/api/usage_summary 端点契约（ZCode 施工）、token-stats 插件卡片升级与双端数据一致性验证方法论
 - [Hermes 子代理模型路由机制](./Hermes子代理模型路由机制.md) — delegation 默认继承实证、官方文档优先级、Kanban per-task override 与"不固定模型，用户口头裁决"实践范式、思考型模型 max_tokens 假阳性
 - [ZCode headless CLI 与 GUI 会话体系辨析](./ZCode-headless-CLI与GUI会话体系辨析.md) — project_id 落点差异实测、两套模型体系分离、18080 网关/Gemini 429 故障链与"GUI 手动建会话"实践规范
-- [Hermes 本地模型工作台与 OpenViking 智能记忆检索实战](./Hermes本地模型工作台与OpenViking智能记忆实战.md) — llama.cpp CUDA 本地推理引擎、RTX 4070 显存适配黄金法则、NTFS Junction C 盘空间彻底释放、OpenViking 语义分层检索与 Serverless 按需唤醒2分钟空闲休眠静默网关
+- [Hermes 本地模型工作台与 OpenViking 智能记忆检索实战](./Hermes本地模型工作台与OpenViking智能记忆实战.md) — llama.cpp CUDA 本地推理引擎、RTX 4070 显存适配黄金法则、NTFS Junction C 盘空间彻底释放、OpenViking 语义分层检索与 Serverless 按需唤醒 2 分钟空闲休眠静默网关
 - [Hermes 模型配置与容灾编排避坑指南](./Hermes模型配置与容灾编排避坑指南.md) — MoA 多参考模型粉碎工具调用协议与显式禁用、上下文窗口 0 自适应与阈值压缩、Fallback 容灾梯度黄金编排（严禁思考模型做静默降级）与版本指纹防漂移
 - [本地多智能体记忆库提炼模型动态路由与配额防漏实践](./本地多智能体记忆库提炼模型动态路由与配额防漏实践.md) — 商业配额慢漏溯源（会话全量发包 vs 提炼调用指纹）、OpenViking 内存单例限制与 Serverless 懒网关生命周期突破、token-stats 内嵌无常驻进程动态跟随及端到端避坑验证
 - [Hermes Agent Android 客户端选型与双端通信机制](./Hermes-Agent-Android客户端选型与双端通信机制.md) — 剖析 hermes-android 与 hermes-mobile 两款开源移动端客户端协议差异、本地化支持与多进程运行时会话拓扑
@@ -38,7 +38,6 @@ AI 编程助手、浏览器自动化、MCP（Model Context Protocol）工具链�
 - [Hermes 记忆体系三层架构与选型决策指南](./Hermes记忆体系三层架构与选型决策指南.md) — 蒸馏自 Hermes Atlas 站长记忆指南：原生便签/官方 Provider/社区插件三层叠加架构、"80% 自动合并"与"Curator 管记忆"两大误传源码级辟谣、8 家 Provider 架构押注对照表与过重记忆层五条报警信号
 - [Hermes 技能系统机制原理：渐进式披露与程序性记忆](./Hermes技能系统机制原理与渐进式披露.md) — 技能即程序性记忆的三级按需加载（索引→正文→引用文件）、SKILL.md 内容六要素标准、事实/历史/方法三分法判定规则，附本机工具池逐项实证
 - [Hermes 多 Profile 编队实战：从单助手到隔离的多 Agent 团队](./Hermes多Profile编队实战与状态隔离.md) — 编队始于状态隔离而非提示词雕花、指挥塔/研究员/写手/工程师四角色架构、SOUL.md 定身份与 AGENTS.md 定语境分界、七步落地流程与本地并发上限定标
-
 
 ## 与其他分类的边界
 

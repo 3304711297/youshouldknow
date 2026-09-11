@@ -62,7 +62,7 @@ BIOS 里改乱了、超频翻车点不亮、忘了 BIOS 密码、刷 BIOS 后系
 
 ## 出处与核查说明
 
-本文整理自 B 站 UP 主「所盼皆欣然」《电脑BIOS/UEFI选项内容全科普（重制版）》第 02 集，经本地语音转录校对整理；快捷键与清理范围等口播细节如与画面有出入以原视频为准：
+本文整理自 B 站 UP 主「所盼皆欣然」《电脑 BIOS/UEFI 选项内容全科普（重制版）》第 02 集，经本地语音转录校对整理；快捷键与清理范围等口播细节如与画面有出入以原视频为准：
 
-- [电脑BIOS选项全科普EP02/恢复默认的三种方法](https://www.bilibili.com/video/BV18jbD6vEHb/)
+- [电脑 BIOS 选项全科普 EP02/恢复默认的三种方法](https://www.bilibili.com/video/BV18jbD6vEHb/)
 - 相关：[启动顺序与 Boot Override](./启动顺序与BootOverride.md)、[Secure Boot 安全启动与密钥管理](./SecureBoot安全启动与密钥管理.md)

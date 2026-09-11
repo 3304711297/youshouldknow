@@ -263,7 +263,7 @@ Google 的 `gemini-3.1-flash-image` 在 Antigravity 中是作为多模态补全�
 在 ZCode 用户全局技能目录 `~/.zcode/skills/gemini-image-gen/`（或项目级目录）下创建两份文件：
 
 #### (1) `SKILL.md`（向 Agent 注册调用规范）
-```markdown
+````markdown
 ---
 name: gemini-image-gen
 description: Use this skill whenever the user asks to generate, draw, paint, or render an image, illustration, anime art, or photo using Google Gemini / Imagen 3 backend.
@@ -291,7 +291,7 @@ python "C:/Users/<用户名>/.zcode/skills/gemini-image-gen/generate_image.py" -
 1. 调用系统命令执行上述脚本。
 2. 读取脚本输出的 JSON 结果。
 3. 成功后以 Markdown 图片/链接格式返回给用户展示：`![image](path/to/image.jpg)`。
-```
+````
 
 #### (2) `generate_image.py`（请求网关并保存图片）
 ```python

@@ -8,7 +8,6 @@ tweak_module: []
 
 # tweakbyjie 全量逐项执行参考
 
-
 > 已与 `tweakbyjie` 模块化结构同步：`Modules/Menu.ps1` 只负责菜单调度，执行逻辑位于各业务模块（`Registry/Bcd/Defender/Mpo/Nvme/Power/Service/Virtualization.ps1`）与 `Modules/Common.ps1`（通用写入/验证）、`Modules/Backup.*.ps1`（备份闭环）；正文表格中的 `:NNN` 为模块化前单文件源码的历史行号快照（见文末边界说明），现行定位以 `Modules/文件.ps1` 和函数名为准。详见 `tweakbyjie/docs/design/CODE-REFACTOR-STATUS.md`。
 
 > **用途**：把 `tweakbyjie/tweakbyjie.ps1` 当前实际执行项转换为可核对的参考手册。

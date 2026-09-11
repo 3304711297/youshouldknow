@@ -34,7 +34,7 @@ tweak_module: []
 ### 2. 配额桶模型设计
 在返回的 JSON 结构中，包含两组模型桶（Buckets）：
 1. **Gemini Models**：
-   - `gemini-5h`（5小时滚动时间窗口）：平滑瞬时爆发请求，防止单用户突发流量拥塞集群；
+   - `gemini-5h`（5 小时滚动时间窗口）：平滑瞬时爆发请求，防止单用户突发流量拥塞集群；
    - `gemini-weekly`（每周总配额窗口）：对应订阅层级（如 Google AI Pro）的周调用总量基准。
 2. **Claude and GPT models (3P 协同池)**：
    - `3p-5h` 与 `3p-weekly`：包含 Claude Opus、Claude Sonnet、GPT-OSS 等协同模型。

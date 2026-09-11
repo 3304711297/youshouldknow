@@ -80,7 +80,7 @@ let assets = if let Some(assets) = assets {
 * **Tauri CLI 的隐式行为**：当你执行 `npm run tauri build` 或 `cargo tauri build` 时，Tauri CLI 会在后台为 `cargo` 自动追加 `--features custom-protocol`；
 * **裸 cargo 的缺失**：如果你直接在 `src-tauri` 目录执行 `cargo build --release`，或者在 CI / 外部脚本中调用原始 cargo，cargo **完全不知道**需要开启此 feature；
 * **致命陷阱**：若 `src-tauri/Cargo.toml` 本身**未在 `[features]` 段中显式声明 `custom-protocol`**，那么即便开发者尝试手动传入 `cargo build --release --features custom-protocol`，cargo 也会直接报错：
-  ```
+  ```text
   error: the package 'xxx' does not contain this feature: custom-protocol
   ```
 
