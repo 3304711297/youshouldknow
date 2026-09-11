@@ -72,6 +72,6 @@ Intel 平台：Advanced → PCH-FW Configuration（南桥固件配置）→ PTT 
 
 本文整理自 B 站 UP 主「所盼皆欣然」对应集，经本地语音转录校对整理；细节以原视频画面为准：
 
-- [电脑BIOS选项全科普EP06/TPM/PTT/fTPM与清除风险（重制版）](https://www.bilibili.com/video/BV1a88c6iE6G/)
-- [电脑BIOS选项全科普EP04/安全启动与TPM（旧版）](https://www.bilibili.com/video/BV1ta5F6HED9/)
+- [电脑 BIOS 选项全科普 EP06/TPM/PTT/fTPM 与清除风险（重制版）](https://www.bilibili.com/video/BV1a88c6iE6G/)
+- [电脑 BIOS 选项全科普 EP04/安全启动与 TPM（旧版）](https://www.bilibili.com/video/BV1ta5F6HED9/)
 - 相关：[Secure Boot 安全启动与密钥管理](./SecureBoot安全启动与密钥管理.md)、[BIOS 恢复默认设置的三种方法](./BIOS恢复默认设置的三种方法.md)

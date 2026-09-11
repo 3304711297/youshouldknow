@@ -55,7 +55,7 @@ tweak_module: []
 
 ## 出处与核查说明
 
-本文整理自 B 站 UP 主「所盼皆欣然」《电脑BIOS选项全科普》旧版合集第 15~18 集，经本地语音转录校对整理；唤醒延迟、毫秒数等口播数字以原视频画面为准：
+本文整理自 B 站 UP 主「所盼皆欣然」《电脑 BIOS 选项全科普》旧版合集第 15~18 集，经本地语音转录校对整理；唤醒延迟、毫秒数等口播数字以原视频画面为准：
 
 - [EP15/SpeedStep & Cool'n'Quiet](https://www.bilibili.com/video/BV1sfKf6bEf9/)
 - [EP16/Speed Shift & CPPC](https://www.bilibili.com/video/BV1rbTv6RE91/)

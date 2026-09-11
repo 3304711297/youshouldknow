@@ -28,7 +28,7 @@ status: reference
 
 ## 二、机制总览
 
-```
+```text
 ZCode 施工 ──写入──▶ SQLite 会话库（session 表）
                           │ 只读轮询（每 3 秒）
                           ▼

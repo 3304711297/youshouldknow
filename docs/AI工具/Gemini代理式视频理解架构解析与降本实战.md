@@ -18,7 +18,7 @@ tweak_module: []
 
 - **暴力全帧解码**：默认按固定帧率（通常为 1 FPS）将整片视频解码为图片序列；
 - **Token 爆炸**：以 10 分钟视频为例，1 FPS 产生 600 帧图片，即便按低分辨率（约 100~258 tokens/帧）计算，也会瞬间吞噬 **15 万至 20 万 Tokens** 的输入上下文；
-- **细节与注意力稀释**：在绝大多数长视频（演讲、代码录屏、BIOS设置、技术会议）中，90% 以上的时间画面是静止或低价值的，但大量无关帧挤满上下文后，模型会产生严重注意力分散（Lost in the Middle），极易漏掉闪烁而过的报错信息或特定弹窗。
+- **细节与注意力稀释**：在绝大多数长视频（演讲、代码录屏、BIOS 设置、技术会议）中，90% 以上的时间画面是静止或低价值的，但大量无关帧挤满上下文后，模型会产生严重注意力分散（Lost in the Middle），极易漏掉闪烁而过的报错信息或特定弹窗。
 
 ---
 
@@ -26,7 +26,7 @@ tweak_module: []
 
 Google DeepMind 在 Gemini 3.5/3.6/3.7/3.8 系列中引入了 **Agentic 代理式视频理解**，将视频输入从“单纯的 Vision Context 吞吐问题”重构为“**模型服务端的自主工具调用闭环（Think → Act → Observe）**”。
 
-```
+```text
 [视频输入: 仅传元数据指针 (Pass by Reference)]
                     │
                     ↓
@@ -139,4 +139,4 @@ interaction = client.interactions.create(
 
 - 官方指南：[Agentic video understanding in Gemini: Developer Guide](https://aistudio.google.com/learn/agentic-video-understanding-with-gemini) (Google DeepMind)
 - API 参考：[Video understanding - Interactions API](https://ai.google.dev/gemini-api/docs/video-understanding) (Google AI for Developers)
-- 关联篇目：[Hermes模型配置与容灾编排避坑指南](./Hermes模型配置与容灾编排避坑指南.md)、[LLM流式工具调用分片损坏防御与透明转码实践](./LLM流式工具调用分片损坏防御与透明转码实践.md)
+- 关联篇目：[Hermes 模型配置与容灾编排避坑指南](./Hermes模型配置与容灾编排避坑指南.md)、[LLM 流式工具调用分片损坏防御与透明转码实践](./LLM流式工具调用分片损坏防御与透明转码实践.md)

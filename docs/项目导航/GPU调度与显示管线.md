@@ -12,7 +12,6 @@ tweak_module: [1, 11]
 
 > 已与 `tweakbyjie` 模块化结构同步：执行逻辑现位于 `Modules/Menu.ps1` 与 `Modules/Common.ps1`（通用写入/验证）、`Modules/Backup.*.ps1`（备份闭环）；此处不再使用 `tweakbyjie.ps1:行号` 定位，以 `Modules/函数名` 为准。详见 `tweakbyjie/docs/design/CODE-REFACTOR-STATUS.md`。
 
-
 本章节对应 `tweakbyjie/tweakbyjie.ps1` 当前源码中的两个 GPU/显示相关执行项目：
 
 - GPU-001：核心游戏优化中的 HAGS

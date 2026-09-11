@@ -59,6 +59,6 @@ BIOS 调速保底（不依赖系统，但只有 3~5 个控制点、单一温度�
 
 本文整理自 B 站 UP 主「所盼皆欣然」对应集，经本地语音转录校对整理；电流上限、秒数等口播数字以原视频画面为准：
 
-- [电脑BIOS选项全科普EP09/风扇PWM与DC模式（重制版）](https://www.bilibili.com/video/BV1gahj65EcW/)
-- [电脑BIOS选项全科普EP10/风扇曲线、启停、温度源与故障报警（重制版）](https://www.bilibili.com/video/BV1ds8Z6KEdW/)
-- [电脑BIOS选项全科普EP10/风扇调速策略【暮里学姐】（旧版）](https://www.bilibili.com/video/BV1BeLX69Ery/)
+- [电脑 BIOS 选项全科普 EP09/风扇 PWM 与 DC 模式（重制版）](https://www.bilibili.com/video/BV1gahj65EcW/)
+- [电脑 BIOS 选项全科普 EP10/风扇曲线、启停、温度源与故障报警（重制版）](https://www.bilibili.com/video/BV1ds8Z6KEdW/)
+- [电脑 BIOS 选项全科普 EP10/风扇调速策略【暮里学姐】（旧版）](https://www.bilibili.com/video/BV1BeLX69Ery/)

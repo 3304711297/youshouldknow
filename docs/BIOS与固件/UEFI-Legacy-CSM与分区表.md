@@ -57,6 +57,6 @@ tweak_module: []
 
 本文整理自 B 站 UP 主「所盼皆欣然」对应集，经本地语音转录校对整理；数字与路径细节以原视频画面为准：
 
-- [电脑BIOS选项全科普EP04/UEFI、Legacy与CSM兼容支持模块（重制版）](https://www.bilibili.com/video/BV12s8V6tEVm/)
-- [电脑BIOS选项全科普EP06/CSM（旧版）](https://www.bilibili.com/video/BV1Tg7Q6uEDR/)
+- [电脑 BIOS 选项全科普 EP04/UEFI、Legacy 与 CSM 兼容支持模块（重制版）](https://www.bilibili.com/video/BV12s8V6tEVm/)
+- [电脑 BIOS 选项全科普 EP06/CSM（旧版）](https://www.bilibili.com/video/BV1Tg7Q6uEDR/)
 - 相关：[Above 4G 解码与 Resizable BAR](./Above4G解码与ResizableBAR.md)、[Secure Boot 安全启动与密钥管理](./SecureBoot安全启动与密钥管理.md)

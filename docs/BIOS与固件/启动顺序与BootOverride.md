@@ -53,5 +53,5 @@ tweak_module: []
 
 本文整理自 B 站 UP 主「所盼皆欣然」两个合集对应集，经本地语音转录校对整理；品牌热键与菜单路径如与画面有出入以原视频为准：
 
-- [电脑BIOS选项全科普EP03/启动顺序与boot override（重制版）](https://www.bilibili.com/video/BV1JKbe6MEom/)
-- [电脑BIOS选项全科普EP02/启动选项（旧版）](https://www.bilibili.com/video/BV1KcVE6aEMd/)
+- [电脑 BIOS 选项全科普 EP03/启动顺序与 boot override（重制版）](https://www.bilibili.com/video/BV1JKbe6MEom/)
+- [电脑 BIOS 选项全科普 EP02/启动选项（旧版）](https://www.bilibili.com/video/BV1KcVE6aEMd/)

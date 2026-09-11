@@ -83,9 +83,9 @@ AC Loadline 决定 CPU 请求多少电压，LLC 决定实际收到的电压—�
 
 ## 出处与核查说明
 
-本文整理自 B 站 UP 主「所盼皆欣然」《电脑BIOS选项全科普》旧版合集第 23~25 集，经本地语音转录校对整理；电压/功耗/尖峰等数字标注"待核"处建议对照原视频画面：
+本文整理自 B 站 UP 主「所盼皆欣然」《电脑 BIOS 选项全科普》旧版合集第 23~25 集，经本地语音转录校对整理；电压/功耗/尖峰等数字标注"待核"处建议对照原视频画面：
 
-- [EP23/核心电压与缓存电压（Intel篇）](https://www.bilibili.com/video/BV1za3q6KE1X/)
-- [EP24/核心电压与缓存电压（AMD篇）](https://www.bilibili.com/video/BV1hp3165EmH/)
+- [EP23/核心电压与缓存电压（Intel 篇）](https://www.bilibili.com/video/BV1za3q6KE1X/)
+- [EP24/核心电压与缓存电压（AMD 篇）](https://www.bilibili.com/video/BV1hp3165EmH/)
 - [EP25/防掉压等级](https://www.bilibili.com/video/BV1HT346kEZm/)
 - 相关：[AMD PBO 与 Curve Optimizer](./AMD-PBO与CurveOptimizer.md)、[功耗墙、电流墙与 CEP 电流保护](./功耗墙电流墙与CEP电流保护.md)

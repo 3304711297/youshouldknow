@@ -275,6 +275,6 @@ Windows 电脑只是热点的客户端，并不承担路由器职责，那么通
 
 | 声明 | 核查结果 |
 | --- | --- |
-| 系统代理与 TUN 是两种不同入站方式 | ✅ 属实（2026-08-29 重核：Karing 官方 FAQ“系统代理和TUN的区别是什么”一节原文确认，两者均为入站方式、与规则/全局无关） |
-| Windows Forwarding（IP 路由转发）影响热点共享与 TUN 场景 | ✅ 属实（2026-08-29 重核：FAQ“karingservice.exe内存及CPU占用超高”条目仍列“开启 Windows 数据转发导致路由回环”为原因，并给出相同的查询/禁用命令；`Get-NetIPInterface`/`Set-NetIPInterface` 为 Windows 机制，可复现） |
+| 系统代理与 TUN 是两种不同入站方式 | ✅ 属实（2026-08-29 重核：Karing 官方 FAQ“系统代理和 TUN 的区别是什么”一节原文确认，两者均为入站方式、与规则/全局无关） |
+| Windows Forwarding（IP 路由转发）影响热点共享与 TUN 场景 | ✅ 属实（2026-08-29 重核：FAQ“karingservice.exe 内存及 CPU 占用超高”条目仍列“开启 Windows 数据转发导致路由回环”为原因，并给出相同的查询/禁用命令；`Get-NetIPInterface`/`Set-NetIPInterface` 为 Windows 机制，可复现） |
 | Karing 客户端的具体行为与规则模式说明 | ⚠️（2026-08-29 重核：最新版本 v1.2.24.2707，2026-08-28 发布，GitHub 预发布渠道活跃；官方文档确认 TUN 为自带独立虚拟网卡实现，Windows 端需管理员权限并自动安装驱动。正文“自带 TUN 不等于依赖系统 NDIS 枚举器，可禁用 Forwarding 但无法确认时不要盲禁”的结论仍成立。行为细节仍随上游版本变化，karing.app/faq 已复核；GitHub 仓库内 faq.md 页面当日网络超时未能直接打开，以 karing.app/faq 为准） |

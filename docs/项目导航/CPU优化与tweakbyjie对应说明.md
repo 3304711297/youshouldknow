@@ -12,7 +12,6 @@ tweak_module: [1]
 
 > 已与 `tweakbyjie` 模块化结构同步：执行逻辑现位于 `Modules/Menu.ps1` 与 `Modules/Common.ps1`（通用写入/验证）、`Modules/Backup.*.ps1`（备份闭环）；此处不再使用 `tweakbyjie.ps1:行号` 定位，以 `Modules/函数名` 为准。详见 `tweakbyjie/docs/design/CODE-REFACTOR-STATUS.md`。
 
-
 本章节逐项对应 `tweakbyjie/tweakbyjie.ps1` 当前“Part 1 → 核心游戏优化 → 子项 1”中的 CPU、MMCSS 多媒体调度和 Games 任务配置。脚本实际写入的路径、值名和目标值以当前源码为准。
 
 > 重要边界：当前脚本对这些注册表写入没有 CPU-001~005 专用备份文件；但自 tweak `b905950` 起，执行核心游戏/系统行为子项前有统一快照门禁（`registry-backup.json`，带机器绑定，备份失败则阻止修改），并可通过 Part 1 子项 4 按快照自动恢复（原不存在的值会被删除）。回读验证方面，除 CPU-001 外，当前执行路径仍没有为 CPU-003/004/005 提供逐值回读验证。因此，下面的“恢复方式”中人工记录原值仍是稳妥前提，脚本快照不能替代回读验证。

@@ -119,6 +119,6 @@ $$\text{绝对延迟 } (\text{ns}) = \text{时序周期数 } \times tCK = \text{
 
 本文整理自 B 站 UP 主「所盼皆欣然」对应集，经本地语音转录校对整理；测试数据与具体时序数字为口播数据，以原视频画面为准：
 
-- [电脑BIOS选项全科普EP01/XMP【暮里学姐】（旧版）](https://www.bilibili.com/video/BV1o1Vg6bEe2/)
-- [电脑BIOS选项全科普EP07/内存超频自动档（重制版）](https://www.bilibili.com/video/BV1YA8r67EwX/)
-- [电脑BIOS选项全科普EP08/XMP失败排查与稳超（重制版）](https://www.bilibili.com/video/BV1CbhM65Eyi/)
+- [电脑 BIOS 选项全科普 EP01/XMP【暮里学姐】（旧版）](https://www.bilibili.com/video/BV1o1Vg6bEe2/)
+- [电脑 BIOS 选项全科普 EP07/内存超频自动档（重制版）](https://www.bilibili.com/video/BV1YA8r67EwX/)
+- [电脑 BIOS 选项全科普 EP08/XMP 失败排查与稳超（重制版）](https://www.bilibili.com/video/BV1CbhM65Eyi/)

@@ -68,7 +68,7 @@ tweak_module: []
 
 ## 出处与核查说明
 
-本文整理自 B 站 UP 主「所盼皆欣然」《电脑BIOS选项全科普》旧版合集第 13、14 集，经本地语音转录校对整理；起步负压值等数字标注"待核"处建议对照原视频画面：
+本文整理自 B 站 UP 主「所盼皆欣然」《电脑 BIOS 选项全科普》旧版合集第 13、14 集，经本地语音转录校对整理；起步负压值等数字标注"待核"处建议对照原视频画面：
 
 - [EP13/AMD PBO](https://www.bilibili.com/video/BV1eEj26eErV/)
 - [EP14/AMD Curve Optimizer](https://www.bilibili.com/video/BV1P4KQ6MEQT/)

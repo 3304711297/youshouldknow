@@ -104,4 +104,4 @@ Hermes 侧改动落在 hermes 分支（commit `cd652b7`），分三层：
 
 - codebuddy2openai（Tauri v2）：`converter.py` / `GET /api/usage_summary`（commit `5b4381c`）
 - Hermes token-stats 配额插件：`check_workbuddy_status()`（hermes 分支，commit `cd652b7`）
-- 本站关联文章：[Hermes-Agent高阶指令全景与生态路线指南](./Hermes-Agent高阶指令全景与生态路线指南.md)
+- 本站关联文章：[Hermes-Agent 高阶指令全景与生态路线指南](./Hermes-Agent高阶指令全景与生态路线指南.md)

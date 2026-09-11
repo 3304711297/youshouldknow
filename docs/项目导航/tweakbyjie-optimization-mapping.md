@@ -12,7 +12,6 @@ tweak_module: []
 
 > 已与 `tweakbyjie` 模块化结构同步：`Modules/Menu.ps1` 只负责菜单调度，实际执行逻辑位于各业务模块（如 `Registry.ps1`、`Bcd.ps1`、`Service.ps1`、`Power.ps1`、`Nvme.ps1`、`Virtualization.ps1`、`Defender.ps1`、`Mpo.ps1`）及 `Common.ps1`/`Backup.*.ps1`；此处不再使用 `tweakbyjie.ps1:行号` 定位，应结合实际模块文件和函数名核对。详见 `tweakbyjie/docs/design/CODE-REFACTOR-STATUS.md`。
 
-
 建立知识说明与实际优化之间的对应关系。逐项映射必须以 `tweakbyjie/tweakbyjie.ps1`（脚本位于 tweakbyjie 仓库根目录） 当前源码为准，不能只根据概念标题判断已经覆盖。
 
 结构：

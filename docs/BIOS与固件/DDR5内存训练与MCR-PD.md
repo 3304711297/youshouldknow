@@ -60,6 +60,6 @@ JEDEC DDR5 起步 4800MT/s，认证档普遍 6000~6400MT/s 以上：频率越高
 
 本文整理自 B 站 UP 主「所盼皆欣然」对应集，经本地语音转录校对整理；秒数与蓝屏代码等口播细节以原视频画面为准：
 
-- [电脑BIOS选项全科普EP12/MCR+PD【暮里学姐】（旧版）](https://www.bilibili.com/video/BV1N8jJ6GExe/)
-- [电脑BIOS选项全科普EP08/XMP失败排查与稳超（重制版）](https://www.bilibili.com/video/BV1CbhM65Eyi/)
+- [电脑 BIOS 选项全科普 EP12/MCR+PD【暮里学姐】（旧版）](https://www.bilibili.com/video/BV1N8jJ6GExe/)
+- [电脑 BIOS 选项全科普 EP08/XMP 失败排查与稳超（重制版）](https://www.bilibili.com/video/BV1CbhM65Eyi/)
 - 相关：[XMP/EXPO 内存认证档科普](../内存超频/XMP-EXPO内存认证档科普.md)
