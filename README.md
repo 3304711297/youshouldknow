@@ -35,7 +35,7 @@
 | **🛠️ 显卡优化** | NVCleanstall 驱动精简、NVIDIA 控制面板/App 设置、ReBAR 强制开启、DP/HDMI 速率表 |
 | **💾 内存与存储** | Windows 内存压缩机制、MMAgent 策略、NVMe 固态硬盘底层特性与读写优化 |
 | **🔥 内存超频** | DDR5 超频速查表、Intel 12/13/14 代海力士 M-die / 英睿达颗粒实机超频参数调校 |
-| **🔌 BIOS 与固件** | 共 24 篇文章：BIOS 选项科普系列 21 篇（XMP/EXPO、Secure Boot、TPM、PBO、功耗墙等，含出处）、UEFI 开机 Logo 修改、固件刷写、移动端笔记本 BIOS 选项与超频降压安全边界 |
+| **🔌 BIOS 与固件** | 共 24 篇文章：BIOS 选项科普系列 21 篇（Secure Boot、TPM、PBO、功耗墙等，逐篇附出处；XMP/EXPO 篇在「内存超频」分类），另有 3 篇专题：固件刷写与开机 Logo 修改、UEFI Editor、移动端笔记本 BIOS 选项与超频降压安全边界 |
 | **💻 笔电相关** | 机械革命/同方模具控制中心与 Uniwill 驱动冲突排查、电池充电管理与跳电机制 |
 | **🛡️ 系统调优与安全** | Windows 调优核心原则、系统服务精简原则、VBS 与安全缓解、设备管理器禁用类优化辨析 |
 | **🧩 系统知识** | Defender 恢复边界、Windows 启动配置 BCD 深度解析、电源计划创建与定制指南、目录联接 Junction 与符号链接辨析 |
@@ -69,7 +69,7 @@
 
 ```text
 youshouldknow/
-├─ docs/                                  # 全部文章，14 个分类目录（共 116 篇文章；AI 工具 26 篇、BIOS 与固件 24 篇、系统知识 17 篇等）
+├─ docs/                                  # 全部文章，14 个分类目录（共 116 篇文章；AI 工具 26 篇、BIOS 与固件 24 篇、系统知识 17 篇等），各分类另有 README 索引
 │  ├─ 项目导航/                           # tweakbyjie 关联说明、优化映射、覆盖清单与自动生成的覆盖矩阵
 │  └─ stylesheets/extra.css               # 主题增强样式（顶部元数据卡等）
 ├─ hooks/badges.py                        # MkDocs hook：注入页面元数据卡（徽章）数据
