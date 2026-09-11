@@ -1,26 +1,44 @@
 {% extends "base.html" %}
 
+{#
+  文章顶部元数据卡（单一条目）。
+  数据由 hooks/badges.py 的 on_page_context 注入 context['meta_card']；
+  缺失字段自动省略，不产生空行。索引页不渲染。
+  变更背景：此前 status/risk/applies_to/verified_on 由本模板 + hook 的
+  admonition + hook 注入的 tags 三处重复消费，顶部堆叠最高 517px。
+#}
 {% block content %}
-  {% if page.meta.status and page.meta.risk and page.meta.applies_to and page.meta.verified_on %}
-    {% set status_labels = {"stable": "稳定维护", "reference": "参考资料", "experimental": "实验性内容"} %}
-    {% set risk_labels = {"low": "低风险", "medium": "中风险", "high": "高风险"} %}
+  {% if meta_card %}
     <aside class="doc-meta" aria-label="文档元数据">
-      <div class="doc-meta__item">
-        <span class="doc-meta__label">状态</span>
-        <span class="doc-meta__badge doc-meta__badge--status-{{ page.meta.status }}">{{ status_labels[page.meta.status] }}</span>
-      </div>
-      <div class="doc-meta__item">
-        <span class="doc-meta__label">风险</span>
-        <span class="doc-meta__badge doc-meta__badge--risk-{{ page.meta.risk }}">{{ risk_labels[page.meta.risk] }}</span>
-      </div>
-      <div class="doc-meta__item">
-        <span class="doc-meta__label">适用范围</span>
-        <span class="doc-meta__value">{{ page.meta.applies_to | join("；") }}</span>
-      </div>
-      <div class="doc-meta__item">
-        <span class="doc-meta__label">最近核验</span>
-        <time class="doc-meta__value" datetime="{{ page.meta.verified_on }}">{{ page.meta.verified_on }}</time>
-      </div>
+      {% if meta_card.status %}
+        <span class="doc-meta__badge doc-meta__badge--status-{{ meta_card.status.key }}">{{ meta_card.status.label }}</span>
+      {% endif %}
+      {% if meta_card.risk %}
+        <span class="doc-meta__badge doc-meta__badge--risk-{{ meta_card.risk.key }}">{{ meta_card.risk.icon }} {{ meta_card.risk.label }}</span>
+      {% endif %}
+      {% if meta_card.applies_to %}
+        <span class="doc-meta__sep" aria-hidden="true"></span>
+        <span class="doc-meta__field">
+          <span class="doc-meta__label">适用</span><span class="doc-meta__value">{{ meta_card.applies_to | join(" / ") }}</span>
+        </span>
+      {% endif %}
+      {% if meta_card.modules %}
+        <span class="doc-meta__sep" aria-hidden="true"></span>
+        <span class="doc-meta__field">
+          <span class="doc-meta__label">联动模块</span>
+          {%- if meta_card.matrix_url -%}
+            <a class="doc-meta__link" href="{{ meta_card.matrix_url | url }}">{{ meta_card.modules | join(" · ") }}</a>
+          {%- else -%}
+            <span class="doc-meta__value">{{ meta_card.modules | join(" · ") }}</span>
+          {%- endif -%}
+        </span>
+      {% endif %}
+      {% if meta_card.verified_on %}
+        <span class="doc-meta__sep" aria-hidden="true"></span>
+        <span class="doc-meta__field">
+          <span class="doc-meta__label">核验</span><time class="doc-meta__value" datetime="{{ meta_card.verified_on }}">{{ meta_card.verified_on }}</time>
+        </span>
+      {% endif %}
     </aside>
   {% endif %}
   {{ super() }}

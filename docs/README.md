@@ -68,23 +68,26 @@ Windows 系统、硬件、游戏性能与日常使用知识库。
 
 ## 🏷️ 文档元数据规范
 
-部分文章在文件开头使用 YAML Front Matter，供站点显示统一的维护信息。当前规范只允许以下四个字段：
+部分文章在文件开头使用 YAML Front Matter，供站点显示统一的维护信息。当前规范只允许以下字段：
 
 ```yaml
 ---
-status: reference
+status: reference          # 可选
 risk: low
 applies_to:
   - Windows 10/11
-verified_on: 2026-08-21
-# 本次收尾未重新核验外部事实，verified_on 保留上次核验日期
+verified_on: 2026-08-21    # 可选
+tweak_module: [2, 3]       # 无对应模块时填 []
 ---
 ```
 
-- `status`：文章状态，只能使用 `stable`（稳定维护）、`reference`（参考资料）或 `experimental`（实验性内容）；
-- `risk`：文章涉及的操作风险，只能使用 `low`（低风险）、`medium`（中风险）或 `high`（高风险）；
-- `applies_to`：非空的适用范围列表，写明 Windows 版本、硬件/软件场景或测试环境；
-- `verified_on`：最近一次内容或事实核查日期，格式为 `YYYY-MM-DD`。它表示核查时间，不替代站点显示的 Git 最后修改日期。
+- `status`：文章状态，只能使用 `stable`（稳定维护）、`reference`（参考资料）或 `experimental`（实验性内容）；可选，缺省时卡片不显示该徽章；
+- `risk`：文章涉及的操作风险，只能使用 `low`（低风险）、`medium`（中风险）或 `high`（高风险）；必填；
+- `applies_to`：非空的适用范围列表，写明 Windows 版本、硬件/软件场景或测试环境；必填；
+- `verified_on`：最近一次内容或事实核查日期，格式为 `YYYY-MM-DD`。它表示核查时间，不替代站点显示的 Git 最后修改日期；可选；
+- `tweak_module`：联动的 tweakbyjie 主菜单模块编号列表，无对应模块时必须是空数组 `[]`；必填。
+
+这些字段由 `hooks/badges.py` 读取并规范化为 `context['meta_card']`，再由 `overrides/main.html` 渲染成**文章标题上方的一条紧凑信息横条**。每个字段只渲染一次；缺项自动省略，不会留下空位。新增字段时请同时改这两处，不要另起渲染路径——历史上同一批字段被模板卡片、admonition、tags 三处重复消费，导致顶部堆叠最多 517px 的冗余。
 
 Front Matter 不重复维护文章标题和分类：标题以正文一级标题为准，分类以目录和 `mkdocs.yml` 导航为准。元数据必须依据正文、事实核查记录和可追溯证据人工填写，不根据关键词自动推断风险或稳定性。旧文章可以暂时没有 Front Matter，并按分类逐步迁移；加入后必须通过校验器。
 
