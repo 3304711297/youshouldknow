@@ -74,7 +74,7 @@ curl -4 -s -o /dev/null -w "baidu  %{http_code}\n" --max-time 8 --noproxy '*' ht
 | HTTP 库 | 是否读环境变量代理 | 实测表现 |
 | --- | --- | --- |
 | **Rust `reqwest`** | ✅ 读（`trust_env` 默认开启） | 访问 `127.0.0.1` 的本机请求**也会被送去代理**；默认读取 `NO_PROXY` |
-| **Python `httpx` 0.28** | ⚠️ 版本相关，实测未走 | 同环境下 `_mounts` 的 proxy 均为 `None`，本机请求直连成功 |
+| **Python `httpx` 0.28** | ⚠️ 版本相关，实测未走 | 同环境下 `_mounts` 的 proxy 均为 `None`，本机请求直连成功。⚠️ 勘误补充（2026-09-12 对照官方文档）：httpx **默认读环境变量代理**（`trust_env=True`）；实测未走的原因是 `Client` 在**构造时**读取环境变量生成 mounts——若客户端创建早于代理变量注入（如应用启动先于代理配置、GUI 启动未继承 shell 环境），mounts 即为 None。判断依据应是「Client 构造时环境变量是否已就位」 |
 | **Python `requests` 2.33** | ✅ 读（`trust_env` 默认 True） | 但会话 `proxies` 为空时表现为直连，需按实际验证 |
 | **Node.js `undici` / 内置 `fetch`** | ❌ 两者都不读 | 必须显式构造 `ProxyAgent` |
 

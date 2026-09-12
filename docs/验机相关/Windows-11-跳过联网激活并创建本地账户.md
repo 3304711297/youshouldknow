@@ -24,7 +24,7 @@ tweak_module: []
 
 微软官方给出的理由是「以增强 Windows 11 的安全性和用户体验」，即要求所有用户在初始化时保持联网并登录微软账户。此后在 OOBE 阶段用 `Shift+F10` 输入 `OOBE\BYPASSNRO` 会直接报错。
 
-不过脚本虽然被移除，**注册表层面的 `BypassNRO` 开关目前仍然有效**，以下是几种可行的替代方案。
+脚本被移除后，**注册表层面的 `BypassNRO` 开关在 24H2 及更早版本仍然有效；25H2 起该值已被逐步封堵**，可能不再生效。以下是几种替代方案（注册表法仅适用于未被封堵的版本，Rufus/Unattend 方式兼容性更好）。
 
 ---
 
@@ -93,7 +93,7 @@ tweak_module: []
 | 声明 | 核查结果 |
 | --- | --- |
 | 微软在 Build 26200.5516 / 26120.3653 中移除 bypassnro.cmd | ✅ 属实（微软官方公告 2025-03-28） |
-| 注册表 `BypassNRO` 值仍被系统读取 | ✅ 属实（Bleeping Computer、ElevenForum 实测） |
+| 注册表 `BypassNRO` 值被系统读取 | ✅ 属实（Bleeping Computer、ElevenForum 实测）；⚠️ 2026-09-12 重核：24H2 及更早有效，25H2 起逐步封堵 |
 | `start ms-cxh:localonly` 已在后续版本移除 | ✅ 属实（Winhance GitHub Issue #326） |
 | `Ctrl+Shift+J` + `WinJS.Application.restart('ms-cxh://LOCALONLY')` 可用 | ✅ 属实（ElevenForum、Reddit 社区验证） |
 

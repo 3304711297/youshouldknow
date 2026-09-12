@@ -186,7 +186,7 @@ CORE-* 对应主菜单 `1` 的核心游戏优化与系统行为子项，是 Cove
 6. 可复核的验证方法
 ## 事实核查记录
 
-核验机制：本映射与《全量执行参考》由 tweakbyjie 仓库的 Coverage 自动审计（tools/Test-CrossRepoCoverage.ps1）持续校验——映射、执行参考、覆盖检查三份资料每一份都必须与 manifest 全部 48 项完全一致，缺少清单内编号与出现清单外编号均判失败；源码引用（`Modules/文件.ps1` 及 `/函数名` 后缀）由审计器校验文件存在与函数定义。最近一次人工逐项校准：2026-08-25 对照 tweakbyjie main（commit `cd95802`）完成——修正映射表中 10 处 `Modules/Menu.ps1`（Part N）为实际业务模块（Registry/Bcd/Service/Power/Mpo），清理 CPU/GPU/MEMORY 行的裸 `:NNN` 旧行号；此前 2026-08-21 完成模块化迁移同步与 44 项 ID 校准；2026-09-05 对照 tweakbyjie main（commit `0ed52b8`）同步新增 CORE-017/018/019（WPBT/任务栏结束任务/PS Core 遥测，吸收自 Atom-Tool-Box）与 GAMEQOS-001（菜单 12 QoS，吸收自 Kiwi-Tweaks），总数 48 项。2026-08-29 重核：对照 tweak `b905950` 源码逐项复核本文声明——44 项清单编号、模块与函数引用、菜单编号 0–11、服务分组（A 组 21 + B 组 9 + Manual 7，含 BITS）、Defender 约 95 个策略值、mpo/nvme/defender/service/power 备份文件名等均属实；但 `cd95802` 之后源码新增了多项备份/恢复能力（见下方勘误），本文相应表述已同步更新。
+核验机制：本映射与《全量执行参考》由 tweakbyjie 仓库的 Coverage 自动审计（tools/Test-CrossRepoCoverage.ps1）持续校验——映射、执行参考、覆盖检查三份资料每一份都必须与 manifest 全部 48 项完全一致，缺少清单内编号与出现清单外编号均判失败；源码引用（`Modules/文件.ps1` 及 `/函数名` 后缀）由审计器校验文件存在与函数定义。最近一次人工逐项校准：2026-08-25 对照 tweakbyjie main（当时 commit `cd95802`）完成；2026-09-12 重核对照 HEAD `5fce57f`（基线随版本演进不再钉死）——修正映射表中 10 处 `Modules/Menu.ps1`（Part N）为实际业务模块（Registry/Bcd/Service/Power/Mpo），清理 CPU/GPU/MEMORY 行的裸 `:NNN` 旧行号；此前 2026-08-21 完成模块化迁移同步与 44 项 ID 校准；2026-09-05 对照 tweakbyjie main（commit `0ed52b8`）同步新增 CORE-017/018/019（WPBT/任务栏结束任务/PS Core 遥测，吸收自 Atom-Tool-Box）与 GAMEQOS-001（菜单 12 QoS，吸收自 Kiwi-Tweaks），总数 48 项。2026-08-29 重核：对照 tweak `b905950` 源码逐项复核本文声明——44 项清单编号、模块与函数引用、菜单编号 0–12、服务分组（A 组 21 + B 组 9 + Manual 7，含 BITS）、Defender 约 95 个策略值、mpo/nvme/defender/service/power 备份文件名等均属实；但 `cd95802` 之后源码新增了多项备份/恢复能力（见下方勘误），本文相应表述已同步更新。
 
 2026-08-29 勘误（对照 tweak `b905950`，`cd95802` 后新增能力）：
 

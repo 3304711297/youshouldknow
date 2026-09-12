@@ -134,6 +134,7 @@ import sys
 SENSITIVE_PATTERNS = [
     # 1. 个人开发机用户名与盘符硬编码拦截
     (r"[C-Z]:[/\\]Users[/\\](?!Public|Default|All Users)[a-zA-Z0-9_\-]+[/\\]", "Hardcoded machine username path"),
+# ⚠️ 实现注记（2026-09-12 与真源仓库核对）：真源 scripts/check_hygiene.py 实际采用**硬编码本机用户名**的精确匹配（而非上面的通配写法）——通配版误报面更大（会命中 Public 等已排除项之外的一切），但思路一致。复刻时按需选择：精确版零误报、通配版更通用。
     # 2. 真实 GitHub Token
     (r"ghp_[A-Za-z0-9]{20,}", "GitHub Personal Access Token"),
     (r"github_pat_[A-Za-z0-9_]{30,}", "GitHub Fine-Grained Token"),

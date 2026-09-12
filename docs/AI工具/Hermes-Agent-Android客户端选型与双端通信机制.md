@@ -77,7 +77,7 @@ New-NetFirewallRule -DisplayName "Hermes Dashboard LAN" -Direction Inbound -Loca
 ```text
 [ 用户操作 ]
     │
-    ├─► PC 桌面客户端 (Hermes Desktop) ──► 专属私有进程 (127.0.0.1:4837) ──┐
+    ├─► PC 桌面客户端 (Hermes Desktop) ──► 专属私有进程 (127.0.0.1:<动态端口>；⚠️ 2026-09-12 核实：桌面端用 `hermes serve --port 0` 由 OS 分配临时端口，图中 4837 为某次实测快照值，非固定) ──┐
     │                                                                      ▼
     └─► 手机端 App (Mobile Client)     ──► 共享网关服务 (0.0.0.0:9119)   ──┼──► 统一数据库 (state.db)
                                                                            │

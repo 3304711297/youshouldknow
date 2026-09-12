@@ -35,7 +35,7 @@ BIOS 里改乱了、超频翻车点不亮、忘了 BIOS 密码、刷 BIOS 后系
 2. **按钮**：部分主板 I/O 面板或板载有 Clear CMOS 实体键，断电按住几秒；
 3. **拔电池**：关机拔电源，按开机键放余电，取下 CR2032 纽扣电池等几秒装回。
 
-**Clear CMOS 是全清**：超频、启动顺序、时间、Secure Boot、可信平台模块（TPM）配置全部重置，连 BIOS 管理员密码也一起清掉。一句话记忆：**想清密码用 Clear CMOS；只想回厂商推荐用 Load Optimized；Clear CMOS 才是全清。**
+**Clear CMOS 是全清**：超频、启动顺序、时间、Secure Boot、TPM 配置（密钥保留、测量基线重置）全部重置。⚠️ 勘误（2026-09-12 核实）：BIOS 管理员密码多存独立 EEPROM/NVRAM 安全区，Clear CMOS 通常**清不掉**——仅老式主板例外。一句话记忆：**想清密码先查平台年代，现代平台清 CMOS 白忙；只想回厂商推荐用 Load Optimized；Clear CMOS 才是全清。**
 
 ## 原理速记
 

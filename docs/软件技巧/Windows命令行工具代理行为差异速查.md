@@ -25,7 +25,8 @@ tweak_module: []
 
 | 工具 | 默认读系统代理？ | 读环境变量？ | 补充说明 |
 | --- | --- | --- | --- |
-| PowerShell 5.1 / 7 的 `Invoke-WebRequest` / `Invoke-RestMethod` | ✅ 是 | ❌ | 需要 `-Proxy` 参数或系统代理；PS7 基于 HttpClient，同走系统代理 |
+| PowerShell 5.1 的 `Invoke-WebRequest` / `Invoke-RestMethod` | ✅ 是 | ❌ | 需要 `-Proxy` 参数或系统代理 |
+| PowerShell 7 的 `Invoke-WebRequest` / `Invoke-RestMethod` | ✅ 是 | ✅（7.0 起支持环境变量代理） | 基于 HttpClient；⚠️ 勘误（2026-09-12 对照微软官方文档）：PS 7.0 起 IWR 同时支持环境变量代理配置 |
 | 浏览器 / Edge | ✅ 是 | ❌ | — |
 | `git` | ❌ | ✅ `http_proxy`/`https_proxy` | 或 `git config --global http.proxy <地址>`（可按域名限定作用范围） |
 | `curl`（含 Windows 内置版） | ❌ | ✅ `http_proxy`/`https_proxy`/`all_proxy` | 临时指定用 `-x <代理地址>` |
@@ -36,7 +37,7 @@ tweak_module: []
 | Node.js 自带 `fetch`（undici） | ❌ | ❌ **两者都不读** | 必须显式用 undici 的 `ProxyAgent`，或改用子进程 curl |
 | `winget` | ⚠️ 有代理设置项 | — | 新版支持 `settings` 中配置代理，行为随版本变化，用前单独核实 |
 
-**判定口诀：PowerShell 系走系统代理，跨平台工具族走环境变量，Node fetch 谁都不走。**
+**判定口诀：PowerShell 系默认走系统代理；⚠️ 勘误（2026-09-12 对照微软官方文档）：PowerShell 7 的 Invoke-WebRequest 从 7.0 起同时支持环境变量代理配置，跨平台工具族走环境变量，Node fetch 谁都不走。**
 
 ### 补充：同一规则反过来也成立——让指定目标"不走"代理
 

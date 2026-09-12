@@ -61,7 +61,7 @@ remote: Reduce the frequency of your requests or try again later.
 
 ### 核心配置命令
 
-在终端中执行以下全局配置（将 `<username>` 替换为你本机的 GitHub 用户名，例如 `3304711297`）：
+在终端中执行以下全局配置（示例中的 `***` 为本站脱敏标记，实际执行时替换为你的 GitHub 用户名）：
 
 ```bash
 git config --global url."https://<username>@github.com/".insteadOf "https://github.com/"

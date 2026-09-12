@@ -100,7 +100,7 @@ tweak_module: []
 
 > 屏不支持 G-SYNC / G-SYNC 兼容模式则跳过此页；对延迟有极致要求的也可不开 G-SYNC 用固定刷新——G-SYNC 会略增延迟，但显著减少画面撕裂。
 >
-> 📌 **FreeSync / Adaptive-Sync 显示器同样适用**：NVIDIA 卡驱动 FreeSync 屏的机制就是「G-SYNC Compatible」（兼容 VESA Adaptive-Sync 标准）。使用流程：显示器 OSD 内先开启 FreeSync → 本页勾选启用（非 NVIDIA 验证名单机型需勾选「为所选显示器型号启用设置」，偶发闪屏属正常）→ 游戏内 `Ctrl+Alt+R` 呼出指示器验证。建议使用 DisplayPort 连接。
+> 📌 **FreeSync / Adaptive-Sync 显示器同样适用**：NVIDIA 卡驱动 FreeSync 屏的机制就是「G-SYNC Compatible」（兼容 VESA Adaptive-Sync 标准）。使用流程：显示器 OSD 内先开启 FreeSync → 本页勾选启用（非 NVIDIA 验证名单机型需勾选「为所选显示器型号启用设置」，偶发闪屏属正常）→ 在 NVIDIA 控制面板「设置 G-SYNC」页勾选「G-SYNC 指示器」后于游戏中验证（NVIDIA App 亦可用 Alt+R 统计覆盖层）。建议使用 DisplayPort 连接。
 
 #### 防撕裂什么情况下不生效（重点）
 

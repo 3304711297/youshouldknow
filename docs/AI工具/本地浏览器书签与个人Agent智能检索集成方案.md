@@ -15,7 +15,7 @@ verified_on: 2026-09-07
 
 > 本文目标：探讨如何将个人浏览器（Edge Dev / Chrome）历经数年整理的数千条高质量书签作为私有知识库赋能本地 AI Agent；针对原始书签全量上传公网记忆库带来的隐私泄露与数据失效两大痛点，详解「本地毫秒直读 + 私有向量语义挂载 + 领域地图映射」三位一体安全检索架构。
 >
-> 实测基准：Microsoft Edge Dev / 9,064 个书签 / Hermes Agent & ZCode 双端 / OpenViking 本地向量数据库。
+> 实测基准：Microsoft Edge Dev / 9,064 个书签 / Hermes Agent 单端（⚠️ ZCode 侧已于 2026-09-09 弃用，原双端规范中的 ZCode 半边失效；脚本与技能在 Hermes 侧继续有效） / OpenViking 本地向量数据库。
 
 ---
 

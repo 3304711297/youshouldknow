@@ -63,7 +63,7 @@ XMP/EXPO 虽能一键拉升频率与第一时序，但主板 BIOS 自动放宽�
 | tCWL | 固定 tCL − 2 |
 | tRTP | 生效值仅 12 / 14 / 15 / 17 / 18 / 20 / 21 / 23 / 24 档位；压低影响 1% low，逐档自摸取 1% low 最优值 |
 | tWR | = tRTP × 4 |
-| tRFC | = tRFC2 × 295 / 160（先看 tRFCpb）；295/160 与 JEDEC 16Gb 颗粒 tRFC1/tRFC2（295ns/160ns）比值一致 |
+| tRFC | = tRFC2 × 295 / 160（先看 tRFCpb）；295/160 与 JEDEC 16Gb 颗粒 tRFC1/tRFC2（295ns/160ns）比值一致。⚠️ 边界：本链为出厂规格重建关系，仅在颗粒跑 JEDEC 出厂规格时成立；A-die 深度调优（tRFC≈160ns）后三档比例不再保持，勿用本链反推 |
 | tRFC2 | = tRFCpb / 0.8125 − 1 |
 | tRFCpb | = 频率 / 2000 × 130，可压小数 |
 | tRRD / tWTR / tRFC4 | 部分平台上为无效参数（不生效） |
