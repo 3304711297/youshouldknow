@@ -107,7 +107,7 @@ agent:
 custom_providers:
   - name: cpa-gui
     base_url: http://127.0.0.1:18080/v1
-    api_key: wY5Xr4HVPT3BZivioFX2L_3XhXdFfU8QBjT_Ff4xGJ0 # 取自 EasyCLIProxyAPI 的 api-keys
+    api_key: <YOUR_GATEWAY_KEY> # 取自 EasyCLIProxyAPI 的 api-keys
     api_mode: chat_completions
     model: gemini-3.8-flash
     models_discovered: true
@@ -126,6 +126,9 @@ custom_providers:
 - **严禁重复定义提供商**：旧版配置常遗留 `Local (127.0.0.1:18080)`。若与 `cpa-gui` 同时存在，二者打向同一端口，会导致桌面 GUI 的模型下拉框内出现两套完全重合的模型列表。必须清理掉冗余项；
 - **凭据池同步清理**：编辑 `config.yaml` 去除重复项后，需同步检查 `~/.hermes/auth.json` 中的 `credential_pool`，删除废弃条目；
 - **浏览器沙箱强制隔离**：配置 `browser.use_real_profile: false`，避免 Agent 浏览器操作污染甚至清空日常 Edge/Chrome 的扩展注册表。
+
+> [!WARNING] 历史存档（2026-09-12）
+> 第四、五节以 ZCode 客户端为配置载体。**ZCode 已于 2026-09-09 弃用并卸载**，`~/.zcode` 相关路径已不存在；但网关侧的双协议适配（`/v1/messages` Anthropic 格式转换）仍然有效，适用于任何 Anthropic 协议客户端。以下按写作时点存档。
 
 ## 四、 ZCode 客户端接入使用 Gemini 配置实战
 
@@ -146,7 +149,7 @@ ZCode 的配置分为两层，建议同步配置：
       "name": "Google",
       "kind": "anthropic",
       "options": {
-        "apiKey": "wY5Xr4HVPT3BZivioFX2L_3XhXdFfU8QBjT_Ff4xGJ0",
+        "apiKey": "<YOUR_GATEWAY_KEY>",
         "baseURL": "http://127.0.0.1:18080",
         "apiKeyRequired": true
       },
@@ -310,7 +313,7 @@ from datetime import datetime
 import requests
 
 LOCAL_BRIDGE_URL = "http://127.0.0.1:18080"
-LOCAL_BRIDGE_KEY = "wY5Xr4HVPT3BZivioFX2L_3XhXdFfU8QBjT_Ff4xGJ0"
+LOCAL_BRIDGE_KEY = "<YOUR_GATEWAY_KEY>"
 
 def generate_via_antigravity(prompt, base_url, api_key, model="gemini-3.1-flash-image", timeout=60):
     url = f"{base_url}/v1/chat/completions"
@@ -401,10 +404,10 @@ if __name__ == "__main__":
 | **HTTP 500 后变 503 `auth_unavailable`** | 本地直接裸 `go build` 编译 CLIProxyAPI 二进制，丢失了官方发布期通过 `-X ldflags` 注入的 OAuth Client 凭据。 | **严禁用本地裸构建覆盖官方核心**。直接使用 EasyCLIProxyAPI 官方预编译的 `cpa-core\cli-proxy-api.exe`（7.2.149+）。 |
 | **“只检测到配置文件，未检测到客户端”** | EasyCLIProxyAPI 控制台硬编码探查系统盘规范路径，而 ZCode 安装在 `D:\zcode`。 | 在 `%LOCALAPPDATA%\Programs\ZCode` 与 `%ProgramFiles%\ZCode` 建立 NTFS 目录联接（`mklink /J`）。 |
 | **Hermes 模型下拉列表重复翻倍** | `config.yaml` 中同时保留了旧网关名称（`Local (127.0.0.1:18080)`）与新网关名称（`cpa-gui`）。 | 清理 `config.yaml` 与 `auth.json`，统一规范化为单实例 `cpa-gui`。 |
-| **日常浏览器扩展和脚本全清空** | Hermes 开启了 `browser.use_real_profile: true`，自动化实例退出时把无扩展加载的内存状态写回了日常配置。 | 在 `config.yaml` 中明确设置 `browser.use_real_profile: false`，彻底沙箱化。 |
+| **日常浏览器扩展和脚本全清空** | Hermes 开启 `browser.use_real_profile: true`（历史版本会把无扩展内存状态写回日常配置）。⚠️ 勘误（2026-09-12 对照 v0.21.1 源码）：现行实现为快照副本隔离（`~/.hermes/browser-profile/`），写回路径已与日常配置隔离，故障链不成立 | 建议保持 `use_real_profile: false`（纵深防御） |
 | **两端查看的 Google 配额完全不一致** | 通用 Google 生产端点 `cloudcode-pa` 与 Antigravity 专有端点 `daily-cloudcode-pa` 属于云端解耦配额池。 | 查询 Antigravity 实际调用消耗时，**必须指定 `daily-cloudcode-pa.googleapis.com` 端点**。 |
 | **HTTP 403: IP banned due to too many failed attempts** | 前端微件使用普通 API Key 频繁轮询 `/v0/management/` 高权限管理接口，触发了防爆破 30 分钟 IP 熔断。 | 数据面与管理面隔离；获取配额改走本地轻量 Python 微服务，绝不高频撞击管理接口。 |
 | **刷新配额点击无反应 / 误以为卡死** | 内存防抖缓存瞬间命中，且界面缺乏加载动画与完成时间戳。 | 后端增加 `?force=1` 穿透参数；前端配套 SVG 旋转 Spinner、`✓ 已刷新` 徽章变形与 Toast 弹窗反馈。 |
 | **`400: Model is not supported on /v1/images/generations`** | Antigravity 桥接中的 `gemini-3.1-flash-image` 是对话多模态格式，不支持标准 OpenAI 生图端点。 | 将请求端点由 `/v1/images/generations` 改为 `/v1/chat/completions`，并在返回的 `choices[0].message.images` 中提取 Base64。 |
 | **`400: User location is not supported for the API use`** | 直连 Google AI Studio 时，国内出口代理 IP 处于未获支持的地区。 | 通过本地 EasyCLIProxyAPI 网关桥接服务中转，自动规避原生地域检测。 |
-| **`401: Invalid API key`** | 生图脚本中的 API Key 与网关 `config.toml` 或 `config.yaml` 的 `api-keys` 不匹配。 | 统一提取网关中配置的明文密钥（如 `wY5Xr4HVPT3BZivioFX2L_3XhXdFfU8QBjT_Ff4xGJ0`）。 |
+| **`401: Invalid API key`** | 生图脚本中的 API Key 与网关 `config.toml` 或 `config.yaml` 的 `api-keys` 不匹配。 | 统一提取网关中配置的明文密钥（如 `<YOUR_GATEWAY_KEY>`）。 |

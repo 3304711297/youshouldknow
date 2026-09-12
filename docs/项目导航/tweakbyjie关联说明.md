@@ -42,12 +42,14 @@ tweak_module: []
 | 模块 | 职责 | 说明 |
 |---|---|---|
 | `Common.ps1` | 通用注册表/BCD/验证/重启/电源计划去重 | `Set-Reg*`/`Invoke-BcdEdit`/`Verify-*`/`Invoke-PowerPlanDedupe` |
-| `Backup.Mpo/Registry/Bcd/Service/SecurityMitigation/Nvme/Defender/Vbs` | 备份闭环 | 各自的 `Test/Ensure/Restore` 三元组与写后回读校验 |
+| `Backup.Mpo/Registry/Bcd/Service/SecurityMitigation/Nvme/Defender/Vbs/GameQos` | 备份闭环 | 各自的 `Test/Ensure/Restore` 三元组与写后回读校验 |
 | `Registry.ps1` | Part 1 编排 | `Invoke-RegistryModule`（核心游戏/系统行为/CPU 缓解） |
 | `Nvme.ps1` | Part 8 编排 | `Invoke-NvmeModule`（备份逻辑在 `Backup.Nvme.ps1`） |
 | `Virtualization.ps1` | Part 9/10 编排 | `Invoke-DeviceGuardModule`/`Invoke-VbsModule` |
 | `Defender.ps1` | Part 5 编排 | `Invoke-DefenderModule`（策略快照见 `Backup.Defender.ps1`） |
-| `Menu.ps1` | 菜单调度与分发 | `Show-TweakMenu`（11 个 Part，支持 `-RunModules` 队列） |
+| `GameQos.ps1` | Part 12 编排 | `Invoke-GameQosModule`（竞技游戏 DSCP 46 QoS，备份在 `Backup.GameQos.ps1`） |
+| `Adapters.ps1` | 适配层 | 网络适配器相关的辅助逻辑 |
+| `Menu.ps1` | 菜单调度与分发 | `Show-TweakMenu`（菜单 0–12 共 12 项：1–12 对应 12 个功能模块，12 为 GameQos；支持 `-RunModule` 非交互队列） |
 
 本文档在描述执行位置时，已从“`tweakbyjie.ps1:行号`”改为“`Modules/函数名`”定位，避免行号漂移。建议按 `tweakbyjie/docs/design/CODE-REFACTOR-STATUS.md` 查看最新模块清单，再对应到下方映射表与全量参考。
 
@@ -57,11 +59,11 @@ tweak_module: []
 
 ## 事实核查记录
 
-核验基准：tweakbyjie 仓库源码（2026-08-29 重核：对照 tweak `b905950` 源码逐项复核；发现 Loader 规模与模块清单自 08-21 基线后漂移，已勘误并更新正文，见下）。
+核验基准：tweakbyjie 仓库源码（2026-08-29 对照 `b905950` 首核；2026-09-12 重核：对照 HEAD `5fce57f` 逐项复核，GameQos（菜单 12）与 Adapters 纳入清单，基线随版本演进不再钉死）。
 
 | 声明 | 核查结果 |
 | --- | --- |
-| tweakbyjie 采用 Loader + `Modules/` 模块化结构 | ✅ 属实（2026-08-29 对照 b905950 复核）：Loader 现为 162 行，点源 19 个模块文件；❌ 勘误并已更新：08-21 基线记录的“约 127 行、点源 16 个文件”已过时 |
-| 模块清单为 Common + 5 个 Backup.* + Menu | ❌ 勘误并已更新（2026-08-29 重核）：现为 Common + Adapters + 8 个 `Backup.*`（Mpo/Registry/Bcd/Service/SecurityMitigation/Nvme/Defender/Vbs）+ Bcd/Defender/Mpo/Nvme/Power/Registry/Service/Virtualization 八个执行模块 + Menu（共 19 个点源文件）；08-21 基线漏计 Adapters、Backup.Registry、Backup.Vbs |
+| tweakbyjie 采用 Loader + `Modules/` 模块化结构 | ✅ 属实（2026-09-12 对照 5fce57f 复核）：Loader 现为 180 行，点源 22 项（21 个 Modules/*.ps1 + 既有清单口径）；08-29 基线的“162 行、19 个文件”与 08-21 基线已随版本演进过时 |
+| 模块清单构成 | ✅ 已更新（2026-09-12 对照 5fce57f 重核）：现为 Common + Adapters + 9 个 `Backup.*`（Mpo/Registry/Bcd/Service/SecurityMitigation/Nvme/Defender/Vbs/GameQos）+ Bcd/Defender/GameQos/Mpo/Nvme/Power/Registry/Service/Virtualization 九个执行模块 + Menu；08-29 基线缺 GameQos 项 |
 | 执行位置采用 `Modules/函数名` 定位而非行号 | ✅ 属实：映射表与执行参考均已迁移；2026-08-25 校准后映射表中 Part N 级 `Modules/Menu.ps1` 引用已替换为实际业务模块 |
-| `Menu.ps1` 含 11 个 Part | ✅ 属实（2026-08-29 对照 b905950 复核）：菜单选项 0–11，其中 1–11 对应 11 个功能模块函数（`Invoke-RegistryModule`/`Invoke-BcdAdvancedModule`/`Invoke-TestModeEnableModule`/`Invoke-TestModeDisableModule`/`Invoke-DefenderModule`/`Invoke-ServiceModule`/`Invoke-PowerModule`/`Invoke-NvmeModule`/`Invoke-DeviceGuardModule`/`Invoke-VbsModule`/`Invoke-MpoModule`）；Loader 支持 `-RunModule` 非交互队列（编号 0–11） |
+| `Menu.ps1` 菜单项数 | ✅ 属实（2026-09-12 对照 5fce57f 复核）：菜单选项 0–12，1–12 对应 12 个功能模块函数（原 11 个 + `Invoke-GameQosModule`）；Loader 支持 `-RunModule` 非交互队列（编号 0–12）。08-29 基线的“11 个 Part”已随 GameQos 引入过期 |

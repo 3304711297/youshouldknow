@@ -96,7 +96,7 @@ chrome-devtools-mcp 官方提供了忽略单个默认参数的选项：
 
 ### 补充：Hermes Agent 原生浏览器工具防护
 
-在使用 Hermes Agent 内置的浏览器自动化工具（`browser_tool.py` / `browser_exec`）时，若在 `config.yaml` 中配置了 `browser.use_real_profile: true`，控制器会自动快照用户的真实 Edge/Chrome 配置文件并拉起临时 Chromium 实例。该实例携带 `--disable-background-networking`、`--disable-default-apps` 等参数，在退出时极易将无扩展运行的内存配置写回，导致日常浏览器的 `extensions.settings` 再次清空。
+在使用 Hermes Agent 内置的浏览器自动化工具时，若在 `config.yaml` 中配置了 `browser.use_real_profile: true`，控制器会把真实配置文件**快照到 `~/.hermes/browser-profile/` 副本**后拉起浏览器实例。⚠️ 勘误（2026-09-12 对照 v0.21.1 源码）：现行实现中副本目录与日常配置目录隔离、启动参数不含 `--disable-extensions`、快照显式排除 Extensions 目录——本文写作时点的「退出时把无扩展内存配置写回日常浏览器」故障链在当前版本**不成立**；以下防灾建议仍值得保留（纵深防御），但风险等级可下调。
 
 **防灾设置**：在 Hermes 的 `config.yaml` 中明确设置：
 

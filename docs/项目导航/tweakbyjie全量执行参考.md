@@ -200,7 +200,7 @@ tweak_module: []
 
 ### BOOT-003 / BOOT-004 测试模式
 
-- 开启 `testsigning on`、`debug on`、`dbgsettings local`、`nointegritychecks on`，源码 `:923-945`；无独立快照和完整回读。
+- 开启 `testsigning on`、`debug on`、`dbgsettings local`、`nointegritychecks on`，逻辑位于 `Modules/Bcd.ps1`（`Invoke-TestModeEnableModule`）；开启前自动快照至独立的 `testmode-backup.json`（与高级 BCD 的 `bcd-backup.json` 分离），无完整运行时回读。
 - 关闭只删除 `testsigning`、`debug`，保留 `nointegritychecks`，源码 `:947-972`；不是原状态精确恢复，删除不存在值可能报告失败。
 
 ### BOOT-005 / BOOT-006
@@ -244,4 +244,4 @@ tweak_module: []
 - “脚本执行”不等于“可恢复”；“配置层回读”不等于“运行时有效”；“知识说明”不等于“脚本支持”。
 ## 事实核查记录
 
-核验机制：由 tweakbyjie 仓库 Coverage 自动审计持续校验，映射、执行参考、覆盖检查三份资料每一份都必须与 manifest 全部 48 项完全一致（缺少清单内编号与出现清单外编号均判失败）；正文 `Modules/文件.ps1` 引用由审计器校验文件存在与函数定义。2026-08-25 对照 tweakbyjie main（commit `cd95802`）校准；2026-09-05 同步 CORE-017/018/019 与 GAMEQOS-001（合计 48 项）：页首定位说明改为“Menu 仅调度、执行在各业务模块”，CPU-002 源码定位修正为 `Modules/Registry.ps1`。⚠️ 已知边界：正文表格中的 `:NNN` 为模块化前单文件源码的基线行号快照，仅作历史对照，不对应现行 Modules/ 结构；现行定位以 `Modules/函数名` 为准。
+核验机制：由 tweakbyjie 仓库 Coverage 自动审计持续校验，映射、执行参考、覆盖检查三份资料每一份都必须与 manifest 全部 48 项完全一致（缺少清单内编号与出现清单外编号均判失败）；正文 `Modules/文件.ps1` 引用由审计器校验文件存在与函数定义。2026-08-25 对照 tweakbyjie main（当时 commit `cd95802`）校准；2026-09-12 重核对照 HEAD `5fce57f`；2026-09-05 同步 CORE-017/018/019 与 GAMEQOS-001（合计 48 项）：页首定位说明改为“Menu 仅调度、执行在各业务模块”，CPU-002 源码定位修正为 `Modules/Registry.ps1`。⚠️ 已知边界：正文表格中的 `:NNN` 为模块化前单文件源码的基线行号快照，仅作历史对照，不对应现行 Modules/ 结构；现行定位以 `Modules/函数名` 为准。

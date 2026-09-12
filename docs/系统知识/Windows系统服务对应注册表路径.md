@@ -100,7 +100,7 @@ HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\<服务名>
 HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender
 ```
 
-这是通过**策略**层控制 Defender 行为的键（对应组策略「计算机配置 → 管理模板 → Windows 组件 → Windows Defender」），如新建 DWORD 值 `DisableAntiSpyware` = `1` 可策略级关闭 Defender——与上文 `Services\WinDefend` 的服务注册键是**两码事**，前者是行为开关、后者是服务注册信息。
+这是通过**策略**层控制 Defender 行为的键（对应组策略「计算机配置 → 管理模板 → Windows 组件 → Windows Defender」），如历史上可用 DWORD 值 `DisableAntiSpyware` = `1` 策略级关——⚠️ 勘误（2026-09-12 对照微软官方文档）：该策略已被微软**废弃**（deprecated），新版 Windows 中置 1 无效，勿再依赖闭 Defender——与上文 `Services\WinDefend` 的服务注册键是**两码事**，前者是行为开关、后者是服务注册信息。
 
 ## 五、操作提醒
 

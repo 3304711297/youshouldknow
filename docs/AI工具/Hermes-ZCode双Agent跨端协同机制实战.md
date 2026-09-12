@@ -8,9 +8,12 @@ tweak_module: []
 status: reference
 ---
 
+> [!WARNING] 历史存档（2026-09-12）
+> **ZCode 客户端已于 2026-09-09 弃用并从本机卸载**（`~/.zcode` 与 `D:\zcode` 目录已删除，配套的 `watch_zcode.py` 守护脚本已退役）。本文描述的"双 Agent 协同"环境已不存在，全文按写作时点（2026-09-05 前后）以过去时存档。其中**与 ZCode 无关的通用机制**——SQLite 只读监听、`terminal(background=True, notify=true)` 进程退出事件唤醒——在当前 Hermes 中仍然有效，可用于任何"一方施工、一方监听"的场景。
+
 # Hermes-ZCode 双 Agent 跨端协同机制实战
 
-> 本文目标：还原一套已在本机跑通的"双桌面 Agent 协同"机制——ZCode 负责施工（写代码、跑任务），Hermes 负责盯盘（监听进度、审计产物、完工后接手验证）。核心解决一个痛点：施工方埋头干活时，监听方的聊天框完全空闲休眠，如何在零人工介入的前提下被自动唤醒并接手。
+> 本文目标：还原一套曾在本机跑通的"双桌面 Agent 协同"机制（ZCode 已弃用，见上方存档说明）——ZCode 负责施工（写代码、跑任务），Hermes 负责盯盘（监听进度、审计产物、完工后接手验证）。核心解决一个痛点：施工方埋头干活时，监听方的聊天框完全空闲休眠，如何在零人工介入的前提下被自动唤醒并接手。
 
 ---
 
@@ -51,7 +54,7 @@ ZCode 施工 ──写入──▶ SQLite 会话库（session 表）
 
 ### 1. 监听层：只读读取 ZCode 会话库
 
-ZCode 的会话数据落在本地 SQLite 库 `C:\Users\VOS-User\.zcode\cli\db\db.sqlite`。Hermes 侧必须以只读模式打开：
+ZCode 的会话数据（当时）落在本地 SQLite 库 `C:\Users\VOS-User\.zcode\cli\db\db.sqlite`。Hermes 侧必须以只读模式打开：
 
 ```python
 conn = sqlite3.connect(r'file:C:\Users\VOS-User\.zcode\cli\db\db.sqlite?mode=ro', uri=True)
@@ -107,7 +110,7 @@ ZCode 侧没有内置的后台通知钩子——`zcode --help` 全量参数中�
 
 ## 五、边界与适用性
 
-- **适用**：Windows 本机"一方施工、一方审计"的双 Agent 分工，需要"完工即唤醒"的自动化闭环；前提是 Hermes 已部署 `scripts/watch_zcode.py` 且能访问 ZCode 数据目录。
+- **适用**：Windows 本机"一方施工、一方审计"的双 Agent 分工（历史方案，ZCode 侧已随弃用失效）；Hermes 侧的监听与唤醒机制仍可用于其他施工方。
 - **不适用**：跨机器协同（会话库在本机盘上）；ZCode 库表结构变更后需同步调整查询字段。
 - **成本与纪律**：watcher 常驻仅 3 秒一次轮询，开销可忽略；真正的门槛是"盯盘指令必须趁施工中单独发送"的交互纪律。
 

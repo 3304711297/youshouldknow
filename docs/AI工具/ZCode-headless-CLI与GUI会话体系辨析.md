@@ -7,15 +7,18 @@ tweak_module: []
 status: reference
 ---
 
+> [!WARNING] 历史存档（2026-09-12）
+> **ZCode 客户端已于 2026-09-09 弃用并从本机卸载**（`D:\zcode\resources\glm\zcode.cjs`、`~/.zcode/cli/config.json`、db.sqlite 等文中路径均已不存在）。本文对两套会话体系隔离关系的实测结论按写作时点存档，不再可复现；「经用户拍板的实践规范」作为历史决策记录保留。
+
 # ZCode headless CLI 与 GUI 会话体系辨析
 
-> 本文目标：厘清 ZCode（Z.AI）headless CLI 与 Desktop GUI 两套会话体系的隔离关系。先给两套体系的总览对比，再以 db.sqlite 实测数据揭示会话落点差异与"GUI 不可见"现象，接着辨析两边互不相通的模型配置与额度池，随后复盘实测中的两起故障链，最终沉淀出经用户拍板的实践规范与适用边界。核心结论只有一句：**headless 会话与 GUI 会话是两套互相隔离的体系，请勿混用。**
+> 本文目标：厘清 ZCode（Z.AI）headless CLI 与 Desktop GUI 两套会话体系的隔离关系（ZCode 已弃用，见上方存档说明）。先给两套体系的总览对比，再以 db.sqlite 实测数据揭示会话落点差异与"GUI 不可见"现象，接着辨析两边互不相通的模型配置与额度池，随后复盘实测中的两起故障链，最终沉淀出经用户拍板的实践规范与适用边界。核心结论只有一句：**headless 会话与 GUI 会话是两套互相隔离的体系，请勿混用。**
 
 ---
 
 ## 一、两套会话体系总览
 
-ZCode 在同一台机器上并存两套会话体系：一套是面向自动化脚本的 headless CLI（`zcode -p`），一套是面向人机协同的 Desktop GUI。二者各有一套独立的会话落点、模型配置与额度体系：
+ZCode 曾在同一台机器上并存两套会话体系：一套是面向自动化脚本的 headless CLI（`zcode -p`），一套是面向人机协同的 Desktop GUI。二者各有一套独立的会话落点、模型配置与额度体系：
 
 | 维度 | headless CLI | Desktop GUI |
 | :--- | :--- | :--- |

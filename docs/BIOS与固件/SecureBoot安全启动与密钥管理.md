@@ -34,7 +34,7 @@ tweak_module: []
 ## 三个典型症状
 
 1. **装 Win11 报"不支持安全启动"**：安装程序不看界面开关，直接查底层状态——部署模式或 CSM 开着都会判定失败。解法：关 CSM → 找 Restore Factory Keys / Install Default Secure Boot Keys 导入出厂密钥转用户模式 → 开关设 Enabled。
-2. **官方 U 盘装 Win11 第一轮重启无限循环，报 Invalid Signature Detected**：微软旧签名证书（2011 年签发）已过期，Win11 官方更新与安装介质改用 2023 新版证书，很多现售主板的 BIOS 密钥白名单还没收录。解法：更新主板 BIOS；或先临时把 Secure Boot 设 Disabled 装好系统、立刻打全 Windows Update 补丁（新证书会自动下发）并更新 BIOS，再回 BIOS 重新开启。
+2. **官方 U 盘装 Win11 第一轮重启无限循环，报 Invalid Signature Detected**：微软旧签名证书（2011 年签发）自 2026 年 6 月起陆续到期（⚠️ 2026-09-12 对照微软 KB5062713/IT Pro Blog 修正时机：到期滚动更新由 Windows Update 通道完成），Win11 官方更新与安装介质改用 2023 新版证书，很多现售主板的 BIOS 密钥白名单还没收录。解法：更新主板 BIOS；或先临时把 Secure Boot 设 Disabled 装好系统、立刻打全 Windows Update 补丁（新证书会自动下发）并更新 BIOS，再回 BIOS 重新开启。
 3. **开机索要 BitLocker 恢复密钥**：清空或关闭 Secure Boot 会改变启动环境测量值，BitLocker 判定启动环境不安全变更，100% 触发 48 位恢复密钥输入。**操作前先去微软账户确认已备份恢复密钥**。
 
 ## Linux 与老 PE

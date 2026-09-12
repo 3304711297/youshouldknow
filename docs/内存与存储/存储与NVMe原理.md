@@ -43,7 +43,7 @@ NVMe 是针对 PCIe 固态硬盘设计的协议，相比传统 SATA AHCI，具�
 fsutil behavior query DisableDeleteNotify
 
 # 逐卷视角（更贴近实际，脚本当前未做逐卷验证）
-fsutil behavior query DisableDeleteNotify C:
+fsutil behavior query DisableDeleteNotify（全局查询；该参数不支持逐卷限定）
 ```
 
 `DisableDeleteNotify=0` 表示系统允许向盘发送 TRIM；但是否对每块盘真正生效，还需结合盘固件、驱动与文件系统。脚本 `fsutil behavior set DisableDeleteNotify 0` 的验证仅覆盖全局，不代表每卷已核验，也没有按原策略自动恢复。
@@ -79,4 +79,4 @@ fsutil behavior query DisableDeleteNotify C:
 | BITS 经 Part 6 设为 Manual，有 service-backup.json 可恢复启动类型 | ✅ 属实：STORAGE-003 与 Backup.Service.ps1 一致 |
 | Native NVMe（主菜单 8）有专用快照、失败回滚与状态检查 | ✅ 属实：STORAGE-004 与 Backup.Nvme.ps1 一致 |
 | 写入缓存策略无脚本执行项 | ✅ 属实：STORAGE-005 不计为执行覆盖 |
-| fsutil 逐卷查询（DisableDeleteNotify C:）语法 | ✅ 属实：fsutil 支持按卷参数（微软文档行为） |
+| fsutil 逐卷查询（DisableDeleteNotify C:）语法 | ❌ 勘误（2026-09-12 Win11 26200 实测）：该参数仅接受 NTFS|ReFS 参数，不支持盘符逐卷查询 |
