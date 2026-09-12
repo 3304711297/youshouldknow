@@ -23,7 +23,7 @@ tweak_module: []
 
 ```yaml
 memory:
-  memory_char_limit: 3000   # 单位是「字符」
+  memory_char_limit: 3000   # 单位是「字符」；本机覆写值（Hermes 出厂默认 2200/1375）
   user_char_limit: 2000     # 单位是「字符」
 ```
 

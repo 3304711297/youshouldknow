@@ -59,7 +59,7 @@ v0.12 引入的 "Autonomous Curator" 常被描述为"自动记忆管理"——**
 
 ### 4. SQLite 会话库 = 按需检索的档案馆
 
-`~/.hermes/hermes_state.db`（SQLite）存每一轮会话：用户消息、Agent 回复、工具调用、推理步骤，外加每会话 token 数与美元成本。默认保留 **90 天**，超期每 24 小时自动清理。
+`~/.hermes/state.db`（SQLite；旧版本文献中曾名 hermes_state.db）存每一轮会话：用户消息、Agent 回复、工具调用、推理步骤，外加每会话 token 数与美元成本。默认保留 **90 天**，超期每 24 小时自动清理。
 
 关键设计：**不自动注入 prompt**（否则等于每次对话贴上全部聊天记录），Agent 需要时按需检索。检索基于 SQLite FTS5 全文索引，双索引并行：
 
