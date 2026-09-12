@@ -2463,10 +2463,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-c-state-irql255" class="md-nav__link">
+  <a href="#2-c-state-irql0xff" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. 为什么关闭 C-State 后依然会在 IRQL=255 崩溃？
+        2. 为什么关闭 C-State 后依然会在 IRQL=0xFF 崩溃？
       
     </span>
   </a>
@@ -5587,10 +5587,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-c-state-irql255" class="md-nav__link">
+  <a href="#2-c-state-irql0xff" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. 为什么关闭 C-State 后依然会在 IRQL=255 崩溃？
+        2. 为什么关闭 C-State 后依然会在 IRQL=0xFF 崩溃？
       
     </span>
   </a>
@@ -5713,8 +5713,8 @@
 </code></pre></div>
 <h3 id="_2">关键细节解析：<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <ol>
-<li><strong>IRQL = 255 (<code>HIGH_LEVEL</code>)</strong>：
-   这是 Windows 内核体系中的最高硬件中断级别（用于 APIC Timer 硬件时钟中断、跨核调度）。在该级别下，系统<strong>严禁发生任何缺页调度（Page Fault）</strong>，一旦寻址失败，内核无法调度虚拟内存管理器自愈，只能立即硬性蓝屏刹车。</li>
+<li><strong>IRQL = 255 (0xFF)</strong>：
+   ⚠️ 勘误（2026-09-12）：x64 Windows 的合法 IRQL 上限为 15（<code>HIGH_LEVEL</code>），0xFF 并非合法 IRQL。BugCheck 0xA 的 Param 2 出现 0xFF，通常意味着 <strong>IRQL 值本身已被破坏或俘获到无效值</strong>——这与本文"降压过度导致总线位翻转、指针损坏"的根因方向恰恰自洽。原判读中"最高级别下严禁缺页调度、失败即硬性蓝屏"的机制描述本身正确，但级别归属应修正。</li>
 <li><strong>非法地址 <code>0xffffaa80db1a3888</code></strong>：
    内核调度器在最高中断级别读取内部数据结构时，读出了一个破损指针，直接导致系统崩溃。</li>
 </ol>
@@ -5730,13 +5730,13 @@
 <li><strong>实测结论</strong>：
   当你将 Core 设为 <code>-205mV</code>、Cache 设为 <code>-190mV</code> 时，<strong>硬件底层实际上从未生效过 -205mV，整个芯片（包含核心）其实一直都在跑 -190mV</strong>！</li>
 </ul>
-<h3 id="2-c-state-irql255">2. 为什么关闭 C-State 后依然会在 <code>IRQL=255</code> 崩溃？<a class="headerlink" href="#2-c-state-irql255" title="Permanent link">&para;</a></h3>
+<h3 id="2-c-state-irql0xff">2. 为什么关闭 C-State 后依然会在 <code>IRQL=0xFF</code> 崩溃？<a class="headerlink" href="#2-c-state-irql0xff" title="Permanent link">&para;</a></h3>
 <p>如果已在 BIOS 中彻底关闭了 C-State（所有核心强制处于 C0 状态，杜绝了休眠唤醒电压跌落），为何还会崩溃？</p>
 <ul>
 <li><strong>全时高频 Ring Bus 的晶体管临界点</strong>：
   关闭 C-State 后，Ring Bus 全时在最高时钟下运转。12 代 Alder Lake 的 Ring Bus 负责挂载 8 个大核、8 个小核、所有共享 L3 缓存以及内存控制器通信。</li>
 <li>核心（Core）由于逻辑门结构不同，可能吃得下更低的电压；但 <strong>Ring Bus / Cache 的物理抗噪极限普遍在 <code>-160mV ~ -180mV</code></strong>。<code>-190mV</code> 已经踩在了物理翻转的悬崖边。</li>
-<li>一旦系统出现突发的多进程并发切换或网络硬件中断，CPU 在响应最高时钟中断（<code>HIGH_LEVEL</code>）的纳秒瞬间，供电电感产生微小的瞬态压降（Transient Vdroop），Ring Bus 内部寻址总线产生单比特翻转（Bit-flip），内存指针损坏为无效地址，硬性诱发 <code>0x0000000A</code>。</li>
+<li>一旦系统出现突发的多进程并发切换或网络硬件中断，CPU 在响应高级别时钟中断的纳秒瞬间，供电电感产生微小的瞬态压降（Transient Vdroop），Ring Bus 内部寻址总线产生单比特翻转（Bit-flip），内存指针损坏为无效地址，硬性诱发 <code>0x0000000A</code>。</li>
 </ul>
 <hr />
 <h2 id="_4">四、 调优与稳定落地方案<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
@@ -5804,7 +5804,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年9月7日 08:54:15 UTC">2026年9月7日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年9月12日 02:13:08 UTC">2026年9月12日</span>
   </span>
 
     

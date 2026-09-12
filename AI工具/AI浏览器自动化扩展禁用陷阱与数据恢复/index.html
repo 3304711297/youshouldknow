@@ -5751,7 +5751,7 @@
 </code></pre></div>
 <p>建议所有会把 <code>--user-data-dir</code> 指向真实配置目录的自动化配置都加这一参数。另有一个整体开关 <code>--ignore-default-chrome-args</code>（复数）可忽略全部默认参数，粒度更粗、需自行补齐必要参数，一般用单项形式即可。</p>
 <h3 id="hermes-agent">补充：Hermes Agent 原生浏览器工具防护<a class="headerlink" href="#hermes-agent" title="Permanent link">&para;</a></h3>
-<p>在使用 Hermes Agent 内置的浏览器自动化工具（<code>browser_tool.py</code> / <code>browser_exec</code>）时，若在 <code>config.yaml</code> 中配置了 <code>browser.use_real_profile: true</code>，控制器会自动快照用户的真实 Edge/Chrome 配置文件并拉起临时 Chromium 实例。该实例携带 <code>--disable-background-networking</code>、<code>--disable-default-apps</code> 等参数，在退出时极易将无扩展运行的内存配置写回，导致日常浏览器的 <code>extensions.settings</code> 再次清空。</p>
+<p>在使用 Hermes Agent 内置的浏览器自动化工具时，若在 <code>config.yaml</code> 中配置了 <code>browser.use_real_profile: true</code>，控制器会把真实配置文件<strong>快照到 <code>~/.hermes/browser-profile/</code> 副本</strong>后拉起浏览器实例。⚠️ 勘误（2026-09-12 对照 v0.21.1 源码）：现行实现中副本目录与日常配置目录隔离、启动参数不含 <code>--disable-extensions</code>、快照显式排除 Extensions 目录——本文写作时点的「退出时把无扩展内存配置写回日常浏览器」故障链在当前版本<strong>不成立</strong>；以下防灾建议仍值得保留（纵深防御），但风险等级可下调。</p>
 <p><strong>防灾设置</strong>：在 Hermes 的 <code>config.yaml</code> 中明确设置：</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">browser</span><span class="p">:</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">use_real_profile</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
@@ -5820,7 +5820,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年9月4日 06:51:53 UTC">2026年9月4日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年9月12日 02:13:08 UTC">2026年9月12日</span>
   </span>
 
     

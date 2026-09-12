@@ -6005,8 +6005,8 @@
 <td style="text-align: left;">关键架构方案选型、复杂理论推演</td>
 </tr>
 <tr>
-<td style="text-align: left;"><code>/delegate</code></td>
-<td style="text-align: left;"><code>/delegate [任务] [目标Agent]</code></td>
+<td style="text-align: left;">子代理分发（<code>delegate_task</code> 工具，自然语言触发，无斜杠命令）</td>
+<td style="text-align: left;">并行任务分派</td>
 <td style="text-align: left;">显式向指定专职子智能体分发特定领域的工作任务，子 Agent 拥有独立会话栈与专属工具集。</td>
 <td style="text-align: left;">专职前端与后端分工、双 Agent 并行开发</td>
 </tr>
@@ -6053,12 +6053,8 @@
 <td style="text-align: left;">实时查看或快速切换主推理模型（如 Gemini 3.8 Flash、Claude 3.7 Sonnet、GPT-4o 等），无需重启客户端。</td>
 </tr>
 <tr>
-<td style="text-align: left;"><code>/temp</code></td>
-<td style="text-align: left;">调节当前模型的生成采样温度（0.0 ~ 1.0），代码编写推荐低温，创意发散推荐较高温度。</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>/thinking</code></td>
-<td style="text-align: left;">开启、关闭或调整支持思考链路模型（如 Gemini Ultra 思考模式、Claude 思考模式）的思考预算深度。</td>
+<td style="text-align: left;"><code>/reasoning</code></td>
+<td style="text-align: left;">开启、关闭或调整支持思考链路模型（如 Gemini 思考模式、Claude 思考模式）的推理强度档位。</td>
 </tr>
 </tbody>
 </table>
@@ -6095,16 +6091,12 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: left;"><code>/doctor</code></td>
+<td style="text-align: left;"><code>hermes doctor</code>（CLI 子命令，非会话内指令）</td>
 <td style="text-align: left;">全面体检本地运行环境：校验 Python 运行时、Node 环境、Git 状态、外部代理可达性与 MCP 守护进程。</td>
 </tr>
 <tr>
-<td style="text-align: left;"><code>/health</code></td>
-<td style="text-align: left;">实时检测当前配置的模型供应商端点响应延迟、HTTP 状态码与配额连通性。</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>/env</code></td>
-<td style="text-align: left;">打印当前智能体进程读取到的核心环境变量，排查代理地址、工作目录与本地端口映射是否偏离。</td>
+<td style="text-align: left;"><code>hermes status</code>（CLI 子命令）</td>
+<td style="text-align: left;">查看当前配置、模型供应商与连接状态；端点延迟与连通性可通过该命令输出与日志观察。</td>
 </tr>
 </tbody>
 </table>
@@ -6187,7 +6179,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年9月5日 12:35:38 UTC">2026年9月5日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年9月12日 02:13:08 UTC">2026年9月12日</span>
   </span>
 
     

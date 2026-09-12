@@ -5602,7 +5602,7 @@
 <h1 id="ddr5-mcrpd">DDR5 内存训练与 MCR/PD<a class="headerlink" href="#ddr5-mcrpd" title="Permanent link">&para;</a></h1>
 <blockquote>
 <p><strong>分类</strong>：BIOS 与固件 · 内存选项</p>
-<p><strong>一句话</strong>：DDR5 平台开机黑屏 30~60 秒是内存训练（Memory Training）在干活；正确绑定 MCR（内存上下文恢复）与 PD（断电模式）可把开机缩到几秒，<strong>绑反了（MCR 开 + PD 关）会蓝屏</strong>。</p>
+<p><strong>一句话</strong>：DDR5 平台开机黑屏 30~60 秒是内存训练（Memory Training）在干活；正确绑定 MCR（内存上下文恢复）与 PD（断电模式）可把开机缩到几秒，<strong>组合不对（MCR 开 + PD 开）部分平台会蓝屏</strong>。</p>
 </blockquote>
 <h2 id="ddr5">为什么 DDR5 开机慢<a class="headerlink" href="#ddr5" title="Permanent link">&para;</a></h2>
 <p>JEDEC DDR5 起步 4800MT/s，认证档普遍 6000~6400MT/s 以上：频率越高、信号衰减反射越严重，参数对温度电压极敏感，冷启动与热启动物理状态不同——所以每次都要重新训练四项核心指标：</p>
@@ -5643,7 +5643,7 @@
 <tbody>
 <tr>
 <td>MCR 开 + PD 开</td>
-<td>✅ 唯一正确的快速开机方案：快且稳</td>
+<td>⚠️ 勘误（2026-09-12 对照华硕官方 FAQ 与社区口径）：主流记录为 <strong>MCR 开 + PD 关</strong> 才稳；PD 在 MCR 开启时反成部分平台的崩溃来源——不稳先关 PD，以实测为准</td>
 </tr>
 <tr>
 <td>MCR 关 + PD 开/关</td>
@@ -5651,7 +5651,7 @@
 </tr>
 <tr>
 <td>MCR 开 + PD 关</td>
-<td>⚠️ 最危险：PHY 被彻底断电后训练参数失效，复用错误数据就蓝屏崩溃——"拿旧钥匙开新车门"</td>
+<td>✅ 主流推荐组合（华硕官方 FAQ 口径）：MCR 复用训练结果、PD 关闭避免 PHY 断电冲突，开机快且稳</td>
 </tr>
 </tbody>
 </table>
@@ -5701,7 +5701,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年9月11日 13:42:39 UTC">2026年9月11日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年9月12日 02:13:08 UTC">2026年9月12日</span>
   </span>
 
     

@@ -5696,9 +5696,13 @@
   
 
 
+<blockquote>
+<p>[!WARNING] 历史存档（2026-09-12）
+<strong>ZCode 客户端已于 2026-09-09 弃用并从本机卸载</strong>（<code>~/.zcode</code> 与 <code>D:\zcode</code> 目录已删除，配套的 <code>watch_zcode.py</code> 守护脚本已退役）。本文描述的"双 Agent 协同"环境已不存在，全文按写作时点（2026-09-05 前后）以过去时存档。其中<strong>与 ZCode 无关的通用机制</strong>——SQLite 只读监听、<code>terminal(background=True, notify=true)</code> 进程退出事件唤醒——在当前 Hermes 中仍然有效，可用于任何"一方施工、一方监听"的场景。</p>
+</blockquote>
 <h1 id="hermes-zcode-agent">Hermes-ZCode 双 Agent 跨端协同机制实战<a class="headerlink" href="#hermes-zcode-agent" title="Permanent link">&para;</a></h1>
 <blockquote>
-<p>本文目标：还原一套已在本机跑通的"双桌面 Agent 协同"机制——ZCode 负责施工（写代码、跑任务），Hermes 负责盯盘（监听进度、审计产物、完工后接手验证）。核心解决一个痛点：施工方埋头干活时，监听方的聊天框完全空闲休眠，如何在零人工介入的前提下被自动唤醒并接手。</p>
+<p>本文目标：还原一套曾在本机跑通的"双桌面 Agent 协同"机制（ZCode 已弃用，见上方存档说明）——ZCode 负责施工（写代码、跑任务），Hermes 负责盯盘（监听进度、审计产物、完工后接手验证）。核心解决一个痛点：施工方埋头干活时，监听方的聊天框完全空闲休眠，如何在零人工介入的前提下被自动唤醒并接手。</p>
 </blockquote>
 <hr />
 <h2 id="_1">一、背景与定位<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
@@ -5750,7 +5754,7 @@
 </ol>
 <h2 id="_3">三、实战步骤<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <h3 id="1-zcode">1. 监听层：只读读取 ZCode 会话库<a class="headerlink" href="#1-zcode" title="Permanent link">&para;</a></h3>
-<p>ZCode 的会话数据落在本地 SQLite 库 <code>C:\Users\VOS-User\.zcode\cli\db\db.sqlite</code>。Hermes 侧必须以只读模式打开：</p>
+<p>ZCode 的会话数据（当时）落在本地 SQLite 库 <code>C:\Users\VOS-User\.zcode\cli\db\db.sqlite</code>。Hermes 侧必须以只读模式打开：</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="sa">r</span><span class="s1">'file:C:\Users\VOS-User\.zcode\cli\db\db.sqlite?mode=ro'</span><span class="p">,</span> <span class="n">uri</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>严禁以可写方式打开该库</strong>——ZCode 运行中持有写锁，写入会触发 <code>database is locked</code> 死锁。</p>
@@ -5815,7 +5819,7 @@
 </ol>
 <h2 id="_5">五、边界与适用性<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>适用</strong>：Windows 本机"一方施工、一方审计"的双 Agent 分工，需要"完工即唤醒"的自动化闭环；前提是 Hermes 已部署 <code>scripts/watch_zcode.py</code> 且能访问 ZCode 数据目录。</li>
+<li><strong>适用</strong>：Windows 本机"一方施工、一方审计"的双 Agent 分工（历史方案，ZCode 侧已随弃用失效）；Hermes 侧的监听与唤醒机制仍可用于其他施工方。</li>
 <li><strong>不适用</strong>：跨机器协同（会话库在本机盘上）；ZCode 库表结构变更后需同步调整查询字段。</li>
 <li><strong>成本与纪律</strong>：watcher 常驻仅 3 秒一次轮询，开销可忽略；真正的门槛是"盯盘指令必须趁施工中单独发送"的交互纪律。</li>
 </ul>
@@ -5884,7 +5888,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年9月11日 13:42:39 UTC">2026年9月11日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年9月12日 02:13:08 UTC">2026年9月12日</span>
   </span>
 
     
