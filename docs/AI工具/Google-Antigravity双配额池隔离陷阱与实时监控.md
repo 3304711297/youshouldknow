@@ -48,7 +48,7 @@ tweak_module: []
 ```http
 POST https://daily-cloudcode-pa.googleapis.com/v1internal:retrieveUserQuotaSummary HTTP/1.1
 Host: daily-cloudcode-pa.googleapis.com
-Authorization: Bearer ya29.a0AdMD...（从凭据文件提取的有效 OAuth Access Token）
+Authorization: Bearer ya29.a...（从 auth 目录的 antigravity-*.json 凭据文件读取的有效 OAuth Access Token；属敏感凭据，勿外传、勿提交仓库）
 Content-Type: application/json
 User-Agent: antigravity/hub/2.8.1 windows/amd64
 

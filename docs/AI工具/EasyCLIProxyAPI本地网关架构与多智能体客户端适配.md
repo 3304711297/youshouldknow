@@ -75,7 +75,7 @@ mklink /J "%ProgramFiles%\ZCode" "D:\zcode"
 ```
 
 **原理解析**：
-- `mklink /J` 是 Windows 文件系统底层的硬链接变种（Junction Point），不占额外磁盘空间，对所有应用程序 100% 透明；
+mklink /J 是目录级重解析点（reparse point），效果上类似路径别名——与文件级硬链接是不同机制
 - 建立联接后，控制台在标准路径即可瞬间探测到 `ZCode.exe`，版本信息立刻正常显示，“无法启动”按钮随之恢复为正常启动控制。
 
 ## 三、 Hermes Agent 接入使用 Gemini 配置实战
