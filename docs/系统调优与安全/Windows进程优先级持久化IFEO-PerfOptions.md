@@ -90,7 +90,7 @@ HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\<
 
 | 声明 | 核查结果 |
 | --- | --- |
-| `PerfOptions` 位于 `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\<程序名.exe>` 下，默认不存在 | ✅ 属实：IFEO 机制为微软公开机制（[Image File Execution Options](https://learn.microsoft.com/en-us/windows/win32/debug/image-file-execution-options)），`PerfOptions` 子键在 Windows Internals 中有记述，生产环境中很少见 |
+| `PerfOptions` 位于 `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\<程序名.exe>` 下，默认不存在 | ✅ 属实：IFEO 机制为微软公开机制（[Image File Execution Options](https://learn.microsoft.com/en-us/previous-versions/windows/desktop/xperf/image-file-execution-options)），`PerfOptions` 子键在 Windows Internals 中有记述，生产环境中很少见 |
 | `CpuPriorityClass` 取值 1=Idle / 2=Normal / 3=High / 4=Realtime / 5=Below Normal / 6=Above Normal | ✅ 属实：多份社区技术文档与工具说明一致（[Aloneguid 实测记录](https://www.aloneguid.uk/posts/2020/12/proc-limit-image-file-exec/)、`gist` 笔记、Softdrive 支持文档） |
 | `IoPriority` 取值 0=Very Low / 1=Low / 2=Normal / 3=High / 4=Critical；经 IFEO 只能设到 Normal 及以下 | ✅ 属实：`IoPriority` 的 High 需程序自身或 System Informer 一类工具设置，Critical 为系统保留（页文件请求）；社区文档明确标注 IFEO 机制下 High 不可用 |
 | `CpuPriorityClass` 对子进程的继承按设计只限 Idle 与 Below Normal | ✅ 属实：对应 `SetPriorityClass` 文档中 `IDLE_PRIORITY_CLASS` / `BELOW_NORMAL_PRIORITY_CLASS` 的继承行为说明 |
@@ -101,7 +101,7 @@ HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\<
 
 **参考链接：**
 
-- [Microsoft Learn — Image File Execution Options](https://learn.microsoft.com/en-us/windows/win32/debug/image-file-execution-options)
+- [Microsoft Learn — Image File Execution Options](https://learn.microsoft.com/en-us/previous-versions/windows/desktop/xperf/image-file-execution-options)
 - [Microsoft Learn — SetPriorityClass 函数](https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-setpriorityclass)
 - [PerfOptions 社区实测记录（CPU/I/O/Page 优先级枚举）](https://www.aloneguid.uk/posts/2020/12/proc-limit-image-file-exec/)
 - [IFEO PerfOptions 键值笔记（继承与 I/O 边界）](https://gist.github.com/HelderMagalhaes/899766e74da8cd3923fd47c41c07b320)
