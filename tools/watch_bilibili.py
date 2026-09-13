@@ -10,6 +10,7 @@ Bilibili UP主视频更新看门检测脚本 (watch_bilibili.py)
 
 import argparse
 import datetime
+import hashlib
 import http.cookiejar
 import json
 import os
@@ -23,8 +24,22 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional, Set
 
 
+# wbi 签名的 64 位重排表（B 站前端固定常量，与具体 UP 主无关）
+_WBI_MIXIN_KEY_ENC_TAB = [
+    46, 47, 18, 2, 53, 8, 23, 32, 15, 50, 10, 31, 58, 3, 45, 35,
+    27, 43, 5, 49, 33, 9, 42, 19, 29, 28, 14, 39, 12, 38, 41, 13,
+    37, 48, 7, 16, 24, 55, 40, 61, 26, 17, 0, 1, 60, 51, 30, 4,
+    22, 25, 54, 21, 56, 59, 6, 63, 57, 62, 11, 36, 20, 34, 44, 12,
+]
+
+
 class BilibiliClient:
-    """轻量稳定 B 站 API 客户端（无第三方依赖，支持合集与系列归档接口）"""
+    """轻量稳定 B 站 API 客户端（无第三方依赖，支持合集、系列归档与 UP 投稿列表接口）"""
+
+    # 风控在签名正确的前提下仍会命中：412 随机触发，-352 由短时间高频请求触发。
+    # 两者都只能靠退避重试吸收，故重试预算给足（看门任务 6 小时一轮，偶发多等几十秒无成本）。
+    MAX_RETRIES = 4
+    RETRY_BACKOFF_SECONDS = 20
 
     def __init__(self, timeout: int = 15):
         self.timeout = timeout
@@ -33,8 +48,85 @@ class BilibiliClient:
                 "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
                 "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
             ),
+            "Accept": "application/json, text/plain, */*",
+            "Accept-Language": "zh-CN,zh;q=0.9",
+            # 不声明 gzip/br：保持纯文本响应，避免额外解压分支
             "Referer": "https://www.bilibili.com/",
+            # 匿名 buvid3 可显著降低被判定为机器请求的概率
+            "Cookie": "buvid3=00000000-0000-0000-0000-000000000000infoc",
         }
+        self._mixin_key: Optional[str] = None
+
+    def _open_text(self, url: str, headers: Optional[Dict[str, str]] = None) -> str:
+        """带退避重试地取回文本响应。
+
+        B 站的 412 风控在签名、Cookie、Referer 全部正确时仍会随机命中，
+        因此这里对 HTTP 错误与非 JSON 响应统一重试，避免看门在随机风控下静默失效。
+        """
+        last_err: Optional[Exception] = None
+        for attempt in range(1, self.MAX_RETRIES + 1):
+            try:
+                req = urllib.request.Request(url, headers=headers or self.headers)
+                with urllib.request.urlopen(req, timeout=self.timeout) as resp:
+                    return resp.read().decode("utf-8")
+            except Exception as e:  # noqa: BLE001 - 需要对 HTTPError/超时统一退避
+                last_err = e
+                if attempt < self.MAX_RETRIES:
+                    time.sleep(self.RETRY_BACKOFF_SECONDS * attempt)
+        raise RuntimeError(f"请求失败（已重试 {self.MAX_RETRIES} 次）：{url} -> {last_err}")
+
+    def _fetch_mixin_key(self) -> str:
+        """取得 wbi 签名用的 mixin key；未登录时 nav 仍会下发 wbi_img"""
+        if self._mixin_key:
+            return self._mixin_key
+        url = "https://api.bilibili.com/x/web-interface/nav"
+        data = json.loads(self._open_text(url))
+        wbi = (data.get("data") or {}).get("wbi_img") or {}
+        img_url = wbi.get("img_url", "")
+        sub_url = wbi.get("sub_url", "")
+        if not img_url or not sub_url:
+            raise RuntimeError("nav 接口未返回 wbi_img，无法进行 wbi 签名")
+        raw = img_url.rsplit("/", 1)[-1].split(".")[0] + sub_url.rsplit("/", 1)[-1].split(".")[0]
+        self._mixin_key = "".join(raw[i] for i in _WBI_MIXIN_KEY_ENC_TAB)[:32]
+        return self._mixin_key
+
+    def _wbi_sign(self, params: Dict[str, Any]) -> str:
+        """对参数做 wbi 签名并返回 query string"""
+        signed = dict(params)
+        signed["wts"] = int(time.time())
+        query = urllib.parse.urlencode(sorted(signed.items()))
+        signed["w_rid"] = hashlib.md5(
+            (query + self._fetch_mixin_key()).encode("utf-8")
+        ).hexdigest()
+        return urllib.parse.urlencode(sorted(signed.items()))
+
+    def get_user_videos(self, mid: int, page: int = 1, page_size: int = 50) -> List[Dict[str, Any]]:
+        """获取 UP 主投稿列表（无合集账号也适用；该接口需要 wbi 签名）"""
+        params = {
+            "mid": mid,
+            "ps": page_size,
+            "pn": page,
+            "order": "pubdate",
+            "platform": "web",
+            "web_location": 1550101,
+        }
+        url = f"https://api.bilibili.com/x/space/wbi/arc/search?{self._wbi_sign(params)}"
+        headers = dict(self.headers)
+        headers["Referer"] = f"https://space.bilibili.com/{mid}"
+        # 风控会在「HTTP 200 + code != 0」这一层出现，因此整个请求-判定过程都要可重试
+        last_detail = ""
+        for attempt in range(1, self.MAX_RETRIES + 1):
+            raw = self._open_text(url, headers)
+            if not raw.lstrip().startswith("{"):
+                last_detail = "非 JSON 响应（HTML 错误页）"
+            else:
+                data = json.loads(raw)
+                if data.get("code") == 0:
+                    return data.get("data", {}).get("list", {}).get("vlist", []) or []
+                last_detail = f"code={data.get('code')}, msg={data.get('message')}"
+            if attempt < self.MAX_RETRIES:
+                time.sleep(self.RETRY_BACKOFF_SECONDS * attempt)
+        raise RuntimeError(f"Failed to fetch user videos: {last_detail}")
 
     def get_seasons_list(self, mid: int) -> List[Dict[str, Any]]:
         """获取 UP 主公开的合集列表 (B站该接口 page_size 最大为 20)"""
@@ -160,6 +252,8 @@ def build_issue_content(
             collection_line = f"- **所属合集**：[{season_name}](https://space.bilibili.com/{video.get('mid', 589200735)}/channel/collectiondetail?sid={season_id})"
         else:
             collection_line = f"- **所属合集**：{season_name}"
+    else:
+        collection_line = "- **来源**：UP 主投稿列表（该账号无合集，按投稿时间跟踪）"
 
     body_lines = [
         "### 📺 上游视频更新通知",
@@ -273,6 +367,16 @@ def main() -> int:
     doc_bvids = collect_documented_bvids(docs_dir)
     print(f"[INFO] Found {len(doc_bvids)} documented BVIDs in {docs_dir}")
 
+    # 1b. 配置里的 baseline_bvids：接入看门时的既有视频，视为已跟踪，避免一次性开历史单
+    baseline_bvids = set()
+    for ch in config_data.get("channels", []):
+        for b in ch.get("baseline_bvids", []) or []:
+            if isinstance(b, str) and b.startswith("BV"):
+                baseline_bvids.add(b)
+    doc_bvids |= baseline_bvids
+    if baseline_bvids:
+        print(f"[INFO] Found {len(baseline_bvids)} baseline BVIDs in config (skipped as already known)")
+
     # 2. 查询已建 Issue 中的 BVID
     issue_bvids = get_existing_issue_bvids(args.repo, token)
     print(f"[INFO] Found {len(issue_bvids)} existing BVIDs in GitHub issues")
@@ -293,8 +397,60 @@ def main() -> int:
         category = ch.get("target_category", "BIOS与固件")
         target_season_ids = ch.get("season_ids")
         watch_all = ch.get("watch_all_seasons", True)
+        watch_mode = ch.get("watch_mode", "seasons")
 
         print(f"\n[INFO] Checking UP: {up_name} (mid={mid})...")
+
+        # 投稿列表模式：适用于没有合集的账号（合集接口对这类账号返回空列表）
+        if watch_mode == "uploads":
+            # 逐页拉取（新→旧），遇到已跟踪的 BVID 即停，避免账号视频超过一页时漏检
+            uploads = []
+            try:
+                for page in range(1, 4):
+                    batch = client.get_user_videos(mid=mid, page=page, page_size=50)
+                    if not batch:
+                        break
+                    uploads.extend(batch)
+                    if any(v.get("bvid") in tracked_bvids for v in batch):
+                        break
+            except Exception as e:
+                print(f"[ERROR] Failed to fetch uploads for {up_name}: {e}", file=sys.stderr)
+                failed_count += 1
+                continue
+
+            if not uploads:
+                # 投稿列表接口对这类账号不该返回空；空结果说明看门实际失效，必须让 workflow 变红
+                print(f"[ERROR] Uploads list for {up_name} returned 0 videos; watch is ineffective.", file=sys.stderr)
+                failed_count += 1
+                continue
+
+            print(f"  [INFO] Fetched {len(uploads)} upload(s) for {up_name}.")
+            for v in uploads:
+                v["mid"] = mid
+                bvid = v.get("bvid")
+                if not bvid or bvid in tracked_bvids:
+                    continue
+                print(f"  + [NEW] Found unrecorded video: {v.get('title')} ({bvid})")
+                title, body = build_issue_content(
+                    video=v,
+                    up_name=up_name,
+                    category=category,
+                )
+                success = create_github_issue(
+                    repo=args.repo,
+                    title=title,
+                    body=body,
+                    labels=["upstream-watch", "bilibili"],
+                    token=token,
+                    dry_run=args.dry_run,
+                )
+                if success:
+                    tracked_bvids.add(bvid)
+                    new_video_count += 1
+                else:
+                    failed_count += 1
+            continue
+
         try:
             seasons = client.get_seasons_list(mid)
         except Exception as e:

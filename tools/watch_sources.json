@@ -8,6 +8,25 @@
       "description": "主板BIOS与UEFI选项全科普合集（旧版与重制版）",
       "watch_all_seasons": false,
       "season_ids": [8897657, 8222417]
+    },
+    {
+      "mid": 13879658,
+      "name": "费利克斯X",
+      "target_category": "系统调优与安全",
+      "enabled": true,
+      "description": "Windows 游戏性能与延迟调机（电源计划/大小核调度/计时器/网络/反作弊对抗），无合集，按投稿时间跟踪",
+      "watch_mode": "uploads",
+      "baseline_bvids": [
+        "BV1kqbr6FEfc", "BV1Kwo6BYEnV", "BV17DcBzdE8F", "BV1K4FNzgENj",
+        "BV1ffkLBjEy6", "BV1oSifBSEUK", "BV1Qw2ABrE4Q", "BV117xDzPEyu",
+        "BV1dhHkzmE31", "BV1MdhQzREqh", "BV1jkYazSEPY", "BV1GZb3z5EfZ",
+        "BV1wwt8zrEyD", "BV12Rt7z2E7f", "BV19WKtzwEA3", "BV16fJtzLEzB",
+        "BV1tWLwzzEKF", "BV1ddXHYbExR", "BV1FuRVY2EL2", "BV1NP9RYMEid",
+        "BV1QwATeiE38", "BV1HkFHe9EfJ", "BV1RSfRYPEj9", "BV1W26iYUEUr",
+        "BV1vDkMYFEQU", "BV1oPzgYtEME", "BV1XbUHYVEbj", "BV12qmwYGEED",
+        "BV1zt2PYPEaX", "BV1oEsqeQE9z", "BV1CFbAerETr", "BV1v44Je3Ert",
+        "BV14CpPezEPM", "BV156nReoEf6", "BV1KiH5ewEjU"
+      ]
     }
   ]
 }
