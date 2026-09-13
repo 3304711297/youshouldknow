@@ -100,8 +100,61 @@ class BilibiliClient:
         ).hexdigest()
         return urllib.parse.urlencode(sorted(signed.items()))
 
+    def search_user_videos(self, mid: int, keyword: str, pages: int = 3) -> List[Dict[str, Any]]:
+        """经搜索接口获取 UP 主最新投稿（零签名、风控宽松）。
+
+        为什么不用 space/wbi/arc/search：
+          该接口需要 wbi 签名，且对数据中心 IP（GitHub Actions 的 Azure 段）命中
+          code=-352「风控校验失败」——社区共识是这类风控解不掉，只能换出口 IP（见
+          bilibili-api-python 文档「可使用代理，绕过 b 站风控策略」）。
+        搜索接口无需签名，实测在 arc/search 被 -352 拦住时仍稳定返回 code 0。
+
+        代价：搜索按页返回，每页 20 条且结果里含其他 UP 主，按 mid 过滤后
+        **只覆盖最新若干条**。对每 6 小时轮询、命中已知 BVID 即停的看门场景足够。
+        """
+        found: Dict[str, Dict[str, Any]] = {}
+        for page in range(1, pages + 1):
+            params = {
+                "search_type": "video",
+                "keyword": keyword,
+                "order": "pubdate",
+                "page": page,
+            }
+            url = "https://api.bilibili.com/x/web-interface/search/type?" + urllib.parse.urlencode(params)
+            headers = dict(self.headers)
+            headers["Referer"] = "https://search.bilibili.com/"
+            raw = self._open_text(url, headers)
+            if not raw.lstrip().startswith("{"):
+                raise RuntimeError("搜索接口返回非 JSON（疑似风控）")
+            data = json.loads(raw)
+            if data.get("code") != 0:
+                raise RuntimeError(
+                    f"Failed to search videos: code={data.get('code')}, msg={data.get('message')}"
+                )
+            results = (data.get("data") or {}).get("result") or []
+            mine = [v for v in results if v.get("mid") == mid]
+            for v in mine:
+                bvid = v.get("bvid")
+                if not bvid or bvid in found:
+                    continue
+                # 搜索结果标题带 <em class="keyword"> 高亮标签，且时长字段是 "mm:ss" 字符串
+                v = dict(v)
+                v["title"] = re.sub(r"</?em[^>]*>", "", str(v.get("title", "")))
+                v["duration"] = _parse_search_duration(v.get("duration"))
+                v["pubdate"] = v.get("pubdate") or v.get("senddate") or 0
+                found[bvid] = v
+            if not results or page >= int((data.get("data") or {}).get("numPages") or 0):
+                break
+            time.sleep(self.RETRY_BACKOFF_SECONDS / 4)
+        return list(found.values())
+
     def get_user_videos(self, mid: int, page: int = 1, page_size: int = 50) -> List[Dict[str, Any]]:
-        """获取 UP 主投稿列表（无合集账号也适用；该接口需要 wbi 签名）"""
+        """获取 UP 主投稿列表（覆盖全部历史，但需要 wbi 签名）。
+
+        ⚠️ 备用路径：该接口对数据中心 IP 稳定返回 code=-352 风控校验失败
+        （GitHub Actions runner 属 Azure 段，必然命中），仅在配置了出口代理时可用。
+        常规看门请用 search_user_videos。
+        """
         params = {
             "mid": mid,
             "ps": page_size,
@@ -156,6 +209,24 @@ class BilibiliClient:
             raise RuntimeError(
                 f"Failed to fetch season {season_id} archives: code={data.get('code')}, msg={data.get('message')}"
             )
+
+
+def _parse_search_duration(value: Any) -> int:
+    """把搜索接口的 "mm:ss" / "hh:mm:ss" 时长转成秒；已是数字则原样返回"""
+    if isinstance(value, (int, float)):
+        return int(value)
+    if not isinstance(value, str) or not value.strip():
+        return 0
+    parts = value.strip().split(":")
+    try:
+        numbers = [int(p) for p in parts]
+    except ValueError:
+        return 0
+    if len(numbers) == 2:
+        return numbers[0] * 60 + numbers[1]
+    if len(numbers) == 3:
+        return numbers[0] * 3600 + numbers[1] * 60 + numbers[2]
+    return 0
 
 
 def extract_bvids_from_text(text: str, bvids_set: Set[str]) -> None:
@@ -403,28 +474,21 @@ def main() -> int:
 
         # 投稿列表模式：适用于没有合集的账号（合集接口对这类账号返回空列表）
         if watch_mode == "uploads":
-            # 逐页拉取（新→旧），遇到已跟踪的 BVID 即停，避免账号视频超过一页时漏检
-            uploads = []
+            keyword = ch.get("search_keyword") or up_name
             try:
-                for page in range(1, 4):
-                    batch = client.get_user_videos(mid=mid, page=page, page_size=50)
-                    if not batch:
-                        break
-                    uploads.extend(batch)
-                    if any(v.get("bvid") in tracked_bvids for v in batch):
-                        break
+                uploads = client.search_user_videos(mid=mid, keyword=keyword, pages=3)
             except Exception as e:
                 print(f"[ERROR] Failed to fetch uploads for {up_name}: {e}", file=sys.stderr)
                 failed_count += 1
                 continue
 
             if not uploads:
-                # 投稿列表接口对这类账号不该返回空；空结果说明看门实际失效，必须让 workflow 变红
-                print(f"[ERROR] Uploads list for {up_name} returned 0 videos; watch is ineffective.", file=sys.stderr)
+                # 按 mid 过滤后不该一条都没有；空结果说明看门实际失效，必须让 workflow 变红
+                print(f"[ERROR] Search returned 0 videos for {up_name}; watch is ineffective.", file=sys.stderr)
                 failed_count += 1
                 continue
 
-            print(f"  [INFO] Fetched {len(uploads)} upload(s) for {up_name}.")
+            print(f"  [INFO] Fetched {len(uploads)} upload(s) for {up_name} via search API (keyword={keyword!r}, fetcher=search).")
             for v in uploads:
                 v["mid"] = mid
                 bvid = v.get("bvid")

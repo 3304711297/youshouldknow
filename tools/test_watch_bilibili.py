@@ -13,6 +13,7 @@ from unittest.mock import MagicMock, patch
 from tools.watch_bilibili import (
     BilibiliClient,
     _WBI_MIXIN_KEY_ENC_TAB,
+    _parse_search_duration,
     build_issue_content,
     collect_documented_bvids,
     create_github_issue,
@@ -211,6 +212,48 @@ class TestWatchBilibili(unittest.TestCase):
         videos = client.get_user_videos(13879658)
         self.assertEqual([v["bvid"] for v in videos], ["BV1bbbbbbbbb"])
         self.assertEqual(mock_urlopen.call_count, 3)  # 1 次 nav + 失败 1 次 + 重试成功 1 次
+
+    def test_parse_search_duration(self):
+        """搜索接口的时长是 "mm:ss" / "hh:mm:ss" 字符串，需转秒"""
+        self.assertEqual(_parse_search_duration("15:22"), 922)
+        self.assertEqual(_parse_search_duration("01:01:05"), 3665)
+        self.assertEqual(_parse_search_duration(240), 240)
+        self.assertEqual(_parse_search_duration(""), 0)
+        self.assertEqual(_parse_search_duration("abc"), 0)
+
+    @patch("tools.watch_bilibili.time.sleep", lambda *_: None)
+    @patch("tools.watch_bilibili.urllib.request.urlopen")
+    def test_search_user_videos_filters_by_mid(self, mock_urlopen):
+        """搜索接口混着其他 UP 主的结果：必须按 mid 过滤、去高亮标签、转时长"""
+
+        def make_resp(payload):
+            resp = MagicMock()
+            resp.read.return_value = payload
+            resp.__enter__.return_value = resp
+            return resp
+
+        payload = json.dumps({
+            "code": 0,
+            "data": {
+                "numPages": 1,
+                "result": [
+                    {"bvid": "BV1mine000001", "mid": 13879658,
+                     "title": '费利克斯X <em class="keyword">电源计划</em> 教程',
+                     "duration": "15:22", "pubdate": 1788000000, "author": "费利克斯X"},
+                    {"bvid": "BV1other00001", "mid": 99999999,
+                     "title": "别人的视频", "duration": "04:00", "pubdate": 1788000001},
+                ],
+            },
+        }).encode("utf-8")
+        mock_urlopen.return_value = make_resp(payload)
+
+        client = BilibiliClient()
+        videos = client.search_user_videos(mid=13879658, keyword="费利克斯X")
+        self.assertEqual(len(videos), 1)
+        self.assertEqual(videos[0]["bvid"], "BV1mine000001")
+        self.assertNotIn("<em", videos[0]["title"])
+        self.assertIn("电源计划", videos[0]["title"])
+        self.assertEqual(videos[0]["duration"], 922)
 
     def test_build_issue_content_uploads_mode(self):
         """无合集账号：正文应标注来源为投稿列表，而不是空白合集行"""
