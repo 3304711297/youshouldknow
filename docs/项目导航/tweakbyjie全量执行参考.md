@@ -153,6 +153,13 @@ tweak_module: []
 - **验证**：重启后用 `msinfo32` 等人工检查；有临时 BCD 清理。
 - **恢复**：无 EFI 变量原始快照或精确恢复；清理子项只能删除临时引导项，EFI 状态重新启用需系统安全设置手工处理。详见 BOOT-005。
 
+### SECURITY-004 易受攻击驱动黑名单
+
+- **入口**：主菜单 `1` → 子项 `5`，内层 `1` 查看当前值 / 内层 `2` 关闭 / 内层 `3` 按快照恢复。
+- **对象**：`HKLM\SYSTEM\CurrentControlSet\Control\CI\Config\VulnerableDriverBlocklistEnable` 写为 `0`（关闭内核级易受攻击驱动拦截，BYOVD 攻击面扩大）。源码 `Modules/Registry.ps1`（子项 5）+ `Modules/Backup.DriverBlocklist.ps1`。
+- **验证**：写入后用 `Verify-RegDword` 回读；HVCI 开启时该值不解除强制黑名单，需重启后以 `msinfo32` / 安全中心复核实际状态。
+- **恢复**：`driver-blocklist-backup.json` 记录存在性与原值（机器绑定，备份失败阻止修改），内层 `3` 按快照恢复；原值原本不存在时删除新增值。属可逆的安全弱化项，与 CPU 安全缓解子项同一门禁级别（无 `I-UNDERSTAND-RISK` 短语）。
+
 ## 五、MEMORY/STORAGE
 
 ### MEMORY-001 / MEMORY-002

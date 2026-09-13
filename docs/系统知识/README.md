@@ -22,6 +22,7 @@ Windows 系统机制、电源管理、排障工具与常用命令的知识分类
 
 ### 电源与睡眠管理
 - [电源计划创建与优化指南](./电源计划创建与优化指南.md) — `powercfg`、Power Settings Explorer 与组策略锁定（主文）
+- [游戏篡改电源计划的检测与恢复](./游戏篡改电源计划的检测与恢复.md) — 游戏改动电源计划的现象核实、恢复流程与不推荐做法
 - [Windows 睡眠、休眠与混合睡眠详解](./Windows-睡眠-休眠与混合睡眠详解.md) — 睡眠/休眠/混合睡眠原理与唤醒排障
 - [Windows 虚拟内存设置指南](./Windows虚拟内存设置指南.md) — 页面文件、提交容量与崩溃转储
 - [Windows 内存压缩功能与 MMAgent 设置](./Windows内存压缩功能与MMAgent设置.md) — Memory Compression / MMAgent / Prefetch 机制

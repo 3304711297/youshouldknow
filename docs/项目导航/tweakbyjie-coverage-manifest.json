@@ -179,6 +179,11 @@
       "name": "Device Guard EFI lock cleanup"
     },
     {
+      "id": "SECURITY-004",
+      "category": "Security",
+      "name": "Vulnerable driver blocklist"
+    },
+    {
       "id": "SERVICE-001",
       "category": "Service",
       "name": "Part 6 service startup groups"

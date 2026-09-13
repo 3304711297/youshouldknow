@@ -58,6 +58,80 @@ tweak_module: []
 
 不要把某篇教程的“固定值”当作所有机器的通用答案；改前记录原值，改后做前后对照。
 
+### 4.1 `netsh int tcp` 常用开关的官方语义与风险
+
+社区"网络优化第一期"类教程常见两条命令：`autotuninglevel=experimental` 与 `timestamps=enabled`。二者都是**合法参数**，但语义常被夸大：
+
+| 命令 | 官方语义 | 实际影响与风险 |
+| --- | --- | --- |
+| `netsh int tcp set global autotuninglevel=experimental` | 接收窗口自动调优的**最高档**，"允许接收窗口增长以适应极端场景" | 官方文档把 `normal` 描述为"适应几乎所有场景"，`experimental` 是为**极端场景**准备的非默认档位。它不叫"最大化吞吐"，把窗口放到极端会放大排队延迟；在普通游戏/浏览场景下与 `normal` 的差异往往测不出来，却更容易在拥塞或对端窗口受限时出现抖动 |
+| `netsh int tcp set global timestamps=enabled` | 在**出站**协商时间戳、在对端协商后**入站**启用 | 与 `allowed`（默认，仅在对端协商时入站启用）的差别在出站协商。它测量 RTT 更精确，代价是每个报文多若干字节头部开销，且在异常对端上可能引入兼容性问题 |
+| `netsh int tcp set global rss=enabled` | 接收端缩放，把收包处理分散到多核 | 现代网卡与系统默认多已启用；单核尖峰问题优先查 RSS/VMQ 配置而非盲目重设 |
+| `netsh int tcp set global rsc=disabled` | 关闭接收段合并 | 关闭后 CPU 每包处理开销上升，通常只在特定抓包/虚拟化场景需要 |
+
+查看当前值：`netsh int tcp show global`；恢复默认：把参数设回 `default`（如 `netsh int tcp set global autotuninglevel=default`）或重启网络适配器。
+
+> 判断原则：这类全局参数影响**所有** TCP 连接。若目标是游戏的低延迟，先确认游戏的网络层用的是 UDP 还是 TCP、瓶颈在 RTT 还是丢包——改全局参数通常不是最直接的杠杆。
+
+### 4.2 更换 DNS 的取舍与正确测量方式
+
+"精准选择地区 DNS"是社区常用手法，做法本身合理，但**推荐值要按自己的链路实测**，不能照抄：
+
+```powershell
+# 正确的测量方式：直接测解析耗时（每个服务器多测几次取平均/最小值）
+1..5 | ForEach-Object {
+  foreach ($s in '223.5.5.5','119.29.29.29','180.76.76.76','114.114.114.114') {
+    $m = Measure-Command {
+      Resolve-DnsName -Name 'www.example.com' -Server $s -Type A -DnsOnly -QuickTimeout -ErrorAction SilentlyContinue
+    }
+    "{0,-18} {1,7:N1} ms" -f $s, $m.TotalMilliseconds
+  }
+}
+```
+
+要点：
+
+- **不要用 `ping` 代替 DNS 测试**。ICMP 常被运营商或目标网络限速/丢弃，本机实测中多个国内公共 DNS 的 `Test-Connection` 全部返回 0 ms（被拦或未计），而 `Resolve-DnsName` 给出的解析耗时差异明显（实测 `223.5.5.5` 平均约 27 ms，`114.114.114.114` 平均约 61 ms）——**ping 延迟低 ≠ 解析快**，二者是不同链路。
+- 社区教程常推荐的 `114.114.114.114` 并非通用最优解，需按自己的运营商与地区实测。
+- 加密 DNS（DoH/DoT）与 Fake-IP 分流的取舍见本文第九节。
+
+### 4.3 网卡协议绑定的精简
+
+在"网络连接 → 网卡属性"里取消勾选不用的协议/服务（如部分虚拟化协议、旧版隧道组件）可减少协议栈处理路径，属于**可逆、低风险**的操作：改前截图记录勾选状态，出问题勾回来即可。
+
+但要注意：取消勾选必须逐个确认用途，尤其 `Internet 协议版本 4 (TCP/IPv4)` 是必需项；`客户端 Microsoft 网络`/`文件和打印机共享` 视是否使用局域网共享决定。IPv6 相关组件在下文另有说明，不建议整块关闭。
+
+### 4.4 IPv6 隧道组件（Teredo / 6to4 / ISATAP）
+
+Teredo、6to4、ISATAP 是 IPv6 过渡期的隧道技术，用于在纯 IPv4 网络上打通 IPv6。它们与"主 IPv6 协议栈"不是一回事：
+
+| 组件 | 作用 | 常见默认状态（本机实测，Windows 11 26200） |
+| --- | --- | --- |
+| Teredo | 通过 NAT 穿透建立 IPv6 隧道 | `Type: disabled`、`State: offline` |
+| 6to4 | 通过 IPv4 中继提供 IPv6 | `Service State: default` |
+| ISATAP | 企业网内 ISATAP 路由隧道 | `State: default` |
+
+社区网络优化常把三者的 `disabled` 命令当作"降低延迟"手段。机制上它们**只在特定过渡场景生效**，在现代网络环境下多数用户本就不走这些路径，关闭它们的收益通常是"减少极少数场景下的额外路径"，而非普遍降延迟；若所在网络确实依赖 IPv6（如教育网、部分运营商 IPv6 优先场景），错误处理可能让 IPv6 能力丢失。
+
+```bat
+:: 状态查询（只读）
+netsh interface teredo show state
+netsh interface 6to4 show state
+netsh interface isatap show state
+
+:: 若确需关闭（本机实测当前 Teredo 已为 disabled/offline）
+netsh interface teredo set state disabled
+netsh interface 6to4 set state disabled
+netsh interface isatap set state disabled
+
+:: 恢复
+netsh interface teredo set state default
+netsh interface 6to4 set state default
+netsh interface isatap set state default
+```
+
+> ⚠️ 不要与"关闭 IPv6 协议本身"混为一谈。关闭 IPv6 栈会影响依赖它的功能（部分游戏 P2P、Xbox 网络、Windows 更新分发），属于另一类取舍，不在本文推荐范围。
+
 ## 五、网卡驱动侧的检查
 
 1. 驱动版本与来源（OEM/芯片厂商/Windows Update 的差异）；
@@ -143,4 +217,10 @@ Windows 系统的网络位置感知服务（`NlaSvc`）内置了 **NCSI（Networ
 | Nagle/Delayed ACK/ECN/RWIN/拥塞控制的机制描述 | ✅ 属实（通读确认与 TCP/IP 通行技术资料一致，机制类内容无时效变化，正文已声明阈值需实测） |
 | 低延迟与高吞吐的取舍关系 | ✅ 属实（通读确认，缓冲/窗口参数的两难为通行结论） |
 | Windows NCSI EnableActiveProbing 与 Captive Portal 弹窗触发机制 | ✅ 属实（经微软官方文档及 2026-07-21 运营商 DNS 劫持事件交叉验证，NCSI 收到重定向后拉起系统浏览器的逻辑确为系统原生设计） |
+| `autotuninglevel=experimental` 的官方定义为"允许接收窗口增长以适应极端场景"，非"最大化性能" | ✅ 属实：微软 netsh interface 官方文档参数表原文列举五档并给出各自定义，`normal` 为"适应几乎所有场景" |
+| `timestamps=enabled` 使出站也协商时间戳，默认值为 `allowed`（仅入站按对端协商启用） | ✅ 属实：微软官方文档对 `timestamps` 三档（disabled/enabled/allowed）的说明 |
+| `netsh int tcp set global` 支持以 `default` 恢复各项默认值 | ✅ 属实：官方参数表每项均含 `default` 选项 |
+| DNS 延迟应直接测解析耗时而非用 ping 判断 | ✅ 属实（2026-09-13 本机实测）：`Resolve-DnsName` 五轮均值 `223.5.5.5`≈26.6 ms、`180.76.76.76`≈35.8 ms、`114.114.114.114`≈61.0 ms；同一批地址 `Test-Connection` 全部返回 0 ms（ICMP 被拦或未计入），证明两类测量不可互替 |
+| Teredo/6to4/ISATAP 为 IPv6 过渡隧道组件，与主 IPv6 协议栈不同；本机 Teredo 已为 disabled/offline | ✅ 属实（2026-09-13 本机实测）：`netsh interface teredo show state` 输出 `Type: disabled`、`State: offline`；6to4/ISATAP 均为 `default` |
+| 关闭 IPv6 隧道组件与关闭 IPv6 协议栈是两件事，后者会影响依赖 IPv6 的功能 | ✅ 属实：三者仅为过渡隧道技术，主协议栈独立配置 |
 

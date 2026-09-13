@@ -110,6 +110,7 @@ nav:
   - 系统知识:
     - 系统知识/README.md
     - 电源计划创建与优化指南: 系统知识/电源计划创建与优化指南.md
+    - 游戏篡改电源计划的检测与恢复: 系统知识/游戏篡改电源计划的检测与恢复.md
     - Windows 睡眠、休眠与混合睡眠详解: 系统知识/Windows-睡眠-休眠与混合睡眠详解.md
     - Windows 启动配置与 tweakbyjie 对应说明: 系统知识/Windows启动配置与tweakbyjie对应说明.md
     - UEFI WPBT 固件自动注入与 Windows 防御: 系统知识/UEFI-WPBT固件自动注入与Windows防御.md
@@ -132,6 +133,8 @@ nav:
     - CPU 调度与游戏线程: CPU与延迟/CPU调度与游戏线程.md
     - Intel 12 代移动标压 (HX) 降压黑屏排障与 Core/Cache 单轨联动机制实测: CPU与延迟/Intel-12代移动标压HX降压黑屏排障与单轨联动机制实测.md
     - Windows 键鼠与 TCP 低延迟可选实验设置: CPU与延迟/Windows键鼠与TCP低延迟可选实验设置.md
+    - 异类线程调度策略与大小核调度: CPU与延迟/异类线程调度策略与大小核调度.md
+    - HPET、平台时钟与中断亲和性辨析: CPU与延迟/HPET与中断亲和性辨析.md
   - GPU与显示:
     - GPU与显示/README.md
     - Windows 图形管线、驱动与帧时间: GPU与显示/Windows图形管线与帧时间.md
@@ -166,6 +169,9 @@ nav:
     - WPBT 固件注入机制与禁用: 系统调优与安全/WPBT固件注入机制与禁用.md
     - 本地回环服务的暴露面与防护: 系统调优与安全/本地回环服务的暴露面与防护.md
     - 设备管理器禁用类优化辨析: 系统调优与安全/设备管理器禁用类优化辨析.md
+    - Windows 进程优先级持久化（IFEO PerfOptions）: 系统调优与安全/Windows进程优先级持久化IFEO-PerfOptions.md
+    - 易受攻击驱动黑名单机制与关闭代价: 系统调优与安全/易受攻击驱动黑名单机制与关闭代价.md
+    - 社区降延迟调机清单辨析: 系统调优与安全/社区降延迟调机清单辨析.md
     - 公开 Agent 记忆库的安全治理与防泄露自动化门禁: 系统调优与安全/公开Agent记忆库的安全治理与防泄露自动化门禁.md
   - 网络通信:
       - 网络通信/README.md

@@ -103,6 +103,42 @@ VBS 是否影响性能取决于：
 - [GRC InSpectre 官方页面](https://www.grc.com/inspectre.htm)
 - Microsoft 官方 Spectre/Meltdown FAQ（support.microsoft.com 35f20c88）已被微软下架，可经 Internet Archive 检索原文；缓解状态查询以 `Get-SpeculationControlSettings` 为准。
 
+## 用注册表在两个模式间切换（社区做法与边界）
+
+除脚本入口外，社区流行一种"手搓一键开关"的做法：把 `DeviceGuard` 相关键值导出成 `.reg`，需要时双击导入切换状态。做法本身可行，但有两个必须澄清的边界。
+
+### 涉及的键值
+
+```text
+HKLM\SYSTEM\CurrentControlSet\Control\DeviceGuard
+├─ EnableVirtualizationBasedSecurity   (REG_DWORD)  1 = 启用 VBS，0 = 关闭
+└─ Scenarios\HypervisorEnforcedCodeIntegrity
+   └─ Enabled                          (REG_DWORD)  1 = 启用 HVCI，0 = 关闭
+```
+
+操作方式：右键 `DeviceGuard` 项 → 导出为 `xxx.reg`；用记事本把两处 `dword:00000001` 改成 `dword:00000000` 另存为另一个文件，即得到一对"开/关"脚本。系统被精简、缺少上述子项时，需按 `DeviceGuard` → `Scenarios` → `HypervisorEnforcedCodeIntegrity` 的层级手工新建。
+
+### 边界一：改完必须重启，不能"双击即生效"
+
+`.reg` 导入只是写了注册表值。VBS 与 HVCI 运行在 **VTL1（虚拟信任级别 1）**，其加载与卸载发生在系统引导阶段，由 hypervisor 建立隔离环境时完成。**运行中的系统无法通过写注册表即时改变已加载的 VTL1 环境**：
+
+- 从关到开：需重启，下次引导时才建立 VBS/HVCI 环境；
+- 从开到关：同样需重启，否则 hypervisor 与 HVCI 仍在运行。
+
+声称"双击 .reg 后不用重启就已切换"的说法与机制不符。判断实际状态应看重启后的 `msinfo32`（"基于虚拟化的安全性"一行）或安全中心的"内核隔离"页，而不是注册表数值。脚本的正规做法是本库 VBS 专题给出的路径：写值 + BCD + 重启后回读验证。
+
+### 边界二：HVCI 开启对驱动签名有硬性要求
+
+开启 HVCI 会强制所有内核驱动满足兼容性与签名要求。若系统里有老旧或不兼容的驱动（部分外设驱动、超频/降压工具驱动、老显卡驱动），开启后**可能直接无法引导或反复蓝屏**。开启前应确认驱动来源，并准备系统还原点。此外 VBS/HVCI 依赖 CPU 硬件虚拟化（Intel VT-x / AMD-V）与 UEFI 安全启动，BIOS 未开启虚拟化时仅改注册表不会生效。
+
+### 与反作弊的关系
+
+部分竞技游戏的反作弊对 VBS/HVCI 状态有明确要求（例如 Riot Vanguard 在 Windows 11 上的要求与部分国服游戏的要求方向相反），跨服游玩时可能需要切换状态。若按上面的方式在两套状态间反复导入 `.reg`：
+
+- **必须重启后才真正切换**，因此"同一台机器上两个服来回切"实际是"每次都要重启"；
+- 不要在游戏运行期间导入 `.reg` 期望即时改变环境——那既不会生效，也不会被反作弊识别为"已切换"，只会在下次重启后突然改变环境；
+- 任何绕过或伪造安全环境状态的操作都有账号封禁风险，本库不提供此类指引。
+
 ## 与 tweakbyjie 的关系
 
 `tweakbyjie` 中涉及 VBS、Hyper-V、Device Guard 的功能属于高级配置，应独立测试。这类修改影响系统安全模型，不应与普通游戏优化混合执行。项目编号、源码行号、验证和恢复状态见 `youshouldknow/项目导航/tweakbyjie-optimization-mapping.md`。
@@ -120,3 +156,7 @@ VBS 是否影响性能取决于：
 | SECURITY-003 先检查 BitLocker 再用 SecConfig.efi + 一次性 BCD 清除 EFI 锁定 | ✅ 属实：Invoke-DeviceGuardModule 含 BitLocker 预检查与拒绝逻辑（2026-08-29 重核） |
 | InSpectre 为 GRC 发布的 Spectre/Meltdown 图形化管理工具 | ✅ 属实：GRC 官方页面存在（该站对 CI 网络有连接重置，浏览器可访问）（2026-08-29 重核：维持原判，属外部事实，未重新在线验证） |
 | 部分杀毒软件将 InSpectre 识别为 PUAT | ⚠️ 依赖社区反馈，未逐一验证杀软厂商官方声明（2026-08-29 重核：维持原判） |
+| VBS/HVCI 的注册表切换路径为 `DeviceGuard\EnableVirtualizationBasedSecurity` 与 `DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity\Enabled` | ✅ 属实：`Modules/Backup.Vbs.ps1` 的 `vbsRegistryValues` 已包含这两个值（另含 LSA 与策略值），与社区 `.reg` 做法的键值一致 |
+| 写注册表后可即时切换 VBS/HVCI，无需重启 | ❌ 错误说法：VBS/HVCI 运行于 VTL1，加载与卸载在系统引导阶段完成；本库要求重启后以 `msinfo32` / 安全中心 / `HypervisorPresent` 复核，而非仅看注册表数值 |
+| 开启 HVCI 可能因不兼容驱动导致无法引导或蓝屏 | ✅ 属实：HVCI 强制内核驱动满足兼容性与签名要求，微软与社区文档均提示需在部署前验证驱动 |
+| 跨服反作弊对 VBS/HVCI 的要求可能方向相反 | ⚠️ 部分核实：Riot Vanguard 在 Windows 11 上要求 VBS/HVCI 为社区广泛记录的现象；具体到"国服要求关闭"仅为视频口述，本库未取得官方公告佐证，正文已按"不提供绕过指引"处理 |
