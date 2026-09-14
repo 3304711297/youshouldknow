@@ -2,7 +2,8 @@
 # 只有真正的成功响应算可达；403/429 不能被静默视为成功。
 # 被明确排除的域名仍需人工复核，不能当作自动检查通过。
 
-max_retries = 2
+max_retries = 3
+retry_wait_time = 2
 timeout = 20
 
 accept = ["200..=299"]
@@ -59,4 +60,7 @@ exclude = [
   'https://linustechtips\.com/',
   # 2026-09-14 起 Newegg 官网对海外 CI runner 请求连接超时/阻断
   'https://www\.newegg\.com/',
+  # 2026-09-14 起 GitHub 前端边缘对 CI runner 并发请求 blob 页面返回 503 限流
+  'https://github\.com/3304711297/tweakbyjie/blob/',
+  'https://github\.com/KaringX/karing-docu/blob/',
 ]

@@ -45,5 +45,6 @@
 | www.nccgroup.com | 2026-09-05 起 Cloudflare/WAF 对 CI runner 与 lychee 返回 403（本地浏览器可达） | 2026-09-05 建档（Ollama CVE 技术通告核查属实） |
 | linustechtips.com | 2026-09-09 起 Cloudflare WAF 对 CI runner 与爬虫返回 403（本地浏览器可达） | 2026-09-09 建档（DDR5 Hynix A-die 调优讨论帖核查属实）；2026-09-09 排除行同 b23.tv/firpe.cn 一并修正双反斜杠笔误 |
 | www.newegg.com | 2026-09-14 起 CI runner (GitHub Actions) 访问连接超时/反爬阻断 | 2026-09-14 建档（电源选型计算文核查属实） |
+| github.com blob 链接 | 2026-09-14 起 GitHub 前端对 CI runner 高并发访问 blob 页面间歇性返回 503 限流 | 2026-09-14 建档（tweakbyjie 与 karing-docu 两处 blob 文档核查属实） |
 
 **2026-08-29 备注**：当日出现跨站点批量封锁潮（tomshardware → techcommunity → asus → digitalfoundry → game-console 依次暴露），均为 403 拦爬虫性质，已按上表逐个建档；如后续 CI 仍零星暴露新域名，继续按本台账机制处理即可。
