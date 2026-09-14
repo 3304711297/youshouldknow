@@ -64,3 +64,11 @@ exclude = [
   'https://github\.com/3304711297/tweakbyjie/blob/',
   'https://github\.com/KaringX/karing-docu/blob/',
 ]
+
+# 按站点限流（放在文件末尾：TOML 表段之后的键会归入该表，故必须在所有顶层键声明之后）。
+# 2026-09-15：community.spiceworks.com 对 CI runner 并发请求返回 429（瞬时限流，
+# 非永久阻断）。lychee 官方建议按站点降并发 + 加请求间隔，而不是排除域名
+# （排除会掩盖将来真正的死链）。见 tools/lychee-excluded-domains.md 的复核原则。
+[hosts."community.spiceworks.com"]
+concurrency = 1
+request_interval = "3s"
