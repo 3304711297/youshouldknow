@@ -68,8 +68,23 @@ def _parse(text: str, source: str = "<unknown>") -> dict | None:
     return None
 
 
+def _body(text: str) -> str:
+    """返回跳过文件开头 YAML front matter 块之后的正文。
+
+    front matter 里允许出现 `# ...` 形式的 YAML 注释（如复核记录），
+    若在整篇文本上取 H1，这些注释行会被误当成标题。
+    """
+    lines = text.splitlines()
+    if not lines or lines[0].strip() != "---":
+        return text
+    for i in range(1, len(lines)):
+        if lines[i].strip() == "---":
+            return "\n".join(lines[i + 1:])
+    return text  # 无闭合分隔符：按无 front matter 处理，交由调用方兜底
+
+
 def _title(path: Path, text: str) -> str:
-    for line in text.splitlines():
+    for line in _body(text).splitlines():
         if line.startswith("# "):
             return line[2:].strip()
     return path.stem
