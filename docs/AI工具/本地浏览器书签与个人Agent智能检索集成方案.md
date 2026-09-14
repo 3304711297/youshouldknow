@@ -68,10 +68,10 @@ verified_on: 2026-09-07
 * **命令范式**：
   ```bash
   # 关键词极速检索
-  python C:/Users/<username>/AppData/Local/hermes/scripts/search_bookmarks.py "耳机校准" -n 5
+  python "%LOCALAPPDATA%\hermes\scripts\search_bookmarks.py" "耳机校准" -n 5
 
   # 限定分类目录过滤
-  python C:/Users/<username>/AppData/Local/hermes/scripts/search_bookmarks.py "代码" -f "编程" -n 10
+  python "%LOCALAPPDATA%\hermes\scripts\search_bookmarks.py" "代码" -f "编程" -n 10
   ```
 
 ### 2. 本地 OpenViking 语义知识库（支持意图召回）

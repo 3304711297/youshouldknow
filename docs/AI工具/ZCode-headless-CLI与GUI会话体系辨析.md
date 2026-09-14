@@ -51,7 +51,7 @@ ZCode 曾在同一台机器上并存两套会话体系：一套是面向自动�
 
 会话隔离只是表象，更隐蔽的是模型配置与额度的双向隔离：
 
-- **CLI 侧**：只认 `C:\Users\<username>\.zcode\cli\config.json`。其中 `providers` 仅 `cpa-gui` 一项，指向本地网关 `http://127.0.0.1:18080`；`model.main` 为 `cpa-gui/gemini-3.8-flash`。
+- **CLI 侧**：只认 `%USERPROFILE%\.zcode\cli\config.json`。其中 `providers` 仅 `cpa-gui` 一项，指向本地网关 `http://127.0.0.1:18080`；`model.main` 为 `cpa-gui/gemini-3.8-flash`。
 - **GUI 侧**：走 `.zcode/v2/setting.json` 与 v2 provider family OAuth 体系，与 CLI 的本地网关配置分属两套。
 
 两边的模型选择与额度池互不相通：CLI 撞 429 / 配额耗尽，不代表 GUI 侧也不可用；反过来，GUI 侧额度充裕也救不了 CLI。排障时必须先分清"哪一侧在报错"。
@@ -90,7 +90,7 @@ ZCode 曾在同一台机器上并存两套会话体系：一套是面向自动�
 - ✅ `zcode --help` 全量参数中无 background / notify / watch / daemon 一类后台常驻参数（对比 Hermes terminal 工具有 background + notify 事件唤醒机制）。
 - ✅ 落点实测（db.sqlite）：headless `--cwd 'D:/ai coding'` → `proj_d-ai-coding`；GUI 主工作区 `D:\ai coding\.zcode\workspace\default` → `proj_d-ai-coding-.zcode-workspace-default`；两个 project_id 并行存在。
 - ✅ GUI 任务列表只显示 GUI 侧 project_id；实测 6 个 headless 会话全部在 GUI 不可见（"隐身"）。
-- ✅ 模型分离：CLI 只认 `C:\Users\<username>\.zcode\cli\config.json`（providers 仅 cpa-gui → `http://127.0.0.1:18080`，`model.main` 为 `cpa-gui/gemini-3.8-flash`）；GUI 走 `.zcode/v2/setting.json` 与 v2 provider family OAuth 体系；两边模型选择与额度池互不相通。
+- ✅ 模型分离：CLI 只认 `%USERPROFILE%\.zcode\cli\config.json`（providers 仅 cpa-gui → `http://127.0.0.1:18080`，`model.main` 为 `cpa-gui/gemini-3.8-flash`）；GUI 走 `.zcode/v2/setting.json` 与 v2 provider family OAuth 体系；两边模型选择与额度池互不相通。
 - ✅ 故障链一：网关未启动 → `AI_APICallError connect ECONNREFUSED 127.0.0.1:18080`（isRetryable）→ 后台重启网关进程后 18080 恢复 LISTENING。
 - ✅ 故障链二：配额触顶 → `RESOURCE_EXHAUSTED 'Resets in 1h47m50s'`，CLI 全挂。
 - ✅ 实践规范三条与适用边界两条均经用户拍板确认。

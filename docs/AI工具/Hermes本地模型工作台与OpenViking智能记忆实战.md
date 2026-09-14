@@ -105,7 +105,7 @@ llama-server.exe -m D:\HermesModels\bge-m3-Q8_0.gguf --embedding --port 18082 --
     "port": 1934
   },
   "storage": {
-    "workspace": "C:/Users/<username>/.openviking/data"
+    "workspace": "%USERPROFILE%/.openviking/data"
   },
   "embedding": {
     "dense": {

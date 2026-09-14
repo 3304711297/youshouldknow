@@ -54,10 +54,11 @@ ZCode 施工 ──写入──▶ SQLite 会话库（session 表）
 
 ### 1. 监听层：只读读取 ZCode 会话库
 
-ZCode 的会话数据（当时）落在本地 SQLite 库 `C:\Users\<username>\.zcode\cli\db\db.sqlite`。Hermes 侧必须以只读模式打开：
+ZCode 的会话数据（当时）落在本地 SQLite 库 `%USERPROFILE%\.zcode\cli\db\db.sqlite`。Hermes 侧必须以只读模式打开：
 
 ```python
-conn = sqlite3.connect(r'file:C:\Users\<username>\.zcode\cli\db\db.sqlite?mode=ro', uri=True)
+db = os.path.expanduser("~") + r"\.zcode\cli\db\db.sqlite"
+conn = sqlite3.connect(f"file:{db}?mode=ro", uri=True)
 ```
 
 **严禁以可写方式打开该库**——ZCode 运行中持有写锁，写入会触发 `database is locked` 死锁。
