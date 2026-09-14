@@ -57,4 +57,6 @@ exclude = [
   'https://firpe\.cn/',
   # 2026-09-09 起 Cloudflare WAF 对 CI runner 与自动化请求返回 403
   'https://linustechtips\.com/',
+  # 2026-09-14 起 Newegg 官网对海外 CI runner 请求连接超时/阻断
+  'https://www\.newegg\.com/',
 ]

@@ -44,5 +44,6 @@
 | www.bleepingcomputer.com | 2026-09-04 起 Cloudflare 防护对 CI runner 返回 503 与 1h 速率惩罚（本地浏览器可达） | 2026-09-04 建档（Windows 11 绕过 MSA 报道核查属实）；**2026-09-09 发现 lychee.toml 排除行误写双反斜杠致正则永不匹配、排除断链**（本次 CI failure 34326142701 即此因），已修正并验证模式可匹配目标 URL |
 | www.nccgroup.com | 2026-09-05 起 Cloudflare/WAF 对 CI runner 与 lychee 返回 403（本地浏览器可达） | 2026-09-05 建档（Ollama CVE 技术通告核查属实） |
 | linustechtips.com | 2026-09-09 起 Cloudflare WAF 对 CI runner 与爬虫返回 403（本地浏览器可达） | 2026-09-09 建档（DDR5 Hynix A-die 调优讨论帖核查属实）；2026-09-09 排除行同 b23.tv/firpe.cn 一并修正双反斜杠笔误 |
+| www.newegg.com | 2026-09-14 起 CI runner (GitHub Actions) 访问连接超时/反爬阻断 | 2026-09-14 建档（电源选型计算文核查属实） |
 
 **2026-08-29 备注**：当日出现跨站点批量封锁潮（tomshardware → techcommunity → asus → digitalfoundry → game-console 依次暴露），均为 403 拦爬虫性质，已按上表逐个建档；如后续 CI 仍零星暴露新域名，继续按本台账机制处理即可。

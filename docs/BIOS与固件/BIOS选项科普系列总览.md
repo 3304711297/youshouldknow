@@ -10,23 +10,23 @@ tweak_module: []
 
 > **分类**：BIOS 与固件 · 系列导航
 >
-> **来源说明**：本系列文章整理自 B 站 UP 主 [所盼皆欣然](https://space.bilibili.com/589200735) 的两个视频合集——旧版《[主板 BIOS 选项科普](https://space.bilibili.com/589200735/channel/collectiondetail?sid=8222417)》（27 集）与重制版《[电脑 BIOS/UEFI 选项内容全科普](https://space.bilibili.com/589200735/channel/collectiondetail?sid=8897657)》（16 集），全部经本地语音转录后按硬件领域知识校对术语整理而成。每篇文章底部均附对应视频出处链接。
+> **来源说明**：本系列文章整理自 B 站 UP 主 [所盼皆欣然](https://space.bilibili.com/589200735) 的两个视频合集——旧版《[主板 BIOS 选项科普](https://space.bilibili.com/589200735/channel/collectiondetail?sid=8222417)》（27 集）与重制版《[电脑 BIOS/UEFI 选项内容全科普](https://space.bilibili.com/589200735/channel/collectiondetail?sid=8897657)》（20 集），全部经本地语音转录后按硬件领域知识校对术语整理而成。每篇文章底部均附对应视频出处链接。
 
 ## 系列覆盖的两个合集
 
 | 合集 | 集数 | 特点 |
 |---|---|---|
 | [主板 BIOS 选项科普（旧版）](https://space.bilibili.com/589200735/channel/collectiondetail?sid=8222417) | 27 集 | 覆盖面最全：从 BIOS 入门一路讲到 CPU 倍频、外频、核心电压与防掉压 |
-| [电脑 BIOS/UEFI 选项内容全科普（重制版）](https://space.bilibili.com/589200735/channel/collectiondetail?sid=8897657) | 16 集 | 对旧版部分主题重制更新：补充 UEFI 时代细节（Boot Override、Secure Boot 密钥管理、VMD、NVMe 识别全链路、Above 4G Decoding 等） |
+| [电脑 BIOS/UEFI 选项内容全科普（重制版）](https://space.bilibili.com/589200735/channel/collectiondetail?sid=8897657) | 20 集 | 对旧版部分主题重制更新：补充 UEFI 时代细节（Boot Override、Secure Boot 密钥管理、VMD、NVMe 识别全链路、Above 4G、ReBAR、配置迁移、Flashback 救砖、前面板音频等） |
 
-两个合集主题有重叠，本文整理时**以重制版为主线、旧版补全重制版未覆盖的主题**（如快速启动、ReBAR、PBO、电压与防掉压等；Above 4G 已随重制版 EP16 更新），出处均逐篇标注。
+两个合集主题有重叠，本文整理时**以重制版为主线、旧版补全重制版未覆盖的主题**（如快速启动、PBO、电压与防掉压等；Above 4G/ReBAR/配置迁移/救砖已随重制版 EP16~EP20 对齐更新），出处均逐篇标注。
 
 ## 阅读地图
 
 ### 第一步：入门三篇（装机必看）
 
 1. [BIOS 入门：进入、退出与模式切换](./BIOS入门进入退出与模式切换.md)——进 BIOS、EZ/高级模式、保存与放弃更改；
-2. [BIOS 恢复默认设置的三种方法](./BIOS恢复默认设置的三种方法.md)——Load Optimized / Load Setup Defaults / Clear CMOS 的层级与坑；
+2. [BIOS 恢复默认设置的三种方法](./BIOS恢复默认设置的三种方法.md)——Load Optimized / Load Setup Defaults / Clear CMOS 的层级与坑（含 EP18 Profile 配置文件迁移陷阱）；
 3. [启动顺序与 Boot Override](./启动顺序与BootOverride.md)——装系统 U 盘启动的正确姿势。
 
 ### 第二步：装系统前后必改项
@@ -40,7 +40,7 @@ tweak_module: []
 
 8. [XMP/EXPO 内存认证档科普](../内存超频/XMP-EXPO内存认证档科普.md)（内存超频分类）；
 9. [DDR5 内存训练与 MCR/PD](./DDR5内存训练与MCR-PD.md)；
-10. [Above 4G 解码与 Resizable BAR](./Above4G解码与ResizableBAR.md)；
+10. [Above 4G 解码与 Resizable BAR](./Above4G解码与ResizableBAR.md)（已对齐重制版 EP16/EP17）；
 11. [风扇调速 PWM/DC 与风扇曲线](./风扇调速PWM-DC与风扇曲线.md)；
 12. [显示输出优先级与核显调用](./显示输出优先级与核显调用.md)；
 13. [SATA 模式与 Intel VMD](./SATA模式与Intel-VMD.md)；
