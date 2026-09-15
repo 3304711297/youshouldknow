@@ -48,3 +48,24 @@
 | github.com blob 链接 | 2026-09-14 起 GitHub 前端对 CI runner 高并发访问 blob 页面间歇性返回 503 限流 | 2026-09-14 建档（tweakbyjie 与 karing-docu 两处 blob 文档核查属实） |
 
 **2026-08-29 备注**：当日出现跨站点批量封锁潮（tomshardware → techcommunity → asus → digitalfoundry → game-console 依次暴露），均为 403 拦爬虫性质，已按上表逐个建档；如后续 CI 仍零星暴露新域名，继续按本台账机制处理即可。
+
+---
+
+## 本地误报（CI 可达，**禁止**加排除）
+
+以下域名在**本地**（中国大陆出口）被 WAF 拒绝，但 GitHub Actions runner 可正常访问，CI 检查为绿。**不要把它们加进 `lychee.toml` 的 `exclude`**——加了会让 CI 失去对这几条链接的监控，反而掩盖将来真正的死链。
+
+| 域名 | 本地现象 | 认定为本地误报的依据 | 建档 |
+| --- | --- | --- | --- |
+| www.corsair.com | 3 条链接（`docs/验机相关/装机法.md` 的 140/142/147 行）稳定 403；已试 3 次重试、多种 UA（含 lychee 默认 UA）均 403 | 同一 revision 下 CI 与本地 lychee 计数**完全一致**（876 Total / 446 Unique / 131 Excluded），CI 报 0 Errors、本地报 3 Errors ⇒ 差异只可能来自出口网络；且 CI 历史上真实报过错（run 34868340301 报 1 Error），证明 CI 检查确实生效 | 2026-09-15 |
+
+**判断方法**（区分"该加排除"与"本地误报"）：取同一 revision，比较 CI 与本地 lychee 的统计块。
+
+- `Total` / `Unique` / `Excluded` 一致而 `Errors` 不同 → 差异只能来自网络出口，属**本地误报**，不要动 `lychee.toml`；
+- CI 与本地都报同样的错误 → 按上方排除表流程建档（加 `exclude` + 本表登记）。
+
+**本地跑检查时的免除方式**（仅为本地排查方便，不进仓库配置）：
+
+```bash
+lychee --config lychee.toml --exclude 'https://www\.corsair\.com/' "./**/*.md"
+```
