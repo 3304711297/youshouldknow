@@ -10,13 +10,13 @@
       
       
       
-        <link rel="canonical" href="https://3304711297.github.io/youshouldknow/BIOS%E4%B8%8E%E5%9B%BA%E4%BB%B6/CPU%E7%94%B5%E5%8E%8B%E4%B8%8ELLC%E9%98%B2%E6%8E%89%E5%8E%8B/">
+        <link rel="canonical" href="https://3304711297.github.io/youshouldknow/BIOS%E4%B8%8E%E5%9B%BA%E4%BB%B6/BIOS%E4%BF%A1%E6%81%AF%E6%9F%A5%E7%9C%8B%E4%B8%8E%E5%AE%89%E5%85%A8%E5%B0%8F%E9%A1%B9/">
       
       
-        <link rel="prev" href="../CPU%E5%80%8D%E9%A2%91%E4%B8%8E%E5%A4%96%E9%A2%91%E8%B6%85%E9%A2%91%E5%9F%BA%E7%A1%80/">
+        <link rel="prev" href="../%E5%8E%82%E5%95%86%E8%BD%AF%E4%BB%B6%E8%87%AA%E5%8A%A8%E5%AE%89%E8%A3%85%E5%BC%80%E5%85%B3/">
       
       
-        <link rel="next" href="../BIOS%E4%B8%8EUEFI%E5%9B%BA%E4%BB%B6%E5%88%B7%E5%86%99%E5%8F%8A%E5%BC%80%E6%9C%BALogo%E4%BF%AE%E6%94%B9%E6%8C%87%E5%8D%97/">
+        <link rel="next" href="../DDR5%E5%86%85%E5%AD%98%E8%AE%AD%E7%BB%83%E4%B8%8EMCR-PD/">
       
       
         
@@ -27,7 +27,7 @@
     
     
       
-        <title>CPU 电压与 LLC 防掉压 - YouShouldKnow</title>
+        <title>BIOS 信息查看与安全小项 - YouShouldKnow</title>
       
     
     
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#cpu-llc" class="md-skip">
+        <a href="#bios-spdmepsp-easy-mode" class="md-skip">
           跳转至
         </a>
       
@@ -114,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              CPU 电压与 LLC 防掉压
+              BIOS 信息查看与安全小项
             
           </span>
         </div>
@@ -1364,10 +1364,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../BIOS%E4%BF%A1%E6%81%AF%E6%9F%A5%E7%9C%8B%E4%B8%8E%E5%AE%89%E5%85%A8%E5%B0%8F%E9%A1%B9/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BIOS 信息查看与安全小项
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1383,6 +1410,264 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一句话结论
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bios-bios-10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、BIOS 密码（BIOS-10）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、BIOS 密码（BIOS-10）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        两级密码的区别
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cmos-rtc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        密码存在哪：CMOS / RTC 内存
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        红色警告：三处代价与局限
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        修改与撤销
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cmos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        忘记密码后的三种清 CMOS 做法
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#spd-bios-11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、SPD 信息（BIOS-11）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、SPD 信息（BIOS-11）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#spd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SPD 是什么
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#spd_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        最重要的一条：SPD 页是只读的
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        菜单路径（华硕 / 微星）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二手验货用法
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#me-psp-bios-12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、ME / PSP 版本（BIOS-12）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、ME / PSP 版本（BIOS-12）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        是什么
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#30" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        为什么"不能乱动"：30 分钟看门狗
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        查看位置与判读
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#easy-mode-bios-15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、Easy Mode 界面切换（BIOS-15）
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、二手交易验货检查清单
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        六、验证方式：怎么算做对了
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        出处与核查说明
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1532,37 +1817,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    CPU 电压与 LLC 防掉压
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../CPU%E7%94%B5%E5%8E%8B%E4%B8%8ELLC%E9%98%B2%E6%8E%89%E5%8E%8B/" class="md-nav__link">
         
   
   
@@ -1578,170 +1836,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="目录">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      目录
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#intel" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Intel 篇：三块主角与电压虚标
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Intel 篇：三块主角与电压虚标">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#acdc-loadline" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        AC/DC Loadline：电压虚标的根源
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        三种电压模式
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        五步降压法（视频口径）
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#1314" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        13/14 代注意
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#amd" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        AMD 篇：别打架，去协商
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#llc" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        LLC 防掉压：掉压与过冲的平衡术
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="LLC 防掉压：掉压与过冲的平衡术">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#v-drop" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        V-Drop 是故意设计
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        品牌方向相反，千万别抄反
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        黄金配对法则
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        甜点标准
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        出处与核查说明
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -5781,44 +5875,33 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#intel" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Intel 篇：三块主角与电压虚标
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Intel 篇：三块主角与电压虚标">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#acdc-loadline" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        AC/DC Loadline：电压虚标的根源
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        三种电压模式
+        一句话结论
       
     </span>
   </a>
   
 </li>
+      
+        <li class="md-nav__item">
+  <a href="#bios-bios-10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、BIOS 密码（BIOS-10）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、BIOS 密码（BIOS-10）">
+      <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        五步降压法（视频口径）
+        两级密码的区别
       
     </span>
   </a>
@@ -5826,49 +5909,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#1314" class="md-nav__link">
+  <a href="#cmos-rtc" class="md-nav__link">
     <span class="md-ellipsis">
       
-        13/14 代注意
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#amd" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        AMD 篇：别打架，去协商
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#llc" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        LLC 防掉压：掉压与过冲的平衡术
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="LLC 防掉压：掉压与过冲的平衡术">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#v-drop" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        V-Drop 是故意设计
+        密码存在哪：CMOS / RTC 内存
       
     </span>
   </a>
@@ -5879,7 +5923,7 @@
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        品牌方向相反，千万别抄反
+        红色警告：三处代价与局限
       
     </span>
   </a>
@@ -5890,7 +5934,7 @@
   <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        黄金配对法则
+        修改与撤销
       
     </span>
   </a>
@@ -5898,10 +5942,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#cmos" class="md-nav__link">
     <span class="md-ellipsis">
       
-        甜点标准
+        忘记密码后的三种清 CMOS 做法
       
     </span>
   </a>
@@ -5914,7 +5958,151 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#spd-bios-11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、SPD 信息（BIOS-11）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、SPD 信息（BIOS-11）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#spd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SPD 是什么
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#spd_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        最重要的一条：SPD 页是只读的
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        菜单路径（华硕 / 微星）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二手验货用法
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#me-psp-bios-12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、ME / PSP 版本（BIOS-12）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、ME / PSP 版本（BIOS-12）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        是什么
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#30" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        为什么"不能乱动"：30 分钟看门狗
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        查看位置与判读
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#easy-mode-bios-15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、Easy Mode 界面切换（BIOS-15）
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、二手交易验货检查清单
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        六、验证方式：怎么算做对了
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
     <span class="md-ellipsis">
       
         出处与核查说明
@@ -5941,12 +6129,12 @@
     <aside class="doc-meta" aria-label="文档元数据">
       
       
-        <span class="doc-meta__badge doc-meta__badge--risk-high">🔴 高风险</span>
+        <span class="doc-meta__badge doc-meta__badge--risk-low">🟢 低风险</span>
       
       
         <span class="doc-meta__sep" aria-hidden="true"></span>
         <span class="doc-meta__field">
-          <span class="doc-meta__label">适用</span><span class="doc-meta__value">Windows 11</span>
+          <span class="doc-meta__label">适用</span><span class="doc-meta__value">Windows 10 / Windows 11</span>
         </span>
       
       
@@ -5961,111 +6149,262 @@
   
 
 
-<h1 id="cpu-llc">CPU 电压与 LLC 防掉压<a class="headerlink" href="#cpu-llc" title="Permanent link">&para;</a></h1>
+<h1 id="bios-spdmepsp-easy-mode">BIOS 信息查看与安全小项：密码、SPD、ME/PSP 与 Easy Mode<a class="headerlink" href="#bios-spdmepsp-easy-mode" title="Permanent link">&para;</a></h1>
 <blockquote>
-<p><strong>分类</strong>：BIOS 与固件 · CPU 超频进阶</p>
-<p><strong>风险等级</strong>：🔴 高。电压操作不当可致不稳定、WHEA 错误乃至长期损伤（缩缸）；本文整理视频原理，实际数值必须以自己平台稳定性测试为准。</p>
-<p><strong>一句话</strong>：Intel 降压的正确顺序是 <strong>AC/DC Loadline → Offset → 最后才碰 LLC</strong>（三者必须动态平衡）；AMD 降压别碰手动 Offset，走 PBO + Curve Optimizer 协商路线。</p>
+<p><strong>分类</strong>：BIOS 与固件 · 选项科普</p>
+<p>本文整理自重制版第 21 集（第一季收官），覆盖四个"看与防"性质的小项：BIOS 密码、SPD 内存信息、ME/PSP 固件版本、Easy Mode 界面切换。<strong>这四个选项不涉及性能调校</strong>，收益是"看得懂"和"回得来"。</p>
 </blockquote>
-<h2 id="intel">Intel 篇：三块主角与电压虚标<a class="headerlink" href="#intel" title="Permanent link">&para;</a></h2>
+<h2 id="_1">一句话结论<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>对象</th>
+<th>选项</th>
+<th>编号</th>
+<th>风险</th>
+<th>核心价值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BIOS 密码</td>
+<td>BIOS-10</td>
+<td><strong>中</strong>（不伤硬件，代价在忘记）</td>
+<td>防他人改设置，但防不住拆机</td>
+</tr>
+<tr>
+<td>SPD 信息</td>
+<td>BIOS-11</td>
+<td>零（只读）</td>
+<td><strong>验货</strong>：确认内存支持 XMP 还是 EXPO</td>
+</tr>
+<tr>
+<td>ME / PSP 版本</td>
+<td>BIOS-12</td>
+<td>查看零风险；<strong>若去改则高危</strong></td>
+<td>排查"开机恰好 30 分钟关机"</td>
+</tr>
+<tr>
+<td>Easy Mode</td>
+<td>BIOS-15</td>
+<td>零（纯界面切换）</td>
+<td>别被满屏英文劝退</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>编号说明：<code>BIOS-10 / 11 / 12 / 15</code> 是本系列的<strong>选项 ID</strong>，不是"第 10~15 期"。全集编号不连续（本期只涉及这四个）。</p>
+</blockquote>
+<hr />
+<h2 id="bios-bios-10">一、BIOS 密码（BIOS-10）<a class="headerlink" href="#bios-bios-10" title="Permanent link">&para;</a></h2>
+<h3 id="_2">两级密码的区别<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>类型</th>
 <th>作用</th>
+<th>何时被要求输入</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Vcore（核心电压）</td>
-<td>越高频率越高，但发热与老化更快</td>
+<td><code>Administrator Password</code>（管理员密码）</td>
+<td>挡住进入 BIOS 设置界面的权限</td>
+<td>开机按 <code>DEL</code> 进 BIOS 时</td>
 </tr>
 <tr>
-<td>Ring/缓存电压</td>
-<td>"辅助轮"——只调核心不调缓存，降压可能白调</td>
-</tr>
-<tr>
-<td>VCCIN（输入总闸门）</td>
-<td>主板给 CPU 供电的总水管，约 1.7~2.1V，比核心电压高约 0.5~1.0V（⚠️ 勘误 2026-09-12：原「高 0.1~0.2V」差一个量级，对照 Intel 12 代 datasheet 与超频资料修正；不同平台有差异）——超 5.5GHz 加压无效先查它</td>
+<td><code>User Password</code>（用户密码）</td>
+<td>仅控制进入操作系统的引导权限</td>
+<td>开机引导阶段</td>
 </tr>
 </tbody>
 </table>
-<h3 id="acdc-loadline">AC/DC Loadline：电压虚标的根源<a class="headerlink" href="#acdc-loadline" title="Permanent link">&para;</a></h3>
-<p>AC Loadline 决定 CPU 向主板请求多少电压（VID），很多主板出厂设得偏保守导致 VID 虚高；<strong>不先调 Loadline 直接做 Offset 降压等于在沙堆上挖地基</strong>。品牌差异极大：华硕用毫欧、微星用等级、技嘉用百分比，方向甚至相反——<strong>不要照搬网上固定数字</strong>，配合 HWiNFO 观察实际变化。</p>
-<h3 id="_1">三种电压模式<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<p>一句话区分：<strong>进 BIOS 用管理员密码，只进系统用用户密码</strong>。两者都设时，管理员密码用于进设置界面，用户密码用于日常开机引导。</p>
+<h3 id="cmos-rtc">密码存在哪：CMOS / RTC 内存<a class="headerlink" href="#cmos-rtc" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>Manual</strong> 固定值：待机也满载电压跑，极限定频用；</li>
-<li><strong>Offset</strong> 偏移：在 VID 基准上加减——每颗 CPU 的 VID 不同，同样 -0.05V 有人真降 0.05V 有人只降 0.02V。⚠️ <strong>Offset 输入框默认正号（加压），想降压必须手动切负号</strong>——忘了切就是电压瞬间 +0.05V；</li>
-<li><strong>Adaptive</strong> 自适应：高负载用设定值、低负载自动降，日常推荐。</li>
+<li>主板官方文档的口径：<strong>CMOS 里保存的是实时钟（RTC）内存的内容</strong>——里面装着日期时间、<strong>BIOS 密码</strong>、以及<strong>你的全部设置参数</strong>（启动顺序、XMP/EXPO、风扇曲线等）；</li>
+<li>因此<strong>清 CMOS = 密码与全部设置一起归零</strong>。这是清密码的唯一途径，也是它的代价。</li>
 </ul>
-<h3 id="_2">五步降压法（视频口径）<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<h3 id="_3">红色警告：三处代价与局限<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <ol>
-<li>确认平台：13/14 代 K 系降压空间最大，非 K 余量小；B660/B760 先刷最新 BIOS（老版降压会触发 CEP），没有 CEP 开关的 B 系不建议强降，改用限 PL 降温；</li>
-<li>调 AC/DC Loadline 从默认逐步下调，顺手检查 VCCIN；</li>
-<li>Offset 保守起步（-0.05V 级），每档跑 10~20 分钟，稳了继续探，直到蓝屏回退一档即甜点值；</li>
-<li>Ring 电压小幅跟调（浮动小于核心），每调一次跑游戏 + 内存测试；</li>
-<li>综合验证：AIDA64 FPU + 日常混合负载——只跑空载不算稳。</li>
+<li><strong>清 CMOS 是"连坐式"重置</strong>：不只清密码，日期时间、启动顺序、内存认证档（XMP/EXPO）、风扇曲线全部回出厂。清完必须重新配置；</li>
+<li><strong>BIOS 密码防不住拆机</strong>：密码在固件层面，硬盘拆下来接到别的机器上照样能读。真要防数据泄露，靠的是<strong>磁盘加密</strong>（如 BitLocker），不是 BIOS 密码；</li>
+<li><strong>笔记本/品牌机的密码常与序列号绑定</strong>：这类机器清 CMOS 清不掉密码，只能返厂。本攻略的主战场是<strong>台式 DIY 主板</strong>。</li>
 </ol>
-<p>参考案例（视频口径，待核）：14600KF 降压前 Cinebench 功耗约 209W，调 AC Loadline + 降压后约 129W、温度约 60 度、性能无损失。</p>
-<h3 id="1314">13/14 代注意<a class="headerlink" href="#1314" title="Permanent link">&para;</a></h3>
-<p>新微码为修复缩缸问题加入了保命电压——降压空间变小、电压降不下去属正常，省电属性被削弱、保命属性增强。</p>
-<h2 id="amd">AMD 篇：别打架，去协商<a class="headerlink" href="#amd" title="Permanent link">&para;</a></h2>
+<h3 id="_4">修改与撤销<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>Zen3/Zen4/Zen5 日常与游戏场景别碰 BIOS 手动核心电压（Manual/Offset）</strong>：Precision Boost 算法会按负载、温度、功耗、体质即时算最优电压；手动 Offset 等于命令"别算了听我的"——轻载像大卡车轰满载油门，重则桌面待机直接蓝屏。正确路线：<strong>PBO + Curve Optimizer</strong>（见<a href="../AMD-PBO%E4%B8%8ECurveOptimizer/">AMD PBO 与 Curve Optimizer</a>）。</li>
-<li><strong>CO 调的不是固定降压值，是每颗核心的整条 V/F 曲线</strong>——体质最好的核心出厂曲线已被压得很低，全局 -30 会先把它砍到物理极限之下；体质差（默认电压高）的核心反而有余量。</li>
-<li><strong>低负载才是考场</strong>：烤机过了≠稳，待机几百 MHz、0.8V 级基础电压下负压太狠会挂机蓝屏。</li>
-<li><strong>SOC 电压生死线</strong>：SOC 管内存控制器和 Infinity Fabric——<strong>AMD 官方明确警告 SOC 绝对不能超过 1.3V</strong>（锐龙 7000 上市初期有过 SOC 过高压烧内存控制器案例）；绝大多数用户锁 1.20~1.25V 最安全。</li>
-<li><strong>3D V-Cache 特别篇</strong>：缓存堆叠在核心上方像盖了隔热垫，热量路径被堵——换 360 水冷仍 80 多度是瓶颈在硅片内部不是冷排；解法是 CO 负压降温不是堆散热；X3D 温度墙更低：Zen3 5800X3D 90°C、Zen4 7800X3D 89°C（普通 Zen4 95°C）、Zen5 9800X3D 恢复 95°C（⚠️ 2026-09-12 对照 AMD 官方产品页修正：原「只有 90 度」过于绝对）。</li>
-<li><strong>PBO Scalar 保持 Auto</strong>；温度墙在 PBO 里手动设（如 85 度）。</li>
+<li><strong>改密码</strong>：进密码设置项 → 输旧密码 → 输两次新密码 → 保存；</li>
+<li><strong>撤销密码</strong>：进入密码设置项 → 输旧密码 → 在 <code>New Password</code> 与确认框中<strong>直接留空回车</strong> → 保存退出即清除。</li>
 </ul>
-<h2 id="llc">LLC 防掉压：掉压与过冲的平衡术<a class="headerlink" href="#llc" title="Permanent link">&para;</a></h2>
-<h3 id="v-drop">V-Drop 是故意设计<a class="headerlink" href="#v-drop" title="Permanent link">&para;</a></h3>
-<p>CPU 功耗在毫秒级疯狂搏动（待机十几瓦↔满载两百多瓦），供电电路电阻不可避免拉低电压；保留掉压是为了抑制<strong>电压过冲（Overshoot）</strong>——满载切回待机瞬间，多给的电压会形成尖峰。LLC 拉满时，瞬态偏激进的主板可能把 1.30V 推到 1.4V 甚至更高的瞬态尖峰（待核）；正常中档 LLC 的尖峰通常不超过约 0.06V。</p>
-<p><strong>尖峰监控软件抓不到</strong>（HWiNFO 默认 1 秒刷新，必须示波器才能看），但 CPU 晶体管实打实挨了每一击——超频老铁律：<strong>宁可掉压 0.03V，不要过冲 0.01V</strong>（待核）。</p>
-<h3 id="_3">品牌方向相反，千万别抄反<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<h3 id="cmos">忘记密码后的三种清 CMOS 做法<a class="headerlink" href="#cmos" title="Permanent link">&para;</a></h3>
+<p><strong>操作前务必断电（拔掉电源线）</strong>：</p>
 <table>
 <thead>
 <tr>
-<th>品牌</th>
-<th>方向</th>
-<th>甜点</th>
+<th>方法</th>
+<th>做法</th>
+<th>适用</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>华硕 Level</td>
-<td>数字越大防掉压越强</td>
-<td>日常超频约 Level 4~5（补偿约 70%）</td>
+<td>按键</td>
+<td>按主板后置 I/O 挡板上的 <code>Clear CMOS</code> 按钮 5~10 秒</td>
+<td>有该按钮的中高端主板</td>
 </tr>
 <tr>
-<td>微星 Mode</td>
-<td>数字越小越强（Mode 1 最强）</td>
-<td>约 Mode 3~4（待核）</td>
+<td>短接排针</td>
+<td>用螺丝刀/跳线帽短接 <code>CLR_CMOS</code>（华硕为 <code>CLRTC</code>）针脚 5~10 秒</td>
+<td>最通用</td>
 </tr>
 <tr>
-<td>技嘉</td>
-<td>Standard/Turbo/Extreme 命名</td>
-<td>—</td>
+<td>抠电池</td>
+<td>取下 <code>CR2032</code> 纽扣电池，等 5~10 分钟装回</td>
+<td>无按钮无排针的老主板</td>
 </tr>
 </tbody>
 </table>
-<h3 id="_4">黄金配对法则<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
-<p>AC Loadline 决定 CPU 请求多少电压，LLC 决定实际收到的电压——<strong>AC 降了多少，LLC 就要相应补多少，两者动态平衡</strong>：AC 调低而 LLC 补偿弱 → 满载电压掉穿黑屏蓝屏；AC 虚高而 LLC 再补偿过多 → 满载电压起飞撞温度墙。这就是降压顺序铁律"先 AC/DC Loadline、再 Offset、最后 LLC"的原因。</p>
-<h3 id="_5">甜点标准<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>电池反装同样能断电清 CMOS，但正装才是正确装法，别把反装当成常规手段。</p>
+</blockquote>
+<p><strong>清完的收尾三步</strong>：开机按 <code>F1</code> 进 BIOS → 按 <code>F5</code> 载入默认设置 → 重设必要项后按 <code>F10</code> 保存退出。</p>
+<hr />
+<h2 id="spd-bios-11">二、SPD 信息（BIOS-11）<a class="headerlink" href="#spd-bios-11" title="Permanent link">&para;</a></h2>
+<h3 id="spd">SPD 是什么<a class="headerlink" href="#spd" title="Permanent link">&para;</a></h3>
+<p><code>SPD</code>（Serial Presence Detect）是<strong>内存条 PCB 上的一颗独立 EEPROM 小芯片</strong>，出厂固化记录了这根内存的：</p>
 <ul>
-<li>手动定频定压超频：满载电压比设定值低 0.02~0.04V；</li>
-<li>开 C-States 节能的日常环境：掉压 0.03~0.05V 反而安全余量更足——追求满载纹丝不动是拿寿命换跑分；</li>
-<li><strong>AMD 用户 LLC 保持 Auto</strong>：等级变化会被 Precision Boost 感知并自动补偿，手动调大概率不如默认；</li>
-<li>LLC 调高后供电模块发热上升，压力测试时看一眼 HWiNFO 的 VRM 温度；每调完跑 10 分钟单核 FPU，每次只动一档。</li>
+<li>厂商与 <code>Part Number</code>（料号）；</li>
+<li>时序（Timings）、频率、电压；</li>
+<li>支持的认证档：<strong>Intel XMP</strong> 或 <strong>AMD EXPO</strong>。</li>
 </ul>
-<h2 id="_6">出处与核查说明<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
-<p>本文整理自 B 站 UP 主「所盼皆欣然」《电脑 BIOS 选项全科普》旧版合集第 23~25 集，经本地语音转录校对整理；电压/功耗/尖峰等数字标注"待核"处建议对照原视频画面：</p>
+<p><strong>关键认知：SPD 在内存条上，不由 BIOS 生成</strong>。BIOS 只是"读"它，改不了它。</p>
+<h3 id="spd_1">最重要的一条：SPD 页是只读的<a class="headerlink" href="#spd_1" title="Permanent link">&para;</a></h3>
 <ul>
-<li><a href="https://www.bilibili.com/video/BV1za3q6KE1X/">EP23/核心电压与缓存电压（Intel 篇）</a></li>
-<li><a href="https://www.bilibili.com/video/BV1hp3165EmH/">EP24/核心电压与缓存电压（AMD 篇）</a></li>
-<li><a href="https://www.bilibili.com/video/BV1HT346kEZm/">EP25/防掉压等级</a></li>
-<li>相关：<a href="../AMD-PBO%E4%B8%8ECurveOptimizer/">AMD PBO 与 Curve Optimizer</a>、<a href="../%E5%8A%9F%E8%80%97%E5%A2%99%E7%94%B5%E6%B5%81%E5%A2%99%E4%B8%8ECEP%E7%94%B5%E6%B5%81%E4%BF%9D%E6%8A%A4/">功耗墙、电流墙与 CEP 电流保护</a></li>
+<li>BIOS 里的 SPD 页面<strong>只读</strong>（华硕菜单里直写 <code>Read only</code>），在此页面<strong>无法开启 XMP/EXPO、无法改任何参数</strong>；</li>
+<li>要开内存认证档，去 <strong>超频菜单</strong>（华硕在 <code>Ai Tweaker</code>，微星在 <code>OC</code>）；</li>
+<li>SPD 告诉你的是内存<strong>"能跑多少"</strong>，<strong>不等于"现在跑多少"</strong>。</li>
 </ul>
+<h3 id="_5">菜单路径（华硕 / 微星）<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>厂商</th>
+<th>路径</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>华硕</td>
+<td><code>Tool</code> → <code>ASUS SPD Information</code></td>
+</tr>
+<tr>
+<td>微星</td>
+<td><code>OC</code> → <code>Memory-Z</code> → <code>DIMM Memory SPD</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="_6">二手验货用法<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<p>这是 SPD 最实用的场景：进 SPD 页面读 <code>Part Number</code>，与内存条外壳贴纸核对是否一致，可识别贴牌/换标条；同时确认它支持的是 XMP 还是 EXPO——买错平台认证档的条子，开不了认证档。</p>
+<hr />
+<h2 id="me-psp-bios-12">三、ME / PSP 版本（BIOS-12）<a class="headerlink" href="#me-psp-bios-12" title="Permanent link">&para;</a></h2>
+<h3 id="_7">是什么<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>平台</th>
+<th>名称</th>
+<th>全称</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Intel</td>
+<td><strong>ME</strong></td>
+<td>Management Engine（管理引擎）</td>
+</tr>
+<tr>
+<td>AMD</td>
+<td><strong>PSP</strong></td>
+<td>Platform Security Processor（平台安全处理器）</td>
+</tr>
+</tbody>
+</table>
+<p>共同点：<strong>独立于主 CPU 和操作系统的子系统，有自己的固件，比操作系统启动得更早</strong>。</p>
+<h3 id="30">为什么"不能乱动"：30 分钟看门狗<a class="headerlink" href="#30" title="Permanent link">&para;</a></h3>
+<ul>
+<li>ME 固件（v6.0 及以上）带<strong>硬件级签名校验</strong>。引导 ROM 找不到带有效签名的 ME 固件时，主板看门狗（Watchdog Timer）会兜底：<strong>整机开机后恰好 30 分钟强制关机</strong>；</li>
+<li>这个"精准 30 分钟"是识别 ME 固件异常的典型特征——不是散热问题，也不是电源问题；</li>
+<li>消费级平台<strong>无法彻底关停 ME</strong>。处置原则只有一条：<strong>只看不改</strong>，绝不擦除、不解包修改。真出故障，走"刷回完整官方 BIOS"恢复。</li>
+</ul>
+<h3 id="_8">查看位置与判读<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>平台</th>
+<th>路径</th>
+<th>字段</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Intel（华硕）</td>
+<td><code>Main</code> 页（EZ Mode 概览即可见）</td>
+<td><code>ME FW Version</code></td>
+</tr>
+<tr>
+<td>Intel（微星）</td>
+<td><code>Advanced</code> → <code>PCH-FW Firmware Versions</code></td>
+<td>固件版本列表（只读）</td>
+</tr>
+<tr>
+<td>AMD（技嘉）</td>
+<td><code>Advanced</code> → <code>PSP Firmware Versions</code></td>
+<td><code>PSP Firmware Version</code>（只读）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>判读判据</strong>：版本号正常显示即健康；若显示 <code>0.0.0.0</code> 或<strong>直接空白</strong>，说明 ME 固件已损坏或未成功加载，<strong>必定触发看门狗关机</strong>，需立即重刷带完整 ME 模块的官方 BIOS。</p>
+<blockquote>
+<p>看门狗 30 分钟关机是"兜底"，不是"惩罚"：它保证机器还能进系统做抢救。所以遇到 30 分钟关机先查 ME 固件，别急着换电源。</p>
+</blockquote>
+<hr />
+<h2 id="easy-mode-bios-15">四、Easy Mode 界面切换（BIOS-15）<a class="headerlink" href="#easy-mode-bios-15" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>作用范围仅限界面</strong>：Easy Mode 与 Advanced Mode 决定你进 BIOS 第一眼看到哪个画面，<strong>不改动任何硬件功能与参数</strong>；</li>
+<li><strong>切换键</strong>：华硕按 <code>F7</code> 在两模式间切换；</li>
+<li><strong>默认值各板不同</strong>：出厂默认进哪个模式由主板厂商决定，以实机为准；</li>
+<li>华硕的路径在 <code>Boot</code> → <code>Setup Mode</code>（决定默认进哪个模式）。</li>
+</ul>
+<p>对于"一进 BIOS 满屏英文不敢动"的情况，切 Easy Mode 是零风险的第一步——它只换界面，不动设置。</p>
+<hr />
+<h2 id="_9">五、二手交易验货检查清单<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
+<p>进 BIOS 五分钟即可完成的两项验货：</p>
+<ol>
+<li><strong>验内存</strong>（防贴牌/假条）：<code>SPD Information</code> 页读 <code>Part Number</code> 与条身贴纸比对；确认 XMP 还是 EXPO；</li>
+<li><strong>验主板</strong>（排查 30 分钟关机隐患）：<code>Main</code> 页看 <code>ME FW Version</code>，确认非 <code>0.0.0.0</code> 且非空白；异常说明主板的 ME 固件有问题，需重刷官方 BIOS 才能恢复正常使用。</li>
+</ol>
+<hr />
+<h2 id="_10">六、验证方式：怎么算做对了<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>密码</strong>：设定后重启，密码状态由 <code>Not Installed</code> 变为 <code>Installed</code>，且开机时确实要求输入——说明生效；</li>
+<li><strong>SPD 页面</strong>：能读到 <code>Part Number</code> 与认证档类型即为正常（该页只读，不存在"改错"）；</li>
+<li><strong>ME / PSP</strong>：能看到版本号（非 <code>0.0.0.0</code>、非空白）即为正常；</li>
+<li><strong>Easy Mode</strong>：<code>F7</code> 能在两模式间来回切换即为正常。</li>
+</ul>
+<hr />
+<h2 id="_11">出处与核查说明<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
+<p>本文整理自 B 站 UP 主「所盼皆欣然」《电脑 BIOS/UEFI 选项内容全科普（重制版）》第 21 集（第一季收官），经本地语音转录与画面抽帧双路校对：</p>
+<ul>
+<li><a href="https://www.bilibili.com/video/BV1Rne569Eyz/">电脑 BIOS 选项全科普 EP21/信息查看与安全</a></li>
+<li>合集：<a href="https://space.bilibili.com/589200735/channel/collectiondetail?sid=8897657">电脑 BIOS/UEFI 选项内容全科普【重制版】</a></li>
+</ul>
+<p><strong>核查说明</strong>：</p>
+<ul>
+<li>文中菜单路径（<code>Tool</code> → <code>ASUS SPD Information</code>、<code>Advanced</code> → <code>PCH-FW Firmware Versions</code>、<code>Boot</code> → <code>Setup Mode</code> 等）以视频画面为准；各厂商菜单路径因品牌、型号、BIOS 版本而异，<strong>以实机与主板说明书为准</strong>；</li>
+<li>视频中出现的版本号样例（如 <code>15.0.x</code>、<code>16.1.x</code>）为演示机型数值，<strong>不代表你的机器应为此版本</strong>；</li>
+<li>视频画面本身标注"网络参考 · 非本机实拍"的截图，其数值仅作字段位置示意；</li>
+<li>涉及清 CMOS、TPM、Secure Boot 的操作请先阅读风险章节：清 CMOS 会导致 BitLocker 恢复密钥验证（见 <a href="../BIOS%E6%81%A2%E5%A4%8D%E9%BB%98%E8%AE%A4%E8%AE%BE%E7%BD%AE%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E6%B3%95/">BIOS 恢复默认设置的三种方法</a>）。</li>
+</ul>
+<p><strong>联动篇目</strong>：<a href="../BIOS%E6%81%A2%E5%A4%8D%E9%BB%98%E8%AE%A4%E8%AE%BE%E7%BD%AE%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E6%B3%95/">BIOS 恢复默认设置的三种方法</a>（清 CMOS 手法与 Profile 迁移陷阱）、<a href="../SecureBoot%E5%AE%89%E5%85%A8%E5%90%AF%E5%8A%A8%E4%B8%8E%E5%AF%86%E9%92%A5%E7%AE%A1%E7%90%86/">Secure Boot 安全启动与密钥管理</a>、<a href="../TPM-PTT-fTPM%E4%B8%8E%E6%B8%85%E9%99%A4%E9%A3%8E%E9%99%A9/">TPM/PTT/fTPM 与清除风险</a>、<a href="../BIOS%E4%B8%8EUEFI%E5%9B%BA%E4%BB%B6%E5%88%B7%E5%86%99%E5%8F%8A%E5%BC%80%E6%9C%BALogo%E4%BF%AE%E6%94%B9%E6%8C%87%E5%8D%97/">BIOS 与 UEFI 固件刷写及开机 Logo 修改指南</a>（ME 固件异常时的重刷恢复）</p>
 
 
 
@@ -6088,7 +6427,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年9月12日 02:13:08 UTC">2026年9月12日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年9月15日 08:39:35 UTC">2026年9月15日</span>
   </span>
 
     
@@ -6098,7 +6437,7 @@
     <span class="md-icon" title="创建日期">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年9月2日 16:34:38 UTC">2026年9月2日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年9月15日 08:39:35 UTC">2026年9月15日</span>
   </span>
 
     
@@ -6134,7 +6473,7 @@
       <nav class="md-footer__inner md-grid" aria-label="页脚" >
         
           
-          <a href="../CPU%E5%80%8D%E9%A2%91%E4%B8%8E%E5%A4%96%E9%A2%91%E8%B6%85%E9%A2%91%E5%9F%BA%E7%A1%80/" class="md-footer__link md-footer__link--prev" aria-label="上一页: CPU 倍频与外频超频基础">
+          <a href="../%E5%8E%82%E5%95%86%E8%BD%AF%E4%BB%B6%E8%87%AA%E5%8A%A8%E5%AE%89%E8%A3%85%E5%BC%80%E5%85%B3/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 厂商软件自动安装开关">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -6144,20 +6483,20 @@
                 上一页
               </span>
               <div class="md-ellipsis">
-                CPU 倍频与外频超频基础
+                厂商软件自动安装开关
               </div>
             </div>
           </a>
         
         
           
-          <a href="../BIOS%E4%B8%8EUEFI%E5%9B%BA%E4%BB%B6%E5%88%B7%E5%86%99%E5%8F%8A%E5%BC%80%E6%9C%BALogo%E4%BF%AE%E6%94%B9%E6%8C%87%E5%8D%97/" class="md-footer__link md-footer__link--next" aria-label="下一页: BIOS 与 UEFI 固件刷写及开机 Logo 修改指南">
+          <a href="../DDR5%E5%86%85%E5%AD%98%E8%AE%AD%E7%BB%83%E4%B8%8EMCR-PD/" class="md-footer__link md-footer__link--next" aria-label="下一页: DDR5 内存训练与 MCR/PD">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 下一页
               </span>
               <div class="md-ellipsis">
-                BIOS 与 UEFI 固件刷写及开机 Logo 修改指南
+                DDR5 内存训练与 MCR/PD
               </div>
             </div>
             <div class="md-footer__button md-icon">
