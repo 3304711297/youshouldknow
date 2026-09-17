@@ -12,14 +12,15 @@ tweak_module: []
 >
 > **来源说明**：本系列文章整理自 B 站 UP 主 [所盼皆欣然](https://space.bilibili.com/589200735) 的两个视频合集——旧版《[主板 BIOS 选项科普](https://space.bilibili.com/589200735/channel/collectiondetail?sid=8222417)》（27 集）与重制版《[电脑 BIOS/UEFI 选项内容全科普](https://space.bilibili.com/589200735/channel/collectiondetail?sid=8897657)》（21 集），全部经本地语音转录后按硬件领域知识校对术语整理而成。每篇文章底部均附对应视频出处链接。
 
-## 系列覆盖的两个合集
+## 系列覆盖的合集与季数
 
 | 合集 | 集数 | 特点 |
 |---|---|---|
 | [主板 BIOS 选项科普（旧版）](https://space.bilibili.com/589200735/channel/collectiondetail?sid=8222417) | 27 集 | 覆盖面最全：从 BIOS 入门一路讲到 CPU 倍频、外频、核心电压与防掉压 |
-| [电脑 BIOS/UEFI 选项内容全科普（重制版）](https://space.bilibili.com/589200735/channel/collectiondetail?sid=8897657) | 20 集 | 对旧版部分主题重制更新：补充 UEFI 时代细节（Boot Override、Secure Boot 密钥管理、VMD、NVMe 识别全链路、Above 4G、ReBAR、配置迁移、Flashback 救砖、前面板音频、信息查看与安全小项等；第一季 21 集收官） |
+| [电脑 BIOS/UEFI 选项内容全科普（重制版第一季）](https://space.bilibili.com/589200735/channel/collectiondetail?sid=8897657) | 21 集 | 对旧版部分主题重制更新：补充 UEFI 时代细节（Boot Override、Secure Boot 密钥管理、VMD、NVMe 识别全链路、Above 4G、ReBAR、配置迁移、Flashback 救砖、前面板音频、信息查看与安全小项等；EP21 收官） |
+| [电脑 BIOS 选项全科普（第二季）](https://space.bilibili.com/589200735) | 连载中 | 聚焦 AMD 锐龙性能释放与 PBO 深度调校（PBO 基础、三面墙实操、标量与频率偏移、调度机制、Curve Optimizer 专栏等） |
 
-两个合集主题有重叠，本文整理时**以重制版为主线、旧版补全重制版未覆盖的主题**（如快速启动、PBO、电压与防掉压等；Above 4G/ReBAR/配置迁移/救砖已随重制版 EP16~EP20 对齐更新），出处均逐篇标注。
+三个合集/季数主题有承接与深化，本文整理时**以重制版与第二季为主线、旧版补全未覆盖的主题**（Above 4G/ReBAR/配置迁移/救砖已随重制版 EP16~EP20 对齐更新，第二季深拆 PBO 与 CPU 调校），出处均逐篇标注。
 
 ## 阅读地图
 
@@ -52,10 +53,11 @@ tweak_module: []
 ### 第四步：CPU 自动优化与超频进阶
 
 18. [CPU 调频与电源管理机制](./CPU调频与电源管理机制.md)——SpeedStep/Speed Shift/CPPC、睿频与 C-States；
-19. [AMD PBO 与 Curve Optimizer](./AMD-PBO与CurveOptimizer.md)；
-20. [功耗墙、电流墙与 CEP 电流保护](./功耗墙电流墙与CEP电流保护.md)；
-21. [CPU 倍频与外频超频基础](./CPU倍频与外频超频基础.md)；
-22. [CPU 电压与 LLC 防掉压](./CPU电压与LLC防掉压.md)。
+19. [PBO 基础与性能释放总闸门](./PBO基础与性能释放总闸门.md)（重制版第二季 EP01）——CPB 自动加速总闸、PBO 四种模式、三面墙前瞻与 X3D 边界；
+20. [AMD PBO 与 Curve Optimizer](./AMD-PBO与CurveOptimizer.md)（旧版综合篇）；
+21. [功耗墙、电流墙与 CEP 电流保护](./功耗墙电流墙与CEP电流保护.md)；
+22. [CPU 倍频与外频超频基础](./CPU倍频与外频超频基础.md)；
+23. [CPU 电压与 LLC 防掉压](./CPU电压与LLC防掉压.md)。
 
 ## 系列理念：超频的三条路线
 

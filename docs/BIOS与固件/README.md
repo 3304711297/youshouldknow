@@ -14,9 +14,9 @@ tweak_module: []
 
 ## 文章
 
-### BIOS 选项科普系列（整理自 B 站 UP 主「所盼皆欣然」两个合集，逐篇附视频出处）
+### BIOS 选项科普系列（整理自 B 站 UP 主「所盼皆欣然」合集，逐篇附视频出处）
 
-- [BIOS 选项科普系列总览](./BIOS选项科普系列总览.md) — 两个合集导读、阅读地图与超频三条路线
+- [BIOS 选项科普系列总览](./BIOS选项科普系列总览.md) — 合集导读、阅读地图与超频三条路线
 - [BIOS 入门：进入、退出与模式切换](./BIOS入门进入退出与模式切换.md)
 - [BIOS 恢复默认设置的三种方法](./BIOS恢复默认设置的三种方法.md)
 - [启动顺序与 Boot Override](./启动顺序与BootOverride.md)
@@ -34,6 +34,7 @@ tweak_module: []
 - [BIOS 信息查看与安全小项](./BIOS信息查看与安全小项.md) — 密码/清 CMOS、SPD 验货、ME/PSP 版本判读、Easy Mode（重制版 EP21 收官）
 - [DDR5 内存训练与 MCR/PD](./DDR5内存训练与MCR-PD.md)
 - [CPU 调频与电源管理机制](./CPU调频与电源管理机制.md)
+- [PBO 基础与性能释放总闸门](./PBO基础与性能释放总闸门.md) — CPB 自动加速总闸、PBO 四种模式、三面墙前瞻与 X3D 边界（第二季 EP01）
 - [AMD PBO 与 Curve Optimizer](./AMD-PBO与CurveOptimizer.md)
 - [功耗墙、电流墙与 CEP 电流保护](./功耗墙电流墙与CEP电流保护.md)
 - [CPU 倍频与外频超频基础](./CPU倍频与外频超频基础.md)

@@ -68,8 +68,8 @@ tweak_module: []
 
 ## 出处与核查说明
 
-本文整理自 B 站 UP 主「所盼皆欣然」《电脑 BIOS 选项全科普》旧版合集第 13、14 集，经本地语音转录校对整理；起步负压值等数字标注"待核"处建议对照原视频画面：
+本文整理自 B 站 UP 主「所盼皆欣然」《电脑 BIOS 选项全科普》旧版合集第 13、14 集，经本地语音转录校对整理；起步负压值等数字标注"待核"处建议对照原视频画面（2026 年第二季重制版首篇详见 [PBO 基础与性能释放总闸门](./PBO基础与性能释放总闸门.md)）：
 
 - [EP13/AMD PBO](https://www.bilibili.com/video/BV1eEj26eErV/)
 - [EP14/AMD Curve Optimizer](https://www.bilibili.com/video/BV1P4KQ6MEQT/)
-- 相关：[CPU 电压与 LLC 防掉压](./CPU电压与LLC防掉压.md)、[功耗墙、电流墙与 CEP 电流保护](./功耗墙电流墙与CEP电流保护.md)
+- 相关：[PBO 基础与性能释放总闸门（第二季重制版 EP01）](./PBO基础与性能释放总闸门.md)、[CPU 电压与 LLC 防掉压](./CPU电压与LLC防掉压.md)、[功耗墙、电流墙与 CEP 电流保护](./功耗墙电流墙与CEP电流保护.md)

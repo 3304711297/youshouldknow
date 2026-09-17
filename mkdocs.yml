@@ -101,6 +101,7 @@ nav:
     - BIOS 信息查看与安全小项: BIOS与固件/BIOS信息查看与安全小项.md
     - DDR5 内存训练与 MCR/PD: BIOS与固件/DDR5内存训练与MCR-PD.md
     - CPU 调频与电源管理机制: BIOS与固件/CPU调频与电源管理机制.md
+    - PBO 基础与性能释放总闸门: BIOS与固件/PBO基础与性能释放总闸门.md
     - AMD PBO 与 Curve Optimizer: BIOS与固件/AMD-PBO与CurveOptimizer.md
     - 功耗墙、电流墙与 CEP 电流保护: BIOS与固件/功耗墙电流墙与CEP电流保护.md
     - CPU 倍频与外频超频基础: BIOS与固件/CPU倍频与外频超频基础.md
