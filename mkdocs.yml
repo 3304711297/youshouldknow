@@ -219,6 +219,8 @@ nav:
     - Hermes 记忆体系三层架构与选型决策指南: AI工具/Hermes记忆体系三层架构与选型决策指南.md
     - Hermes 技能系统机制原理：渐进式披露与程序性记忆: AI工具/Hermes技能系统机制原理与渐进式披露.md
     - Hermes 多 Profile 编队实战：从单助手到隔离的多 Agent 团队: AI工具/Hermes多Profile编队实战与状态隔离.md
+    - 基于 BrowserSkill 接管真实 Chromium 浏览器的跨 Agent 协同与常驻复用实践: AI工具/基于BrowserSkill接管真实Chromium浏览器的跨Agent协同与常驻复用实践.md
+    - AI 网关客户端连接池分段超时与流式状态机防御架构: AI工具/AI网关客户端连接池分段超时与流式状态机防御架构.md
   - 项目导航:
     - 项目导航/README.md
     - tweakbyjie 关联说明: 项目导航/tweakbyjie关联说明.md
