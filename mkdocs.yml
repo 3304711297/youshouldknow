@@ -102,6 +102,7 @@ nav:
     - DDR5 内存训练与 MCR/PD: BIOS与固件/DDR5内存训练与MCR-PD.md
     - CPU 调频与电源管理机制: BIOS与固件/CPU调频与电源管理机制.md
     - PBO 基础与性能释放总闸门: BIOS与固件/PBO基础与性能释放总闸门.md
+    - PPT、TDC、EDC 与温度限制: BIOS与固件/PPT-TDC-EDC与温度限制.md
     - AMD PBO 与 Curve Optimizer: BIOS与固件/AMD-PBO与CurveOptimizer.md
     - 功耗墙、电流墙与 CEP 电流保护: BIOS与固件/功耗墙电流墙与CEP电流保护.md
     - CPU 倍频与外频超频基础: BIOS与固件/CPU倍频与外频超频基础.md
@@ -175,6 +176,7 @@ nav:
     - 易受攻击驱动黑名单机制与关闭代价: 系统调优与安全/易受攻击驱动黑名单机制与关闭代价.md
     - 社区降延迟调机清单辨析: 系统调优与安全/社区降延迟调机清单辨析.md
     - 公开 Agent 记忆库的安全治理与防泄露自动化门禁: 系统调优与安全/公开Agent记忆库的安全治理与防泄露自动化门禁.md
+    - 游戏反作弊内核驱动常驻与 System 高占用排查: 系统调优与安全/游戏反作弊内核驱动常驻与System高占用排查.md
   - 网络通信:
       - 网络通信/README.md
       - Windows 网络栈优化原则: 网络通信/Windows网络栈优化原则.md
