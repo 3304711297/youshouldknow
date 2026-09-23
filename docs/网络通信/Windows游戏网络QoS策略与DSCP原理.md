@@ -56,20 +56,21 @@ Windows 组策略在注册表中的映射位置为：
 "Throttle Rate"="-1"
 ```
 
-> 💡 **联动说明**：本优化项已在 `tweakbyjie` 的 **[Part 12 竞技游戏网络 QoS 策略管理]** 模块中完整实现，支持一键快照备份、主流竞技游戏自动识别写入与安全还原。
+> 💡 **联动说明**：本优化项已在 `tweakbyjie` 的 **[Part 12 竞技游戏网络 QoS 策略管理]** 模块中完整实现，支持一键快照备份、主流竞技游戏（含 CS2、Valorant、Apex、Minecraft Java 版与基岩版等 13 款游戏）自动识别写入与安全还原。
 
 ---
 
 ## 4. 现代 TCP 协议栈优化与常见误区辨析
 
-在分析以 Kiwi-Tweaks 为代表的社区优化方案时，有两项关键网络参数必须严谨对待：
+在分析以 Kiwi-Tweaks 及民间网络优化工具为代表的社区方案时，有两项关键网络参数必须严谨对待：
 
-### ✅ 推荐优化：启用 TCP CUBIC 与 SACK
+### ✅ 推荐优化：保持 TCP CUBIC 与 SACK（拒绝旧版 CTCP）
 ```cmd
 netsh int tcp set supplemental Internet congestionprovider=cubic
 netsh int tcp set global autotuninglevel=normal
 ```
-- **CUBIC 拥塞控制算法**：相比旧版 Windows 默认的 Compound TCP，CUBIC 具备更好的带宽探测效率与丢包恢复能力，在高带宽、中长延迟网络下连接更平稳；
+- **CUBIC 拥塞控制算法（RFC 8312）**：Windows 10 1709+ 客户端默认已全面转向 CUBIC。部分陈旧优化器（如 ALit-NetworkOptimizer）仍强制改写为 Vista/Win7 时代的 Compound TCP (CTCP)。CUBIC 具备更好的带宽探测效率与丢包恢复能力，在高带宽、中长延迟网络下连接更平稳，切忌降级回退为 CTCP；
+- **控制对象辨析（TCP vs UDP）**：绝大多数竞技网游（如 CS2、Valorant、Apex、Minecraft 基岩版）的核心游戏数据包走 **UDP** 协议，TCP 拥塞控制参数对其游戏实时交互毫秒级延迟**完全不生效**，属于典型的调优对象错位；
 - **SACK（Selective Acknowledgment，选择性确认）**：允许接收方只请求重传丢失的数据段，而不是重传整个窗口，大幅减少重传开销。
 
 ### ❌ 严禁避坑：盲目关闭窗口自动调优（`autotuninglevel=disabled`）
@@ -80,4 +81,10 @@ netsh int tcp set global autotuninglevel=normal
 ## 5. 风险与边界总结
 
 1. **反作弊安全性**：QoS 策略属于 Windows 组策略原生支持的无侵入网络标记，不修改游戏内存或二进制代码，与 Riot Vanguard、EasyAntiCheat、BattlEye、VAC 等完全兼容；
-2. **路由器协同**：若家用路由器开启了基于 DSCP / 802.1p 的 QoS 队列调度，加速效果更明显；若路由器为无 QoS 功能的基础交换机，则依然在本地 Windows 网络输出队列中享有最高优先级。
+2. **端到端边界：QoS 标记 ≠ 绝对广域网提速**：
+   - DSCP 46（EF）在 RFC 3246 中被定义为每跳行为（Per-Hop Behavior, PHB）。它的实际生效高度依赖本地网卡驱动、局域网交换机/家庭路由器（如 WMM 语音队列映射）；
+   - 一旦数据包离开家庭网关进入公网，绝大多数电信运营商（ISP）会将出站流量的 DSCP 字段重写（Remark）或置零重置为 Best Effort。因此，DSCP 46 的核心价值在于**解决本机至局域网家庭网关之间的排队挤塞与缓冲区膨胀（Bufferbloat）**，绝不能宣传为“穿透全网的绝对优先权”；
+3. **启动器与分类器作用域（以 Minecraft 为例）**：
+   - **Java 版启动器兼容性**：第三方启动器（PCL2、HMCL）拉起自定义路径的 JRE 时，Windows QoS 策略通过文件名（`javaw.exe`）进行匹配即可跨路径命中，无需固化绝对路径；其副作用是所有名为 `javaw.exe` 的图形程序均会被同等标记；
+   - **基岩版 UWP 进程隔离**：UWP 虽然运行在 AppContainer 沙箱内，但网络套接字仍正常受底层 NDIS QoS 策略监管；
+   - **避免硬编码端口**：Minecraft 默认端口为 Java 25565 / 基岩版 19132，但大量私设服务器使用自定义端口。基于进程名（AppPathNameMatchCondition）的分类器比限制特定端口更具普适性与鲁棒性。
