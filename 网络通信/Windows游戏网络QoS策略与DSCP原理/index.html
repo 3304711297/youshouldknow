@@ -4171,10 +4171,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#tcp-cubic-sack" class="md-nav__link">
+  <a href="#tcp-cubic-sack-ctcp" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ✅ 推荐优化：启用 TCP CUBIC 与 SACK
+        ✅ 推荐优化：保持 TCP CUBIC 与 SACK（拒绝旧版 CTCP）
       
     </span>
   </a>
@@ -5982,10 +5982,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#tcp-cubic-sack" class="md-nav__link">
+  <a href="#tcp-cubic-sack-ctcp" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ✅ 推荐优化：启用 TCP CUBIC 与 SACK
+        ✅ 推荐优化：保持 TCP CUBIC 与 SACK（拒绝旧版 CTCP）
       
     </span>
   </a>
@@ -6131,16 +6131,17 @@
 <a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="na">"Throttle Rate"</span><span class="o">=</span><span class="s">"-1"</span>
 </code></pre></div>
 <blockquote>
-<p>💡 <strong>联动说明</strong>：本优化项已在 <code>tweakbyjie</code> 的 <strong>[Part 12 竞技游戏网络 QoS 策略管理]</strong> 模块中完整实现，支持一键快照备份、主流竞技游戏自动识别写入与安全还原。</p>
+<p>💡 <strong>联动说明</strong>：本优化项已在 <code>tweakbyjie</code> 的 <strong>[Part 12 竞技游戏网络 QoS 策略管理]</strong> 模块中完整实现，支持一键快照备份、主流竞技游戏（含 CS2、Valorant、Apex、Minecraft Java 版与基岩版等 13 款游戏）自动识别写入与安全还原。</p>
 </blockquote>
 <hr />
 <h2 id="4-tcp">4. 现代 TCP 协议栈优化与常见误区辨析<a class="headerlink" href="#4-tcp" title="Permanent link">&para;</a></h2>
-<p>在分析以 Kiwi-Tweaks 为代表的社区优化方案时，有两项关键网络参数必须严谨对待：</p>
-<h3 id="tcp-cubic-sack">✅ 推荐优化：启用 TCP CUBIC 与 SACK<a class="headerlink" href="#tcp-cubic-sack" title="Permanent link">&para;</a></h3>
+<p>在分析以 Kiwi-Tweaks 及民间网络优化工具为代表的社区方案时，有两项关键网络参数必须严谨对待：</p>
+<h3 id="tcp-cubic-sack-ctcp">✅ 推荐优化：保持 TCP CUBIC 与 SACK（拒绝旧版 CTCP）<a class="headerlink" href="#tcp-cubic-sack-ctcp" title="Permanent link">&para;</a></h3>
 <p><div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>netsh int tcp set supplemental Internet congestionprovider=cubic
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>netsh int tcp set global autotuninglevel=normal
 </code></pre></div>
-- <strong>CUBIC 拥塞控制算法</strong>：相比旧版 Windows 默认的 Compound TCP，CUBIC 具备更好的带宽探测效率与丢包恢复能力，在高带宽、中长延迟网络下连接更平稳；
+- <strong>CUBIC 拥塞控制算法（RFC 8312）</strong>：Windows 10 1709+ 客户端默认已全面转向 CUBIC。部分陈旧优化器（如 ALit-NetworkOptimizer）仍强制改写为 Vista/Win7 时代的 Compound TCP (CTCP)。CUBIC 具备更好的带宽探测效率与丢包恢复能力，在高带宽、中长延迟网络下连接更平稳，切忌降级回退为 CTCP；
+- <strong>控制对象辨析（TCP vs UDP）</strong>：绝大多数竞技网游（如 CS2、Valorant、Apex、Minecraft 基岩版）的核心游戏数据包走 <strong>UDP</strong> 协议，TCP 拥塞控制参数对其游戏实时交互毫秒级延迟<strong>完全不生效</strong>，属于典型的调优对象错位；
 - <strong>SACK（Selective Acknowledgment，选择性确认）</strong>：允许接收方只请求重传丢失的数据段，而不是重传整个窗口，大幅减少重传开销。</p>
 <h3 id="autotuningleveldisabled">❌ 严禁避坑：盲目关闭窗口自动调优（<code>autotuninglevel=disabled</code>）<a class="headerlink" href="#autotuningleveldisabled" title="Permanent link">&para;</a></h3>
 <ul>
@@ -6150,7 +6151,13 @@
 <h2 id="5">5. 风险与边界总结<a class="headerlink" href="#5" title="Permanent link">&para;</a></h2>
 <ol>
 <li><strong>反作弊安全性</strong>：QoS 策略属于 Windows 组策略原生支持的无侵入网络标记，不修改游戏内存或二进制代码，与 Riot Vanguard、EasyAntiCheat、BattlEye、VAC 等完全兼容；</li>
-<li><strong>路由器协同</strong>：若家用路由器开启了基于 DSCP / 802.1p 的 QoS 队列调度，加速效果更明显；若路由器为无 QoS 功能的基础交换机，则依然在本地 Windows 网络输出队列中享有最高优先级。</li>
+<li><strong>端到端边界：QoS 标记 ≠ 绝对广域网提速</strong>：</li>
+<li>DSCP 46（EF）在 RFC 3246 中被定义为每跳行为（Per-Hop Behavior, PHB）。它的实际生效高度依赖本地网卡驱动、局域网交换机/家庭路由器（如 WMM 语音队列映射）；</li>
+<li>一旦数据包离开家庭网关进入公网，绝大多数电信运营商（ISP）会将出站流量的 DSCP 字段重写（Remark）或置零重置为 Best Effort。因此，DSCP 46 的核心价值在于<strong>解决本机至局域网家庭网关之间的排队挤塞与缓冲区膨胀（Bufferbloat）</strong>，绝不能宣传为“穿透全网的绝对优先权”；</li>
+<li><strong>启动器与分类器作用域（以 Minecraft 为例）</strong>：</li>
+<li><strong>Java 版启动器兼容性</strong>：第三方启动器（PCL2、HMCL）拉起自定义路径的 JRE 时，Windows QoS 策略通过文件名（<code>javaw.exe</code>）进行匹配即可跨路径命中，无需固化绝对路径；其副作用是所有名为 <code>javaw.exe</code> 的图形程序均会被同等标记；</li>
+<li><strong>基岩版 UWP 进程隔离</strong>：UWP 虽然运行在 AppContainer 沙箱内，但网络套接字仍正常受底层 NDIS QoS 策略监管；</li>
+<li><strong>避免硬编码端口</strong>：Minecraft 默认端口为 Java 25565 / 基岩版 19132，但大量私设服务器使用自定义端口。基于进程名（AppPathNameMatchCondition）的分类器比限制特定端口更具普适性与鲁棒性。</li>
 </ol>
 
 
@@ -6174,7 +6181,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年9月3日 15:41:23 UTC">2026年9月3日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年9月23日 15:30:31 UTC">2026年9月23日</span>
   </span>
 
     

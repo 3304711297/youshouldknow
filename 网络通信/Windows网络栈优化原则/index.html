@@ -4172,6 +4172,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#45" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5 网卡高级硬件属性（中断节流、大包发送卸载与缓冲区）的工程权衡
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -6151,6 +6162,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#45" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5 网卡高级硬件属性（中断节流、大包发送卸载与缓冲区）的工程权衡
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -6517,6 +6539,19 @@
 <blockquote>
 <p>⚠️ 不要与"关闭 IPv6 协议本身"混为一谈。关闭 IPv6 栈会影响依赖它的功能（部分游戏 P2P、Xbox 网络、Windows 更新分发），属于另一类取舍，不在本文推荐范围。</p>
 </blockquote>
+<h3 id="45">4.5 网卡高级硬件属性（中断节流、大包发送卸载与缓冲区）的工程权衡<a class="headerlink" href="#45" title="Permanent link">&para;</a></h3>
+<p>社区部分“网络深度优化器”（如 ALit-NetworkOptimizer 等）常将网卡设备管理器的高级属性全部拉满或盲目关闭，这类做法往往存在严重的系统级工程代价：</p>
+<ol>
+<li><strong>中断节流（Interrupt Moderation / <code>*InterruptModeration</code>）</strong>：</li>
+<li><strong>机制</strong>：网卡默认开启中断节流，将微秒内的多个数据包聚合为单次硬件中断，再由系统调度单次 ISR/DPC 处理，保护 CPU 免受中断风暴侵扰；</li>
+<li><strong>代价与权衡</strong>：关闭中断节流（设为 <code>0</code>）确实能在极少数轻载极限竞技中减少几个微秒的排队延迟，但代价是硬件中断频率呈指数级飙升。在多核、高吞吐或笔记本平台上，过高的 DPC/ISR 处理开销会直接挤占游戏主线程的 CPU 时间片，极易引发游戏帧时间突发尖峰（Microstuttering）。必须通过 LatencyMon 实测 DPC 延迟，绝不能当作“无脑通用优化”；</li>
+<li><strong>大包发送卸载（Large Send Offload / <code>*LSOv2IPv4</code> / <code>*LSOv2IPv6</code>）</strong>：</li>
+<li><strong>机制</strong>：LSO 允许 TCP 协议栈将最大 64KB 的上层大缓冲直接交给网卡芯片，由网卡硬件自主分片（Segmentation）并计算校验和，大幅降低 CPU 负载；</li>
+<li><strong>代价与权衡</strong>：针对高频小包互动的 FPS 游戏，小包本身不触发分段，关 LSO 影响甚微；但一旦盲目全局关闭 LSO，在进行后台下载、Steam 游戏更新或局域网文件传输时，CPU 将被强制拉回处理每一个 1500 字节的 TCP 包，导致传输吞吐骤降且 CPU 占用剧增；</li>
+<li><strong>收发缓冲区大小（Receive/Transmit Buffers）与“伪回滚”陷阱</strong>：</li>
+<li>部分优化器将环形缓冲区强制改写为最大值（如 2048），并在所谓的“一键还原”中硬编码恢复为固定值（如 512）；</li>
+<li><strong>严重缺陷</strong>：不同网卡厂商的默认队列长度完全不同（例如部分网卡出厂默认就是 1024）。硬编码的“恢复”本质上是又一次非受控篡改。任何驱动级高级属性修改，必须遵循严格的首次状态快照精准回滚原则。</li>
+</ol>
 <h2 id="_4">五、网卡驱动侧的检查<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <ol>
 <li>驱动版本与来源（OEM/芯片厂商/Windows Update 的差异）；</li>
@@ -6675,7 +6710,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年9月13日 09:38:04 UTC">2026年9月13日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年9月23日 15:30:31 UTC">2026年9月23日</span>
   </span>
 
     
