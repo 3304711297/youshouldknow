@@ -22,6 +22,13 @@
       "last_synced_commit": "81954bf",
       "last_synced_release": "",
       "description": "CachyOS Performance Optimization Guide (跨平台调度、Shader Cache 与 I/O 调优机理参考)"
+    },
+    "ALit-NetworkOptimizer": {
+      "repo": "xiaoX-bgs11/ALit-NetworkOptimizer",
+      "branch": "master",
+      "last_synced_commit": "aa34b8e",
+      "last_synced_release": "",
+      "description": "ALit-NetworkOptimizer (Minecraft PvP 网络优化器，增补 WinDivert 伪优化辨析、网卡高级属性权衡与 Minecraft QoS 边界)"
     }
   }
 }
