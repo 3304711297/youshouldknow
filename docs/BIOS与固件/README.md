@@ -46,6 +46,7 @@ tweak_module: []
 
 - [BIOS 与 UEFI 固件刷写及开机 Logo 修改指南](./BIOS与UEFI固件刷写及开机Logo修改指南.md)
 - [UEFI Editor 项目说明](./UEFI-Editor项目说明.md)
+- [同方模具笔记本解锁 BIOS 全功能菜单（AMITSE 与 AMIBCP 路线）](./同方模具笔记本解锁BIOS全功能菜单-AMITSE与AMIBCP路线.md) — 菜单被「屏蔽」的机制、社区解锁链条与本机实测观察
 - [机械革命笔记本 BIOS 选项与超频降压风险说明](./机械革命笔记本BIOS选项与超频降压风险说明.md)
 
 ## 建议阅读顺序
