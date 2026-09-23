@@ -2,8 +2,8 @@ name: bilibili-watch
 
 on:
   schedule:
-    # 每 6 小时轮询一次（UTC 02:00, 08:00, 14:00, 20:00 -> 北京时间 10:00, 16:00, 22:00, 04:00）
-    - cron: "0 2,8,14,20 * * *"
+    # 每天 UTC 01:00、07:00（北京时间 09:00、15:00）运行
+    - cron: '0 1,7 * * *'
   workflow_dispatch:
 
 permissions:
