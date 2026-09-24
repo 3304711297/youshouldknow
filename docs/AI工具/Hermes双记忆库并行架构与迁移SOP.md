@@ -4,8 +4,12 @@ applies_to:
   - Windows 10/11（源码考证基于 hermes-agent 开源仓库，机制跨平台通用）
   - OpenViking 智能记忆检索
 risk: low
+status: reference
 tweak_module: []
 ---
+
+> [!WARNING] 历史存档（2026-09-21）
+> **OpenViking 已于 2026-09-21 退役**（本站不再有第二记忆库；长文本事实转由 Git 共享库 shared-agent-memory 承载）。本文对「provider 是叠加层而非替换层」的源码考证仍然成立；但「先迁后删」迁移 SOP 的目标端已不存在，全文按退役时点以过去时存档，不再作为本站当前操作规范。
 
 # Hermes 双记忆库并行架构与迁移 SOP
 
