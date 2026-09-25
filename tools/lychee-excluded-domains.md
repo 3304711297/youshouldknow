@@ -47,6 +47,7 @@
 | www.newegg.com | 2026-09-14 起 CI runner (GitHub Actions) 访问连接超时/反爬阻断 | 2026-09-14 建档（电源选型计算文核查属实） |
 | github.com blob 链接 | 2026-09-14 起 GitHub 前端对 CI runner 高并发访问 blob 页面间歇性返回 503 限流 | 2026-09-14 建档（tweakbyjie 与 karing-docu 两处 blob 文档核查属实） |
 | web.archive.org (bswaterb 快照) | 2026-09-24 起 Internet Archive 历史快照回放返回 404（原站已离线，CDX 快照索引存在但回放服务不稳定） | 2026-09-25 建档（本地已复核原站离线、CDX 索引存在，教程核心原理已在正文提炼） |
+| www.starwindsoftware.com | 2026-09-25 起 Cloudflare WAF 对 CI runner 返回 522/403 阻断 | 2026-09-25 建档（TPM 绕过博文此前核查属实） |
 
 **2026-08-29 备注**：当日出现跨站点批量封锁潮（tomshardware → techcommunity → asus → digitalfoundry → game-console 依次暴露），均为 403 拦爬虫性质，已按上表逐个建档；如后续 CI 仍零星暴露新域名，继续按本台账机制处理即可。
 

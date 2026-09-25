@@ -65,6 +65,8 @@ exclude = [
   'https://github\.com/KaringX/karing-docu/blob/',
   # 2026-09-24 起 bswaterb 原站离线且 Internet Archive 历史快照回放返回 404（CDX 索引存在但服务不稳定）
   'https?://web\.archive\.org/.*bswaterb\.club',
+  # 2026-09-25 起 Cloudflare WAF 对 CI runner 返回 522/403 阻断
+  'https://www\.starwindsoftware\.com/',
 ]
 
 # 按站点限流（放在文件末尾：TOML 表段之后的键会归入该表，故必须在所有顶层键声明之后）。
