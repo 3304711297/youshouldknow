@@ -104,6 +104,7 @@ nav:
     - PBO 基础与性能释放总闸门: BIOS与固件/PBO基础与性能释放总闸门.md
     - PPT、TDC、EDC 与温度限制: BIOS与固件/PPT-TDC-EDC与温度限制.md
     - PBO 进阶旋钮标量与频率偏移: BIOS与固件/PBO进阶旋钮标量频率偏移与AGESA.md
+    - CPPC 首选核与 C-State 及 SMT: BIOS与固件/CPPC首选核-CState与SMT调度机制.md
     - AMD PBO 与 Curve Optimizer: BIOS与固件/AMD-PBO与CurveOptimizer.md
     - 功耗墙、电流墙与 CEP 电流保护: BIOS与固件/功耗墙电流墙与CEP电流保护.md
     - CPU 倍频与外频超频基础: BIOS与固件/CPU倍频与外频超频基础.md

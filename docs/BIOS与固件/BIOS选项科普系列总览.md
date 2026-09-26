@@ -56,10 +56,11 @@ tweak_module: []
 19. [PBO 基础与性能释放总闸门](./PBO基础与性能释放总闸门.md)（重制版第二季 EP01）——CPB 自动加速总闸、PBO 四种模式、三面墙前瞻与 X3D 边界；
 20. [PPT、TDC、EDC 与温度限制](./PPT-TDC-EDC与温度限制.md)（重制版第二季 EP02）——四面墙物理定义、出厂 1.35x 规律、Motherboard 档本质、9000 系 105W 模式与 HWiNFO 读数定位；
 21. [PBO 进阶旋钮：标量、频率偏移与 AGESA](./PBO进阶旋钮标量频率偏移与AGESA.md)（重制版第二季 EP03）——标量 FIT 算法、频率偏移天花板逻辑、AGESA 换代与 Profile 跨版本陷阱；
-22. [AMD PBO 与 Curve Optimizer](./AMD-PBO与CurveOptimizer.md)（旧版综合篇）；
-23. [功耗墙、电流墙与 CEP 电流保护](./功耗墙电流墙与CEP电流保护.md)；
-24. [CPU 倍频与外频超频基础](./CPU倍频与外频超频基础.md)；
-25. [CPU 电压与 LLC 防掉压](./CPU电压与LLC防掉压.md)。
+22. [CPPC 首选核、C-State 与 SMT：调度三兄弟与 Windows 协同](./CPPC首选核-CState与SMT调度机制.md)（重制版第二季 EP04）——调度层定位、首选核三件套联动机制、C-State 待机功耗闸门与 CO 调优前置、SMT 36 款游戏实测辨析；
+23. [AMD PBO 与 Curve Optimizer](./AMD-PBO与CurveOptimizer.md)（旧版综合篇）；
+24. [功耗墙、电流墙与 CEP 电流保护](./功耗墙电流墙与CEP电流保护.md)；
+25. [CPU 倍频与外频超频基础](./CPU倍频与外频超频基础.md)；
+26. [CPU 电压与 LLC 防掉压](./CPU电压与LLC防掉压.md)。
 
 ## 系列理念：超频的三条路线
 
