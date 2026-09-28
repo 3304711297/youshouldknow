@@ -370,6 +370,6 @@ Curve Optimizer 调优过程中，翻车现象千奇百怪。建立科学的排�
 
 ### 外部权威技术来源
 - AMD Precision Boost Overdrive 2 Official Technical Brief & FAQs: [AMD Community - Understanding Precision Boost 2](https://community.amd.com/t5/gaming/community-update-precision-boost-2/ba-p/416183)
-- Microsoft Learn: [WHEA-Logger Event ID 18 and Event ID 19 Machine Check Architecture Reference](https://learn.microsoft.com/en-us/windows/win32/whea/hardware-error-events)
+- Microsoft Learn: [WHEA-Logger Event ID 18 and Event ID 19 Machine Check Architecture Reference](https://learn.microsoft.com/en-us/windows-hardware/drivers/whea/whea-hardware-error-events)
 - HWiNFO Technical Forum: [Effective Clock vs Reported Core Clock Explanation & Clock Stretching in AMD Zen Processors](https://www.hwinfo.com/forum/threads/effective-clock-vs-instant-clock.5958/)
 - CoreCycler Project Repository: [sp00n/corecycler - Tool to test Curve Optimizer settings per-core](https://github.com/sp00n/corecycler)
