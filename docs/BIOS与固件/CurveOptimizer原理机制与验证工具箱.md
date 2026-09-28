@@ -327,4 +327,5 @@ tweak_module: []
   - [PPT、TDC、EDC 与温度限制（第二季 EP02）](./PPT-TDC-EDC与温度限制.md)
   - [PBO 进阶旋钮标量频率偏移与 AGESA（第二季 EP03）](./PBO进阶旋钮标量频率偏移与AGESA.md)
   - [CPPC 首选核、C-State 与 SMT：调度三兄弟与 Windows 协同（第二季 EP04）](./CPPC首选核-CState与SMT调度机制.md)
+  - [Curve Optimizer 实操分核精调与翻车排查（第二季 EP06）](./CurveOptimizer实操分核精调与翻车排查.md)
   - [AMD PBO 与 Curve Optimizer（旧版综合参考篇）](./AMD-PBO与CurveOptimizer.md)
