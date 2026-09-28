@@ -71,6 +71,8 @@ class TestWatchBilibili(unittest.TestCase):
         self.assertIn("电脑BIOS/UEFI选项内容全科普【重制版】", body)
         self.assertIn("docs/BIOS与固件/", body)
         self.assertIn("Checklist", body)
+        self.assertIn("video_analyze", body)
+        self.assertIn("Whisper", body)
 
     def test_create_github_issue_dry_run(self):
         res = create_github_issue(

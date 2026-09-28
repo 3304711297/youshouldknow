@@ -345,7 +345,7 @@ def build_issue_content(
         "",
         "### 📋 知识库收录待办 (Checklist)",
         "- [ ] 视频内容初审与价值评估（是否需要收录进知识库）",
-        "- [ ] 视频技术提取（Gemini 代理式蒸馏 agentic-video-distill / 本地 Whisper）",
+        "- [ ] 视频技术提取与双轨校验（未明确指定云端时，优先在当前会话使用当前模型 video_analyze 分析；且必须结合 Whisper 音频转录双轨比对，消除视觉与听觉误差）",
         "- [ ] 硬件术语校对与文章整理",
         f"- [ ] 补充 YAML Front Matter 并加入 `docs/{category}/`",
         "- [ ] 运行 `python tools/check_front_matter.py` 与 `python scripts/gen-matrix.py` 验证",

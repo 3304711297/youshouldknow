@@ -58,3 +58,18 @@ python tools/audit_layout.py <urls.txt> out.json 390
 （`useplatformclock/useplatformtick/…`）与正文里的注册表路径在窄屏会撑破容器。
 `anywhere` 会计入 min-content 计算，因此能让不可断长串折行，避免横向滚动。
 代价是折行点可能落在参数中间，属可接受的取舍。
+
+---
+
+## 上游视频监控与视频分析规范（watch_bilibili.py）
+
+`tools/watch_bilibili.py` 是 GitHub Actions `bilibili-watch` 定时看门任务的核心脚本，负责监控配置在 `tools/watch_sources.json` 中的 UP 主合集并在发现新视频时自动创建 `upstream-watch` Issue。
+
+### 视频技术提取与双轨校验铁律（AI 处理规范）
+
+后续 AI Agent 在响应与处理此类 Issue 时，必须严格遵守以下执行规范：
+
+1. **优先在当前会话直接分析视频**：除非用户在指令中明确强调/要求使用外部云端模型，**默认一律优先在当前会话直接使用当前模型调用 `video_analyze` 分析视频**。严禁盲目调用外部云端 API 或子脚本，避免额外的命令往返消耗大量 Token；
+2. **强制双轨比对避免误差（video_analyze + Whisper）**：分析视频时**不仅要调用 `video_analyze` 分析画面、菜单层级与图表，还必须提取音频使用 Whisper 进行转录**。将多模态视觉切片与 Whisper 听觉转录逐项交叉比对，消除生僻术语误听与视觉小字漏检，彻底杜绝先验幻觉；
+3. **知识库准入严格确认**：未经用户在会话中明确选择与指令确认，严禁擅自向 `docs/` 目录编写或提交文章。
+
