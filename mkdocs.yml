@@ -107,6 +107,7 @@ nav:
     - CPPC 首选核与 C-State 及 SMT: BIOS与固件/CPPC首选核-CState与SMT调度机制.md
     - Curve Optimizer 原理与验证工具箱: BIOS与固件/CurveOptimizer原理机制与验证工具箱.md
     - Curve Optimizer 实操与翻车排查: BIOS与固件/CurveOptimizer实操分核精调与翻车排查.md
+    - Curve Shaper 原理机制与多区间调校: BIOS与固件/CurveShaper原理机制与多区间调校.md
     - AMD PBO 与 Curve Optimizer: BIOS与固件/AMD-PBO与CurveOptimizer.md
     - 功耗墙、电流墙与 CEP 电流保护: BIOS与固件/功耗墙电流墙与CEP电流保护.md
     - CPU 倍频与外频超频基础: BIOS与固件/CPU倍频与外频超频基础.md

@@ -365,6 +365,7 @@ Curve Optimizer 调优过程中，翻车现象千奇百怪。建立科学的排�
   - [PBO 进阶旋钮：标量、频率偏移与 AGESA（第二季 EP03）](./PBO进阶旋钮标量频率偏移与AGESA.md)
   - [CPPC 首选核、C-State 与 SMT：调度三兄弟与 Windows 协同（第二季 EP04）](./CPPC首选核-CState与SMT调度机制.md)
   - [Curve Optimizer 原理机制与验证工具箱（第二季 EP05）](./CurveOptimizer原理机制与验证工具箱.md)
+  - [Curve Shaper 原理机制与多区间调校（第二季 EP07）](./CurveShaper原理机制与多区间调校.md)
   - [CPU 电压与 LLC 防掉压](./CPU电压与LLC防掉压.md)
   - [AMD PBO 与 Curve Optimizer（旧版综合参考篇）](./AMD-PBO与CurveOptimizer.md)
 

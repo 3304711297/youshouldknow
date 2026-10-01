@@ -40,6 +40,7 @@ tweak_module: []
 - [CPPC 首选核、C-State 与 SMT：调度三兄弟与 Windows 协同](./CPPC首选核-CState与SMT调度机制.md) — 调度层定位、首选核三件套联动机制、C-State 待机功耗闸门与 CO 调优前置、SMT 36 款游戏实测辨析（第二季 EP04）
 - [Curve Optimizer 原理机制与验证工具箱](./CurveOptimizer原理机制与验证工具箱.md) — PSIC 两档本质与控制变量定位、CO V/F 曲线不锁压不锁频机制、首选核认知误区、五大工具箱与七步证据链（第二季 EP05）
 - [Curve Optimizer 实操分核精调与翻车排查](./CurveOptimizer实操分核精调与翻车排查.md) — 全核摸底小步加节奏、分核逐核压榨与金核反常识防坑、低负载瞬态黑屏与三大事件码判读、时钟拉伸跑分铁证与五级回滚阶梯（第二季 EP06）
+- [Curve Shaper 原理机制与多区间调校](./CurveShaper原理机制与多区间调校.md) — Zen 5 独占 15 点温频网格、待机低载与高频满载分段限速、找不到选项四步排查、五步设置法与冷热双测 SOP（第二季 EP07）
 - [AMD PBO 与 Curve Optimizer](./AMD-PBO与CurveOptimizer.md)
 - [功耗墙、电流墙与 CEP 电流保护](./功耗墙电流墙与CEP电流保护.md)
 - [CPU 倍频与外频超频基础](./CPU倍频与外频超频基础.md)
