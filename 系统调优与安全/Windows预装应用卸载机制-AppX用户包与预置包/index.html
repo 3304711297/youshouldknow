@@ -4273,7 +4273,79 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#windows-11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        附录：Windows 11 常见预置包速查
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="附录：Windows 11 常见预置包速查">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        框架与基础组件
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        系统工具与生产力
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#xbox" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        内容、娱乐与 Xbox
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        媒体扩展
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        使用说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
     <span class="md-ellipsis">
       
         事实核查记录
@@ -4284,7 +4356,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_8" class="md-nav__link">
+  <a href="#_12" class="md-nav__link">
     <span class="md-ellipsis">
       
         参考
@@ -6254,7 +6326,79 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#windows-11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        附录：Windows 11 常见预置包速查
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="附录：Windows 11 常见预置包速查">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        框架与基础组件
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        系统工具与生产力
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#xbox" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        内容、娱乐与 Xbox
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        媒体扩展
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        使用说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
     <span class="md-ellipsis">
       
         事实核查记录
@@ -6265,7 +6409,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_8" class="md-nav__link">
+  <a href="#_12" class="md-nav__link">
     <span class="md-ellipsis">
       
         参考
@@ -6418,6 +6562,7 @@
 <li><strong>商店与安装基础设施</strong>：Microsoft Store、Desktop App Installer（<code>winget</code> 的载体）。删了会连带影响应用安装与更新链路。</li>
 <li><strong>Shell 与安全组件</strong>：开始菜单/搜索宿主、安全中心 UI（<code>SecHealthUI</code>）一类。它们通常被系统标记为不可移除，硬删的代价远大于收益。</li>
 </ul>
+<p>具体包名与用途见文末附录「Windows 11 常见预置包速查」，删除前先按 Name 对号，不要凭显示名猜。</p>
 <p>先看系统自己怎么标记：</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c"># 官方 cmdlet：列出已安装且被配置为不可移除的包</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nb">Get-NonRemovableAppsPolicy</span> <span class="n">-Online</span>
@@ -6444,7 +6589,292 @@
 </ul>
 <h2 id="tweakbyjie">七、与 tweakbyjie 的边界<a class="headerlink" href="#tweakbyjie" title="Permanent link">&para;</a></h2>
 <p>tweakbyjie 当前<strong>不执行 AppX 删除</strong>：它把「批量卸载预装应用」视为超出固定优化范围的新功能面，脚本里没有对应模块。本文只解释机制与边界，不提供可直接照抄的「全量卸载清单」；需要清理时按第三节的两步法逐项做，并保留还原点。</p>
-<h2 id="_7">事实核查记录<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<h2 id="windows-11">附录：Windows 11 常见预置包速查<a class="headerlink" href="#windows-11" title="Permanent link">&para;</a></h2>
+<p>删除前先认包。下表按用途分组，包名取<strong>包族名（<code>Name</code>）</strong>——<code>PackageFullName</code> 还会附带版本、架构与发布者哈希（如 <code>_8wekyb3d8bbwe</code>），随更新变化，不适合作为判断依据。</p>
+<p>「建议」一列只表达删除后的功能影响，不表达性能收益：</p>
+<ul>
+<li><strong>保留</strong>：删了会破坏依赖或系统基础功能；</li>
+<li><strong>谨慎</strong>：删了会缺失某项功能，且不一定能靠商店一键装回；</li>
+<li><strong>按需</strong>：功能明确，用不到可以删；</li>
+<li><strong>可删</strong>：独立内容应用，删除不影响系统。</li>
+</ul>
+<h3 id="_7">框架与基础组件<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">包名（Name）</th>
+<th style="text-align: left;">实际应用</th>
+<th style="text-align: left;">建议</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>Microsoft.VCLibs.140.00</code></td>
+<td style="text-align: left;">UWP 应用的 C++ 运行时</td>
+<td style="text-align: left;">保留</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>Microsoft.UI.Xaml.2.4</code></td>
+<td style="text-align: left;">WinUI 2 框架</td>
+<td style="text-align: left;">保留</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>Microsoft.WindowsAppRuntime.*</code></td>
+<td style="text-align: left;">Windows App SDK 运行时（较新版本出现）</td>
+<td style="text-align: left;">保留</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>Microsoft.DesktopAppInstaller</code></td>
+<td style="text-align: left;">应用安装器，<code>winget</code> 的载体</td>
+<td style="text-align: left;">保留</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>Microsoft.WindowsStore</code></td>
+<td style="text-align: left;">Microsoft Store</td>
+<td style="text-align: left;">保留</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>Microsoft.StorePurchaseApp</code></td>
+<td style="text-align: left;">Store 购买流程组件</td>
+<td style="text-align: left;">保留</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>Microsoft.SecHealthUI</code></td>
+<td style="text-align: left;">Windows 安全中心界面</td>
+<td style="text-align: left;">保留</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>MicrosoftWindows.Client.WebExperience</code></td>
+<td style="text-align: left;">小组件（Widgets）平台</td>
+<td style="text-align: left;">谨慎</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_8">系统工具与生产力<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">包名（Name）</th>
+<th style="text-align: left;">实际应用</th>
+<th style="text-align: left;">建议</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>Microsoft.WindowsNotepad</code></td>
+<td style="text-align: left;">记事本</td>
+<td style="text-align: left;">按需</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>Microsoft.Paint</code></td>
+<td style="text-align: left;">画图</td>
+<td style="text-align: left;">按需</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>Microsoft.ScreenSketch</code></td>
+<td style="text-align: left;">截图工具（Snipping Tool）</td>
+<td style="text-align: left;">按需</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>Microsoft.WindowsTerminal</code></td>
+<td style="text-align: left;">Windows 终端</td>
+<td style="text-align: left;">按需</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>Microsoft.WindowsCalculator</code></td>
+<td style="text-align: left;">计算器</td>
+<td style="text-align: left;">按需</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>Microsoft.Windows.Photos</code></td>
+<td style="text-align: left;">照片</td>
+<td style="text-align: left;">按需</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>Microsoft.WindowsCamera</code></td>
+<td style="text-align: left;">相机</td>
+<td style="text-align: left;">按需</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>Microsoft.WindowsSoundRecorder</code></td>
+<td style="text-align: left;">录音机</td>
+<td style="text-align: left;">按需</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>Microsoft.MicrosoftStickyNotes</code></td>
+<td style="text-align: left;">便笺</td>
+<td style="text-align: left;">按需</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>Microsoft.WindowsAlarms</code></td>
+<td style="text-align: left;">时钟（闹钟/计时器）</td>
+<td style="text-align: left;">按需</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>Microsoft.PowerAutomateDesktop</code></td>
+<td style="text-align: left;">Power Automate 桌面版</td>
+<td style="text-align: left;">按需</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>Microsoft.Todos</code></td>
+<td style="text-align: left;">微软待办</td>
+<td style="text-align: left;">按需</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>microsoft.windowscommunicationsapps</code></td>
+<td style="text-align: left;">邮件和日历（旧版）</td>
+<td style="text-align: left;">按需</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>Microsoft.People</code></td>
+<td style="text-align: left;">人脉</td>
+<td style="text-align: left;">按需</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>Microsoft.YourPhone</code></td>
+<td style="text-align: left;">手机连接（Phone Link）</td>
+<td style="text-align: left;">按需</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>Microsoft.GetHelp</code></td>
+<td style="text-align: left;">获取帮助</td>
+<td style="text-align: left;">按需</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>Microsoft.Getstarted</code></td>
+<td style="text-align: left;">入门/提示（Tips）</td>
+<td style="text-align: left;">可删</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>Microsoft.MicrosoftOfficeHub</code></td>
+<td style="text-align: left;">Office 集线器</td>
+<td style="text-align: left;">可删</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>Microsoft.WindowsFeedbackHub</code></td>
+<td style="text-align: left;">反馈中心</td>
+<td style="text-align: left;">可删</td>
+</tr>
+</tbody>
+</table>
+<h3 id="xbox">内容、娱乐与 Xbox<a class="headerlink" href="#xbox" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">包名（Name）</th>
+<th style="text-align: left;">实际应用</th>
+<th style="text-align: left;">建议</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>Microsoft.BingNews</code></td>
+<td style="text-align: left;">新闻</td>
+<td style="text-align: left;">可删</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>Microsoft.BingWeather</code></td>
+<td style="text-align: left;">天气</td>
+<td style="text-align: left;">可删</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>Microsoft.WindowsMaps</code></td>
+<td style="text-align: left;">地图</td>
+<td style="text-align: left;">可删</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>Microsoft.MicrosoftSolitaireCollection</code></td>
+<td style="text-align: left;">纸牌合集</td>
+<td style="text-align: left;">可删</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>Microsoft.549981C3F5F10</code></td>
+<td style="text-align: left;">Cortana（小娜，微软已停止支持）</td>
+<td style="text-align: left;">可删</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>Microsoft.ZuneMusic</code></td>
+<td style="text-align: left;">媒体播放器（Media Player）</td>
+<td style="text-align: left;">按需</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>Microsoft.ZuneVideo</code></td>
+<td style="text-align: left;">电影和电视</td>
+<td style="text-align: left;">按需</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>Microsoft.GamingApp</code></td>
+<td style="text-align: left;">Xbox 应用</td>
+<td style="text-align: left;">按需</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>Microsoft.XboxIdentityProvider</code></td>
+<td style="text-align: left;">Xbox 登录组件</td>
+<td style="text-align: left;">谨慎</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>Microsoft.Xbox.TCUI</code></td>
+<td style="text-align: left;">Xbox UI 组件</td>
+<td style="text-align: left;">谨慎</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>Microsoft.XboxGameOverlay</code></td>
+<td style="text-align: left;">Xbox 游戏覆盖层</td>
+<td style="text-align: left;">谨慎</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>Microsoft.XboxGamingOverlay</code></td>
+<td style="text-align: left;">Game Bar / 录屏覆盖层</td>
+<td style="text-align: left;">谨慎</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>Microsoft.XboxSpeechToTextOverlay</code></td>
+<td style="text-align: left;">Xbox 语音转文字覆盖层</td>
+<td style="text-align: left;">谨慎</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_9">媒体扩展<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<p>这几项是解码扩展，不是「预装娱乐应用」。删掉后对应格式可能无法预览或播放，且不一定能从商店装回。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">包名（Name）</th>
+<th style="text-align: left;">实际应用</th>
+<th style="text-align: left;">建议</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>Microsoft.HEIFImageExtension</code></td>
+<td style="text-align: left;">HEIF/HEIC 图像解码</td>
+<td style="text-align: left;">保留</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>Microsoft.WebpImageExtension</code></td>
+<td style="text-align: left;">WebP 图像解码</td>
+<td style="text-align: left;">保留</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>Microsoft.VP9VideoExtensions</code></td>
+<td style="text-align: left;">VP9 视频解码</td>
+<td style="text-align: left;">保留</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>Microsoft.WebMediaExtensions</code></td>
+<td style="text-align: left;">媒体格式扩展</td>
+<td style="text-align: left;">保留</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_10">使用说明<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>包族名对号，不看版本</strong>：用 <code>Get-AppxPackage -AllUsers *&lt;Name&gt;*</code> 匹配；表里的名称是前缀，实际包名可能带版本后缀。</li>
+<li><strong>清单不是全集</strong>：不同 Windows 版本、地区与 SKU 的预置包不同（较新版本还会出现 Clipchamp、Family、QuickAssist、CrossDevice 等），以本机 <code>Get-AppxProvisionedPackage -Online</code> 的结果为准。</li>
+<li><strong>「可删」不等于「该删」</strong>：删除的收益是减少后台活动与推荐内容，不是性能提升；删之前建还原点。</li>
+<li><strong>本表底稿是 2023-06 的一份第三方 Win11 清单</strong>，其中若干描述笼统或已过时（例如把 <code>549981C3F5F10</code> 留空、把 <code>YourPhone</code> 说成「Windows 10 设备连接」）。本表按当前应用身份做了校正，仍建议结合本机枚举核对。</li>
+</ol>
+<h2 id="_11">事实核查记录<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -6477,15 +6907,20 @@
 <td style="text-align: left;">清理预装应用能显著提升性能</td>
 <td style="text-align: left;">❌ 无通用证据；收益主要是后台活动与推荐内容减少，需实测</td>
 </tr>
+<tr>
+<td style="text-align: left;">附录的预装包清单可以跨版本照抄</td>
+<td style="text-align: left;">❌ 包名与数量随版本、地区、SKU 变化；清单只作识别参考，删除前以本机枚举为准</td>
+</tr>
 </tbody>
 </table>
-<h2 id="_8">参考<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<h2 id="_12">参考<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="https://learn.microsoft.com/en-us/windows/application-management/overview-windows-apps">Overview of apps on Windows client devices（Installed 与 Provisioned 两类应用）</a></li>
 <li><a href="https://learn.microsoft.com/en-us/powershell/module/appx/remove-appxpackage?view=windowsserver2025-ps">Remove-AppxPackage（<code>-AllUsers</code> 作用域与管理员要求）</a></li>
 <li><a href="https://learn.microsoft.com/en-us/powershell/module/dism/remove-appxprovisionedpackage?view=windowsserver2025-ps">Remove-AppxProvisionedPackage（预置包语义）</a></li>
 <li><a href="https://learn.microsoft.com/en-us/powershell/module/dism/get-appxprovisionedpackage?view=windowsserver2025-ps">Get-AppxProvisionedPackage（为新用户安装的包）</a></li>
 <li><a href="https://learn.microsoft.com/en-us/powershell/module/appx/get-nonremovableappspolicy?view=windowsserver2025-ps">Get-NonRemovableAppsPolicy（不可移除应用清单）</a></li>
+<li><a href="https://www.pc528.net/202306271417.html">Windows 11 预安装的 Microsoft Appx 应用程序功能介绍（pc528，2023-06-27）</a>——附录清单的底稿；该文对部分包的描述已过时或笼统，附录按当前应用身份做了校正。</li>
 <li><a href="https://github.com/ProjectAtomOS/Atom-Tool-Box/releases/tag/v0.2.0">Atom-Tool-Box v0.2.0（DEBLOAT 实现样本）</a></li>
 </ul>
 
@@ -6510,7 +6945,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年11月4日 13:01:13 UTC">2026年11月4日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年11月4日 13:14:56 UTC">2026年11月4日</span>
   </span>
 
     
