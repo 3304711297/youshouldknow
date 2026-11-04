@@ -12,9 +12,9 @@
     "Atom-Tool-Box": {
       "repo": "ProjectAtomOS/Atom-Tool-Box",
       "branch": "main",
-      "last_synced_commit": "ecf8368",
-      "last_synced_release": "v0.1.5",
-      "description": "Atom ToolBox (ProjectAtomOS / Windows Gaming & System Optimization Utility)"
+      "last_synced_commit": "5826a03",
+      "last_synced_release": "v0.2.0",
+      "description": "Atom ToolBox (ProjectAtomOS / Windows Gaming & System Optimization Utility)：0.2.0（5826a03）吸收 AppX 用户包/预置包卸载机制，新增《Windows 预装应用卸载机制-AppX用户包与预置包》；同版更新策略脚本（暂停/延迟/目标版本）经审阅仅登记、不纳入；按用户要求保留 Atom-Tool-Box 看门"
     },
     "cachyos-optimization": {
       "repo": "fernbacher/cachyos-optimization",
