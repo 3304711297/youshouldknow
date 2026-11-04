@@ -18,20 +18,23 @@ tweak_module: []
 
 ## 一、这类教程到底在做什么
 
-结论先说：**它不是「自己做一份 Windows 镜像」，而是「用现成工具把别人的精简方案套到你的系统上」。**
+结论先说：**它不是「自己做一份 Windows 镜像」，也不是「从零写一套优化脚本」，而是「拿现成的 Playbook 换皮、重打包，再用 AME Wizard 部署」。**
 
-以 B 站教程《如何封装自己的电竞系统，纯保姆级教学》为例，画面里能核实的证据是：
+以 B 站教程《如何封装自己的电竞系统，纯保姆级教学》（`BV1Vznm6kEVB`，11:09）为例，画面里能核实的事实链是：
 
-- 出现 **AME Wizard（Beta）** 的执行界面，加载的是 **ACME Playbook v0.574**（界面原文 *A playbook that focuses on improving gaming performance and privacy.*）；
-- 桌面与资源管理器里是一个叫 **电竞系统** 的目录，里面有 **XOS** 包，包内可见 `Playbook.conf`、`playbook.png`、`Configuration`、`Executables`、`custom.yml` 一类文件；
-- 讲解过程打开 **Notepad++** 改 `custom.yml` 与 `Playbook.conf`，用 `<Name>ACMPC</Name>` 这类字段改电脑名/用户名；
-- 用「运行 → `regedit`」准备导入注册表，并在文本里成段展示 `sc config … start= disabled` 形式的服务禁用命令。
+1. 桌面三个物件：`ACMEPC-Playbook.APBX`（类型 APBX，1.88 MB，2026/8/22）、`AME Wizard Beta.exe`、`电竞系统` 文件夹；
+2. `电竞系统\XOS` 里是**别人写好的 playbook 包**：`Configuration`、`Executables`、`playbook.conf`、`playbook.png`（`playbook.conf` 修改时间 2026/10/11）；
+3. 教程做的事：把 `playbook.conf` 里的 `<Name>XOS</Name>`、`<Username>XOS</Username>`、`<Title>XOS Playbook v0.574</Title>`、`<ShortDescription>`、`<Description>`、`<ProgressText>`、壁纸名逐项改成 `ACMEPC`；
+4. 改完把文件夹**压成 zip、把后缀改成 `.apbx`**，拖进 AME Wizard → `Next` 执行；
+5. 另外打开 `online.winscript.cc`（Chris Titus Tech WinUtil 的网页配置版）勾选精简项，把生成的 PowerShell 代码复制到管理员终端执行。
 
-视频自己给出的「电竞系统原理」原文（画面白框，逐字）：
+AME Wizard 左侧栏同时列出 `ACMEPC`（标注 *Unverified / Customized Playbook*）与原始的 `XOS`（标注 *Unverified / Created by imkoby*）——**「封装」的实质是「改作者名 + 改标题 + 换壁纸」**，不是写新 playbook。视频里也明说代码来源是贴吧流传的版本（"因为评论区发不出来，今天全部的语法和代码可以截图复制，或者直接搜贴吧 ACMEPC 去复制"）。
+
+视频自己给出的「电竞系统原理」（手机便签原文，逐字）：
 
 > 往期教程就已经给你们梳理过一个所谓的电竞系统思路，那就是在原版系统的基础上去精简系统自带组件，禁用服务项，导入一个高性能定制电源计划，或者自带卓越性能这种，然后关闭一些系统可能会占用后台影响性能的系统本身设置【尤其是系统通知，索引系统更新，WINDOWS DEFENDER 这些】仅此而已
 
-所以它的技术内核只有四件事：**删组件、禁服务、换电源计划、关后台设置**。AME Wizard 与 Playbook 只是把这件事从「手工逐项改」变成「脚本批量改」。
+所以技术内核只有四件事：**删组件、禁服务、换电源计划、关后台设置**。AME Wizard 与 Playbook 只是把这件事从「手工逐项改」变成「脚本批量改」。
 
 ## 二、Playbook 封装是个什么东西
 
@@ -39,36 +42,48 @@ Playbook 是一份**声明式载荷包**，AME Wizard 是它的**执行器**：
 
 | 包内元素 | 作用 | 可逆性 |
 | --- | --- | --- |
-| `Playbook.conf` / `playbook.png` | 元数据：名称、版本、图标、作者、支持的 Windows 版本 | — |
-| `custom.yml` | 可变配置：电脑名/用户名、是否保留某些功能、地区/语言等 | 部署前可改，部署后随系统状态走 |
-| `Executables/` | 实际执行的程序（含自写工具） | 取决于其做了什么 |
-| `.reg` / 内联 `regedit` 项 | 直接写注册表 | **多数不可逆**（未见备份/回滚脚本） |
-| `sc config … start= disabled` 一类命令 | 直接把服务启动类型改成禁用 | 可手工改回，但**要知道改了哪些** |
+| `playbook.conf` | 元数据：`<Name>`/`<Username>`/`<Title>`/`<Description>`/`<ProgressText>`，以及壁纸、引导名称、系统版本信息 | 部署前可改；部署后写进系统，需另改回 |
+| `Configuration/`、`Executables/` | playbook 的配置与随包可执行文件 | 取决于它做了什么 |
+| `custom.yml` | 真正的改动清单：服务、命令、注册表 | 视条目而定，多数无回滚 |
+| `playbook.png` | 图标 | — |
+| `.apbx` | 上述内容的**打包后缀**（本质是 zip 改名） | — |
+
+`custom.yml` 用的四种 YAML 标签，教程里逐条演示过：
+
+```yaml
+# 1) 改服务启动类型（startup: 0=Boot 1=System 2=Auto 3=Manual 4=Disabled）
+- !service: {name: 'DPSvc', operation: change, startup: 4}
+
+# 2) 直接跑命令
+- !cmd: {command: 'powercfg /hibernate off'}
+
+# 3) 写单个注册表值（示例路径为 PriorityControl 键）
+- !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Control\PriorityControl', ...}
+
+# 4) 删整棵注册表键
+- !registryKey: {path: 'HKLM\SOFTWARE\...'}
+```
 
 关键点在于**执行方式**：AME Wizard 不是「装个软件点两下」的常规安装，而是把系统切到独立的部署环境里执行 playbook（过程中需要重启）。这意味着：
 
 1. 它绕过「设置 → 应用 → 卸载」这类可撤销通道，直接改系统文件、服务与注册表；
-2. **没有任何官方的「一键还原」**——Playbook 的执行通常不生成回滚清单；
-3. 出问题时最快的恢复手段是**重装或恢复系统镜像**，而不是「再跑一次反向脚本」。
+2. **没有官方的「一键还原」**——playbook 执行通常不生成回滚清单；
+3. 出问题最快的恢复手段是**重装或恢复系统镜像**，而不是「再跑一次反向脚本」；
+4. 首次运行会要求 `Disable Security → Allow AME Wizard file system access`（给它文件系统访问权），这一步本身就是「让工具接管系统」的授权。
 
 ## 三、四类改动的真实代价
 
 ### 1. 精简系统组件（不可逆项）
 
-组件被移除后，`DISM /Online /Add-Capability` 往往装不回来——组件存储（WinSxS 源）被裁掉了，补装会报「源文件找不到」。典型受影响面：
+被移除的组件通常装不回来——组件存储源被裁掉后，`DISM /Online /Add-Capability` 会报「源文件找不到」。典型受影响面：Windows 更新自身、可选/按需功能（FOD）、.NET 3.5、语言包、商店与 Winget 依赖的 AppX 框架、WSL/Hyper-V/沙盒、打印子系统。
 
-- Windows 更新本身（部分 playbook 会连 WU 组件一起裁）；
-- 可选功能与按需功能（FOD）、.NET 3.5、语言包；
-- 商店 / Winget 依赖的 AppX 框架；
-- WSL、Hyper-V、沙盒、打印子系统。
-
-**这一项没有「试一下不行再撤回」的空间**，做之前必须接受「这台机器以后可能装不回某些 Windows 功能」。
+**这一项没有「试一下不行再撤回」的空间。**
 
 ### 2. 禁用服务项（可逆，但容易连带）
 
-`sc config <svc> start= disabled` 单独一条都能改回来，问题在**没人给你清单**。视频里那一大段长列表，字幕挡住后连服务名都读不全——照抄等于把「系统服务」当成黑盒关了。
+`!service: {startup: 4}` 单独一条都能改回 `3`（手动），问题在**没人给你清单**。视频里那一大段 `custom.yml` 滚动时，连服务名都读不全——照抄等于把「系统服务」当成黑盒关了。
 
-对照本库的[Windows 服务优化原则](./Windows服务优化原则.md)：服务的正确做法是**按分组、按依赖、逐项验证**，而不是整段 `disabled`。常见连带：
+对照本库的[Windows 服务优化原则](./Windows服务优化原则.md)：服务的正确做法是**按分组、按依赖、逐项验证**，而不是整段 `startup: 4`。常见连带：
 
 - 关 `Diagnostic Policy Service` → 部分排障、事件收集、应用诊断失效；
 - 关索引 / `WSearch` → 开始菜单与资源管理器搜索退化；
@@ -80,6 +95,8 @@ Playbook 是一份**声明式载荷包**，AME Wizard 是它的**执行器**：
 四件事里只有这一件是**真正可逆、且机制清楚**的：`powercfg /import` 导入一个 `.pow` 方案、`powercfg /setactive` 激活，出问题换回「平衡」即可。本库已有专门文章讨论电源计划本身（见[电源计划创建与优化指南](../系统知识/电源计划创建与优化指南.md)）。
 
 需要注意的是：**别把「卓越性能」当成免费的帧率**。它主要影响处理器最小状态与响应策略，在插电的台式机上有意义，在笔记本上更多是发热与续航的取舍；对已经跑满 GPU 瓶颈的游戏，收益接近零。
+
+另外，教程里 `powercfg /hibernate off` 这类命令会顺带关掉休眠，**依赖休眠文件的快速启动也随之失效**——对双系统、外接显卡坞和部分驱动的初始化行为都有连带影响，而视频没有提。
 
 ### 4. 关通知 / 索引 / 更新 / Defender（风险最高的一组）
 
@@ -117,13 +134,14 @@ Playbook 是一份**声明式载荷包**，AME Wizard 是它的**执行器**：
 4. **驱动签名强制被绕过、内核被打补丁**：与反作弊（EAC / BattlEye / Vanguard / ACE）和安全启动直接冲突，后果是游戏进不去或账号风险，见[易受攻击驱动黑名单机制与关闭代价](./易受攻击驱动黑名单机制与关闭代价.md)、[Secure Boot 安全启动与密钥管理](../BIOS与固件/SecureBoot安全启动与密钥管理.md)。
 5. **没有回滚清单**：playbook 执行完，你手里通常只有「一个被改过的系统」，没有「改了哪些」的记录。
 
-## 六、视频里没说清或说得含糊的地方
+## 六、视频里没说清或值得警惕的地方
 
-- **服务禁用清单读不全**：整段 `sc config … start= disabled` 被字幕与分辨率遮挡，无法核对到底关了哪些；教程本身也没有给出清单文件。
-- **「有利有弊」只说了半句**：承认有弊，但没有展开弊是什么、如何回退。
+- **服务与注册表清单读不全**：`custom.yml` 快速滚动 + 字幕遮挡，服务名与 `!registryKey` 的长键路径无法核对；教程本身也没有给出清单文件。
+- **代码不是原创，来源不可审计**：作者明说语法与代码来自贴吧流传版本。而 playbook 的 `Executables/` 可以放任意程序——**等于以管理员身份运行陌生人的可执行文件**。
 - **没有验证环节**：装完不测帧率、不测延迟、不测功能完整性（打印、蓝牙、WSL、商店）。
 - **把「精简」当默认正确**：与「按需、可逆、可验证」的优化原则相反。
-- **第三方 playbook 的可信度未讨论**：`ACME Playbook`、`XOS` 都是社区产物，其 `Executables/` 里跑什么、是否联网、是否改安全启动，教程没有涉及。
+- **署名/授权争议被当作花絮**：视频中段插入了作者与海外原作者的维权交涉截图（已打码），说明这类「换皮 playbook」在社区里本身存在授权争议——这恰好是判断「要不要用它」的重要信号。
+- **没有回滚说明**：全程未讲失败怎么恢复。
 
 ## 七、如果确实想走这条路：把风险压到最低
 
@@ -131,7 +149,8 @@ Playbook 是一份**声明式载荷包**，AME Wizard 是它的**执行器**：
 2. **不要在主力机上首发**：用虚拟机或备用盘先跑一遍 playbook，逐项记录它对服务与注册表的改动。
 3. **留一份块级镜像**（`wbadmin` / 第三方 disk image / 厂商恢复介质），这是唯一可靠的「回滚」。
 4. **明确不碰的四件事**：安全启动、驱动签名强制、VBS/HVCI、Defender 完全移除。这四项一旦动，收益是「可能少几个后台进程」，代价是「系统不再是你熟悉的那个 Windows」。
-5. **与 tweakbyjie 的边界**：`tweakbyjie` 只做可逆、可验证、有明确机制依据的项；凡是「跑完就回不去」的改动，不属于脚本该做的事。
+5. **不要用来源不明的 `.apbx`**：先把它当 zip 解开，看 `Executables/` 与 `custom.yml` 里到底有什么，再决定是否运行。
+6. **与 tweakbyjie 的边界**：`tweakbyjie` 只做可逆、可验证、有明确机制依据的项；凡是「跑完就回不去」的改动，不属于脚本该做的事。
 
 ## 相关阅读
 
