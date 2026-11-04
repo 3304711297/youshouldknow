@@ -72,6 +72,8 @@ Get-AppxProvisionedPackage -Online |
 - **商店与安装基础设施**：Microsoft Store、Desktop App Installer（`winget` 的载体）。删了会连带影响应用安装与更新链路。
 - **Shell 与安全组件**：开始菜单/搜索宿主、安全中心 UI（`SecHealthUI`）一类。它们通常被系统标记为不可移除，硬删的代价远大于收益。
 
+具体包名与用途见文末附录「Windows 11 常见预置包速查」，删除前先按 Name 对号，不要凭显示名猜。
+
 先看系统自己怎么标记：
 
 ```powershell
@@ -106,6 +108,90 @@ Get-AppxPackage | Where-Object NonRemovable -eq $true |
 
 tweakbyjie 当前**不执行 AppX 删除**：它把「批量卸载预装应用」视为超出固定优化范围的新功能面，脚本里没有对应模块。本文只解释机制与边界，不提供可直接照抄的「全量卸载清单」；需要清理时按第三节的两步法逐项做，并保留还原点。
 
+## 附录：Windows 11 常见预置包速查
+
+删除前先认包。下表按用途分组，包名取**包族名（`Name`）**——`PackageFullName` 还会附带版本、架构与发布者哈希（如 `_8wekyb3d8bbwe`），随更新变化，不适合作为判断依据。
+
+「建议」一列只表达删除后的功能影响，不表达性能收益：
+
+- **保留**：删了会破坏依赖或系统基础功能；
+- **谨慎**：删了会缺失某项功能，且不一定能靠商店一键装回；
+- **按需**：功能明确，用不到可以删；
+- **可删**：独立内容应用，删除不影响系统。
+
+### 框架与基础组件
+
+| 包名（Name） | 实际应用 | 建议 |
+| :--- | :--- | :--- |
+| `Microsoft.VCLibs.140.00` | UWP 应用的 C++ 运行时 | 保留 |
+| `Microsoft.UI.Xaml.2.4` | WinUI 2 框架 | 保留 |
+| `Microsoft.WindowsAppRuntime.*` | Windows App SDK 运行时（较新版本出现） | 保留 |
+| `Microsoft.DesktopAppInstaller` | 应用安装器，`winget` 的载体 | 保留 |
+| `Microsoft.WindowsStore` | Microsoft Store | 保留 |
+| `Microsoft.StorePurchaseApp` | Store 购买流程组件 | 保留 |
+| `Microsoft.SecHealthUI` | Windows 安全中心界面 | 保留 |
+| `MicrosoftWindows.Client.WebExperience` | 小组件（Widgets）平台 | 谨慎 |
+
+### 系统工具与生产力
+
+| 包名（Name） | 实际应用 | 建议 |
+| :--- | :--- | :--- |
+| `Microsoft.WindowsNotepad` | 记事本 | 按需 |
+| `Microsoft.Paint` | 画图 | 按需 |
+| `Microsoft.ScreenSketch` | 截图工具（Snipping Tool） | 按需 |
+| `Microsoft.WindowsTerminal` | Windows 终端 | 按需 |
+| `Microsoft.WindowsCalculator` | 计算器 | 按需 |
+| `Microsoft.Windows.Photos` | 照片 | 按需 |
+| `Microsoft.WindowsCamera` | 相机 | 按需 |
+| `Microsoft.WindowsSoundRecorder` | 录音机 | 按需 |
+| `Microsoft.MicrosoftStickyNotes` | 便笺 | 按需 |
+| `Microsoft.WindowsAlarms` | 时钟（闹钟/计时器） | 按需 |
+| `Microsoft.PowerAutomateDesktop` | Power Automate 桌面版 | 按需 |
+| `Microsoft.Todos` | 微软待办 | 按需 |
+| `microsoft.windowscommunicationsapps` | 邮件和日历（旧版） | 按需 |
+| `Microsoft.People` | 人脉 | 按需 |
+| `Microsoft.YourPhone` | 手机连接（Phone Link） | 按需 |
+| `Microsoft.GetHelp` | 获取帮助 | 按需 |
+| `Microsoft.Getstarted` | 入门/提示（Tips） | 可删 |
+| `Microsoft.MicrosoftOfficeHub` | Office 集线器 | 可删 |
+| `Microsoft.WindowsFeedbackHub` | 反馈中心 | 可删 |
+
+### 内容、娱乐与 Xbox
+
+| 包名（Name） | 实际应用 | 建议 |
+| :--- | :--- | :--- |
+| `Microsoft.BingNews` | 新闻 | 可删 |
+| `Microsoft.BingWeather` | 天气 | 可删 |
+| `Microsoft.WindowsMaps` | 地图 | 可删 |
+| `Microsoft.MicrosoftSolitaireCollection` | 纸牌合集 | 可删 |
+| `Microsoft.549981C3F5F10` | Cortana（小娜，微软已停止支持） | 可删 |
+| `Microsoft.ZuneMusic` | 媒体播放器（Media Player） | 按需 |
+| `Microsoft.ZuneVideo` | 电影和电视 | 按需 |
+| `Microsoft.GamingApp` | Xbox 应用 | 按需 |
+| `Microsoft.XboxIdentityProvider` | Xbox 登录组件 | 谨慎 |
+| `Microsoft.Xbox.TCUI` | Xbox UI 组件 | 谨慎 |
+| `Microsoft.XboxGameOverlay` | Xbox 游戏覆盖层 | 谨慎 |
+| `Microsoft.XboxGamingOverlay` | Game Bar / 录屏覆盖层 | 谨慎 |
+| `Microsoft.XboxSpeechToTextOverlay` | Xbox 语音转文字覆盖层 | 谨慎 |
+
+### 媒体扩展
+
+这几项是解码扩展，不是「预装娱乐应用」。删掉后对应格式可能无法预览或播放，且不一定能从商店装回。
+
+| 包名（Name） | 实际应用 | 建议 |
+| :--- | :--- | :--- |
+| `Microsoft.HEIFImageExtension` | HEIF/HEIC 图像解码 | 保留 |
+| `Microsoft.WebpImageExtension` | WebP 图像解码 | 保留 |
+| `Microsoft.VP9VideoExtensions` | VP9 视频解码 | 保留 |
+| `Microsoft.WebMediaExtensions` | 媒体格式扩展 | 保留 |
+
+### 使用说明
+
+1. **包族名对号，不看版本**：用 `Get-AppxPackage -AllUsers *<Name>*` 匹配；表里的名称是前缀，实际包名可能带版本后缀。
+2. **清单不是全集**：不同 Windows 版本、地区与 SKU 的预置包不同（较新版本还会出现 Clipchamp、Family、QuickAssist、CrossDevice 等），以本机 `Get-AppxProvisionedPackage -Online` 的结果为准。
+3. **「可删」不等于「该删」**：删除的收益是减少后台活动与推荐内容，不是性能提升；删之前建还原点。
+4. **本表底稿是 2023-06 的一份第三方 Win11 清单**，其中若干描述笼统或已过时（例如把 `549981C3F5F10` 留空、把 `YourPhone` 说成「Windows 10 设备连接」）。本表按当前应用身份做了校正，仍建议结合本机枚举核对。
+
 ## 事实核查记录
 
 | 声明 | 核查结果 |
@@ -116,6 +202,7 @@ tweakbyjie 当前**不执行 AppX 删除**：它把「批量卸载预装应用�
 | 删除框架包会让依赖应用故障 | ✅ 机制成立：框架包是依赖项；具体表现依应用与版本 |
 | 功能更新后应用一定回归 | ⚠️ 社区常见观察，微软无永久删除承诺；不同升级路径结果不一 |
 | 清理预装应用能显著提升性能 | ❌ 无通用证据；收益主要是后台活动与推荐内容减少，需实测 |
+| 附录的预装包清单可以跨版本照抄 | ❌ 包名与数量随版本、地区、SKU 变化；清单只作识别参考，删除前以本机枚举为准 |
 
 ## 参考
 
@@ -124,4 +211,5 @@ tweakbyjie 当前**不执行 AppX 删除**：它把「批量卸载预装应用�
 - [Remove-AppxProvisionedPackage（预置包语义）](https://learn.microsoft.com/en-us/powershell/module/dism/remove-appxprovisionedpackage?view=windowsserver2025-ps)
 - [Get-AppxProvisionedPackage（为新用户安装的包）](https://learn.microsoft.com/en-us/powershell/module/dism/get-appxprovisionedpackage?view=windowsserver2025-ps)
 - [Get-NonRemovableAppsPolicy（不可移除应用清单）](https://learn.microsoft.com/en-us/powershell/module/appx/get-nonremovableappspolicy?view=windowsserver2025-ps)
+- [Windows 11 预安装的 Microsoft Appx 应用程序功能介绍（pc528，2023-06-27）](https://www.pc528.net/202306271417.html)——附录清单的底稿；该文对部分包的描述已过时或笼统，附录按当前应用身份做了校正。
 - [Atom-Tool-Box v0.2.0（DEBLOAT 实现样本）](https://github.com/ProjectAtomOS/Atom-Tool-Box/releases/tag/v0.2.0)
