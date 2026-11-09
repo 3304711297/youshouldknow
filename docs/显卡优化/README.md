@@ -25,6 +25,10 @@ NVIDIA / AMD 显卡驱动、控制面板、DLSS、ReBAR 与接口知识分类。
 - [DLSS 帧生成、低延时模式与延迟的关系](./DLSS帧生成低延时模式与延迟的关系.md) — 超分/帧生成/Reflex、刷新率与多帧生成倍率对帧率与延迟的影响
 - [NVIDIA 进阶优化 - DLSS 超分预设模型](./NVIDIA进阶优化-DLSS超分预设模型.md) — DLSS 预设、DLSSTweaks 与 Ultra Performance 比例示例
 
+### 显示路径与缓存维护
+- [全屏优化与窗口化游戏优化](./全屏优化与窗口化游戏优化.md) — FSO / SwapEffectUpgradeEnable / GpuPreference 三层开关的边界与验证
+- [着色器缓存与清理边界](./着色器缓存与清理边界.md) — 缓存目录、可再生性与安全清理的三条规则
+
 ### 硬件能力与接口
 - [NVIDIA 进阶优化 - ReBAR 强制开启](./NVIDIA进阶优化-ReBAR强制开启.md) — Resizable BAR 的开启条件与验证
 - [DP / HDMI 协议与速率关系表](./DP-HDMI协议与速率关系表.md) — 接口带宽、分辨率与刷新率速查

@@ -167,6 +167,8 @@ nav:
     - NVIDIA 进阶优化 - DLSS 超分预设模型: 显卡优化/NVIDIA进阶优化-DLSS超分预设模型.md
     - NVIDIA 进阶优化 - ReBAR 强制开启: 显卡优化/NVIDIA进阶优化-ReBAR强制开启.md
     - DP / HDMI 协议与速率关系表: 显卡优化/DP-HDMI协议与速率关系表.md
+    - 全屏优化与窗口化游戏优化: 显卡优化/全屏优化与窗口化游戏优化.md
+    - 着色器缓存与清理边界: 显卡优化/着色器缓存与清理边界.md
   - 笔电相关:
     - 笔电相关/README.md
     - 控制中心与 Uniwill 驱动冲突排查: 笔电相关/控制中心与Uniwill驱动冲突排查.md

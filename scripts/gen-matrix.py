@@ -20,7 +20,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 DOCS = ROOT / "docs"
 OUT = DOCS / "项目导航" / "覆盖矩阵.md"
-MODULE_RANGE = range(1, 13)
+MODULE_RANGE = range(1, 18)
 
 _spec = importlib.util.spec_from_file_location("cfm", ROOT / "tools" / "check_front_matter.py")
 _cfm = importlib.util.module_from_spec(_spec)
@@ -116,7 +116,7 @@ def _render(entries: list[dict]) -> str:
     lines.append("> 反向入口见 tweakbyjie 仓库 README 的菜单章节（各模块「详见」链接指向本库对应文章）。")
     lines.append(">")
     lines.append("> 边界说明：菜单 **0（退出 / Exit）不是模块**，不参与前置条件灰掉；预检（preflight）")
-    lines.append("> 只对 1-11 号模块做可用性判断。各模块执行后的重启询问属于会话级收尾，同样不受预检影响，")
+    lines.append("> 只对 1-17 号模块做可用性判断。各模块执行后的重启询问属于会话级收尾，同样不受预检影响，")
     lines.append("> 也从不自动重启（`-AcceptDefaults` 无人值守模式下维持默认\"不重启\"）。")
     lines.append("")
     lines.append("## 模块 → 文章（一对多）")
