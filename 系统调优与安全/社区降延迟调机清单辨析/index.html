@@ -6614,13 +6614,14 @@
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>默认：0x00000014 (20)    —— 保留给后台任务的 CPU 时间百分比
 </code></pre></div>
 <ul>
-<li>官方语义：为<strong>多媒体/后台任务</strong>预留的 CPU 时间比例，属于 MMCSS 体系；</li>
-<li>设为 <code>0</code>（即保留 0%）意味着把 20% 的预留全部释放给前台。这确实可能让前台拿到更多 CPU，但<strong>后台线程可能出现饥饿</strong>——音频、录制、后台服务、部分驱动工作线程在极端情况下可能被过度压制，表现为爆音、卡顿或功能异常；</li>
-<li>社区常见做法是从 20 降到 10。</li>
+<li>官方语义：MMCSS 为低优先级任务保留的 CPU 时间比例，默认 20（0x14）；</li>
+<li><strong>取值有钳制</strong>：非 10 的整数倍会向下取整到最近的 10；<strong>小于 10 或大于 100 一律按 20 处理</strong>；<code>100</code> 会直接禁用 MMCSS（驱动返回 <code>STATUS_SERVER_DISABLED</code>）。因此网上流传的“设 0 释放 20% 预留”是<strong>无效写法</strong>——0 会被钳回 20，等于没改；</li>
+<li>真正生效的最低值是 <code>10</code>，即把后台预留从 20% 降到 10%；代价是音频、录制与后台服务在极端争抢时更容易被压制；</li>
+<li>改完必须用 <code>powercfg /query</code> 复核；若当前值本来就是 20，写 10 才是有意义的变更。</li>
 </ul>
 <h3 id="win32priorityseparation">Win32PrioritySeparation<a class="headerlink" href="#win32priorityseparation" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>HKLM\SYSTEM\CurrentControlSet\Control\PriorityControl\Win32PrioritySeparation
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>默认：0x26 (38) —— 短时间片 + 可变 + 3:1 前台提升
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>干净安装默认：0x2；性能选项选「程序」后写入 0x26 (38)
 </code></pre></div>
 <p>该值是 <strong>6 位位掩码（AABBCC）</strong>，三段分别控制：</p>
 <table>
@@ -6646,8 +6647,9 @@
 </tbody>
 </table>
 <ul>
-<li><code>0x26</code>（38，桌面默认）= <strong>短时间片 + 可变 + 前台 3:1 提升</strong>；</li>
-<li><code>0x28</code>（40，社区常见推荐）= <strong>长(固定)时间片 + 1:1</strong>，即<strong>取消了前台提升</strong>。</li>
+<li>注册表干净安装的默认值是 <code>0x2</code>；在客户端 SKU 上它解析为与 <code>0x26</code> 相同的策略，所以“默认 0x26”只是性能选项写入后的等价说法；</li>
+<li><code>0x26</code>（38，性能选项「程序」）= <strong>短时间片 + 可变 + 前台 3:1 提升</strong>；</li>
+<li><code>0x28</code>（40，社区常见推荐）= <strong>短 + 固定 + 1:1</strong>，即<strong>取消了前台提升</strong>，前台与后台各拿固定 18 个 quantum。</li>
 </ul>
 <p>也就是说，把它从 38 改成 40 在语义上等于"让前台与后台平分时间片"，对"希望前台游戏获得更多 CPU"的目标而言方向相反。有观点认为固定时间片能减少上下文切换从而稳住帧率，这是<strong>另一种取舍</strong>，不是普遍更优——两者的差异依后台进程数量与负载而变。</p>
 <h3 id="_3">与本机现状的对照<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
@@ -6670,7 +6672,7 @@
 </tr>
 <tr>
 <td><code>Win32PrioritySeparation</code></td>
-<td><code>38</code>（0x26，桌面默认：短时间片 + 3:1 前台提升）</td>
+<td><code>38</code>（0x26，性能选项「程序」显式值；干净安装默认 0x2，客户端上等价）</td>
 <td><code>40</code>（0x28，固定时间片 + 1:1）</td>
 <td><strong>方向相反</strong>：40 取消前台提升。若照抄社区值，会覆盖现有优化</td>
 </tr>
@@ -6804,16 +6806,16 @@
 </thead>
 <tbody>
 <tr>
-<td><code>SystemResponsiveness</code> 默认值为 20（0x14），语义是保留给后台任务的 CPU 时间比例</td>
-<td>✅ 属实：<code>tweakbyjie</code> 源码将其从默认值改写到 10 并在注释中标注默认 20；MMCSS 体系下该值控制后台预留</td>
+<td><code>SystemResponsiveness</code> 默认值为 20（0x14），语义是 MMCSS 为低优先级任务保留的 CPU 时间比例</td>
+<td>✅ 属实；钳制规则经 Microsoft Learn 与 <code>mmcss.sys</code> 反汇编核对：非 10 的倍数向下取整，&lt;10 或 &gt;100 按 20 处理，100 禁用 MMCSS</td>
 </tr>
 <tr>
-<td><code>Win32PrioritySeparation</code> 默认 0x26(38) 为"短时间片 + 可变 + 3:1 前台提升"</td>
-<td>✅ 属实：微软文档与社区技术整理（bitsum 收录的微软说明）一致给出 0x26 为桌面默认及其三段位掩码含义</td>
+<td><code>Win32PrioritySeparation</code> 干净安装默认 0x2，客户端上等价于 0x26（短 + 可变 + 3:1）</td>
+<td>✅ 属实：微软归档文档给出默认值 2；性能选项「程序」写入 0x26；两者在客户端 SKU 上行为一致</td>
 </tr>
 <tr>
-<td><code>0x28</code>(40) 为"固定时间长片 + 无前台提升"</td>
-<td>✅ 属实：同上来源的取值表，0x28 属 fixed/1:1 组合</td>
+<td><code>0x28</code>(40) 为「短 + 固定 + 1:1（无前台提升）」</td>
+<td>✅ 属实：6 位位掩码 bits5:4=10（短）、bits3:2=10（固定）、bits1:0=00（1:1）；固定时间片下前后台各 18 quantum</td>
 </tr>
 <tr>
 <td>把 <code>Win32PrioritySeparation</code> 从 38 改为 40 与"提升游戏前台优先级"目标相反</td>
@@ -6856,6 +6858,8 @@
 <p><strong>参考链接：</strong></p>
 <ul>
 <li><a href="https://learn.microsoft.com/zh-tw/windows-server/administration/windows-commands/netsh-interface">Microsoft Learn — netsh interface（TCP 参数）</a></li>
+<li><a href="https://learn.microsoft.com/en-us/windows/win32/procthread/multimedia-class-scheduler-service">Microsoft Learn — Multimedia Class Scheduler Service</a></li>
+<li><a href="https://github.com/MicrosoftDocs/win32/pull/2025">MicrosoftDocs/win32 PR #2025 — SystemResponsiveness 取整与钳制规则修正</a></li>
 <li><a href="https://bitsum.com/files/Win32PrioritySeparation-Microsoft-Docs.pdf">Win32PrioritySeparation 微软文档收录（位掩码与取值表）</a></li>
 <li><a href="https://learn.microsoft.com/en-us/previous-versions/windows/desktop/xperf/image-file-execution-options">Microsoft Learn — Image File Execution Options</a></li>
 <li><a href="https://learn.microsoft.com/en-us/windows/security/application-security/application-control/windows-defender-application-control/design/microsoft-recommended-driver-block-rules">Microsoft Learn — Microsoft recommended driver block rules</a></li>
@@ -6882,7 +6886,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年9月23日 15:30:31 UTC">2026年9月23日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年11月9日 08:35:17 UTC">2026年11月9日</span>
   </span>
 
     
