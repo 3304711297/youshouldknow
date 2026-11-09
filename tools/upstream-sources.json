@@ -29,6 +29,13 @@
       "last_synced_commit": "aa34b8e",
       "last_synced_release": "",
       "description": "ALit-NetworkOptimizer (Minecraft PvP 网络优化器，增补 WinDivert 伪优化辨析、网卡高级属性权衡与 Minecraft QoS 边界)"
+    },
+    "Delta-Force-Graphics-Optimizer": {
+      "repo": "Leonard8818/-Delta-Force-Graphics-Optimizer",
+      "branch": "main",
+      "last_synced_commit": "9fab79d",
+      "last_synced_release": "v0.23.0.52",
+      "description": "三角洲行动画面优化助手（已评估 Release v0.23.0.52；公开源码仍停在 v0.23.0.13，二进制不与源码同步。本库吸收其着色器缓存/全屏优化/还原冲突检测等机制，见《着色器缓存与清理边界》《全屏优化、窗口化游戏优化与 GPU 首选项》两文）"
     }
   }
 }
