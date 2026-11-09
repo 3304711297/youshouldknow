@@ -3,7 +3,7 @@ applies_to:
   - Windows 10
   - Windows 11
 risk: medium
-tweak_module: []
+tweak_module: [15]
 ---
 
 # Windows 虚拟内存（页面文件）设置指南
