@@ -188,6 +188,7 @@ nav:
     - 游戏反作弊内核驱动常驻与 System 高占用排查: 系统调优与安全/游戏反作弊内核驱动常驻与System高占用排查.md
     - AME Wizard 与 Playbook 封装「电竞系统」辨析: 系统调优与安全/AME-Wizard与Playbook封装电竞系统辨析.md
     - Windows 预装应用卸载机制（AppX 用户包与预置包）: 系统调优与安全/Windows预装应用卸载机制-AppX用户包与预置包.md
+    - 极致电脑响应速度与「丝滑操作」辨析: 系统调优与安全/极致电脑响应速度与丝滑操作辨析.md
   - 网络通信:
       - 网络通信/README.md
       - Windows 网络栈优化原则: 网络通信/Windows网络栈优化原则.md
