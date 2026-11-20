@@ -34,8 +34,8 @@
       "repo": "Leonard8818/-Delta-Force-Graphics-Optimizer",
       "branch": "main",
       "last_synced_commit": "9fab79d",
-      "last_synced_release": "v0.23.0.52",
-      "description": "三角洲行动画面优化助手（已评估 Release v0.23.0.52；公开源码仍停在 v0.23.0.13，二进制不与源码同步。本库吸收其着色器缓存/全屏优化/还原冲突检测等机制，见《着色器缓存与清理边界》《全屏优化、窗口化游戏优化与 GPU 首选项》两文）"
+      "last_synced_release": "v0.23.0.53",
+      "description": "三角洲行动画面优化助手（已评估 Release v0.23.0.53；该 tag 与 v0.23.0.52 指向同一提交 9fab79d，仅 Release 号推进、无源码提交，评估无可收录内容。公开源码仍停在 v0.23.0.13，二进制不与源码同步。本库吸收其着色器缓存/全屏优化/还原冲突检测等机制，见《着色器缓存与清理边界》《全屏优化、窗口化游戏优化与 GPU 首选项》两文）"
     }
   }
 }
