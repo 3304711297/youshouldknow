@@ -62,6 +62,8 @@
 | --- | --- | --- | --- |
 | www.corsair.com | 3 条链接（`docs/验机相关/装机法.md` 的 140/142/147 行）稳定 403；已试 3 次重试、多种 UA（含 lychee 默认 UA）均 403 | 同一 revision 下 CI 与本地 lychee 计数**完全一致**（876 Total / 446 Unique / 131 Excluded），CI 报 0 Errors、本地报 3 Errors ⇒ 差异只可能来自出口网络；且 CI 历史上真实报过错（run 34868340301 报 1 Error），证明 CI 检查确实生效 | 2026-09-15 |
 
+**2026-11-21 补充**：CI runner 侧开始同样返回 403（03:03 / 10:47 / 11:05 三轮 docs 运行连续命中），「CI 可达」前提当轮不再成立。按本仓库「先降并发、不轻易排除」的原则，已在 `lychee.toml` 增加 `[hosts."www.corsair.com"]`（`concurrency = 1`、`request_interval = "5s"`），验证后 link-check 恢复绿灯（run 44897638407）。同日试过全局替换浏览器 UA，反而引入 `space.bilibili.com` 412、`resetera.com` 403、`gitlab.gnome.org` 406 三类新失败，已回退——**不要用全局 UA 去绕 WAF**。若该站点再次持续 403，再按上方排除表流程建档。
+
 **判断方法**（区分"该加排除"与"本地误报"）：取同一 revision，比较 CI 与本地 lychee 的统计块。
 
 - `Total` / `Unique` / `Excluded` 一致而 `Errors` 不同 → 差异只能来自网络出口，属**本地误报**，不要动 `lychee.toml`；
