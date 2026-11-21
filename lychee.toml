@@ -5,11 +5,6 @@
 max_retries = 3
 retry_wait_time = 2
 timeout = 20
-
-
-# 2026-11-21：corsair.com 等 Akamai 站点对 lychee 默认 UA 直接返回 403。改用真实浏览器 UA，
-# 避免只因 UA 被识别成爬虫就误判死链；状态码判定不放松（403/429 仍然算失败）。
-user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
 accept = ["200..=299"]
 
 # 连接层失败或明确拒绝自动探测的域名按域名显式排除。
@@ -83,3 +78,9 @@ exclude = [
 [hosts."community.spiceworks.com"]
 concurrency = 1
 request_interval = "3s"
+
+# 2026-11-21：corsair.com 对 CI runner 的并发请求返回 403（此前可达），先按站点降并发，
+# 不直接排除域名（排除会掩盖将来真正的死链）。见 tools/lychee-excluded-domains.md。
+[hosts."www.corsair.com"]
+concurrency = 1
+request_interval = "5s"
