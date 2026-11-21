@@ -67,6 +67,9 @@ exclude = [
   'https?://web\.archive\.org/.*bswaterb\.club',
   # 2026-09-25 起 Cloudflare WAF 对 CI runner 返回 522/403 阻断
   'https://www\.starwindsoftware\.com/',
+  # 2026-11-21 起 ocinside.de TLS 可握手但 HTTP 响应 80s 仍不返回（本机与 CI runner
+  # 同现象），每轮 link-check 超时并连带跳过 deploy；见 tools/lychee-excluded-domains.md
+  'https://www\.ocinside\.de/',
 ]
 
 # 按站点限流（放在文件末尾：TOML 表段之后的键会归入该表，故必须在所有顶层键声明之后）。
