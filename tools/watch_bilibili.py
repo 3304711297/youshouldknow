@@ -193,22 +193,65 @@ class BilibiliClient:
                 return data.get("data", {}).get("items_lists", {}).get("seasons_list", [])
             raise RuntimeError(f"Failed to fetch seasons: code={data.get('code')}, msg={data.get('message')}")
 
-    def get_season_archives(self, mid: int, season_id: int, page_size: int = 30) -> List[Dict[str, Any]]:
-        """获取指定合集下的视频列表"""
-        url = (
-            f"https://api.bilibili.com/x/polymer/web-space/seasons_archives_list?"
-            f"mid={mid}&season_id={season_id}&page_num=1&page_size={page_size}"
-        )
-        headers = dict(self.headers)
-        headers["Referer"] = f"https://space.bilibili.com/{mid}/channel/collectiondetail?sid={season_id}"
-        req = urllib.request.Request(url, headers=headers)
-        with urllib.request.urlopen(req, timeout=self.timeout) as resp:
-            data = json.loads(resp.read().decode("utf-8"))
-            if data.get("code") == 0:
-                return data.get("data", {}).get("archives", [])
-            raise RuntimeError(
-                f"Failed to fetch season {season_id} archives: code={data.get('code')}, msg={data.get('message')}"
+    def get_season_archives(
+        self, mid: int, season_id: int, page_size: int = 30, max_pages: int = 20
+    ) -> List[Dict[str, Any]]:
+        """获取指定合集下的视频列表（自动翻页取全）。
+
+        合集归档按「加入合集顺序」升序返回，最新视频落在**最后一页**。这里曾固定
+        page_num=1&page_size=30，合集一旦超过 30 条，新视频就全部落在第 2 页之后，
+        看门每轮都报 0 条并成功退出（实测 season 8897657 共 42 条，后 12 条不可见）。
+        因此必须翻页，且翻页上限内没取全时要显式失败，而不是返回残缺列表。
+        """
+        archives: List[Dict[str, Any]] = []
+        seen: Set[str] = set()
+        total = 0
+        page_num = 1
+        while page_num <= max_pages:
+            url = (
+                f"https://api.bilibili.com/x/polymer/web-space/seasons_archives_list?"
+                f"mid={mid}&season_id={season_id}&page_num={page_num}&page_size={page_size}"
             )
+            headers = dict(self.headers)
+            headers["Referer"] = f"https://space.bilibili.com/{mid}/channel/collectiondetail?sid={season_id}"
+            req = urllib.request.Request(url, headers=headers)
+            with urllib.request.urlopen(req, timeout=self.timeout) as resp:
+                data = json.loads(resp.read().decode("utf-8"))
+            if data.get("code") != 0:
+                raise RuntimeError(
+                    f"Failed to fetch season {season_id} archives: code={data.get('code')}, msg={data.get('message')}"
+                )
+            payload = data.get("data") or {}
+            page = payload.get("page") or {}
+            if page.get("total") is not None:
+                total = int(page["total"])
+            items = payload.get("archives") or []
+            for v in items:
+                bvid = v.get("bvid")
+                if bvid and bvid in seen:
+                    continue
+                if bvid:
+                    seen.add(bvid)
+                archives.append(v)
+            if not items:
+                break
+            if total and len(archives) >= total:
+                break
+            page_num += 1
+            if page_num <= max_pages:
+                time.sleep(self.RETRY_BACKOFF_SECONDS / 4)
+
+        if total:
+            if len(archives) < total:
+                raise RuntimeError(
+                    f"season {season_id} 归档只取到 {len(archives)}/{total} 条"
+                    f"（翻页上限 {max_pages} 页），会漏掉最新视频"
+                )
+        elif len(archives) >= max_pages * page_size:
+            raise RuntimeError(
+                f"season {season_id} 归档未返回 total 且已取满 {max_pages} 页，无法确认完整性"
+            )
+        return archives
 
 
 def _parse_search_duration(value: Any) -> int:

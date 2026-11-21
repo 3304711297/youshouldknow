@@ -288,6 +288,76 @@ class TestWatchBilibili(unittest.TestCase):
             if ch.get("watch_mode") == "uploads":
                 self.assertTrue(ch.get("baseline_bvids"), "uploads 模式应带基线，避免一次性开历史单")
 
+    @patch("tools.watch_bilibili.time.sleep", lambda *_: None)
+    @patch("tools.watch_bilibili.urllib.request.urlopen")
+    def test_season_archives_paginate_past_page_size(self, mock_urlopen):
+        """合集归档按加入顺序升序返回、最新视频在末尾，超过单页容量必须翻页取全。
+
+        实测 season 8897657 共 42 条，只取 page_num=1&page_size=30 时后 12 条
+        （含全部最新视频）不可见，看门静默漏报。
+        """
+
+        def make_page(start: int, count: int, total: int, page_num: int):
+            archives = [
+                {
+                    "bvid": f"BV1{i:08d}"[:12],
+                    "title": f"EP{i}",
+                    "pubdate": 1780000000 + i,
+                    "duration": 600,
+                }
+                for i in range(start, start + count)
+            ]
+            return {
+                "code": 0,
+                "data": {"archives": archives, "page": {"total": total, "page_num": page_num, "page_size": 30}},
+            }
+
+        def make_resp(payload):
+            resp = MagicMock()
+            resp.read.return_value = json.dumps(payload).encode("utf-8")
+            resp.__enter__.return_value = resp
+            return resp
+
+        mock_urlopen.side_effect = [
+            make_resp(make_page(1, 30, 42, 1)),
+            make_resp(make_page(31, 12, 42, 2)),
+        ]
+
+        client = BilibiliClient()
+        archives = client.get_season_archives(mid=589200735, season_id=8897657, page_size=30)
+
+        self.assertEqual(len(archives), 42)
+        self.assertEqual(archives[-1]["bvid"], f"BV1{42:08d}"[:12])
+        self.assertEqual(mock_urlopen.call_count, 2)
+        second_url = mock_urlopen.call_args_list[1][0][0].full_url
+        self.assertIn("page_num=2", second_url)
+
+    @patch("tools.watch_bilibili.time.sleep", lambda *_: None)
+    @patch("tools.watch_bilibili.urllib.request.urlopen")
+    def test_season_archives_truncation_fails_loudly(self, mock_urlopen):
+        """翻页上限内没取全时不能静默返回残缺列表（那正是本次漏报的成因），必须显式失败"""
+
+        def make_resp(count, total):
+            archives = [
+                {"bvid": f"BV1{i:08d}"[:12], "title": f"EP{i}", "pubdate": 1780000000 + i, "duration": 600}
+                for i in range(1, count + 1)
+            ]
+            payload = {
+                "code": 0,
+                "data": {"archives": archives, "page": {"total": total, "page_num": 1, "page_size": 30}},
+            }
+            resp = MagicMock()
+            resp.read.return_value = json.dumps(payload).encode("utf-8")
+            resp.__enter__.return_value = resp
+            return resp
+
+        mock_urlopen.side_effect = [make_resp(30, 120), make_resp(30, 120)]
+
+        client = BilibiliClient()
+        with self.assertRaises(RuntimeError) as ctx:
+            client.get_season_archives(mid=589200735, season_id=8897657, page_size=30, max_pages=1)
+        self.assertIn("120", str(ctx.exception))
+
 
 if __name__ == "__main__":
     unittest.main()
