@@ -6,6 +6,10 @@ max_retries = 3
 retry_wait_time = 2
 timeout = 20
 
+
+# 2026-11-21：corsair.com 等 Akamai 站点对 lychee 默认 UA 直接返回 403。改用真实浏览器 UA，
+# 避免只因 UA 被识别成爬虫就误判死链；状态码判定不放松（403/429 仍然算失败）。
+user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
 accept = ["200..=299"]
 
 # 连接层失败或明确拒绝自动探测的域名按域名显式排除。
